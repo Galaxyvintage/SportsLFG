@@ -1,0 +1,408 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6322901A1BE0C0C00097B93B /* SportsLFG.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 632290181BE0C0C00097B93B /* SportsLFG.xcdatamodeld */; };
+		6322901F1BE0C0C00097B93B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6322901D1BE0C0C00097B93B /* LaunchScreen.storyboard */; };
+		6322902E1BE0C15E0097B93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632290271BE0C15E0097B93B /* AppDelegate.swift */; };
+		6322902F1BE0C15E0097B93B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632290281BE0C15E0097B93B /* HomeViewController.swift */; };
+		632290301BE0C15E0097B93B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 632290291BE0C15E0097B93B /* Images.xcassets */; };
+		632290311BE0C15E0097B93B /* MainCVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322902A1BE0C15E0097B93B /* MainCVController.swift */; };
+		632290321BE0C15E0097B93B /* MainCVSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322902B1BE0C15E0097B93B /* MainCVSegue.swift */; };
+		632290341BE0C15E0097B93B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322902D1BE0C15E0097B93B /* RegisterViewController.swift */; };
+		632290371BE0C1730097B93B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 632290351BE0C1730097B93B /* Main.storyboard */; };
+		A1F5DE97E1C7507ECD8C9F5F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE3EA33AED1FE155D30688 /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0436F88DAFDD8EB0368A14C8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		0FDE3EA33AED1FE155D30688 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		402569FD0E94BE229C00BD29 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		6322900E1BE0C0C00097B93B /* SportsLFG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportsLFG.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		632290191BE0C0C00097B93B /* SportsLFG.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SportsLFG.xcdatamodel; sourceTree = "<group>"; };
+		6322901E1BE0C0C00097B93B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		632290201BE0C0C00097B93B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		632290261BE0C15E0097B93B /* SportsLFG-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SportsLFG-Bridging-Header.h"; sourceTree = "<group>"; };
+		632290271BE0C15E0097B93B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		632290281BE0C15E0097B93B /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		632290291BE0C15E0097B93B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6322902A1BE0C15E0097B93B /* MainCVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCVController.swift; sourceTree = "<group>"; };
+		6322902B1BE0C15E0097B93B /* MainCVSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCVSegue.swift; sourceTree = "<group>"; };
+		6322902D1BE0C15E0097B93B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		632290361BE0C1730097B93B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6322900B1BE0C0C00097B93B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1F5DE97E1C7507ECD8C9F5F /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		323B981C4C61C8A9C0AE07EC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0FDE3EA33AED1FE155D30688 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		632290051BE0C0C00097B93B = {
+			isa = PBXGroup;
+			children = (
+				632290101BE0C0C00097B93B /* SportsLFG */,
+				6322900F1BE0C0C00097B93B /* Products */,
+				A2C588836F1A870D3F5D212C /* Pods */,
+				323B981C4C61C8A9C0AE07EC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6322900F1BE0C0C00097B93B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6322900E1BE0C0C00097B93B /* SportsLFG.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		632290101BE0C0C00097B93B /* SportsLFG */ = {
+			isa = PBXGroup;
+			children = (
+				632290271BE0C15E0097B93B /* AppDelegate.swift */,
+				632290281BE0C15E0097B93B /* HomeViewController.swift */,
+				632290291BE0C15E0097B93B /* Images.xcassets */,
+				6322902A1BE0C15E0097B93B /* MainCVController.swift */,
+				6322902B1BE0C15E0097B93B /* MainCVSegue.swift */,
+				6322902D1BE0C15E0097B93B /* RegisterViewController.swift */,
+				632290351BE0C1730097B93B /* Main.storyboard */,
+				6322901D1BE0C0C00097B93B /* LaunchScreen.storyboard */,
+				632290201BE0C0C00097B93B /* Info.plist */,
+				632290181BE0C0C00097B93B /* SportsLFG.xcdatamodeld */,
+				632290261BE0C15E0097B93B /* SportsLFG-Bridging-Header.h */,
+			);
+			path = SportsLFG;
+			sourceTree = "<group>";
+		};
+		A2C588836F1A870D3F5D212C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				402569FD0E94BE229C00BD29 /* Pods.debug.xcconfig */,
+				0436F88DAFDD8EB0368A14C8 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6322900D1BE0C0C00097B93B /* SportsLFG */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 632290231BE0C0C00097B93B /* Build configuration list for PBXNativeTarget "SportsLFG" */;
+			buildPhases = (
+				2924CEF44B80E054A72B41F5 /* Check Pods Manifest.lock */,
+				6322900A1BE0C0C00097B93B /* Sources */,
+				6322900B1BE0C0C00097B93B /* Frameworks */,
+				6322900C1BE0C0C00097B93B /* Resources */,
+				77A718EF8D6A60FEBA41E129 /* Embed Pods Frameworks */,
+				693BD285A4C7FEB2A7060F3D /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SportsLFG;
+			productName = SportsLFG;
+			productReference = 6322900E1BE0C0C00097B93B /* SportsLFG.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		632290061BE0C0C00097B93B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "CMPT-GP03";
+				TargetAttributes = {
+					6322900D1BE0C0C00097B93B = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = W2LDAN7BSH;
+					};
+				};
+			};
+			buildConfigurationList = 632290091BE0C0C00097B93B /* Build configuration list for PBXProject "SportsLFG" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 632290051BE0C0C00097B93B;
+			productRefGroup = 6322900F1BE0C0C00097B93B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6322900D1BE0C0C00097B93B /* SportsLFG */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6322900C1BE0C0C00097B93B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				632290371BE0C1730097B93B /* Main.storyboard in Resources */,
+				6322901F1BE0C0C00097B93B /* LaunchScreen.storyboard in Resources */,
+				632290301BE0C15E0097B93B /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2924CEF44B80E054A72B41F5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		693BD285A4C7FEB2A7060F3D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		77A718EF8D6A60FEBA41E129 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6322900A1BE0C0C00097B93B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6322902E1BE0C15E0097B93B /* AppDelegate.swift in Sources */,
+				632290341BE0C15E0097B93B /* RegisterViewController.swift in Sources */,
+				6322901A1BE0C0C00097B93B /* SportsLFG.xcdatamodeld in Sources */,
+				6322902F1BE0C15E0097B93B /* HomeViewController.swift in Sources */,
+				632290321BE0C15E0097B93B /* MainCVSegue.swift in Sources */,
+				632290311BE0C15E0097B93B /* MainCVController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6322901D1BE0C0C00097B93B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6322901E1BE0C0C00097B93B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		632290351BE0C1730097B93B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				632290361BE0C1730097B93B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		632290211BE0C0C00097B93B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		632290221BE0C0C00097B93B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		632290241BE0C0C00097B93B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 402569FD0E94BE229C00BD29 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = SportsLFG/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = CMPT275.SportsLFG;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SportsLFG/SportsLFG-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		632290251BE0C0C00097B93B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0436F88DAFDD8EB0368A14C8 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = SportsLFG/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = CMPT275.SportsLFG;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SportsLFG/SportsLFG-Bridging-Header.h";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		632290091BE0C0C00097B93B /* Build configuration list for PBXProject "SportsLFG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				632290211BE0C0C00097B93B /* Debug */,
+				632290221BE0C0C00097B93B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		632290231BE0C0C00097B93B /* Build configuration list for PBXNativeTarget "SportsLFG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				632290241BE0C0C00097B93B /* Debug */,
+				632290251BE0C0C00097B93B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		632290181BE0C0C00097B93B /* SportsLFG.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				632290191BE0C0C00097B93B /* SportsLFG.xcdatamodel */,
+			);
+			currentVersion = 632290191BE0C0C00097B93B /* SportsLFG.xcdatamodel */;
+			path = SportsLFG.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 632290061BE0C0C00097B93B /* Project object */;
+}

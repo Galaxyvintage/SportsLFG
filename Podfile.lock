@@ -1,0 +1,10 @@
+PODS:
+  - KinveyKit (1.39.0)
+
+DEPENDENCIES:
+  - KinveyKit
+
+SPEC CHECKSUMS:
+  KinveyKit: 2a6cdc7b2985c1f31a532a6a643e9f90dfbef202
+
+COCOAPODS: 0.39.0
