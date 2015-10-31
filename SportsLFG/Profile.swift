@@ -9,38 +9,50 @@ import Foundation
 
 //TODO:
 //     1. implement the init function
-//     2. verify user information using kinvey api 
-//     3. if user information is correct, current view is push to the HomeView
-//     4. if user information is incorrect, an alert will be shown to users 
+class Location
+{
+  var myCity : String
+  var myProvince : String
+  var myCountry  : String
+  init(city : String, province : String, country : String)
+  {
+    myCity = city
+    myProvince = province
+    myCountry  = country
+  }
+}
+
 
 class Profile 
 {
-  var userName: String
-  var userAge: UInt
-  var isMale : Bool // gender boolean
-  var userID: UInt
+  var userName : String!
+  var userEmai : String!
+  var userAge  : UInt!
+  var location : Location!
+  var isMale : Bool! // gender boolean
+  var userID : UInt!
+  var rating : Double!
+  var sports : Array<Sports>!
+  var achievemenPoints : UInt!
     
-  //var rating: Double
-  //var achievementPoints: Int
-    
-  init(id: UInt, gender : Bool, name :String, age : UInt) 
+  init()
   {
-    userID   = id
-    userName = name
-    userAge  = age
-    isMale   = gender
+    
+    
   }
     
-  // Function to retrieve user account information based on given account number
-  // Returns true if successful
-  private func getInfo(id: Int) -> Bool 
+  
+  private func getInfo(userID : UInt) -> Bool 
   {
     // do stuff
     // self.name = databasegetName()
     // something like that????
     return true
   }
-    
+  
   //private func databaseGetName(userID)
+
+  //func 
+  
     
 }
