@@ -1,10 +1,9 @@
-//
-//  AppDelegate.swift
-//  test
-//
-//  Created by CharlesL on 2015-10-27.
-//  Copyright © 2015 CharlesL. All rights reserved.
-//
+// 
+// File   : AppDelegate.swift
+// Author : Charles Li
+// Date created: Oct 27 2015
+// Date edited : Nov 01 2015
+// Description:
 
 import UIKit
 import CoreData
@@ -17,6 +16,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
+    
+    KCSClient.sharedClient().initializeKinveyServiceForAppKey(
+      "kid_W1d_FZ8Vve",
+      withAppSecret: "fc49d0de98c44fb5b6b1573774aa6771",
+      usingOptions: nil
+    )
+        
+    KCSPing.pingKinveyWithBlock { (result: KCSPingResult!) -> Void in
+      if result.pingWasSuccessful {
+        NSLog("Kinvey Ping Success")
+      } else {
+        NSLog("Kinvey Ping Failed")
+      }
+    }
+    
+    
+    
+    
+    
     return true
   }
 

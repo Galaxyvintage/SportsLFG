@@ -1,10 +1,9 @@
 //
-//  Log-in.swift
-//  SportsLFG
-//
-//  Created by Aaron Cheung on 2015-10-30.
-//  Copyright (c) 2015 CMPT-GP03. All rights reserved.
-//
+// File : LoginViewController.swift
+// Author : Aaron Cheung, Charles Li
+// Date created : Oct 30 2015
+// Date modified: Nov 01 2015
+// Description :
 
 import UIKit
 
