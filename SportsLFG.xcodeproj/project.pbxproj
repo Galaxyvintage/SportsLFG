@@ -17,6 +17,7 @@
 		632290341BE0C15E0097B93B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322902D1BE0C15E0097B93B /* RegisterViewController.swift */; };
 		632290371BE0C1730097B93B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 632290351BE0C1730097B93B /* Main.storyboard */; };
 		63B3C07C1BE4BB7300B31457 /* Sports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B3C07B1BE4BB7300B31457 /* Sports.swift */; };
+		63D573EE1BE7E78E00EE769A /* FirstTimeUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D573ED1BE7E78E00EE769A /* FirstTimeUserViewController.swift */; };
 		96C3F6D31BE41D6F00AC236A /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C3F6D21BE41D6F00AC236A /* Profile.swift */; };
 		96C3F6D51BE4284600AC236A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C3F6D41BE4284600AC236A /* LoginViewController.swift */; };
 		A1F5DE97E1C7507ECD8C9F5F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE3EA33AED1FE155D30688 /* libPods.a */; };
@@ -39,6 +40,7 @@
 		6322902D1BE0C15E0097B93B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		632290361BE0C1730097B93B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63B3C07B1BE4BB7300B31457 /* Sports.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sports.swift; sourceTree = "<group>"; };
+		63D573ED1BE7E78E00EE769A /* FirstTimeUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTimeUserViewController.swift; sourceTree = "<group>"; };
 		96C3F6D21BE41D6F00AC236A /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		96C3F6D41BE4284600AC236A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,18 +87,19 @@
 			isa = PBXGroup;
 			children = (
 				632290271BE0C15E0097B93B /* AppDelegate.swift */,
-				632290281BE0C15E0097B93B /* HomeViewController.swift */,
 				632290291BE0C15E0097B93B /* Images.xcassets */,
+				6322902D1BE0C15E0097B93B /* RegisterViewController.swift */,
+				96C3F6D41BE4284600AC236A /* LoginViewController.swift */,
+				63D573ED1BE7E78E00EE769A /* FirstTimeUserViewController.swift */,
 				6322902A1BE0C15E0097B93B /* MainCVController.swift */,
 				6322902B1BE0C15E0097B93B /* MainCVSegue.swift */,
-				6322902D1BE0C15E0097B93B /* RegisterViewController.swift */,
+				632290281BE0C15E0097B93B /* HomeViewController.swift */,
 				632290351BE0C1730097B93B /* Main.storyboard */,
 				6322901D1BE0C0C00097B93B /* LaunchScreen.storyboard */,
 				632290201BE0C0C00097B93B /* Info.plist */,
 				632290181BE0C0C00097B93B /* SportsLFG.xcdatamodeld */,
 				632290261BE0C15E0097B93B /* SportsLFG-Bridging-Header.h */,
 				96C3F6D21BE41D6F00AC236A /* Profile.swift */,
-				96C3F6D41BE4284600AC236A /* LoginViewController.swift */,
 				63B3C07B1BE4BB7300B31457 /* Sports.swift */,
 			);
 			path = SportsLFG;
@@ -235,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6322902E1BE0C15E0097B93B /* AppDelegate.swift in Sources */,
+				63D573EE1BE7E78E00EE769A /* FirstTimeUserViewController.swift in Sources */,
 				632290341BE0C15E0097B93B /* RegisterViewController.swift in Sources */,
 				6322901A1BE0C0C00097B93B /* SportsLFG.xcdatamodeld in Sources */,
 				96C3F6D31BE41D6F00AC236A /* Profile.swift in Sources */,

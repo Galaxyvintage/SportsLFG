@@ -53,6 +53,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     let password  = userNewPassword.text
     let confirm   = userNewPasswordConfirm.text
     
+    
+    /////////////////////////
+    //User Input Validation//
+    /////////////////////////
+    
     // Check if password and confirm password match 
     if((password) != confirm)
     {
@@ -101,13 +106,18 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
       
 
-    
-    // Kinvey new user register 
+    ///////////////////////////////
+    // Kinvey new user register//// 
+    ///////////////////////////////
     
     
     NSLog("check")
     NSLog(email!)
     NSLog(password!)
+    
+    //Add custom attributes to KCSUser object 
+    
+    
     
     KCSUser.userWithUsername(
       email!,

@@ -8,11 +8,9 @@
 import UIKit
 
 //TODO:
-//     1. verify user information using kinvey api 
-//     2. if user information is correct, current view is push to the HomeView
-//     3. if user information is incorrect, an alert will be shown to users 
-//
-//
+//    1.If it's users' first time running the app, an information collecting view should 
+//    be presented to the users
+
 class LoginViewController : UIViewController, UITextFieldDelegate
 {
   
@@ -54,6 +52,7 @@ class LoginViewController : UIViewController, UITextFieldDelegate
     let email = userEmailField.text
     let password = userPasswordField.text
     let mainControllerView = self.storyboard?.instantiateViewControllerWithIdentifier("HomeController")
+    
     KCSUser.loginWithUsername(
       email!,
       password: password!,
@@ -61,14 +60,22 @@ class LoginViewController : UIViewController, UITextFieldDelegate
         if errorOrNil == nil {
           //the log-in was successful and the user is now the active user and credentials saved
           //hide log-in view and show main app content
-
-          self.presentViewController(mainControllerView!, animated: true, completion: {() -> Void in
-            //query the email 
-            //find user info
-            //load user info
           
-          })
+          let defaults = NSUserDefaults.standardUserDefaults()
+          let key      = "didRunBefore"
+          let isFirstTime = defaults.boolForKey(key) 
           
+          if(isFirstTime == false)
+          {
+            defaults.setObject(true , forKey: key)
+            //push to a new view where user can enter their info the first time they use the app
+            //self.presentViewController("",animated:true, completion:nil)
+          }else{
+            
+            self.presentViewController(mainControllerView!, animated: true, completion: nil)              
+            
+          }
+      
         } else {
           //there was an error with the update save
           
