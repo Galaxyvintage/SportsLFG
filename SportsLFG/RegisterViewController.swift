@@ -49,9 +49,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
   
   @IBAction func reigsterNewUser(sender: UIButton) {
   
-    let email     = userNewEmail!.text          
-    let password  = userNewPassword!.text
-    let confirm   = userNewPasswordConfirm!.text
+    let email     = userNewEmail.text          
+    let password  = userNewPassword.text
+    let confirm   = userNewPasswordConfirm.text
     
     // Check if password and confirm password match 
     if((password) != confirm)
