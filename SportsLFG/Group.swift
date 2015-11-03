@@ -28,7 +28,7 @@ class Group
   var ageMin     : UInt?
   var gender     : GenderType
   var description: String?
-  var isTeam     : Bool
+  //var isTeam     : Bool
   
   
   //initializer(constructor)
@@ -51,14 +51,13 @@ class Group
   
   func getSizeMax() -> UInt 
   {
-    
-    return 0
+    return groupSizeMax
   }
   
   func getSizeCurrent() -> UInt 
   {
     
-    return 0
+    return groupSizeCurrent
   }
   
   func getAgeLimit()->(UInt,UInt)//returns ageMmin and ageMax
@@ -69,13 +68,19 @@ class Group
   
   func getDescription() ->String
   {
-    
-    return "a"
+    if description.isEmpty {
+      return " "
+    } else {
+      return description
+    }
   }
   
   func isFull() -> Bool
   {
-    return true 
+    if groupSizeCurrent >= groupSizeMax {
+      return true
+    }
+    return false 
   }
   
   func isLeader(userID : UInt) -> Bool
