@@ -51,6 +51,7 @@ class LoginViewController : UIViewController, UITextFieldDelegate
   @IBAction func userLogin(sender: UIButton) {
     let email = userEmailField.text
     let password = userPasswordField.text
+    let firstControllerView=self.storyboard?.instantiateViewControllerWithIdentifier("FirstTimeUser")
     let mainControllerView = self.storyboard?.instantiateViewControllerWithIdentifier("HomeController")
     
     KCSUser.loginWithUsername(
@@ -62,25 +63,30 @@ class LoginViewController : UIViewController, UITextFieldDelegate
           //hide log-in view and show main app content
           
           let defaults = NSUserDefaults.standardUserDefaults()
-          let key      = "didRunBefore"
-          let isFirstTime = defaults.boolForKey(key) 
+          let key      = email!
+          let didRunBefore = defaults.boolForKey(key) 
           
-          if(isFirstTime == false)
+          NSLog("check")
+          
+          if(didRunBefore == false)
+            
           {
+            NSLog("in")
             defaults.setObject(true , forKey: key)
+            defaults.synchronize()
+            
             //push to a new view where user can enter their info the first time they use the app
-            //self.presentViewController("",animated:true, completion:nil)
+            self.presentViewController(firstControllerView!,animated:true, completion:nil)
           }else{
             
             self.presentViewController(mainControllerView!, animated: true, completion: nil)              
-            
           }
       
         } else {
           //there was an error with the update save
           
         
-          let message = "password incorrect"//need to include the case when  internet connection is not available.
+          let message = "email or password incorrect"//need to include the case when  internet connection is not available.
           let alert = UIAlertController(
             title: NSLocalizedString("Log-in failed", comment: "can not log in"),
             message: message,

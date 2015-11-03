@@ -893,6 +893,59 @@
             </objects>
             <point key="canvasLocation" x="-3645.75" y="-391.125"/>
         </scene>
+        <!--FirstTimeUserViewController-->
+        <scene sceneID="DFV-j3-haL">
+            <objects>
+                <viewController storyboardIdentifier="FirstTimeUser" title="FirstTimeUserViewController" id="fS3-FO-id9" customClass="FirstTimeUserViewController" customModule="SportsLFG" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nhX-zA-eYb"/>
+                        <viewControllerLayoutGuide type="bottom" id="en6-ju-OQ5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="laa-HQ-zuy">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFb-We-6Qr">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.26274509800000001" green="0.46666666670000001" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="SaveAndGoToMainPage:" destination="fS3-FO-id9" eventType="touchUpInside" id="0qS-Y8-tGw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SFb-We-6Qr" firstAttribute="centerX" secondItem="laa-HQ-zuy" secondAttribute="centerX" id="kPx-cK-G8f"/>
+                            <constraint firstItem="SFb-We-6Qr" firstAttribute="centerY" secondItem="laa-HQ-zuy" secondAttribute="centerY" id="p0i-xI-kKG"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="SFb-We-6Qr"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="kPx-cK-G8f"/>
+                                <exclude reference="p0i-xI-kKG"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="SFb-We-6Qr"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="kPx-cK-G8f"/>
+                                <include reference="p0i-xI-kKG"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oYn-e1-fKH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2589.75" y="-1000.125"/>
+        </scene>
         <!--LoginView-->
         <scene sceneID="rbO-V9-Gt3">
             <objects>

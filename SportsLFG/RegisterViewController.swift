@@ -106,9 +106,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
       
 
-    ///////////////////////////////
-    // Kinvey new user register//// 
-    ///////////////////////////////
+    /////////////////////////////////
+    // Kinvey New User Registration//
+    /////////////////////////////////
     
     
     NSLog("check")
