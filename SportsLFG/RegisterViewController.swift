@@ -1,10 +1,9 @@
-//
-//  RegisterViewController.swift
-//  SwiftLFG_64
-//
-//  Created by CharlesL on 2015-10-06.
-//  Copyright (c) 2015 CharlesL. All rights reserved.
-//
+// 
+// File   : RegisterViewController.swift
+// Author : Charles Li
+// Date created: Oct.20 2015
+// Date edited : Oct.31 2015
+// Description:
 
 import UIKit
 
@@ -13,14 +12,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
   
   // MARK: Properties
   
-  @IBOutlet weak var userNewEmail: UITextField?
-  @IBOutlet weak var userNewPassword: UITextField?
-  @IBOutlet weak var userNewPasswordConfirm: UITextField?
-  
-  
-  // Hide entering passwords 
-  
-  
+ 
+  @IBOutlet weak var userNewEmail : UITextField!
+  @IBOutlet weak var userNewPassword: UITextField!
+  @IBOutlet weak var userNewPasswordConfirm: UITextField!
   
   override func viewDidLoad() {
     
@@ -54,9 +49,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
   
   @IBAction func reigsterNewUser(sender: UIButton) {
   
-    let email     = userNewEmail?.text           // var text String?
-    let password  = userNewPassword?.text
-    let confirm   = userNewPasswordConfirm?.text
+    let email     = userNewEmail.text          
+    let password  = userNewPassword.text
+    let confirm   = userNewPasswordConfirm.text
+    
+    
+    /////////////////////////
+    //User Input Validation//
+    /////////////////////////
     
     // Check if password and confirm password match 
     if((password) != confirm)
@@ -91,21 +91,42 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }  
     
     // Validate email format
+    if(!(isValidEmail(email!)))
+    {
+      let alert = UIAlertController(
+        title:   NSLocalizedString("Error", comment: "erro title "),
+        message: NSLocalizedString("it's not a valid email address", comment: "email error"),
+        preferredStyle : UIAlertControllerStyle.Alert
+      )
       
+      let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+      alert.addAction(cancelAction)
+      presentViewController(alert, animated: true , completion: nil)
+      return
+    }
       
 
+    /////////////////////////////////
+    // Kinvey New User Registration//
+    /////////////////////////////////
     
-    // Kinvey new user register 
+    
+    NSLog("check")
+    NSLog(email!)
+    NSLog(password!)
+    
+    //Add custom attributes to KCSUser object 
+    
+    
     
     KCSUser.userWithUsername(
-      email,
-      password: password,
-      fieldsAndValues: [
-        KCSUserAttributeEmail : confirm! 
-      ],
+      email!,
+      password: password!,
+      fieldsAndValues:[KCSUserAttributeEmail:email!],
       withCompletionBlock: { (user: KCSUser!, errorOrNil: NSError!, result: KCSUserActionResult) -> Void in
         if errorOrNil == nil {
           //was successful!
+          NSLog("successful")
           let alert = UIAlertController(
             title: NSLocalizedString("Account Creation Successful", comment: "account success note title"),
             message: NSLocalizedString("User created. Welcome!", comment: "account success message body"),
@@ -119,7 +140,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
           
         
         } else {
+          NSLog("error")
           //there was an error with the create
+          errorOrNil.userInfo["Kinvey.ExecutedHooks"]
+          let errorObject = errorOrNil.userInfo["Kinvey.ExecutedHooks"]
+          print(errorObject)
           let message = errorOrNil.localizedDescription
           let alert = UIAlertController(
             title: NSLocalizedString("Create account failed", comment: "Create account failed"),
@@ -135,7 +160,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
       }
     )
-
   }
 
   

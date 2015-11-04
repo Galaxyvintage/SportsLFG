@@ -1,17 +1,17 @@
-//
-//  HomeViewController.swift
-//  SwiftLFG_64
-//
-//  Created by CharlesL on 2015-10-13.
-//  Copyright (c) 2015 CharlesL. All rights reserved.
-//
+// 
+// File   : HomeViewController.swift
+// Author : Charles Li
+// Date created: Oct.13 2015
+// Date edited : Nov.03 2015
+// Description:
 
 import Foundation
 
-class HomeViewController : UIViewController{
-  
-  
-  
-  
+class HomeViewController : UIViewController
+{
 
+  override func viewDidLoad() {
+        super.viewDidLoad()
+    
+  }
 }

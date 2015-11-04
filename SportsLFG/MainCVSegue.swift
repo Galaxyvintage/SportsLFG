@@ -1,10 +1,9 @@
-//
-//  MainCVSegue.swift
-//  SwiftLFG_64
-//
-//  Created by CharlesL on 2015-10-11.
-//  Copyright (c) 2015 CharlesL. All rights reserved.
-//
+// 
+// File   : MainCVSegue.swift
+// Author : Charles Li
+// Date created: Oct.11 2015
+// Date edited : Oct.15 2015
+// Description:
 
 import Foundation
 
