@@ -29,13 +29,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     // Dispose of any resources that can be recreated.
   }
   
+  //This method dismisses the keyboard after the user presses the return button
   func textFieldShouldReturn(textField: UITextField) -> Bool{
     textField.resignFirstResponder()
     self.view.endEditing(true)
     return false
   }
    
-  
+  //This method returns true if the user email is valid and false if not
   func isValidEmail(testStr:String) -> Bool {
     // println("validate calendar: \(testStr)")
     let emailRegEx = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
@@ -58,7 +59,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     //User Input Validation//
     /////////////////////////
     
-    // Check if password and confirm password match 
+    // This checks if password and confirm password match and alerts the user if they are different
     if((password) != confirm)
     {
       let alert = UIAlertController(
@@ -73,7 +74,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
       return
     }
     
-    // Check if there is any empty field
+    // This checks if there is any empty field and alerts the user if there is one or more
     if(email!.isEmpty    == true || 
        password!.isEmpty == true ||
        confirm!.isEmpty  == true )
@@ -90,7 +91,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
       return
     }  
     
-    // Validate email format
+    // This validate email format and alerts the user if email format is invalid
     if(!(isValidEmail(email!)))
     {
       let alert = UIAlertController(
@@ -118,7 +119,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     //Add custom attributes to KCSUser object 
     
     
-    
+    //This is the user registration method from the Kinvey API
     KCSUser.userWithUsername(
       email!,
       password: password!,
@@ -141,7 +142,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         
         } else {
           NSLog("error")
-          //there was an error with the create
+          //there was an error with the create 
+          //this checks what kind of error it is and it prints the info to the console
           errorOrNil.userInfo["Kinvey.ExecutedHooks"]
           let errorObject = errorOrNil.userInfo["Kinvey.ExecutedHooks"]
           print(errorObject)

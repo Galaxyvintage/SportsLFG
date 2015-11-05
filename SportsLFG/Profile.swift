@@ -16,6 +16,8 @@ class Location
   var myCity : String
   var myProvince : String
   var myCountry  : String
+  
+  //initialize the location object
   init(city : String, province : String, country : String)
   {
     myCity = city
@@ -26,17 +28,14 @@ class Location
 
 class Profile 
 {
-  var userName : String!
-  var userEmail: String
+  var userEmail: String!
   var userAge  : UInt!
   var location : Location!
   var isMale : Bool! // gender boolean
   var rating : Double!
-  var sports : Array<Sports>!
+  var sports : Array<String>!
   var achievemenPoints : UInt!
-  
-  init(email : String)       
-  {
-    userEmail = email
-  }
+
 }
+
+

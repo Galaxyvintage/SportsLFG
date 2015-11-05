@@ -7,9 +7,6 @@
 
 import UIKit
 
-//TODO:
-//    1.If it's users' first time running the app, an information collecting view should 
-//    be presented to the users
 
 class LoginViewController : UIViewController, UITextFieldDelegate
 {
@@ -20,12 +17,6 @@ class LoginViewController : UIViewController, UITextFieldDelegate
   @IBOutlet weak var userPasswordField: UITextField!
   
 
-   
-  // Function to retrieve user account information based on given account number
-  // Returns true if successful
-  
-  
-  
   
   override func viewDidLoad() {
     
@@ -48,6 +39,7 @@ class LoginViewController : UIViewController, UITextFieldDelegate
   
   //MARK: Actions
   
+  //This is the login method from the Kinvey API
   @IBAction func userLogin(sender: UIButton) {
     let email = userEmailField.text
     let password = userPasswordField.text

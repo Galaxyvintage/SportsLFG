@@ -17,7 +17,7 @@ class FirstTimeUserViewController : UIViewController{
   @IBOutlet weak var City: UITextField!
   @IBOutlet weak var Province: UITextField!
   
-  //check whether user misses any field 
+  //This checks whether user misses any field
   func isAnyEmptyField()->Bool
   {
     if( Name!.text     == nil || 
@@ -50,16 +50,16 @@ class FirstTimeUserViewController : UIViewController{
     }
     
     
-    //Add custom attributes to the user 
-    //only for first time user 
-    //more attribute can be set up later 
+    //This adds custom attributes to the user 
+    //It's only for the first time user 
+    //notes: more attribute can be set up later 
     currentUser.setValue(Name.text, forAttribute: "Name")
     currentUser.setValue(Age.text, forAttribute:"Age")
     currentUser.setValue(City.text, forAttribute:"City")
     currentUser.setValue(Province.text, forAttribute:"Province")
     
     
-
+    //This method saves the custom attributes to the kinvey back-end database
     currentUser.saveWithCompletionBlock { (NSarry:[AnyObject]!, errorOrNil:NSError!) -> Void in
       if (errorOrNil == nil)
       {

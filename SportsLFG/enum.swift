@@ -8,6 +8,8 @@
 
 import Foundation
 
+//enum class for Sports type and Gender types
+//so that we can have our own types for variables 
 
 enum SportsType
 {

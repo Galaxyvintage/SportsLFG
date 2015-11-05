@@ -1,7 +1,8 @@
 //
 // File  : Group.swift
-// Author: Charles Li
-// Date  : Oct.30 2015
+// Author: Aaron Cheung, Charles Li
+// Date created  : Oct.30 2015
+// Date edited   : Nov.03 2015
 // Description :
 //
 
@@ -17,30 +18,30 @@ class Group
  
   var groupType  : SportsType!
   var groupID    : UInt
-  var groupName  : String!
-  //var teamLeader : Profile  
-  //var sport      : Sports!
-  //var members     : Array<Profile>?
-  //var waitingQueue   : wQueue<Profile>?
+  var groupName  : String
+  var teamLeader : Profile? 
+  var sport      : String!
+  var members          : Array<Profile>?
+  var waitingQueue     : Queue<Profile>?
   var groupSizeMax     : UInt
   var groupSizeCurrent : UInt
   var ageMax     : UInt?
   var ageMin     : UInt?
-  var gender     : GenderType
+  var gender     : GenderType?
   var description: String?
-  //var isTeam     : Bool
+  var isTeam     : Bool
   
   
   //initializer(constructor)
  
-  init(type    : SportsType,
+  init(name    : String,
+       type    : SportsType,
        ID      : UInt,
-       size    : UInt
-        
-      )
+       size    : UInt)
   {
     groupType = type
     groupID   = ID 
+    groupName = name
     groupSizeMax = size
     groupSizeCurrent = 0
     gender    = GenderType.Neutral    //Neutral means no gender restriction
@@ -48,33 +49,37 @@ class Group
   }
   
   
-  
+  //This method returns the max size of a group
   func getSizeMax() -> UInt 
   {
     return groupSizeMax
   }
   
+  //This method returns the current size of a group
   func getSizeCurrent() -> UInt 
   {
     
     return groupSizeCurrent
   }
   
-  func getAgeLimit()->(UInt,UInt)//returns ageMmin and ageMax
+  //This method returns the age limit of a group (minAge, maxAge)
+  func getAgeLimit()->(UInt,UInt)
   {
     
     return (0,0)
   }
   
+  //This method returns the description of a group 
   func getDescription() ->String
   {
-    if description.isEmpty {
+    if ((description?.isEmpty) == nil) {
       return " "
     } else {
-      return description
+      return description!
     }
   }
   
+  //This method returns true if the group is full and false if the group still has spots
   func isFull() -> Bool
   {
     if groupSizeCurrent >= groupSizeMax {
@@ -83,10 +88,12 @@ class Group
     return false 
   }
   
+  //This method returns true if the user is the leader of the group and false otherwise
   func isLeader(userID : UInt) -> Bool
   {
     return true
   }
+  
   
   /*
   the following 3 methods can only be implemented after the profile class are created in
