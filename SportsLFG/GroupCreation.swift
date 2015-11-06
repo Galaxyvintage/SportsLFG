@@ -84,9 +84,27 @@ class GroupCreation : UIViewController
     ///////////////////////
     
     
-    
-    
-    
+    //This checks if there is any mandatory fields is missing
+    if(currentName.text?.isEmpty == true ||
+       maxSize.text?.isEmpty     == true ||
+       address.text?.isEmpty     == true ||
+       city!.text?.isEmpty       == true ||
+       province!.text?.isEmpty   == true ||
+       time!.text?.isEmpty       == true ||
+       date!.text?.isEmpty       == nil  )
+    {
+      let alert = UIAlertController(
+        title:   NSLocalizedString("Error", comment: "account success note title"),
+        message: NSLocalizedString("Empty field", comment: "password errors"),
+        preferredStyle : UIAlertControllerStyle.Alert
+      )
+      
+      let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+      alert.addAction(cancelAction)
+      presentViewController(alert, animated: true , completion: nil)
+      return
+    }
+       
     
     
     
@@ -135,12 +153,19 @@ class GroupCreation : UIViewController
       withCompletionBlock: {(objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in 
         if errorOrNil != nil{
           
+          var message = "Failed to create a group"
+          
           //for checking which error domain 
-          print(errorOrNil.domain)
+          //print(errorOrNil.domain)
           
           
+          //identify the error domain
+          if(errorOrNil.domain == "KCSServerErrorDomain")
+          {
+            message = "Group already exists"
+          }
           //create an alert to tell user there is an error
-          let message = "Failed to create a group"
+          
           let alert = UIAlertController(
             title: NSLocalizedString("Error", comment: "error"),
             message: message,
