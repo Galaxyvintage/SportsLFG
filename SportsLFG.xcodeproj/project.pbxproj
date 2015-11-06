@@ -19,12 +19,10 @@
 		632290371BE0C1730097B93B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 632290351BE0C1730097B93B /* Main.storyboard */; };
 		63C035091BE47F5B00BAFA65 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C035081BE47F5B00BAFA65 /* Group.swift */; };
 		63C0350B1BE485E700BAFA65 /* enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0350A1BE485E700BAFA65 /* enum.swift */; };
-		63C0350D1BE4AB4200BAFA65 /* GroupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0350C1BE4AB4200BAFA65 /* GroupList.swift */; };
 		63C0350F1BE4ABF400BAFA65 /* LFGViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0350E1BE4ABF400BAFA65 /* LFGViewController.swift */; };
 		63D573EE1BE7E78E00EE769A /* FirstTimeUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D573ED1BE7E78E00EE769A /* FirstTimeUserViewController.swift */; };
 		63D573F01BE9797900EE769A /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D573EF1BE9797900EE769A /* ProfileTableViewController.swift */; };
 		63D573F51BE9F7D900EE769A /* GroupCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D573F41BE9F7D900EE769A /* GroupCreation.swift */; };
-		63D573FA1BEB41C100EE769A /* LFGSeque.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D573F91BEB41C100EE769A /* LFGSeque.swift */; };
 		96C3F6D31BE41D6F00AC236A /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C3F6D21BE41D6F00AC236A /* Profile.swift */; };
 		96C3F6D51BE4284600AC236A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C3F6D41BE4284600AC236A /* LoginViewController.swift */; };
 		A1F5DE97E1C7507ECD8C9F5F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE3EA33AED1FE155D30688 /* libPods.a */; };
@@ -49,12 +47,10 @@
 		632290361BE0C1730097B93B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63C035081BE47F5B00BAFA65 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		63C0350A1BE485E700BAFA65 /* enum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enum.swift; sourceTree = "<group>"; };
-		63C0350C1BE4AB4200BAFA65 /* GroupList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupList.swift; sourceTree = "<group>"; };
 		63C0350E1BE4ABF400BAFA65 /* LFGViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFGViewController.swift; sourceTree = "<group>"; };
 		63D573ED1BE7E78E00EE769A /* FirstTimeUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTimeUserViewController.swift; sourceTree = "<group>"; };
 		63D573EF1BE9797900EE769A /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		63D573F41BE9F7D900EE769A /* GroupCreation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCreation.swift; sourceTree = "<group>"; };
-		63D573F91BEB41C100EE769A /* LFGSeque.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFGSeque.swift; sourceTree = "<group>"; };
 		96C3F6D21BE41D6F00AC236A /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		96C3F6D41BE4284600AC236A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,7 +104,6 @@
 				63D573EF1BE9797900EE769A /* ProfileTableViewController.swift */,
 				6322902A1BE0C15E0097B93B /* MainCVController.swift */,
 				6322902B1BE0C15E0097B93B /* MainCVSegue.swift */,
-				63D573F91BEB41C100EE769A /* LFGSeque.swift */,
 				632290351BE0C1730097B93B /* Main.storyboard */,
 				6322901D1BE0C0C00097B93B /* LaunchScreen.storyboard */,
 				632290201BE0C0C00097B93B /* Info.plist */,
@@ -123,7 +118,6 @@
 			children = (
 				63C035081BE47F5B00BAFA65 /* Group.swift */,
 				63C0350A1BE485E700BAFA65 /* enum.swift */,
-				63C0350C1BE4AB4200BAFA65 /* GroupList.swift */,
 				4A017AEE1BE77F0000E974A2 /* Queue.swift */,
 				96C3F6D21BE41D6F00AC236A /* Profile.swift */,
 			);
@@ -295,9 +289,7 @@
 				96C3F6D51BE4284600AC236A /* LoginViewController.swift in Sources */,
 				63D573F51BE9F7D900EE769A /* GroupCreation.swift in Sources */,
 				632290321BE0C15E0097B93B /* MainCVSegue.swift in Sources */,
-				63C0350D1BE4AB4200BAFA65 /* GroupList.swift in Sources */,
 				63D573F01BE9797900EE769A /* ProfileTableViewController.swift in Sources */,
-				63D573FA1BEB41C100EE769A /* LFGSeque.swift in Sources */,
 				632290311BE0C15E0097B93B /* MainCVController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

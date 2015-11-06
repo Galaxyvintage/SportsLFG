@@ -9,22 +9,56 @@ import Foundation
 
 class GroupCreation : UIViewController
 {
-  
+   
+  //MARK: Properties
   var sport :String!
-  var newGroup: Group!
+  var currentType    : SportsType!
     
   //A flag to check whether user has enter all the needed information
+  
+  //must-enter attributes 
   var flag  :Bool!
-  @IBOutlet weak var groupName: UITextField!
-  @IBOutlet weak var name: UITextField!
+  @IBOutlet weak var currentName: UITextField!
+  @IBOutlet weak var maxSize: UITextField!
+  @IBOutlet weak var address: UITextField!
+  @IBOutlet weak var city: UITextField!
+  @IBOutlet weak var province: UITextField!
+  @IBOutlet weak var time: UITextField!
+  @IBOutlet weak var date: UITextField!
+ 
+  
+  
+  //optional attributes 
+  @IBOutlet weak var ageMin: UITextField?
+  @IBOutlet weak var ageMax: UITextField?
+  @IBOutlet var gender: [UIButton]?
+  @IBOutlet weak var detail: UITextField?
+  
+  
+  @IBOutlet var SportsButton: [UIButton]!
+  
   
   
   @IBAction func PingPong(sender: UIButton) {
-    sport = "PingPong"
+    sport        = "PingPong"
+    currentType  = SportsType.Indoor
+    
+    for btn in SportsButton{
+      btn.selected = false
+    }
+    sender.selected = true
   }
+  
   @IBAction func Soccer(sender:UIButton) {
-    sport = "Soccer"
+    sport        = "Soccer"
+    currentType  = SportsType.Outdoor
+    for btn in SportsButton{
+      btn.selected = false
+    }
+    sender.selected = true
   }
+  
+  
   
   
   
@@ -39,5 +73,93 @@ class GroupCreation : UIViewController
   }
   
   
+  
+  
+  //write information to the newGroup object
+  @IBAction func createGroup(sender: UIButton) {
+    
+    
+    ///////////////////////
+    //Validate user input//
+    ///////////////////////
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //The following 4 lines get the current date of the system
+    let tempDate    = NSDate()
+    let formatter = NSDateFormatter()
+    formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+    let currentDate = formatter.stringFromDate(tempDate)
+    
+    
+    
+    //Kinvey API method that creates a store object 
+    let store = KCSAppdataStore.storeWithOptions(
+      [KCSStoreKeyCollectionName : "Groups", 
+       KCSStoreKeyCollectionTemplateClass : Groups.self]
+    )
+    
+    
+    //Kinvey API method that creates a Groups instance and saving to the database
+    //and assigns user input to the instance properties
+    let group         = Groups()
+    group.name        = currentName.text!  
+    group.sport       = sport
+    group.maxSize     = maxSize.text!
+    group.startTime   = time.text!
+    group.startDate   = date.text!
+    group.dateCreated = currentDate
+    group.address     = address.text!
+    group.city        = city.text!
+    group.province    = province.text!
+    
+    //this method saves the changes and uploads the newly created entity to the database
+    store.saveObject(
+      group, 
+      withCompletionBlock: {(objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in 
+        if errorOrNil != nil{
+          
+          //for checking which error domain 
+          print(errorOrNil.domain)
+          
+          
+          //create an alert to tell user there is an error
+          let message = "Failed to create a group"
+          let alert = UIAlertController(
+            title: NSLocalizedString("Error", comment: "error"),
+            message: message,
+            preferredStyle: UIAlertControllerStyle.Alert  
+          )
+          let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+          alert.addAction(cancelAction)
+          self.presentViewController(alert, animated: true, completion: nil)
+          
+        }else{
+          
+          //save was sucessful
+          //bring user to their group page 
+          //self.
+          NSLog("Successfullly saved event(id ='%@').",(objectsOrNil[0] as! NSObject).kinveyObjectId())
+        }
+      },
+      
+      withProgressBlock : nil
+    )  
+  }  
 }
 
