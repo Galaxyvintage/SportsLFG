@@ -127,6 +127,7 @@ class GroupCreation : UIViewController
     group.address     = address.text!
     group.city        = city.text!
     group.province    = province.text!
+    group.metadata?.setGloballyWritable(false)
     
     //this method saves the changes and uploads the newly created entity to the database
     store.saveObject(
