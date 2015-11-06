@@ -7,16 +7,41 @@
 
 import Foundation
 
-class FirstTimeUserViewController : UIViewController{
+class FirstTimeUserViewController : UIViewController, UITextFieldDelegate{
+  
   
   //MARK: Properties 
   
   @IBOutlet weak var Name: UITextField!
-  
-  @IBOutlet weak var Age: UITextField!
+  @IBOutlet weak var Age : UITextField!
   @IBOutlet weak var City: UITextField!
   @IBOutlet weak var Province: UITextField!
   
+  override func viewDidLoad() {
+    
+    super.viewDidLoad()
+    // Do any additional setup after loading the view, typically from a nib.
+   
+    //set all the textfields's delegate to its view controller
+    self.Name.delegate = self
+    self.Age.delegate  = self
+    self.City.delegate = self
+    self.Province.delegate  = self
+  }
+
+  //This method  dismisses keyboard on return key press
+  func textFieldShouldReturn(textField: UITextField) -> Bool{
+    textField.resignFirstResponder()
+    self.view.endEditing(true)
+    return false
+  }
+  
+  //This method dismisses keyboard by touching to anywhere on the screen
+  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    self.view.endEditing(true)
+  }
+
+    
   //This checks whether user misses any field
   func isAnyEmptyField()->Bool
   {

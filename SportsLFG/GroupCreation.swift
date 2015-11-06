@@ -7,9 +7,9 @@
 //
 import Foundation
 
-class GroupCreation : UIViewController
+class GroupCreation : UIViewController, UITextFieldDelegate
 {
-   
+
   //MARK: Properties
   var sport :String!
   var currentType    : SportsType!
@@ -37,7 +37,42 @@ class GroupCreation : UIViewController
   
   @IBOutlet var SportsButton: [UIButton]!
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    // Do any additional setup after loading the view, typically from a nib.
+    
+    //set all the text fields' delegate to the view controller itself
+    self.currentName.delegate = self;
+    self.maxSize.delegate  = self;
+    self.address.delegate  = self;
+    self.city.delegate     = self;
+    self.province.delegate = self;
+    self.time.delegate     = self;
+    self.date.delegate     = self;
+    self.ageMin!.delegate  = self;
+    self.ageMax!.delegate  = self;
+    self.detail!.delegate  = self;
+    
+  }
   
+  
+  //This method  dismisses keyboard on return key press
+  func textFieldShouldReturn(textField: UITextField) -> Bool{
+    textField.resignFirstResponder()
+    self.view.endEditing(true)
+    return false
+  }
+  
+  //MThis method dismisses keyboard by touching to anywhere on the screen
+  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    self.view.endEditing(true)
+  }
+  
+  //MARK: Actions
+  
+  //////////
+  //Sports//
+  //////////
   
   @IBAction func PingPong(sender: UIButton) {
     sport        = "PingPong"

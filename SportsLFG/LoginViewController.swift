@@ -23,19 +23,24 @@ class LoginViewController : UIViewController, UITextFieldDelegate
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     
+    //set all the textfields's delegate to its view controller
+    self.userEmailField.delegate    = self
+    self.userPasswordField.delegate = self
+    
   }
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-  
+  //This method dismisses keyboard on return key press
   func textFieldShouldReturn(textField: UITextField) -> Bool{
     textField.resignFirstResponder()
     self.view.endEditing(true)
     return false
   }
   
+  //This method dismisses keyboard by touching to anywhere on the screen
+  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    self.view.endEditing(true)
+  }
+
   
   //MARK: Actions
   

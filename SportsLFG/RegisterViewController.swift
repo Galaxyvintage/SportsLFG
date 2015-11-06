@@ -21,21 +21,28 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    
+    //set all the textfields's delegate to its view controller
+    self.userNewEmail.delegate = self
+    self.userNewPassword.delegate = self
+    self.userNewPasswordConfirm.delegate = self
       
   }
 
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-  
-  //This method dismisses the keyboard after the user presses the return button
+  //This method  dismisses keyboard on return key press
   func textFieldShouldReturn(textField: UITextField) -> Bool{
     textField.resignFirstResponder()
     self.view.endEditing(true)
     return false
   }
+  
+  //This method dismisses keyboard by touching to anywhere on the screen
+  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    self.view.endEditing(true)
+  }
+
    
+  
   //This method returns true if the user email is valid and false if not
   func isValidEmail(testStr:String) -> Bool {
     // println("validate calendar: \(testStr)")
