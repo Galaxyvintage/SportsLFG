@@ -35,7 +35,7 @@ class Groups : NSObject{
       "city"     : "city",
       "province" :"province",
       "metadata" : KCSEntityKeyMetadata
-    ]
+  ]
   }
 }
 

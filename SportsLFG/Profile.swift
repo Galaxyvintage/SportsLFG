@@ -9,6 +9,8 @@
 import Foundation
 
 
+//Not sure if we need this...havent used this class yet
+
 //unless user changes information, then she doesnt need to load her info from the database more than one 
 
 class Location

@@ -126,7 +126,7 @@ class GroupCreation : UIViewController, UITextFieldDelegate
        city!.text?.isEmpty       == true ||
        province!.text?.isEmpty   == true ||
        time!.text?.isEmpty       == true ||
-       date!.text?.isEmpty       == nil  )
+       date!.text?.isEmpty       == true  )
     {
       let alert = UIAlertController(
         title:   NSLocalizedString("Error", comment: "account success note title"),
@@ -180,7 +180,7 @@ class GroupCreation : UIViewController, UITextFieldDelegate
     group.address     = address.text!
     group.city        = city.text!
     group.province    = province.text!
-    group.metadata?.setGloballyWritable(false)
+
     
     //this method saves the changes and uploads the newly created entity to the database
     store.saveObject(
@@ -191,14 +191,14 @@ class GroupCreation : UIViewController, UITextFieldDelegate
           var message = "Failed to create a group"
           
           //for checking which error domain 
-          //print(errorOrNil.domain)
-          
+   
+      
+          print(errorOrNil.userInfo[KCSErrorCode])
+          print(errorOrNil.userInfo[KCSErrorInternalError])
+          print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
           
           //identify the error domain
-          if(errorOrNil.domain == "KCSServerErrorDomain")
-          {
-            message = "Group already exists"
-          }
+       
           //create an alert to tell user there is an error
           
           let alert = UIAlertController(

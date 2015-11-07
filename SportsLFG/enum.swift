@@ -1,9 +1,10 @@
 //
-//  enum.swift
-//  SportsLFG
 //
-//  Created by CharlesL on 2015-10-30.
-//  Copyright © 2015 CMPT-GP03. All rights reserved.
+// File  : enum.swift
+// Author: Aaron Cheung, Charles Li
+// Date created  : Oct 30 2015
+// Date modified : Nov 03 2015
+// Description : 
 //
 
 import Foundation
