@@ -12,9 +12,15 @@ class GroupTableViewCell: UITableViewCell {
     
     // MARK: Properties
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var photoImageView: UIImageView!
-    @IBOutlet weak var otherView: UIView!
+    @IBOutlet weak var SportTypeImageView: UIImageView!
+    @IBOutlet weak var NameLabel: UILabel!
+    @IBOutlet weak var StartDateLabel: UILabel!
+    @IBOutlet weak var StartTimeLabel: UILabel!
+    @IBOutlet weak var CreateDateLabel: UILabel!
+    @IBOutlet weak var ProvienceLabel: UILabel!
+    @IBOutlet weak var CityLabel: UILabel!
+    @IBOutlet weak var AddressLabel: UILabel!
+    @IBOutlet weak var MaxNumberLabel: UILabel!
     
 
     override func awakeFromNib() {
