@@ -10,7 +10,9 @@ import Foundation
 
 class Groups : NSObject{
   
-  var name: String?  //as unique Kinvey entity _id
+  
+  var entityId  : String?
+  var name: String? 
   var dateCreated: String?
   var startTime  : String?
   var startDate  : String?
@@ -25,7 +27,8 @@ class Groups : NSObject{
   //This function provided by Kinvey API maps the variables above to the back-end database schema
   override func hostToKinveyPropertyMapping() -> [NSObject : AnyObject]! {
     return [
-      "name" : KCSEntityKeyId, //the required _id field
+      "entityId" : KCSEntityKeyId, //the required _id field
+      "name"     : "name",         //this is also unique 
       "dateCreated": "dateCreated",
       "sport"    : "sport",
       "startTime": "time",

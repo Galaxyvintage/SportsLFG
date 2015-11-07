@@ -13,7 +13,7 @@ class GroupCreation : UIViewController, UITextFieldDelegate
   //MARK: Properties
   var sport :String!
   var currentType    : SportsType!
-    
+  var exist : Bool = false 
   //A flag to check whether user has enter all the needed information
   
   //must-enter attributes 
@@ -139,28 +139,7 @@ class GroupCreation : UIViewController, UITextFieldDelegate
       presentViewController(alert, animated: true , completion: nil)
       return
     }
-       
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //The following 4 lines get the current date of the system
-    let tempDate    = NSDate()
-    let formatter = NSDateFormatter()
-    formatter.dateStyle = NSDateFormatterStyle.ShortStyle
-    let currentDate = formatter.stringFromDate(tempDate)
-    
-    
-    
+     
     //Kinvey API method that creates a store object 
     let store = KCSAppdataStore.storeWithOptions(
       [KCSStoreKeyCollectionName : "Groups", 
@@ -168,59 +147,88 @@ class GroupCreation : UIViewController, UITextFieldDelegate
     )
     
     
-    //Kinvey API method that creates a Groups instance and saving to the database
-    //and assigns user input to the instance properties
-    let group         = Groups()
-    group.name        = currentName.text!  
-    group.sport       = sport
-    group.maxSize     = maxSize.text!
-    group.startTime   = time.text!
-    group.startDate   = date.text!
-    group.dateCreated = currentDate
-    group.address     = address.text!
-    group.city        = city.text!
-    group.province    = province.text!
-
-    
-    //this method saves the changes and uploads the newly created entity to the database
-    store.saveObject(
-      group, 
-      withCompletionBlock: {(objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in 
-        if errorOrNil != nil{
-          
-          var message = "Failed to create a group"
-          
-          //for checking which error domain 
-   
-      
-          print(errorOrNil.userInfo[KCSErrorCode])
-          print(errorOrNil.userInfo[KCSErrorInternalError])
-          print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
-          
-          //identify the error domain
+    //check whether the item already exists
+    let query = KCSQuery(onField: "name", withExactMatchForValue: currentName.text!)
        
-          //create an alert to tell user there is an error
-          
-          let alert = UIAlertController(
-            title: NSLocalizedString("Error", comment: "error"),
-            message: message,
-            preferredStyle: UIAlertControllerStyle.Alert  
-          )
-          let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-          alert.addAction(cancelAction)
-          self.presentViewController(alert, animated: true, completion: nil)
-          
-        }else{
-          
-          //save was sucessful
-          //bring user to their group page 
-          //self.
-          NSLog("Successfullly saved event(id ='%@').",(objectsOrNil[0] as! NSObject).kinveyObjectId())
-        }
-      },
+    //execute the query 
+    store.countWithQuery(query) { (count :UInt, errorOrNil :NSError!) -> Void in
       
-      withProgressBlock : nil
-    )  
+      //if the group already exists
+      if(count > 0)
+      {
+        
+        //create an alert to tell user there is an error
+        let alert = UIAlertController(
+          title: NSLocalizedString("Error", comment: "error"),
+          message: "Group already exists",
+          preferredStyle: UIAlertControllerStyle.Alert  
+        )
+        let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(cancelAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+        return 
+      }
+    
+  
+      //The following 4 lines get the current date of the system
+      let tempDate    = NSDate()
+      let formatter = NSDateFormatter()
+      formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+      let currentDate = formatter.stringFromDate(tempDate)
+        
+      //Kinvey API method that creates a Groups instance and saving to the database
+      //and assigns user input to the instance properties
+      let group         = Groups()
+      group.name        = self.currentName.text!  
+      group.sport       = self.sport
+      group.maxSize     = self.maxSize.text!
+      group.startTime   = self.time.text!
+      group.startDate   = self.date.text!
+      group.dateCreated = currentDate
+      group.address     = self.address.text!
+      group.city        = self.city.text!
+      group.province    = self.province.text!
+      group.metadata?.setGloballyReadable(true)
+
+      //this method saves the changes and uploads the newly created entity to the database
+      store.saveObject(
+        group, 
+        withCompletionBlock: {(objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in 
+          if (errorOrNil != nil)
+          {
+      
+            print(errorOrNil.userInfo[KCSErrorCode])
+            print(errorOrNil.userInfo[KCSErrorInternalError])
+            print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
+          
+            //identify the error domain
+            let message = errorOrNil.userInfo[KCSErrorInternalError] as! String?
+            
+            //create an alert to tell user there is an error
+            let alert = UIAlertController(
+              title: NSLocalizedString("Error", comment: "error"),
+              message: message,
+              preferredStyle: UIAlertControllerStyle.Alert  
+            )
+            let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+            alert.addAction(cancelAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+            return 
+        
+          
+          }
+          else
+          {
+            //save was sucessful
+            //bring user to their group page 
+            //self.
+            NSLog("Successfullly saved event(id ='%@').",(objectsOrNil[0] as! NSObject).kinveyObjectId())
+          }
+        },
+      
+        withProgressBlock : nil
+      )
+    }    
   }  
 }
 
