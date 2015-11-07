@@ -2917,10 +2917,10 @@
             </objects>
             <point key="canvasLocation" x="246.75" y="478.875"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Group Table View Controller-->
         <scene sceneID="jiS-46-Tvg">
             <objects>
-                <tableViewController id="h4N-cs-NDb" sceneMemberID="viewController">
+                <tableViewController id="h4N-cs-NDb" customClass="GroupTableViewController" customModule="SportsLFG" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="22" sectionFooterHeight="22" id="Dho-ZA-Wbr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2934,9 +2934,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rhI-nx-4TJ">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rhI-nx-4TJ">
                                             <rect key="frame" x="8" y="8" width="90" height="90"/>
                                             <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="90" id="FMP-Yd-9D5"/>
+                                                <constraint firstAttribute="height" constant="90" id="IN7-Vy-FkH"/>
+                                            </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWg-Dg-zMo">
                                             <rect key="frame" x="116" y="8" width="251" height="21"/>
