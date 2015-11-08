@@ -42,7 +42,7 @@ class Group : NSObject{
     //This function provided by Kinvey API maps the variables above to the back-end database schema
     override func hostToKinveyPropertyMapping() -> [NSObject : AnyObject]! {
         return [
-           "entityId" : KCSEntityKeyId,   //the required _id field
+            "entityId" : KCSEntityKeyId,   //the required _id field
             "name"    : "name",        //the name
             "dateCreated": "dateCreated",
             "sport"    : "sport",

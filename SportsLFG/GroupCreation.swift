@@ -117,16 +117,16 @@ class GroupCreation : UIViewController
     
     //Kinvey API method that creates a Groups instance and saving to the database
     //and assigns user input to the instance properties
-    let group         = Groups()
-    group.name        = currentName.text!  
-    group.sport       = sport
-    group.maxSize     = maxSize.text!
-    group.startTime   = time.text!
-    group.startDate   = date.text!
-    group.dateCreated = currentDate
-    group.address     = address.text!
-    group.city        = city.text!
-    group.province    = province.text!
+    let group = Group(name       : currentName.text! ,
+                      dateCreated: currentDate,
+                      startTime  : time.text!, 
+                      startDate  : date.text!, 
+                      sport      : sport, 
+                      maxSize    : maxSize.text!, 
+                      address    : address.text!, 
+                      city       : city.text!, 
+                      province   : province.text!)
+ 
     group.metadata?.setGloballyWritable(false)
     
     //this method saves the changes and uploads the newly created entity to the database
