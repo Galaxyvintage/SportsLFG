@@ -1,18 +1,16 @@
 //
-//  Group.swift
-//  SportsLFG
-//
-//  Created by IsaacQ on 2015-11-06.
-//  Copyright © 2015 CMPT-GP03. All rights reserved.
+// File  : Group.swift
+// Author: Aaron Cheung, Charles Li
+// Date created  : Oct.30 2015
+// Date edited   : Nov.05 2015
+// Description :
 //
 
 import Foundation
 
 class Groups : NSObject{
   
-  
-  var entityId  : String?
-  var name: String? 
+  var name: String?  //as unique Kinvey entity _id
   var dateCreated: String?
   var startTime  : String?
   var startDate  : String?
@@ -27,8 +25,7 @@ class Groups : NSObject{
   //This function provided by Kinvey API maps the variables above to the back-end database schema
   override func hostToKinveyPropertyMapping() -> [NSObject : AnyObject]! {
     return [
-      "entityId" : KCSEntityKeyId, //the required _id field
-      "name"     : "name",         //this is also unique 
+      "name" : KCSEntityKeyId, //the required _id field
       "dateCreated": "dateCreated",
       "sport"    : "sport",
       "startTime": "time",
@@ -38,7 +35,7 @@ class Groups : NSObject{
       "city"     : "city",
       "province" :"province",
       "metadata" : KCSEntityKeyMetadata
-  ]
+    ]
   }
 }
 

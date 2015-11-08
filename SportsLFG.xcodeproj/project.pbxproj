@@ -19,7 +19,7 @@
 		632290321BE0C15E0097B93B /* MainCVSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322902B1BE0C15E0097B93B /* MainCVSegue.swift */; };
 		632290341BE0C15E0097B93B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322902D1BE0C15E0097B93B /* RegisterViewController.swift */; };
 		632290371BE0C1730097B93B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 632290351BE0C1730097B93B /* Main.storyboard */; };
-		63C035091BE47F5B00BAFA65 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C035081BE47F5B00BAFA65 /* Group.swift */; };
+		63C035091BE47F5B00BAFA65 /* Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C035081BE47F5B00BAFA65 /* Groups.swift */; };
 		63C0350B1BE485E700BAFA65 /* enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0350A1BE485E700BAFA65 /* enum.swift */; };
 		63C0350F1BE4ABF400BAFA65 /* LFGViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0350E1BE4ABF400BAFA65 /* LFGViewController.swift */; };
 		63D573EE1BE7E78E00EE769A /* FirstTimeUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D573ED1BE7E78E00EE769A /* FirstTimeUserViewController.swift */; };
@@ -49,7 +49,7 @@
 		6322902B1BE0C15E0097B93B /* MainCVSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCVSegue.swift; sourceTree = "<group>"; };
 		6322902D1BE0C15E0097B93B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		632290361BE0C1730097B93B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		63C035081BE47F5B00BAFA65 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		63C035081BE47F5B00BAFA65 /* Groups.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Groups.swift; sourceTree = "<group>"; };
 		63C0350A1BE485E700BAFA65 /* enum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enum.swift; sourceTree = "<group>"; };
 		63C0350E1BE4ABF400BAFA65 /* LFGViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFGViewController.swift; sourceTree = "<group>"; };
 		63D573ED1BE7E78E00EE769A /* FirstTimeUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTimeUserViewController.swift; sourceTree = "<group>"; };
@@ -120,7 +120,8 @@
 		63D573F11BE9A7C200EE769A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				63C035081BE47F5B00BAFA65 /* Group.swift */,
+				4AC6A8621BEDD1CE004F9C7A /* Group.swift */,
+				63C035081BE47F5B00BAFA65 /* Groups.swift */,
 				63C0350A1BE485E700BAFA65 /* enum.swift */,
 				4A017AEE1BE77F0000E974A2 /* Queue.swift */,
 				96C3F6D21BE41D6F00AC236A /* Profile.swift */,
@@ -282,9 +283,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63C035091BE47F5B00BAFA65 /* Group.swift in Sources */,
+				63C035091BE47F5B00BAFA65 /* Groups.swift in Sources */,
 				6322902E1BE0C15E0097B93B /* AppDelegate.swift in Sources */,
 				63C0350B1BE485E700BAFA65 /* enum.swift in Sources */,
+				4A76EB011BEC9216004890AD /* GroupTableViewCell.swift in Sources */,
 				4A017AEF1BE77F0000E974A2 /* Queue.swift in Sources */,
 				63D573EE1BE7E78E00EE769A /* FirstTimeUserViewController.swift in Sources */,
 				632290341BE0C15E0097B93B /* RegisterViewController.swift in Sources */,
