@@ -57,7 +57,8 @@ class GroupTableViewController: UITableViewController {
         // Table view cells are reused and should be dequeued using a cell identifier.
         let cellIdentifier = "GroupTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GroupTableViewCell
-        // Fetches the appropriate meal for the data source layout.
+       
+      // Fetches the appropriate meal for the data source layout.
         let group = groups[indexPath.row]
         
         // Configure the cell...
