@@ -277,12 +277,12 @@
                                                 <include reference="4k9-zq-6gW"/>
                                                 <include reference="tvG-ef-HvZ"/>
                                                 <include reference="ufi-rR-ckB"/>
-                                                <include reference="Qmq-yF-akA"/>
-                                                <include reference="Zim-gw-kAa"/>
-                                                <include reference="wM3-hx-904"/>
                                                 <include reference="Sbu-9i-0bO"/>
                                                 <include reference="UVJ-3y-tNn"/>
                                                 <include reference="zoP-Lr-TpE"/>
+                                                <include reference="Qmq-yF-akA"/>
+                                                <include reference="Zim-gw-kAa"/>
+                                                <include reference="wM3-hx-904"/>
                                                 <include reference="3do-rd-0Lt"/>
                                                 <include reference="mZA-9H-tom"/>
                                                 <include reference="wWx-6K-R7y"/>
@@ -428,10 +428,10 @@
                                 <exclude reference="OJ0-cn-BP3"/>
                                 <exclude reference="TkM-Hr-p7d"/>
                                 <exclude reference="jxz-Bd-FM6"/>
-                                <exclude reference="Fu5-mt-Wbr"/>
-                                <exclude reference="ixX-tW-QmC"/>
                                 <exclude reference="2ie-qN-fVB"/>
                                 <exclude reference="jQH-zS-hqC"/>
+                                <exclude reference="Fu5-mt-Wbr"/>
+                                <exclude reference="ixX-tW-QmC"/>
                                 <exclude reference="ZB9-Wh-aKk"/>
                             </mask>
                         </variation>
@@ -441,10 +441,10 @@
                                 <include reference="jxz-Bd-FM6"/>
                                 <include reference="kP7-rp-Ogv"/>
                                 <include reference="pJQ-uf-VkO"/>
-                                <include reference="Fu5-mt-Wbr"/>
-                                <include reference="ixX-tW-QmC"/>
                                 <include reference="2ie-qN-fVB"/>
                                 <include reference="jQH-zS-hqC"/>
+                                <include reference="Fu5-mt-Wbr"/>
+                                <include reference="ixX-tW-QmC"/>
                                 <include reference="ZB9-Wh-aKk"/>
                             </mask>
                         </variation>
@@ -472,6 +472,9 @@
                                 <include reference="TkM-Hr-p7d"/>
                                 <include reference="kP7-rp-Ogv"/>
                                 <include reference="pJQ-uf-VkO"/>
+                                <include reference="4jq-95-FWF"/>
+                                <include reference="Jvd-M4-okj"/>
+                                <include reference="tJU-fz-rTc"/>
                                 <include reference="1Om-Bq-2NQ"/>
                                 <include reference="QVu-FH-pmb"/>
                                 <include reference="08H-2X-zIx"/>
@@ -480,9 +483,6 @@
                                 <include reference="MCC-qQ-E1d"/>
                                 <include reference="7Sb-9i-KM4"/>
                                 <include reference="tkI-xY-LxO"/>
-                                <include reference="4jq-95-FWF"/>
-                                <include reference="Jvd-M4-okj"/>
-                                <include reference="tJU-fz-rTc"/>
                                 <include reference="Buo-lZ-uXG"/>
                                 <include reference="TOE-kW-osl"/>
                                 <include reference="eqw-Xh-SEQ"/>
@@ -1650,6 +1650,9 @@
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="Basketball-50_red" translatesAutoresizingMaskIntoConstraints="NO" id="G1f-m6-0qT">
                                                     <rect key="frame" x="0.0" y="-50" width="50" height="50"/>
                                                     <animations/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="19" y="32" width="7" height="50"/>
+                                                    </variation>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="GroupName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2HW-lK-jbe">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1664,6 +1667,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="64" y="32" width="35" height="20"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="0 / 10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2R-A9-48e">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1671,6 +1677,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="107" y="32" width="41" height="20"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Gender:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Anh-db-Nwt">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1678,6 +1687,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="64" y="55" width="50" height="20"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mpd-Ee-nox">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1743,6 +1755,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="173" y="31" width="80" height="20"/>
+                                                    </variation>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="nXn-Oa-FW0">
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -1758,8 +1773,9 @@
                                                             <exclude reference="40S-ap-bdT"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                        <rect key="frame" x="158" y="54" width="129" height="42"/>
                                                         <mask key="constraints">
                                                             <include reference="40S-ap-bdT"/>
                                                         </mask>
@@ -1999,7 +2015,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdY-Bk-KfI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1073.25" y="478.875"/>
+            <point key="canvasLocation" x="2213.25" y="316.875"/>
         </scene>
         <!--NewGroup-->
         <scene sceneID="dZG-mv-KWT">
@@ -2948,16 +2964,16 @@
             <objects>
                 <tableViewController id="h4N-cs-NDb" customClass="GroupTableViewController" customModule="SportsLFG" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="22" sectionFooterHeight="22" id="Dho-ZA-Wbr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupTableViewCell" rowHeight="150" id="MHu-Lo-eJY" customClass="GroupTableViewCell" customModule="SportsLFG" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="22" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="86" width="414" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MHu-Lo-eJY" id="2sb-xd-nEb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="149"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rhI-nx-4TJ">
@@ -3078,6 +3094,7 @@
                                         </label>
                                     </subviews>
                                     <animations/>
+                                    <color key="backgroundColor" red="1" green="0.64141042531274983" blue="0.38238539096075519" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstItem="q8Z-Qu-VqV" firstAttribute="top" secondItem="mVA-cW-qGR" secondAttribute="bottom" constant="8" id="1BW-ki-zaC"/>
                                         <constraint firstItem="mVA-cW-qGR" firstAttribute="top" secondItem="Pl8-MH-Qly" secondAttribute="bottom" constant="8" id="3Ym-ZX-1i7"/>
@@ -3108,11 +3125,11 @@
                                         <mask key="constraints">
                                             <exclude reference="MP6-f7-5Ra"/>
                                             <exclude reference="a93-MI-TAo"/>
-                                            <exclude reference="NKv-rO-dOI"/>
-                                            <exclude reference="fu4-YW-syS"/>
                                             <exclude reference="J0N-6S-gkd"/>
                                             <exclude reference="P1T-sM-DUl"/>
                                             <exclude reference="xqt-64-8yg"/>
+                                            <exclude reference="NKv-rO-dOI"/>
+                                            <exclude reference="fu4-YW-syS"/>
                                             <exclude reference="7dz-HO-XVV"/>
                                             <exclude reference="C0P-nH-fiN"/>
                                             <exclude reference="d1n-xM-nUU"/>
@@ -3136,11 +3153,11 @@
                                         <mask key="constraints">
                                             <include reference="MP6-f7-5Ra"/>
                                             <include reference="a93-MI-TAo"/>
-                                            <include reference="NKv-rO-dOI"/>
-                                            <include reference="fu4-YW-syS"/>
                                             <include reference="J0N-6S-gkd"/>
                                             <include reference="P1T-sM-DUl"/>
                                             <include reference="xqt-64-8yg"/>
+                                            <include reference="NKv-rO-dOI"/>
+                                            <include reference="fu4-YW-syS"/>
                                             <include reference="7dz-HO-XVV"/>
                                             <include reference="C0P-nH-fiN"/>
                                             <include reference="d1n-xM-nUU"/>
@@ -3180,12 +3197,24 @@
                             <outlet property="delegate" destination="h4N-cs-NDb" id="7vb-JH-nMq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Groups" id="stf-oD-zeO"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationItem key="navigationItem" title="Groups" id="stf-oD-zeO">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="pMb-fz-89c">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nns-YJ-e2Z">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="BackToLFG:" destination="h4N-cs-NDb" eventType="touchUpInside" id="PAK-gJ-N4f"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pwD-PC-i9I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2031.75" y="478.125"/>
+            <point key="canvasLocation" x="843" y="-370.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Ft3-sG-71Q">
@@ -4139,7 +4168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUS-UI-L4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1853.25" y="478.875"/>
+            <point key="canvasLocation" x="2123.25" y="-391.125"/>
         </scene>
         <!--SignUpNavigation Scene-->
         <scene sceneID="m7h-yT-Nea">
@@ -4191,7 +4220,7 @@
             <objects>
                 <navigationController title="GroupList Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="9gC-rr-YLa" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="FDV-iP-ohx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -4205,7 +4234,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i4h-n3-cAw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1113" y="477.75"/>
+            <point key="canvasLocation" x="14.25" y="-370.125"/>
         </scene>
     </scenes>
     <resources>

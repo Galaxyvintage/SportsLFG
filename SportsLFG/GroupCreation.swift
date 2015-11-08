@@ -17,7 +17,6 @@ class GroupCreation : UIViewController, UITextFieldDelegate
   //A flag to check whether user has enter all the needed information
   
   //must-enter attributes 
-  var flag  :Bool!
   @IBOutlet weak var currentName: UITextField!
   @IBOutlet weak var maxSize: UITextField!
   @IBOutlet weak var address: UITextField!
@@ -99,7 +98,7 @@ class GroupCreation : UIViewController, UITextFieldDelegate
   
   //This methods returns back to the LFG view controller
   @IBAction func BackToLFG(sender: UIButton) {
-    NSLog("check")
+    NSLog("BackToLFG")
     //unwind back to MainCVController 
     //set gotoLFG to true and perform segue to LFG controller
     let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
@@ -126,7 +125,8 @@ class GroupCreation : UIViewController, UITextFieldDelegate
        city!.text?.isEmpty       == true ||
        province!.text?.isEmpty   == true ||
        time!.text?.isEmpty       == true ||
-       date!.text?.isEmpty       == true  )
+       date!.text?.isEmpty       == true ||
+       sport.isEmpty             == true )
     {
       let alert = UIAlertController(
         title:   NSLocalizedString("Error", comment: "account success note title"),
@@ -143,11 +143,11 @@ class GroupCreation : UIViewController, UITextFieldDelegate
     //Kinvey API method that creates a store object 
     let store = KCSAppdataStore.storeWithOptions(
       [KCSStoreKeyCollectionName : "Groups", 
-       KCSStoreKeyCollectionTemplateClass : Groups.self]
+       KCSStoreKeyCollectionTemplateClass : Group.self]
     )
     
     
-    //check whether the item already exists
+    //This creates a query that checks whether the item already exists
     let query = KCSQuery(onField: "name", withExactMatchForValue: currentName.text!)
        
     //execute the query 
@@ -168,29 +168,32 @@ class GroupCreation : UIViewController, UITextFieldDelegate
         self.presentViewController(alert, animated: true, completion: nil)
         return 
       }
-    
-  
+      
+      
       //The following 4 lines get the current date of the system
       let tempDate    = NSDate()
       let formatter = NSDateFormatter()
       formatter.dateStyle = NSDateFormatterStyle.ShortStyle
       let currentDate = formatter.stringFromDate(tempDate)
-        
-      //Kinvey API method that creates a Groups instance and saving to the database
+      
+      //Kinvey API method that creates a Group instance and saving to the database
       //and assigns user input to the instance properties
-      let group         = Groups()
-      group.name        = self.currentName.text!  
-      group.sport       = self.sport
-      group.maxSize     = self.maxSize.text!
-      group.startTime   = self.time.text!
-      group.startDate   = self.date.text!
+      let group = Group()
+      group.name        = self.currentName.text! 
       group.dateCreated = currentDate
-      group.address     = self.address.text!
+      group.startTime   = self.time.text! 
+      group.startDate   = self.date.text! 
+      group.sport       = self.sport
+      group.maxSize     = self.maxSize.text! 
+      group.address     = self.address.text! 
       group.city        = self.city.text!
       group.province    = self.province.text!
-      group.metadata?.setGloballyReadable(true)
+ 
+      group.metadata?.setGloballyWritable(false)
+    
+  
 
-      //this method saves the changes and uploads the newly created entity to the database
+      //This method saves the changes and uploads the newly created entity to the database
       store.saveObject(
         group, 
         withCompletionBlock: {(objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in 
