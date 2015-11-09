@@ -1,4 +1,5 @@
 # SportsLFG
+####Note: it's developed using xcde 7.1 and swift 2.0. Lower versions could result in errors
 ####TODO
 #####VERSION 1.0
 
