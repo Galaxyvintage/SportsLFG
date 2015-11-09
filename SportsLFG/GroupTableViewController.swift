@@ -40,15 +40,6 @@ class GroupTableViewController: UITableViewController {
       //)
       */
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
       //This query returns all objects from the database 
       let query = KCSQuery()
       

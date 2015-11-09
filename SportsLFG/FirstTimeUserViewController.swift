@@ -98,6 +98,7 @@ class FirstTimeUserViewController : UIViewController, UITextFieldDelegate{
       else
       {
         //update failed
+        //need to inform user if save goes wrong 
       }
     }
     NSLog("Save")

@@ -55,7 +55,10 @@ class Group : NSObject{
   }
   
   static override func kinveyObjectBuilderOptions() -> [NSObject : AnyObject]! {
-    return [ KCS_REFERENCE_MAP_KEY :[ "members" : inGroup.self]
+    return [ 
+      KCS_REFERENCE_MAP_KEY :[ 
+        "members" : inGroup.self
+      ]
     ]
   }
 }

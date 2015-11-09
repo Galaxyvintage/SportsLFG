@@ -129,7 +129,7 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
        sport                     == nil )
     {
       let alert = UIAlertController(
-        title:   NSLocalizedString("Error", comment: "account success note title"),
+        title  : NSLocalizedString("Error", comment: "account success note title"),
         message: NSLocalizedString("Empty field", comment: "password errors"),
         preferredStyle : UIAlertControllerStyle.Alert
       )
@@ -161,7 +161,7 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
         
         //create an alert to tell user there is an error
         let alert = UIAlertController(
-          title: NSLocalizedString("Error", comment: "error"),
+          title  : NSLocalizedString("Error", comment: "error"),
           message: "Group already exists",
           preferredStyle: UIAlertControllerStyle.Alert  
         )
@@ -197,11 +197,6 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
       group.province      = self.province.text!
       group.metadata?.setGloballyWritable(false)
     
-      in_group.group = group
-      in_group.user  = KCSUser.activeUser()
-  
-      
-      group.members? += [in_group]
 
       
       
@@ -222,7 +217,7 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
             
             //create an alert to tell user there is an error
             let alert = UIAlertController(
-              title: NSLocalizedString("Error", comment: "error"),
+              title  : NSLocalizedString("Error", comment: "error"),
               message: message,
               preferredStyle: UIAlertControllerStyle.Alert  
             )
@@ -231,7 +226,6 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
             self.presentViewController(alert, animated: true, completion: nil)
             return 
         
-          
           }
           else
           {
@@ -246,6 +240,9 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
         },
       
         withProgressBlock : nil
+        
+        
+        
       )
     }    
   }  

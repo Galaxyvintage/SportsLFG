@@ -73,7 +73,9 @@ class GroupViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }  
-    /*
+    
+  /*
+    
     func joinGroup() 
     {
       let currentUserId    = KCSUser.activeUser().userId
@@ -83,7 +85,7 @@ class GroupViewController: UIViewController {
         [KCSStoreKeyCollectionName          : "inGroups", 
          KCSStoreKeyCollectionTemplateClass : Group.self])
     
-      let query = KCSQuery(onField: "userId", withExactMatchForValue: currentUserId)
+      let query = KCSQuery(onField:"currentUserId", withExactMatchForValue: currentUserId)
       
       store.queryWithQuery(
         
@@ -94,16 +96,13 @@ class GroupViewController: UIViewController {
           {
             //error 
           }
-          else if(objectsOrNil == nil)
+          
+          else if(objectsOrNil != nil)
           {
-            //add the user to the group
-          }
-          else 
-          {
-            for groupName in objectsOrNil
+            for InGroup in objectsOrNil
             {
               //user is in the group
-              if(currentGroupName == (groupName as! inGroup).groupName)
+              if(currentGroupName == (InGroup as! inGroup).groupName)
               {
                 let alert = UIAlertController(
                   title: NSLocalizedString("Hello", comment: "join a group"),
@@ -115,18 +114,29 @@ class GroupViewController: UIViewController {
                 self.presentViewController(alert, animated: true , completion: nil)
                 return 
               }
-            
+              
             }
-          
-          //add the user to the group 
+            
+            //add the user to the group 
+            let userInGroup = inGroup()
+            userInGroup.userId = currentUserId
+            userInGroup.groupName = currentGroupName
+            
+            store.saveObject(userInGroup, withCompletionBlock: { (objectsOrNil[AnyObject]!, errorOrNil : NSError!) -> Void in
+              
+              
+              
+              
+              
+              }, withProgressBlock: nil)
+            
+            
+            
+            
           }
         
-        
-        }, withProgressBlock: nil)
-      
-      
-      
-      
+        },
+      withProgressBlock: nil)
   }
   
   */

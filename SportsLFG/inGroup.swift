@@ -14,8 +14,8 @@ import Foundation
 class inGroup : NSObject{
   
   var entityId : String?     // as unique Kinvey entity _id
-  var user     : KCSUser?          
-  var group    : Group?
+  var userId   : String?          
+  var groupName: String?
   var metadata : KCSMetadata? //Kinvey metadata, optional
   
   
@@ -23,18 +23,10 @@ class inGroup : NSObject{
   override func hostToKinveyPropertyMapping() -> [NSObject : AnyObject]! {
     return [
       "entityId"      :  KCSEntityKeyId,   //the required _id field
-      "user"          : "user",         //the name
-      "group"         : "group",      //the group name the user is in
+      "userId"        : "userId",         //the name
+      "groupName"     : "groupName",      //the group name the user is in
       "metadata"      :  KCSEntityKeyMetadata
     ]
   }
   
-  static override func kinveyPropertyToCollectionMapping() -> [NSObject : AnyObject]! {
-    return ["user" : KCSUserCollectionName, "group": "Groups"]
-  }
-  
-  
-  static override func kinveyObjectBuilderOptions() -> [NSObject : AnyObject]! {
-    return[KCS_REFERENCE_MAP_KEY :["group": Group.self]]
-  }
 }

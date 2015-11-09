@@ -377,6 +377,7 @@
                                 </variation>
                                 <connections>
                                     <action selector="Logout:" destination="YrH-6f-Kgn" eventType="touchUpInside" id="AFW-Ft-ZSb"/>
+                                    <segue destination="Mt0-cU-Kmz" kind="showDetail" identifier="GoBackToLogin" id="0bj-KV-32U"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -851,7 +852,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iVR-kJ-6IU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3645.75" y="-391.125"/>
+            <point key="canvasLocation" x="-3636.75" y="-391.125"/>
         </scene>
         <!--FirstTimeUserViewController-->
         <scene sceneID="DFV-j3-haL">
@@ -1332,7 +1333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aas-DE-cuJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2976.75" y="-391.125"/>
+            <point key="canvasLocation" x="-2964.75" y="-391.125"/>
         </scene>
         <!--LFG-->
         <scene sceneID="8Bk-D3-xtE">
@@ -3933,7 +3934,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ACM-1O-FIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1542.75" y="-391.125"/>
+            <point key="canvasLocation" x="-1530.75" y="-391.125"/>
         </scene>
         <!--MainCVNavigationController-->
         <scene sceneID="oW1-fa-mjT">
@@ -4661,6 +4662,7 @@
         <image name="User Groups-32_red" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="0bj-KV-32U"/>
         <segue reference="qxK-gx-4Ir"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

@@ -59,6 +59,23 @@ class LoginViewController : UIViewController, UITextFieldDelegate
           //the log-in was successful and the user is now the active user and credentials saved
           //hide log-in view and show main app content
           
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
           let defaults = NSUserDefaults.standardUserDefaults()
           let key      = email!+"hello"
           let didRunBefore = defaults.boolForKey(key) 
@@ -74,6 +91,7 @@ class LoginViewController : UIViewController, UITextFieldDelegate
             
             //push to a new view where user can enter their info the first time they use the app
             self.presentViewController(firstControllerView!,animated:true, completion:nil)
+            
           }else{
             
             self.presentViewController(mainControllerView!, animated: true, completion: nil)              
@@ -82,7 +100,6 @@ class LoginViewController : UIViewController, UITextFieldDelegate
         } else {
           //there was an error with the update save
           
-        
           let message = "email or password incorrect"//need to include the case when  internet connection is not available.
           let alert = UIAlertController(
             title: NSLocalizedString("Log-in failed", comment: "can not log in"),
