@@ -2035,6 +2035,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="44" y="84" width="106" height="20.5"/>
+                                </variation>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XIb-gC-HSu" userLabel="GroupName">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
@@ -2052,7 +2055,8 @@
                                         <exclude reference="Odw-7H-FWZ"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="44" y="112.5" width="205" height="30"/>
                                     <mask key="constraints">
                                         <include reference="Ai1-A3-7jN"/>
                                         <include reference="Odw-7H-FWZ"/>
@@ -2065,6 +2069,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="44" y="156.5" width="104" height="21.5"/>
+                                </variation>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wRS-yh-OhR" userLabel="SportsScroll">
                                 <rect key="frame" x="0.0" y="362" width="375" height="80"/>
@@ -2277,7 +2284,8 @@
                                         <exclude reference="g2l-85-P0I"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="44" y="482.5" width="98" height="30"/>
                                     <mask key="constraints">
                                         <include reference="ShZ-iU-YXt"/>
                                         <include reference="g2l-85-P0I"/>
@@ -2317,6 +2325,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="44" y="453.5" width="44" height="21"/>
+                                </variation>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E3P-L5-sNM" userLabel="When">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
@@ -2347,6 +2358,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="45" y="520.5" width="51" height="20.5"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Recommended Experience level" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OBR-NC-iw7">
                                 <rect key="frame" x="21" y="471" width="260" height="21"/>
@@ -3085,22 +3099,22 @@
                             <mask key="constraints">
                                 <exclude reference="aPj-bu-gOu"/>
                                 <exclude reference="aWO-wb-AEH"/>
-                                <exclude reference="MkS-im-eOw"/>
-                                <exclude reference="pSs-4n-bli"/>
+                                <exclude reference="eH6-yd-nbK"/>
+                                <exclude reference="hc8-ws-6lT"/>
                                 <exclude reference="2Qb-Mj-ZV9"/>
                                 <exclude reference="PHS-yS-ngu"/>
-                                <exclude reference="SHX-Yu-d2g"/>
-                                <exclude reference="f5r-1z-v0T"/>
                                 <exclude reference="HpA-7n-RTR"/>
                                 <exclude reference="aKj-qL-3uq"/>
                                 <exclude reference="PQY-E3-2xQ"/>
                                 <exclude reference="uvW-Kv-Bb0"/>
                                 <exclude reference="0B7-Cc-PQ6"/>
                                 <exclude reference="C3f-Ps-D0P"/>
+                                <exclude reference="SHX-Yu-d2g"/>
+                                <exclude reference="f5r-1z-v0T"/>
                                 <exclude reference="euP-v6-uxg"/>
                                 <exclude reference="uYi-5f-qkZ"/>
-                                <exclude reference="eH6-yd-nbK"/>
-                                <exclude reference="hc8-ws-6lT"/>
+                                <exclude reference="MkS-im-eOw"/>
+                                <exclude reference="pSs-4n-bli"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -3118,22 +3132,22 @@
                             <mask key="constraints">
                                 <include reference="aPj-bu-gOu"/>
                                 <include reference="aWO-wb-AEH"/>
-                                <include reference="MkS-im-eOw"/>
-                                <include reference="pSs-4n-bli"/>
+                                <include reference="eH6-yd-nbK"/>
+                                <include reference="hc8-ws-6lT"/>
                                 <include reference="2Qb-Mj-ZV9"/>
                                 <include reference="PHS-yS-ngu"/>
-                                <include reference="SHX-Yu-d2g"/>
-                                <include reference="f5r-1z-v0T"/>
                                 <include reference="HpA-7n-RTR"/>
                                 <include reference="aKj-qL-3uq"/>
                                 <include reference="PQY-E3-2xQ"/>
                                 <include reference="uvW-Kv-Bb0"/>
                                 <include reference="0B7-Cc-PQ6"/>
                                 <include reference="C3f-Ps-D0P"/>
+                                <include reference="SHX-Yu-d2g"/>
+                                <include reference="f5r-1z-v0T"/>
                                 <include reference="euP-v6-uxg"/>
                                 <include reference="uYi-5f-qkZ"/>
-                                <include reference="eH6-yd-nbK"/>
-                                <include reference="hc8-ws-6lT"/>
+                                <include reference="MkS-im-eOw"/>
+                                <include reference="pSs-4n-bli"/>
                             </mask>
                         </variation>
                     </view>
@@ -4012,8 +4026,8 @@
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="42" y="284" width="290" height="33"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="42" y="284" width="290" height="30"/>
                                 </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7nu-di-hKE">
@@ -4039,8 +4053,8 @@
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
-                                    <rect key="frame" x="42" y="535" width="290" height="30"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="42" y="535" width="290" height="33"/>
                                 </variation>
                             </textField>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pya-3w-7Ms">
