@@ -82,7 +82,7 @@ class FirstTimeUserViewController : UIViewController, UITextFieldDelegate{
     //It's only for the first time user 
     //notes: more attribute can be set up later
 
-    currentUser.setValue(Name.text, forAttribute: "Name")
+    currentUser.setValue(Name.text, forAttribute:"Name")
     currentUser.setValue(Age.text, forAttribute:"Age")
     currentUser.setValue(City.text, forAttribute:"City")
     currentUser.setValue(Province.text, forAttribute:"Province")

@@ -74,8 +74,11 @@ class GroupViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }  
     
+  
+  
   /*
-    
+  //Unfinsihed 
+  
     func joinGroup() 
     {
       let currentUserId    = KCSUser.activeUser().userId

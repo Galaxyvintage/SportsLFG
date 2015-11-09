@@ -59,22 +59,31 @@ class LoginViewController : UIViewController, UITextFieldDelegate
           //the log-in was successful and the user is now the active user and credentials saved
           //hide log-in view and show main app content
           
+          user.refreshFromServer({ (objectsOrNil:[AnyObject]!, errorOrNil : NSError!) -> Void in
+            if(errorOrNil != nil)
+            {
+              //error
+            }
+            else if(objectsOrNil != nil)
+            {
+              let currentUser = objectsOrNil[0] as! KCSUser
+              
+              let check = currentUser.getValueForAttribute("Name")
+              
+              if(check == nil || check! as! String == ""){
+                self.presentViewController(firstControllerView!,animated:true, completion:nil)
+              }
+              else
+              {
+                self.presentViewController(mainControllerView!, animated: true, completion: nil)   
+              }
+              
+            }
+            
+          })
           
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+            
+          /*
           
           let defaults = NSUserDefaults.standardUserDefaults()
           let key      = email!+"hello"
@@ -91,11 +100,7 @@ class LoginViewController : UIViewController, UITextFieldDelegate
             
             //push to a new view where user can enter their info the first time they use the app
             self.presentViewController(firstControllerView!,animated:true, completion:nil)
-            
-          }else{
-            
-            self.presentViewController(mainControllerView!, animated: true, completion: nil)              
-          }
+          */  
       
         } else {
           //there was an error with the update save

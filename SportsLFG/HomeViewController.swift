@@ -11,7 +11,7 @@ class HomeViewController : UIViewController
 {
   
   @IBAction func Logout(sender: UIButton) {
-    let LoginControllerView=self.storyboard?.instantiateViewControllerWithIdentifier("LoginNavigationController")
+    //let LoginControllerView=self.storyboard?.instantiateViewControllerWithIdentifier("LoginNavigationController")
     KCSUser.activeUser().logout()
     performSegueWithIdentifier("GoBackToLogin", sender: UIButton.self)    
   }

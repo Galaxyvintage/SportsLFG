@@ -181,7 +181,7 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
       //Kinvey API method that creates a Group instance and saving to the database
       //and assigns user input to the instance properties
       let group = Group()
-      let in_group = inGroup()
+      
       
       group.name          = self.currentName.text! 
       group.nameLowercase = self.currentName.text!.lowercaseString
