@@ -10,6 +10,12 @@ import UIKit
 
 class GroupViewController: UIViewController {
     
+    /*
+    This value is passed by `GroupTableViewController` in `prepareForSegue(_:sender:)`
+    */
+    var group: Group?
+    
+    
     // MARK: Properties
     @IBOutlet weak var SportImageView: UIImageView!
     @IBOutlet weak var GroupNameLabel: UILabel!
@@ -26,6 +32,37 @@ class GroupViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        // Set up views if editing an existing Group.
+        if let groupwork = group {
+            navigationItem.title = groupwork.name
+            GroupNameLabel.text   = groupwork.name
+            CreateDateLabel.text = groupwork.dateCreated
+            StartDateLabel.text = groupwork.startDate
+            StartTimeLabel.text = groupwork.startTime
+            ProvienceLabel.text = groupwork.province
+            CityLabel.text = groupwork.city
+            AddressLabel.text = groupwork.address
+            MaxNumLabel.text = groupwork.maxSize
+            switch groupwork.sport!{
+            case "bB":
+                let photo1 = UIImage(named: "Basketball-50_blue")!
+                SportImageView.image = photo1
+            case "Soccer":
+                let photo1 = UIImage(named: "Football 2-50_blue")!
+                SportImageView.image = photo1
+            case "PingPong":
+                let photo1 = UIImage(named: "Ping Pong-50_blue")!
+                SportImageView.image = photo1
+            case "R":
+                let photo1 = UIImage(named: "Running-50_blue")!
+                SportImageView.image = photo1
+            default:
+                let photod = UIImage(named: "defaultPhoto")!
+                SportImageView.image = photod
+                
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
