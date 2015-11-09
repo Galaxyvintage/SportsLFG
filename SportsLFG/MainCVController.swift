@@ -3,16 +3,19 @@
 // Author : Charles Li
 // Date created: Oct.11 2015
 // Date edited : Oct.15 2015
-// Description:
-import Foundation
+// Description: This is responsible for the main tab bar view controller and loads different view depending 
+//              on the selected button
 
 
 import Foundation
 
 
-//global flags 
-//they are used to determine which segue to perform
-//need to be set back to false when the segue is about to be fired
+import Foundation
+
+
+//Global flags 
+//They are used to determine which segue to perform
+//Note:need to be set back to false when the segue is about to be fired
 class sharedFlag{
   
   static var gotoHome = false
@@ -23,7 +26,10 @@ class sharedFlag{
 
 
 class MainCVController : UIViewController{
-    var currentViewController: UIViewController!
+  
+  //MARK: Properties
+  
+  var currentViewController: UIViewController!
   @IBOutlet var TabBarButtons: Array<UIButton>!  
   @IBOutlet var CV: UIView!
   override func viewDidLoad() {
@@ -31,12 +37,14 @@ class MainCVController : UIViewController{
     super.viewDidLoad()
     
     //NSLog("check1")
+    
+    //This checks if the tab bar should go to the LFG page
     if(sharedFlag.gotoLFG == true)
     {
       sharedFlag.gotoLFG = false
       performSegueWithIdentifier("LFG", sender: TabBarButtons[1])
     }
-      
+    //If all global flags are false, it will automatically go to the home page   
     else if(TabBarButtons.count > 0) {
       performSegueWithIdentifier("Home", sender: TabBarButtons[0])
 

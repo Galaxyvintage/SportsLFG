@@ -3,7 +3,7 @@
 // Author : Charles Li
 // Date created: Oct.13 2015
 // Date edited : Nov.03 2015
-// Description:
+// Description: This is responsible for the home view controller and further functions need to be added in version 2.0
 
 import Foundation
 

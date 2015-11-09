@@ -1,9 +1,10 @@
 //
-//  GroupTableViewController.swift
-//  SportsLFG
+// File  : GroupTableViewController.swift
+// Author: Aaron Cheung, Charles Li, Isaac Qiao
+// Date created  : Nov.08 2015
+// Date edited   : Nov.08 2015
+// Description :
 //
-//  Created by IsaacQ on 2015-11-06.
-//  Copyright © 2015 CMPT-GP03. All rights reserved.
 //
 
 import UIKit
@@ -20,16 +21,40 @@ class GroupTableViewController: UITableViewController {
   [KCSStoreKeyCollectionName : "Groups", 
    KCSStoreKeyCollectionTemplateClass : Group.self])
   
-    func retrieveInitialData() 
-    {
-    }
-  
     override func viewDidLoad() {
       super.viewDidLoad()
+      
+      /*
+      //testing inGroup (error)
+      //let groupId = "5640db6a035ea9491b06c2c7"
+      //store.loadObjectWithID(groupId, withCompletionBlock: { (objectsOrNil : [AnyObject]!, errorOrNil: NSError!) -> Void in
+      // if errorOrNil == nil{
+      //    let group = objectsOrNil[0] as! Group
+      //    let in_group = group.members! 
+      //    NSLog("first user Id is %@ ",(in_group[0].user?.userId)!)
+      //  }
         
-    
+        
+        
+      // }, withProgressBlock: nil
+      //)
+      */
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      //This query returns all objects from the database 
       let query = KCSQuery()
-      //query.limitModifer = KCSQueryLimitModifier(limit: 20)
+      
+      //This limit the query for the first 20 objects
+      //TODO: need to add a function to load more in the next version
+      // query.limitModifer = KCSQueryLimitModifier(limit: 20)
       //query.skipModifier = KCSQuerySkipModifier(withcount: 20)
       
       store.queryWithQuery(
@@ -45,10 +70,12 @@ class GroupTableViewController: UITableViewController {
             {
               let newGroup = testGroup as! Group
              
+              //the following 4 log statements are for testing purposes 
               NSLog("newGroup's name is %@",newGroup.name!)
               NSLog("newGroup's sport is %@",newGroup.sport!)
               NSLog("newGroup's city is %@",newGroup.city!)
               NSLog("newGroup's province is %@",newGroup.province!)
+            
               self.groupA += [newGroup]  
             }
             self.tableView.reloadData()
@@ -89,11 +116,10 @@ class GroupTableViewController: UITableViewController {
         cell.NameLabel.text       = group.name
         cell.StartDateLabel.text  = group.startDate
         cell.StartTimeLabel.text  = group.startTime
-        cell.CreateDateLabel.text = group.dateCreated
         cell.ProvienceLabel.text  = group.province
-        cell.CityLabel.text    = group.city
-        cell.AddressLabel.text = group.address
-        cell.MaxNumberLabel.text = group.maxSize
+        cell.CityLabel.text       = group.city
+        cell.AddressLabel.text    = group.address
+        cell.MaxNumberLabel.text  = group.currentSize! + "/" + group.maxSize!
         //cell.SportTypeImageView.image using switch, need to further change
         switch group.sport!{
         case "bB":
@@ -120,6 +146,8 @@ class GroupTableViewController: UITableViewController {
   //MARK:Actions
 
   
+  //This method is called when the back button is called and brings the users 
+  //back to the LFG page
   @IBAction func BackToLFG(sender: UIButton) {
     NSLog("BackToLFG")
     //unwind back to MainCVController 
@@ -130,12 +158,7 @@ class GroupTableViewController: UITableViewController {
   
   
   }
-  
-  
-  
-  
-  
-  
+
   
     /*
     // Override to support conditional editing of the table view.

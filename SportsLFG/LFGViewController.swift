@@ -4,7 +4,8 @@
 // Date created: Nov.03 2015
 // Date edited : Nov.03 2015
 // Description:
-//  Copyright © Charles Li. All rights reserved.
+// TODO: Need to implement the searching by category feature in version 2.0 in this file 
+// 
 //
 
 import Foundation

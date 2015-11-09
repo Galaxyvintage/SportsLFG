@@ -1,21 +1,20 @@
 //
-// File  : GroupCreation.swift
+// File  : GroupCreationController.swift
 // Author: Charles Li
 // Date created  : Nov 04 2015
 // Date modified : Nov 04 2015
-// Description : 
+// Description : This is class is used in the group creation view controller and handles 
+//               group creation request
 //
 import Foundation
 
-class GroupCreation : UIViewController, UITextFieldDelegate
+class GroupCreationController: UIViewController, UITextFieldDelegate
 {
 
   //MARK: Properties
   var sport :String!
   var currentType    : SportsType!
-  var exist : Bool = false 
-  //A flag to check whether user has enter all the needed information
-  
+
   //must-enter attributes 
   @IBOutlet weak var currentName: UITextField!
   @IBOutlet weak var maxSize: UITextField!
@@ -142,13 +141,15 @@ class GroupCreation : UIViewController, UITextFieldDelegate
     }
      
     //Kinvey API method that creates a store object 
+    //so we can save entities to a specific collection
     let store = KCSAppdataStore.storeWithOptions(
       [KCSStoreKeyCollectionName : "Groups", 
        KCSStoreKeyCollectionTemplateClass : Group.self]
     )
     
     
-    //This creates a query that checks whether the item already exists
+    //This creates a query that checks whether the item already exists by 
+    //changing the user input to all lowercases and comparing it to the database
     let query = KCSQuery(onField: "nameLowercase", withExactMatchForValue: currentName.text!.lowercaseString)
        
     //execute the query 
@@ -180,6 +181,8 @@ class GroupCreation : UIViewController, UITextFieldDelegate
       //Kinvey API method that creates a Group instance and saving to the database
       //and assigns user input to the instance properties
       let group = Group()
+      let in_group = inGroup()
+      
       group.name          = self.currentName.text! 
       group.nameLowercase = self.currentName.text!.lowercaseString
       group.owner         = KCSUser.activeUser().userId
@@ -188,14 +191,21 @@ class GroupCreation : UIViewController, UITextFieldDelegate
       group.startDate     = self.date.text! 
       group.sport         = self.sport
       group.maxSize       = self.maxSize.text! 
+      group.currentSize   = "1"                //only 1 member when it's first created 
       group.address       = self.address.text! 
       group.city          = self.city.text!
       group.province      = self.province.text!
- 
       group.metadata?.setGloballyWritable(false)
     
+      in_group.group = group
+      in_group.user  = KCSUser.activeUser()
   
+      
+      group.members? += [in_group]
 
+      
+      
+      
       //This method saves the changes and uploads the newly created entity to the database
       store.saveObject(
         group, 
@@ -226,9 +236,12 @@ class GroupCreation : UIViewController, UITextFieldDelegate
           else
           {
             //save was sucessful
-            //bring user to their group page 
-            //self.
+            //TODO:bring user to their group page 
             NSLog("Successfullly saved event(id ='%@').",(objectsOrNil[0] as! NSObject).kinveyObjectId())
+            let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
+            sharedFlag.gotoLFG = true
+            self.presentViewController(mainControllerView, animated: true,completion:nil)      
+
           }
         },
       

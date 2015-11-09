@@ -3,7 +3,9 @@
 // Author :Charles Li
 // Date created : Nov 03 2015
 // Date modified: Nov 03 2015
-// Description :
+// Description : This is class is used to handle personal information
+// TODO: need to implement the edit function so the users can change their info 
+
 import Foundation
 
 class ProfileTableViewController : UITableViewController

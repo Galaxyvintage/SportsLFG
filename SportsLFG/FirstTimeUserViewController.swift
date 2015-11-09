@@ -3,7 +3,8 @@
 // Author :Charles Li
 // Date created : Nov 02 2015
 // Date modified: Nov 03 2015
-// Description :
+// Description :  This class is used by the first time user view controller and it's for
+//                either first time users or old users that use a new device
 
 import Foundation
 
@@ -60,10 +61,12 @@ class FirstTimeUserViewController : UIViewController, UITextFieldDelegate{
   @IBAction func SaveAndGoToMainPage(sender: UIButton) {
     let currentUser = KCSUser.activeUser()
     
+    //This is run if there is an empty field
+    
     if(isAnyEmptyField() == true)
     {
       let alert = UIAlertController(
-        title:   NSLocalizedString("Error", comment: ""),
+        title:   NSLocalizedString("Error",         comment: ""),
         message: NSLocalizedString("Missing input", comment: ""),
         preferredStyle : UIAlertControllerStyle.Alert
       )
@@ -77,7 +80,8 @@ class FirstTimeUserViewController : UIViewController, UITextFieldDelegate{
     
     //This adds custom attributes to the user 
     //It's only for the first time user 
-    //notes: more attribute can be set up later 
+    //notes: more attribute can be set up later
+
     currentUser.setValue(Name.text, forAttribute: "Name")
     currentUser.setValue(Age.text, forAttribute:"Age")
     currentUser.setValue(City.text, forAttribute:"City")
@@ -85,6 +89,7 @@ class FirstTimeUserViewController : UIViewController, UITextFieldDelegate{
     
     
     //This method saves the custom attributes to the kinvey back-end database
+    
     currentUser.saveWithCompletionBlock { (NSarry:[AnyObject]!, errorOrNil:NSError!) -> Void in
       if (errorOrNil == nil)
       {
@@ -97,7 +102,8 @@ class FirstTimeUserViewController : UIViewController, UITextFieldDelegate{
     }
     NSLog("Save")
     
-
+    //After saving user info, the following presents the home view controller 
+ 
     let mainControllerView = self.storyboard?.instantiateViewControllerWithIdentifier("HomeController")
     self.presentViewController(mainControllerView!, animated: true, completion: nil)              
   }

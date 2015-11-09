@@ -1,11 +1,11 @@
+// 
+// File   : GroupTableViewController.swift
+// Author : Isaac Qiao ,Charles Li
+// Date created: Nov.05 2015
+// Date edited : Nov.08 2015
+// Description : This is the cell class that is used in the Group table view class when 
+// 
 //
-//  GroupTableViewCell.swift
-//  SportsLFG
-//
-//  Created by IsaacQ on 2015-11-05.
-//  Copyright © 2015 CMPT-GP03. All rights reserved.
-//
-
 import UIKit
 
 class GroupTableViewCell: UITableViewCell {
@@ -16,7 +16,7 @@ class GroupTableViewCell: UITableViewCell {
     @IBOutlet weak var NameLabel: UILabel!
     @IBOutlet weak var StartDateLabel: UILabel!
     @IBOutlet weak var StartTimeLabel: UILabel!
-    @IBOutlet weak var CreateDateLabel: UILabel!
+    //@IBOutlet weak var CreateDateLabel: UILabel!
     @IBOutlet weak var ProvienceLabel: UILabel!
     @IBOutlet weak var CityLabel: UILabel!
     @IBOutlet weak var AddressLabel: UILabel!

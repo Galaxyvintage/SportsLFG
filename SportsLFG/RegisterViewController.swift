@@ -3,7 +3,8 @@
 // Author : Charles Li
 // Date created: Oct.20 2015
 // Date edited : Oct.31 2015
-// Description:
+// Description: This is class is used by the register view controller 
+//              and handles user registration
 
 import UIKit
 

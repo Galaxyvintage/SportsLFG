@@ -3,7 +3,7 @@
 // Author : Aaron Cheung, Charles Li
 // Date created : Oct 30 2015
 // Date modified: Nov 01 2015
-// Description :
+// Description  : This class is used by the login view controller and handles user login requests
 
 import UIKit
 
