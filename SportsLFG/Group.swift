@@ -1,17 +1,19 @@
 //
 // File  : Group.swift
-// Author: Aaron Cheung, Charles Li
+// Author: Aaron Cheung, Charles Li, Isaac Qiao
 // Date created  : Oct.30 2015
-// Date edited   : Nov.05 2015
+// Date edited   : Nov.08 2015
 // Description :
 //
-//  Created by IsaacQ on 2015-11-06.
-//  Copyright © 2015 CMPT-GP03. All rights reserved.
 //
 class Group : NSObject{
     
     var entityId : String?
-    var name: String?  //as unique Kinvey entity _id
+    var name: String?           // as unique Kinvey entity _id
+    var nameLowercase : String? // prevent groups with same names but varying upper and lower case letters
+                                // e.g when group "TESTING001" exists, "Testing001" cannot be created
+                                
+    var owner : String?
     var dateCreated: String?
     var startTime  : String?
     var startDate  : String?
@@ -27,7 +29,9 @@ class Group : NSObject{
     override func hostToKinveyPropertyMapping() -> [NSObject : AnyObject]! {
         return [
             "entityId" : KCSEntityKeyId,   //the required _id field
-            "name"     : "name",        //the name
+            "name"     : "name",           //the name
+            "nameLowercase" :"nameLowercase",
+            "owner"    : "owner",
             "dateCreated": "dateCreated",
             "sport"    : "sport",
             "startTime": "time",

@@ -99,6 +99,7 @@ class GroupCreation : UIViewController, UITextFieldDelegate
   //This methods returns back to the LFG view controller
   @IBAction func BackToLFG(sender: UIButton) {
     NSLog("BackToLFG")
+    
     //unwind back to MainCVController 
     //set gotoLFG to true and perform segue to LFG controller
     let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
@@ -126,7 +127,7 @@ class GroupCreation : UIViewController, UITextFieldDelegate
        province!.text?.isEmpty   == true ||
        time!.text?.isEmpty       == true ||
        date!.text?.isEmpty       == true ||
-       sport.isEmpty             == true )
+       sport                     == nil )
     {
       let alert = UIAlertController(
         title:   NSLocalizedString("Error", comment: "account success note title"),
@@ -148,7 +149,7 @@ class GroupCreation : UIViewController, UITextFieldDelegate
     
     
     //This creates a query that checks whether the item already exists
-    let query = KCSQuery(onField: "name", withExactMatchForValue: currentName.text!)
+    let query = KCSQuery(onField: "nameLowercase", withExactMatchForValue: currentName.text!.lowercaseString)
        
     //execute the query 
     store.countWithQuery(query) { (count :UInt, errorOrNil :NSError!) -> Void in
@@ -179,15 +180,17 @@ class GroupCreation : UIViewController, UITextFieldDelegate
       //Kinvey API method that creates a Group instance and saving to the database
       //and assigns user input to the instance properties
       let group = Group()
-      group.name        = self.currentName.text! 
-      group.dateCreated = currentDate
-      group.startTime   = self.time.text! 
-      group.startDate   = self.date.text! 
-      group.sport       = self.sport
-      group.maxSize     = self.maxSize.text! 
-      group.address     = self.address.text! 
-      group.city        = self.city.text!
-      group.province    = self.province.text!
+      group.name          = self.currentName.text! 
+      group.nameLowercase = self.currentName.text!.lowercaseString
+      group.owner         = KCSUser.activeUser().userId
+      group.dateCreated   = currentDate
+      group.startTime     = self.time.text! 
+      group.startDate     = self.date.text! 
+      group.sport         = self.sport
+      group.maxSize       = self.maxSize.text! 
+      group.address       = self.address.text! 
+      group.city          = self.city.text!
+      group.province      = self.province.text!
  
       group.metadata?.setGloballyWritable(false)
     

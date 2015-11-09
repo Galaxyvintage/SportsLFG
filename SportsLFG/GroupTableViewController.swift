@@ -28,7 +28,7 @@ class GroupTableViewController: UITableViewController {
     // Can be further change when know how to use database load data
     func loadData()
     {
-      // sampel self created groups in groups array
+      // sample self created groups in groups array
       /*
         let G1 = Group(name: "Group1", dateCreated: "Created date 1", startTime  : "startTime1", startDate  : "startDate2", sport  : "bB", maxSize : "11", address: "add1", city    : "city1", province: "P1")
         let G2 = Group(name: "Group2", dateCreated: "Created date 2", startTime  : "startTime2", startDate  : "startDate2", sport  : "Soccer", maxSize : "22", address: "add2", city    : "city2", province: "P2")
@@ -43,27 +43,9 @@ class GroupTableViewController: UITableViewController {
   
     override func viewDidLoad() {
       super.viewDidLoad()
-      
-      /*
-      store.loadObjectWithID(
-        "563dce2ca3025e212b01f5fc",
-        withCompletionBlock: { (objectsOrNil: [AnyObject]!, errorOrNil: NSError!) -> Void in
-          if errorOrNil == nil {
-            NSLog("successful reload: %@", objectsOrNil[0] as! Group) // event updated
-          
-            NSLog("Group name is: %@",(objectsOrNil[0] as! Group).dateCreated!)
-            
-          } else {
-            NSLog("error occurred: %@", errorOrNil)
-          }
-        },
-        withProgressBlock: nil
-      )
-      
-      */
       let query = KCSQuery()
-      query.limitModifer = KCSQueryLimitModifier(limit: 20)
-      query.skipModifier = KCSQuerySkipModifier(withcount: 20)
+      //query.limitModifer = KCSQueryLimitModifier(limit: 20)
+      //query.skipModifier = KCSQuerySkipModifier(withcount: 20)
       
       store.queryWithQuery(
         query, 
@@ -74,19 +56,17 @@ class GroupTableViewController: UITableViewController {
           {
             NSLog("error is nil")
             
-            let rtnGroups = objectsOrNil as! [Group]
-            
-            NSLog("return group array's size is %ld",rtnGroups.count)
-            
-            /*
-            NSLog("return group array's size is %ld",rtnGroups.count)
-            for i in  rtnGroups as! [Group]
+            for testGroup in objectsOrNil 
             {
-              self.groups.append(i)
-              
+              let newGroup = testGroup as! Group
+             
+              NSLog("newGroup's name is %@",newGroup.name!)
+              NSLog("newGroup's sport is %@",newGroup.sport!)
+              NSLog("newGroup's city is %@",newGroup.city!)
+              NSLog("newGroup's province is %@",newGroup.province!)
+              self.groupA += [newGroup]  
             }
-            */
-            self.loadData()
+            self.tableView.reloadData()
           }
         }, 
         withProgressBlock: nil
@@ -112,11 +92,12 @@ class GroupTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+      
         // Table view cells are reused and should be dequeued using a cell identifier.
         let cellIdentifier = "GroupTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GroupTableViewCell
        
-      // Fetches the appropriate meal for the data source layout.
+      // Fetches the appropriate group for the data source layout.
         let group = groupA[indexPath.row]
         
         // Configure the cell...
