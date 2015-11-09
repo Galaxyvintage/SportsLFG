@@ -24,25 +24,10 @@ class GroupTableViewController: UITableViewController {
     {
     }
   
-    // This is a helper method to load sample data into the app.
-    // Can be further change when know how to use database load data
-    func loadData()
-    {
-      // sample self created groups in groups array
-      /*
-        let G1 = Group(name: "Group1", dateCreated: "Created date 1", startTime  : "startTime1", startDate  : "startDate2", sport  : "bB", maxSize : "11", address: "add1", city    : "city1", province: "P1")
-        let G2 = Group(name: "Group2", dateCreated: "Created date 2", startTime  : "startTime2", startDate  : "startDate2", sport  : "Soccer", maxSize : "22", address: "add2", city    : "city2", province: "P2")
-        let G3 = Group(name: "Group3", dateCreated: "Created date 3", startTime  : "startTime3", startDate  : "startDate3", sport  : "PingPong", maxSize : "33", address: "add3", city    : "city3", province: "P3")
-        let G4 = Group(name: "Group4", dateCreated: "Created date 4", startTime  : "startTime4", startDate  : "startDate4", sport  : "R", maxSize : "44", address: "add4", city    : "city4", province: "P4")
-        retrieveInitialData() 
-        NSLog("Check")
-        groupA += [G1,G2,G3,G4]
-      */
-      
-    }
-  
     override func viewDidLoad() {
       super.viewDidLoad()
+        
+    
       let query = KCSQuery()
       //query.limitModifer = KCSQueryLimitModifier(limit: 20)
       //query.skipModifier = KCSQuerySkipModifier(withcount: 20)
@@ -97,7 +82,7 @@ class GroupTableViewController: UITableViewController {
         let cellIdentifier = "GroupTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GroupTableViewCell
        
-      // Fetches the appropriate group for the data source layout.
+        // Fetches the appropriate group for the data source layout.
         let group = groupA[indexPath.row]
         
         // Configure the cell...
@@ -187,14 +172,25 @@ class GroupTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowDetail" {
+            let groupDetailViewController = segue.destinationViewController as! GroupViewController
+            
+            // Get the cell that generated this segue.
+            if let selectedGroupCell = sender as? GroupTableViewCell {
+                let indexPath = tableView.indexPathForCell(selectedGroupCell)!
+                let selectedGroup = groupA[indexPath.row]
+                groupDetailViewController.group = selectedGroup
+            }
+        }
+        else if segue.identifier == "AddGroup" {
+            print("Adding new group.")
+        }
     }
-    */
+    
 
 }
