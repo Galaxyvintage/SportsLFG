@@ -60,7 +60,7 @@ class LoginViewController : UIViewController, UITextFieldDelegate
           //hide log-in view and show main app content
           
           let defaults = NSUserDefaults.standardUserDefaults()
-          let key      = email!
+          let key      = email!+"hello"
           let didRunBefore = defaults.boolForKey(key) 
           
           NSLog("check")
