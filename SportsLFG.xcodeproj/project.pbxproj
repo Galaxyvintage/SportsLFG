@@ -23,6 +23,7 @@
 		63C035091BE47F5B00BAFA65 /* Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C035081BE47F5B00BAFA65 /* Groups.swift */; };
 		63C0350B1BE485E700BAFA65 /* enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0350A1BE485E700BAFA65 /* enum.swift */; };
 		63C0350F1BE4ABF400BAFA65 /* LFGViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0350E1BE4ABF400BAFA65 /* LFGViewController.swift */; };
+		63D2D24C1BF031D10065C2A3 /* SportsLFGTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2D24B1BF031D10065C2A3 /* SportsLFGTests.swift */; };
 		63D573EE1BE7E78E00EE769A /* FirstTimeUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D573ED1BE7E78E00EE769A /* FirstTimeUserViewController.swift */; };
 		63D573F01BE9797900EE769A /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D573EF1BE9797900EE769A /* ProfileTableViewController.swift */; };
 		63D573F51BE9F7D900EE769A /* GroupCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D573F41BE9F7D900EE769A /* GroupCreation.swift */; };
@@ -30,6 +31,16 @@
 		96C3F6D51BE4284600AC236A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C3F6D41BE4284600AC236A /* LoginViewController.swift */; };
 		A1F5DE97E1C7507ECD8C9F5F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE3EA33AED1FE155D30688 /* libPods.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		63D2D24E1BF031D10065C2A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 632290061BE0C0C00097B93B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6322900D1BE0C0C00097B93B;
+			remoteInfo = SportsLFG;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0436F88DAFDD8EB0368A14C8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -54,6 +65,9 @@
 		63C035081BE47F5B00BAFA65 /* Groups.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Groups.swift; sourceTree = "<group>"; };
 		63C0350A1BE485E700BAFA65 /* enum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enum.swift; sourceTree = "<group>"; };
 		63C0350E1BE4ABF400BAFA65 /* LFGViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFGViewController.swift; sourceTree = "<group>"; };
+		63D2D2491BF031D10065C2A3 /* SportsLFGTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SportsLFGTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		63D2D24B1BF031D10065C2A3 /* SportsLFGTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsLFGTests.swift; sourceTree = "<group>"; };
+		63D2D24D1BF031D10065C2A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63D573ED1BE7E78E00EE769A /* FirstTimeUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTimeUserViewController.swift; sourceTree = "<group>"; };
 		63D573EF1BE9797900EE769A /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		63D573F41BE9F7D900EE769A /* GroupCreation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCreation.swift; sourceTree = "<group>"; };
@@ -67,6 +81,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1F5DE97E1C7507ECD8C9F5F /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		63D2D2461BF031D10065C2A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				632290101BE0C0C00097B93B /* SportsLFG */,
+				63D2D24A1BF031D10065C2A3 /* SportsLFGTests */,
 				6322900F1BE0C0C00097B93B /* Products */,
 				A2C588836F1A870D3F5D212C /* Pods */,
 				323B981C4C61C8A9C0AE07EC /* Frameworks */,
@@ -95,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				6322900E1BE0C0C00097B93B /* SportsLFG.app */,
+				63D2D2491BF031D10065C2A3 /* SportsLFGTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,6 +140,15 @@
 				632290261BE0C15E0097B93B /* SportsLFG-Bridging-Header.h */,
 			);
 			path = SportsLFG;
+			sourceTree = "<group>";
+		};
+		63D2D24A1BF031D10065C2A3 /* SportsLFGTests */ = {
+			isa = PBXGroup;
+			children = (
+				63D2D24B1BF031D10065C2A3 /* SportsLFGTests.swift */,
+				63D2D24D1BF031D10065C2A3 /* Info.plist */,
+			);
+			path = SportsLFGTests;
 			sourceTree = "<group>";
 		};
 		63D573F11BE9A7C200EE769A /* Classes */ = {
@@ -185,6 +217,24 @@
 			productReference = 6322900E1BE0C0C00097B93B /* SportsLFG.app */;
 			productType = "com.apple.product-type.application";
 		};
+		63D2D2481BF031D10065C2A3 /* SportsLFGTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63D2D2501BF031D10065C2A3 /* Build configuration list for PBXNativeTarget "SportsLFGTests" */;
+			buildPhases = (
+				63D2D2451BF031D10065C2A3 /* Sources */,
+				63D2D2461BF031D10065C2A3 /* Frameworks */,
+				63D2D2471BF031D10065C2A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				63D2D24F1BF031D10065C2A3 /* PBXTargetDependency */,
+			);
+			name = SportsLFGTests;
+			productName = SportsLFGTests;
+			productReference = 63D2D2491BF031D10065C2A3 /* SportsLFGTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -198,6 +248,11 @@
 					6322900D1BE0C0C00097B93B = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = W2LDAN7BSH;
+					};
+					63D2D2481BF031D10065C2A3 = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = W2LDAN7BSH;
+						TestTargetID = 6322900D1BE0C0C00097B93B;
 					};
 				};
 			};
@@ -215,6 +270,7 @@
 			projectRoot = "";
 			targets = (
 				6322900D1BE0C0C00097B93B /* SportsLFG */,
+				63D2D2481BF031D10065C2A3 /* SportsLFGTests */,
 			);
 		};
 /* End PBXProject section */
@@ -227,6 +283,13 @@
 				632290371BE0C1730097B93B /* Main.storyboard in Resources */,
 				6322901F1BE0C0C00097B93B /* LaunchScreen.storyboard in Resources */,
 				632290301BE0C15E0097B93B /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		63D2D2471BF031D10065C2A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,7 +369,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		63D2D2451BF031D10065C2A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63D2D24C1BF031D10065C2A3 /* SportsLFGTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		63D2D24F1BF031D10065C2A3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6322900D1BE0C0C00097B93B /* SportsLFG */;
+			targetProxy = 63D2D24E1BF031D10065C2A3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6322901D1BE0C0C00097B93B /* LaunchScreen.storyboard */ = {
@@ -440,6 +519,30 @@
 			};
 			name = Release;
 		};
+		63D2D2511BF031D10065C2A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SportsLFGTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = CMPT275.SportsLFGTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SportsLFG.app/SportsLFG";
+			};
+			name = Debug;
+		};
+		63D2D2521BF031D10065C2A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SportsLFGTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = CMPT275.SportsLFGTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SportsLFG.app/SportsLFG";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -460,6 +563,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		63D2D2501BF031D10065C2A3 /* Build configuration list for PBXNativeTarget "SportsLFGTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63D2D2511BF031D10065C2A3 /* Debug */,
+				63D2D2521BF031D10065C2A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 
