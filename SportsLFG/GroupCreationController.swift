@@ -142,10 +142,15 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
      
     //Kinvey API method that creates a store object 
     //so we can save entities to a specific collection
-    let store = KCSAppdataStore.storeWithOptions(
+    let storeGroup = KCSAppdataStore.storeWithOptions(
       [KCSStoreKeyCollectionName : "Groups", 
        KCSStoreKeyCollectionTemplateClass : Group.self]
     )
+    
+    let storeInGroup = KCSAppdataStore.storeWithOptions(
+      [KCSStoreKeyCollectionName          : "InGroups", 
+       KCSStoreKeyCollectionTemplateClass : inGroup.self])
+
     
     
     //This creates a query that checks whether the item already exists by 
@@ -153,7 +158,7 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
     let query = KCSQuery(onField: "nameLowercase", withExactMatchForValue: currentName.text!.lowercaseString)
        
     //execute the query 
-    store.countWithQuery(query) { (count :UInt, errorOrNil :NSError!) -> Void in
+    storeGroup.countWithQuery(query) { (count :UInt, errorOrNil :NSError!) -> Void in
       
       //if the group already exists
       if(count > 0)
@@ -196,13 +201,9 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
       group.city          = self.city.text!
       group.province      = self.province.text!
       group.metadata?.setGloballyWritable(false)
-    
-
-      
-      
       
       //This method saves the changes and uploads the newly created entity to the database
-      store.saveObject(
+      storeGroup.saveObject(
         group, 
         withCompletionBlock: {(objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in 
           if (errorOrNil != nil)
@@ -232,18 +233,46 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
             //save was sucessful
             //TODO:bring user to their group page 
             NSLog("Successfullly saved event(id ='%@').",(objectsOrNil[0] as! NSObject).kinveyObjectId())
-            let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
-            sharedFlag.gotoLFG = true
-            self.presentViewController(mainControllerView, animated: true,completion:nil)      
+            
+            let currentUserId    = KCSUser.activeUser().userId
+            let currentGroupName = group.name
 
-          }
+            
+            //add the user to the group 
+            let userInGroup = inGroup()
+            userInGroup.userId = currentUserId
+            userInGroup.groupName = currentGroupName
+            storeInGroup.saveObject(
+              userInGroup, 
+              withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil : NSError!) -> Void in
+                
+                if(errorOrNil != nil)
+                {
+                  //error
+                  //prompt the user to save their info again
+              
+                }
+                else if(objectsOrNil != nil)
+                {
+                  //saved successfully
+                  let checkInGroup = objectsOrNil[0] as! inGroup
+                  NSLog("userID:%@",checkInGroup.userId!)
+                  NSLog("groupName:%@",checkInGroup.groupName!)
+
+                  //information must be uploadded to the InGroup relationship collection 
+                  //on our backend database before the  current view disappears 
+                  let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
+                  sharedFlag.gotoLFG = true
+                  self.presentViewController(mainControllerView, animated: true,completion:nil)      
+                  
+                }
+                
+              }, 
+              withProgressBlock: nil)
+            }
         },
       
-        withProgressBlock : nil
-        
-        
-        
-      )
+        withProgressBlock : nil)
     }    
   }  
 }

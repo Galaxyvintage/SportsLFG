@@ -2,7 +2,7 @@
 // File  : GroupViewController.swift
 // Author: Aaron Cheung, Charles Li, Isaac Qiao
 // Date created  : Nov.08 2015
-// Date edited   : Nov.08 2015
+// Date edited   : Nov.11 2015
 // Description : This class is used in group view controller when users want to see
 //               the detail information 
 //
@@ -76,8 +76,8 @@ class GroupViewController: UIViewController {
     
   
   
-  /*
-  //Unfinsihed 
+  
+  //Unfinsihed join group function 
   
     func joinGroup() 
     {
@@ -85,19 +85,19 @@ class GroupViewController: UIViewController {
       let currentGroupName = group!.name
       
       let store = KCSAppdataStore.storeWithOptions(
-        [KCSStoreKeyCollectionName          : "inGroups", 
-         KCSStoreKeyCollectionTemplateClass : Group.self])
+        [KCSStoreKeyCollectionName          : "InGroups", 
+         KCSStoreKeyCollectionTemplateClass : inGroup.self])
     
-      let query = KCSQuery(onField:"currentUserId", withExactMatchForValue: currentUserId)
+      let query = KCSQuery(onField:"user", withExactMatchForValue: currentUserId)
       
       store.queryWithQuery(
-        
         query, 
         withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in
         
           if(errorOrNil != nil)
           {
             //error 
+            
           }
           
           else if(objectsOrNil != nil)
@@ -124,28 +124,33 @@ class GroupViewController: UIViewController {
             let userInGroup = inGroup()
             userInGroup.userId = currentUserId
             userInGroup.groupName = currentGroupName
-            
-            store.saveObject(userInGroup, withCompletionBlock: { (objectsOrNil[AnyObject]!, errorOrNil : NSError!) -> Void in
+            store.saveObject(
+              userInGroup, 
+              withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil : NSError!) -> Void in
               
-              
-              
-              
-              
-              }, withProgressBlock: nil)
-            
-            
-            
-            
+                if(errorOrNil != nil)
+                {
+                  //error
+                }
+                else if(objectsOrNil != nil)
+                {
+                  //saved successfully
+                   let checkInGroup = objectsOrNil[0] as! inGroup
+                   NSLog("userID:%@",checkInGroup.userId!)
+                   NSLog("groupName:%@",checkInGroup.groupName!)
+                }
+      
+              }, 
+              withProgressBlock: nil)
           }
-        
         },
       withProgressBlock: nil)
   }
   
-  */
+  
   //MARK: Actions
   
-  /*
+  
   @IBAction func JoinGroup(sender: UIBarButtonItem) {
     let alert = UIAlertController(
       title: NSLocalizedString("Hello", comment: "join a group"),
@@ -155,7 +160,7 @@ class GroupViewController: UIViewController {
     let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
       
       //addUser to the Group
-      
+      self.joinGroup()
       
     }
     let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
@@ -164,6 +169,6 @@ class GroupViewController: UIViewController {
     self.presentViewController(alert, animated: true , completion: nil)
     
   }
-  */ 
+
 
 }

@@ -528,7 +528,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z9q-Pr-huT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-747.75" y="-1050.375"/>
+            <point key="canvasLocation" x="-747.75" y="-1044.375"/>
         </scene>
         <!--Profile-->
         <scene sceneID="aOv-zf-KJu">
@@ -3189,7 +3189,11 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="TJr-UX-UpH">
-                        <barButtonItem key="rightBarButtonItem" title="Join" id="fZL-qb-0QZ"/>
+                        <barButtonItem key="rightBarButtonItem" title="Join" id="fZL-qb-0QZ">
+                            <connections>
+                                <action selector="JoinGroup:" destination="iZY-FT-qUb" id="j5O-34-Yie"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>

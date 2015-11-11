@@ -59,6 +59,9 @@ class LoginViewController : UIViewController, UITextFieldDelegate
           //the log-in was successful and the user is now the active user and credentials saved
           //hide log-in view and show main app content
           
+          
+          //this fetches user data from the database to determine 
+          //whether it's the user's first time using the app
           user.refreshFromServer({ (objectsOrNil:[AnyObject]!, errorOrNil : NSError!) -> Void in
             if(errorOrNil != nil)
             {
@@ -70,6 +73,7 @@ class LoginViewController : UIViewController, UITextFieldDelegate
               
               let check = currentUser.getValueForAttribute("Name")
               
+              //this checks whether the currentuser's name is empty or nil
               if(check == nil || check! as! String == ""){
                 self.presentViewController(firstControllerView!,animated:true, completion:nil)
               }
@@ -83,26 +87,7 @@ class LoginViewController : UIViewController, UITextFieldDelegate
           })
           
             
-          /*
-          
-          let defaults = NSUserDefaults.standardUserDefaults()
-          let key      = email!+"hello"
-          let didRunBefore = defaults.boolForKey(key) 
-          
-          NSLog("check")
-          
-          if(didRunBefore == false)
-            
-          {
-            NSLog("in")
-            defaults.setObject(true , forKey: key)
-            defaults.synchronize()
-            
-            //push to a new view where user can enter their info the first time they use the app
-            self.presentViewController(firstControllerView!,animated:true, completion:nil)
-          */  
-      
-        } else {
+          } else {
           //there was an error with the update save
           
           let message = "email or password incorrect"//need to include the case when  internet connection is not available.
