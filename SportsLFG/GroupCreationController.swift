@@ -195,8 +195,8 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
       group.startTime     = self.time.text! 
       group.startDate     = self.date.text! 
       group.sport         = self.sport
-      group.maxSize       = self.maxSize.text! 
-      group.currentSize   = "1"                //only 1 member when it's first created 
+      group.maxSize       = Int(self.maxSize.text!)! 
+      group.currentSize   = 1                //only 1 member when it's first created 
       group.address       = self.address.text! 
       group.city          = self.city.text!
       group.province      = self.province.text!

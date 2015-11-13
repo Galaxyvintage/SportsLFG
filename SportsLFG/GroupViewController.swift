@@ -45,7 +45,7 @@ class GroupViewController: UIViewController {
             ProvienceLabel.text   = groupwork.province
             CityLabel.text        = groupwork.city
             AddressLabel.text     = groupwork.address
-            MaxNumLabel.text      = groupwork.maxSize
+            MaxNumLabel.text      = String(groupwork.maxSize)
             
             //load the corresponding picture based on the name
             switch groupwork.sport!{
@@ -90,14 +90,19 @@ class GroupViewController: UIViewController {
     
       let query = KCSQuery(onField:"user", withExactMatchForValue: currentUserId)
       
+      //query to check whether the user is already in the group
       store.queryWithQuery(
         query, 
         withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in
-        
+
           if(errorOrNil != nil)
           {
             //error 
-            
+            NSLog("error1")
+            print(errorOrNil.userInfo[KCSErrorCode])
+            print(errorOrNil.userInfo[KCSErrorInternalError])
+            print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
+            return
           }
           
           else if(objectsOrNil != nil)
@@ -131,6 +136,18 @@ class GroupViewController: UIViewController {
                 if(errorOrNil != nil)
                 {
                   //error
+                  let message = errorOrNil.userInfo[NSLocalizedDescriptionKey];
+                  
+                  let alert = UIAlertController(
+                    title: NSLocalizedString("Sorry", comment: "error"),
+                    message: message as? String,
+                    preferredStyle: UIAlertControllerStyle.Alert
+                  )
+                  let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+                  alert.addAction(cancelAction)
+                  self.presentViewController(alert, animated: true , completion: nil)
+                  return 
+
                 }
                 else if(objectsOrNil != nil)
                 {

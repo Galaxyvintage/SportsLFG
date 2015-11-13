@@ -20,12 +20,11 @@ class Group : NSObject{
     var startTime  : String?
     var startDate  : String?
     var sport      : String?
-    var currentSize: String?
-    var maxSize    : String?
+    var currentSize: NSNumber?
+    var maxSize    : NSNumber?
     var address    : String?
     var city       : String?
     var province   : String?
-    var members    : [inGroup]?
     var metadata   : KCSMetadata? //Kinvey metadata, optional
        
     //This function provided by Kinvey API maps the variables above to the back-end database schema
@@ -39,26 +38,13 @@ class Group : NSObject{
             "sport"    : "sport",
             "startTime": "time",
             "startDate": "date",
-            "maxSize"  : "maxSize",
+            "maxSize"  :  "maxSize",
             "currentSize":"currentSize",
             "address"  : "address",
             "city"     : "city",
             "province" : "province",
-            "members"  : "members",
             "metadata" : KCSEntityKeyMetadata
         ]
     }
   
-  
-  static override func kinveyPropertyToCollectionMapping() -> [NSObject : AnyObject]! {
-    return ["members"/*backend field name*/ : "InGroups" /*collection name for members */]
-  }
-  
-  static override func kinveyObjectBuilderOptions() -> [NSObject : AnyObject]! {
-    return [ 
-      KCS_REFERENCE_MAP_KEY :[ 
-        "members" : inGroup.self
-      ]
-    ]
-  }
 }
