@@ -178,7 +178,7 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
       
       
       //The following 4 lines get the current date of the system
-      let tempDate    = NSDate()
+      let tempDate  = NSDate()
       let formatter = NSDateFormatter()
       formatter.dateStyle = NSDateFormatterStyle.ShortStyle
       let currentDate = formatter.stringFromDate(tempDate)
@@ -196,7 +196,7 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
       group.startDate     = self.date.text! 
       group.sport         = self.sport
       group.maxSize       = Int(self.maxSize.text!)! 
-      group.currentSize   = 1                //only 1 member when it's first created 
+      group.currentSize   = 0                //only 1 member when it's first created 
       group.address       = self.address.text! 
       group.city          = self.city.text!
       group.province      = self.province.text!
@@ -248,6 +248,11 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
                 
                 if(errorOrNil != nil)
                 {
+                  NSLog("Check")
+                  
+                  print(errorOrNil.userInfo[KCSErrorCode])
+                  print(errorOrNil.userInfo[KCSErrorInternalError])
+                  print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
                   //error
                   //prompt the user to save their info again
               

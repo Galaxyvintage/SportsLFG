@@ -5,6 +5,26 @@
 2. Run the .xcworkspace file instead of .xcodeproj file because Kinvey's APIs is included using cocoapod
 
 
+####TODO
+#####VERSION 1.0
+
+- [x] 1.  AccountLogin(password reset will be implemented in version 2.0)
+- [x] 2.  GroupFinding("show my groups" will be implemented in version 2.0)
+
+
+#####VERSION 2.0
+
+- [ ] 1.  Password Reset/Edit Profile
+- [ ] 2.  Integrate Map into Group View
+- [ ] 3.  Search By Category
+- [ ] 4.  Group Deletion
+- [ ] 5.  Business Logics for database collections 
+
+#####VERSION 3.0
+
+
+
+
 #####Current Overview
 1. The features we have now in our Version 1 are 
 
@@ -34,13 +54,3 @@
 
 3. Features we will have in Version 2 are fullfilling what we should do in V1 and also viewing groups in Map view (shows groups near you), checking your team, and HealthKit related functions .
 
-####TODO
-#####VERSION 1.0
-
-- [x] 1.  AccountLogin(password reset will be implemented in version 2.0)
-- [x] 2.  GroupFinding("show my groups" will be implemented in version 2.0)
-
-
-#####VERSION 2.0
-
-#####VERSION 3.0
