@@ -15,7 +15,7 @@
 #####VERSION 2.0
 
 - [ ] 1.  Password Reset/Edit Profile
-- [ ] 2.  Integrate Map into Group View
+- [ ] 2.  Map View for Groups
 - [ ] 3.  Search By Category
 - [ ] 4.  Group Deletion
 - [ ] 5.  Business Logics for database collections 
