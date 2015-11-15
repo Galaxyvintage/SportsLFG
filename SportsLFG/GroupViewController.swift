@@ -2,12 +2,14 @@
 // File  : GroupViewController.swift
 // Author: Aaron Cheung, Charles Li, Isaac Qiao
 // Date created  : Nov.08 2015
-// Date edited   : Nov.11 2015
+// Date edited   : Nov.13 2015
 // Description : This class is used in group view controller when users want to see
 //               the detail information 
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
 class GroupViewController: UIViewController {
     
@@ -19,7 +21,8 @@ class GroupViewController: UIViewController {
     
     // MARK: Properties
   
-    @IBOutlet weak var SportImageView: UIImageView!
+    @IBOutlet weak var mapView: MKMapView!
+
     @IBOutlet weak var GroupNameLabel: UILabel!
     @IBOutlet weak var CreateDateLabel: UILabel!
     @IBOutlet weak var StartDateLabel: UILabel!
@@ -32,7 +35,11 @@ class GroupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      
+          
+    
+      
+      
         // Do any additional setup after loading the view.
         
         // Set up views if editing an existing Group.
@@ -47,25 +54,42 @@ class GroupViewController: UIViewController {
             AddressLabel.text     = groupwork.address
             MaxNumLabel.text      = String(groupwork.maxSize)
             
-            //load the corresponding picture based on the name
-            switch groupwork.sport!{
-            case "bB":
-                let photo1 = UIImage(named: "Basketball-50_blue")!
-                SportImageView.image = photo1
-            case "Soccer":
-                let photo1 = UIImage(named: "Football 2-50_blue")!
-                SportImageView.image = photo1
-            case "PingPong":
-                let photo1 = UIImage(named: "Ping Pong-50_blue")!
-                SportImageView.image = photo1
-            case "R":
-                let photo1 = UIImage(named: "Running-50_blue")!
-                SportImageView.image = photo1
-            default:
-                let photod = UIImage(named: "defaultPhoto")!
-                SportImageView.image = photod
+            var groupLocation =  (groupwork.address)! + "," 
+                groupLocation += (groupwork.city)!    + "," 
+                groupLocation += (groupwork.province)! 
+            NSLog(groupLocation)
+            let geocoder = CLGeocoder()
+          geocoder.geocodeAddressString(groupLocation, completionHandler: { (placemarks :[CLPlacemark]?,errorOrNil : NSError?) -> Void in
+              
+              if errorOrNil != nil
+              {
                 
-            }
+                
+              }
+            
+              else if let firstPlacemark = placemarks?[0] {
+                //print(firstPlacemark)
+                let location = firstPlacemark.location!
+                let center = CLLocationCoordinate2DMake (location.coordinate.latitude, location.coordinate.longitude)
+                print(location.coordinate.latitude)
+                print(location.coordinate.longitude)
+                let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+            
+                let region = MKCoordinateRegion(center : center, span : span)
+                
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = center
+                annotation.title = (groupwork.name)!
+                
+                self.mapView.addAnnotation(annotation)
+                self.mapView.setRegion(region, animated: true)
+                
+              }   
+            
+            })
+          
+
+  
         }
     }
 
@@ -75,9 +99,6 @@ class GroupViewController: UIViewController {
     }  
     
   
-  
-  
-  //Unfinsihed join group function 
   
     func joinGroup() 
     {
