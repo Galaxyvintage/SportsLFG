@@ -21,6 +21,7 @@
 		632290321BE0C15E0097B93B /* MainCVSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322902B1BE0C15E0097B93B /* MainCVSegue.swift */; };
 		632290341BE0C15E0097B93B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322902D1BE0C15E0097B93B /* RegisterViewController.swift */; };
 		632290371BE0C1730097B93B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 632290351BE0C1730097B93B /* Main.storyboard */; };
+		637FFA7F1BF9661300A06686 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637FFA7E1BF9661300A06686 /* EditProfileController.swift */; };
 		63C0350B1BE485E700BAFA65 /* enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0350A1BE485E700BAFA65 /* enum.swift */; };
 		63C0350F1BE4ABF400BAFA65 /* LFGViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0350E1BE4ABF400BAFA65 /* LFGViewController.swift */; };
 		63D2D24C1BF031D10065C2A3 /* SportsLFGTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2D24B1BF031D10065C2A3 /* SportsLFGTests.swift */; };
@@ -62,6 +63,7 @@
 		6322902B1BE0C15E0097B93B /* MainCVSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainCVSegue.swift; path = SportsLFG/MainCVSegue.swift; sourceTree = "<group>"; };
 		6322902D1BE0C15E0097B93B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		632290361BE0C1730097B93B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		637FFA7E1BF9661300A06686 /* EditProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		63C0350A1BE485E700BAFA65 /* enum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enum.swift; sourceTree = "<group>"; };
 		63C0350E1BE4ABF400BAFA65 /* LFGViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFGViewController.swift; sourceTree = "<group>"; };
 		63D2D2491BF031D10065C2A3 /* SportsLFGTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SportsLFGTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +155,7 @@
 				6322902B1BE0C15E0097B93B /* MainCVSegue.swift */,
 				632290281BE0C15E0097B93B /* HomeViewController.swift */,
 				63D573EF1BE9797900EE769A /* ProfileTableViewController.swift */,
+				637FFA7E1BF9661300A06686 /* EditProfileController.swift */,
 			);
 			name = Home;
 			path = ..;
@@ -365,6 +368,7 @@
 				6322902F1BE0C15E0097B93B /* HomeViewController.swift in Sources */,
 				63C0350F1BE4ABF400BAFA65 /* LFGViewController.swift in Sources */,
 				4A955EF21BF0182900CDDA74 /* GroupViewController.swift in Sources */,
+				637FFA7F1BF9661300A06686 /* EditProfileController.swift in Sources */,
 				96C3F6D51BE4284600AC236A /* LoginViewController.swift in Sources */,
 				63D573F51BE9F7D900EE769A /* GroupCreationController.swift in Sources */,
 				632290321BE0C15E0097B93B /* MainCVSegue.swift in Sources */,

@@ -44,6 +44,12 @@ class MainCVController : UIViewController{
       sharedFlag.gotoLFG = false
       performSegueWithIdentifier("LFG", sender: TabBarButtons[1])
     }
+      
+    else if(sharedFlag.gotoHome == true)
+    {
+      sharedFlag.gotoHome = false
+      performSegueWithIdentifier("Home", sender: TabBarButtons[0])
+    }
     //If all global flags are false, it will automatically go to the home page   
     else if(TabBarButtons.count > 0) {
       performSegueWithIdentifier("Home", sender: TabBarButtons[0])
