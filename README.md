@@ -14,11 +14,12 @@
 
 #####VERSION 2.0
 
-- [ ] 1.  Password Reset/Edit Profile
-- [ ] 2.  Map View for Groups
-- [ ] 3.  Search By Category
-- [ ] 4.  Group Deletion
-- [ ] 5.  Business Logics for database collections 
+- [ ] 1.  Password Reset
+- [x] 2.  Edit Profile
+- [x] 3.  Map View for Groups
+- [ ] 4.  Search By Category
+- [ ] 5.  Group Deletion
+- [x] 6.  Business Logics for database collections 
 
 #####VERSION 3.0
 

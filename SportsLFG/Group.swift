@@ -20,11 +20,13 @@ class Group : NSObject{
     var startTime  : String?
     var startDate  : String?
     var sport      : String?
+    var sportType  : String?
     var currentSize: NSNumber?
     var maxSize    : NSNumber?
     var address    : String?
     var city       : String?
     var province   : String?
+    var geocoord   : CLLocation?
     var metadata   : KCSMetadata? //Kinvey metadata, optional
        
     //This function provided by Kinvey API maps the variables above to the back-end database schema
@@ -36,6 +38,7 @@ class Group : NSObject{
             "owner"    : "owner",
             "dateCreated": "dateCreated",
             "sport"    : "sport",
+            "sportTYpe": "sportType",
             "startTime": "time",
             "startDate": "date",
             "maxSize"  :  "maxSize",
@@ -43,7 +46,8 @@ class Group : NSObject{
             "address"  : "address",
             "city"     : "city",
             "province" : "province",
-            "metadata" : KCSEntityKeyMetadata
+            "metadata" : KCSEntityKeyMetadata,
+            "geocoord" : KCSEntityKeyGeolocation //geo location
         ]
     }
   

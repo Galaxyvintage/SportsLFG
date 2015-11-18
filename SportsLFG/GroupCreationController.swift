@@ -8,12 +8,20 @@
 //
 import Foundation
 
-class GroupCreationController: UIViewController, UITextFieldDelegate
+//TODO:
+//     1. Save the sportType when the group is created
+//     2. Verify user address using CLLocation manager 
+//     3. Let user pick their location using the map
+//     4. Let user pick province and location using pickers
+
+
+class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFieldDelegate,UIPickerViewDelegate
 {
 
   //MARK: Properties
   var sport :String!
-  var currentType    : SportsType!
+  var sportType : String?
+  var sportTypeArr = ["Outdoor","Indoor","Gym"]
 
   //must-enter attributes 
   @IBOutlet weak var currentName: UITextField!
@@ -23,7 +31,7 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
   @IBOutlet weak var province: UITextField!
   @IBOutlet weak var time: UITextField!
   @IBOutlet weak var date: UITextField!
- 
+  @IBOutlet weak var sportTypePickerView: UIPickerView!
   
   
   //optional attributes 
@@ -51,8 +59,34 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
     self.ageMax!.delegate  = self;
     self.detail!.delegate  = self;
     
+    self.sportTypePickerView.delegate   = self;
+    self.sportTypePickerView.dataSource = self;
+    
   }
   
+  //This method is used to specify the number of cloumns in the picker elemnt 
+  func numberOfComponentsInPickerView(pickerView :UIPickerView) -> Int
+  {
+     return 1 
+  }
+  
+  //This method is used to specify the number of rows of data in the UIPickerView element 
+  func pickerView(pickerView : UIPickerView, numberOfRowsInComponent component: Int)->Int
+  {
+    return sportTypeArr.count 
+  } 
+  
+  //This method is used to specify the data for a specific row and specific component
+  func pickerView(pickerView : UIPickerView, titleForRow row :Int, forComponent component: Int) -> String?
+  {
+    return sportTypeArr[row]
+  }  
+  
+  
+  func pickerView(pickerView : UIPickerView, didSelectRow row : Int, inComponent component : Int)
+  {
+    sportType = sportTypeArr[row]
+  }
   
   //This method  dismisses keyboard on return key press
   func textFieldShouldReturn(textField: UITextField) -> Bool{
@@ -74,9 +108,7 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
   
   @IBAction func PingPong(sender: UIButton) {
     sport        = "PingPong"
-    currentType  = SportsType.Indoor
-    
-    for btn in SportsButton{
+       for btn in SportsButton{
       btn.selected = false
     }
     sender.selected = true
@@ -84,7 +116,6 @@ class GroupCreationController: UIViewController, UITextFieldDelegate
   
   @IBAction func Soccer(sender:UIButton) {
     sport        = "Soccer"
-    currentType  = SportsType.Outdoor
     for btn in SportsButton{
       btn.selected = false
     }
