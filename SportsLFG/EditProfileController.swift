@@ -10,54 +10,54 @@ import Foundation
 
 class EditProfileController : UIViewController
 {
-
-  @IBOutlet weak var name: UITextField!
-  @IBOutlet weak var age:  UITextField!
-  @IBOutlet weak var city: UITextField!
-  @IBOutlet weak var province: UITextField!
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
     
-    //add placeholder to text field    
-  }
-  
-  func BackToHome()
-  {
-    let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
-    sharedFlag.gotoHome = true
-    presentViewController(mainControllerView, animated: true,completion:nil)  
-  }
-  
-  
-  @IBAction func Back(sender: UIButton) {
+    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var age:  UITextField!
+    @IBOutlet weak var city: UITextField!
+    @IBOutlet weak var province: UITextField!
     
-     self.BackToHome()
-  }
-  
-  
-  @IBAction func SaveAndBack(sender: UIButton) {
-    
-    let currentUser = KCSUser.activeUser()
-    if(!(name.text!.isEmpty))
-    {
-      currentUser.setValue(name.text, forAttribute:"Name")
-    }
-    if(!(age.text!.isEmpty))
-    {
-      currentUser.setValue(age.text, forAttribute: "Age")
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //add placeholder to text field
     }
     
-    if(!(city.text!.isEmpty))
+    func BackToHome()
     {
-      currentUser.setValue(city.text, forAttribute:"City")
+        let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController")
+        sharedFlag.gotoHome = true
+        presentViewController(mainControllerView, animated: true,completion:nil)
     }
     
-    if(!(province.text!.isEmpty))
-    {
-      currentUser.setValue(province.text, forAttribute: "Province")
+    
+    @IBAction func Back(sender: UIButton) {
+        
+        self.BackToHome()
+    }
+    
+    
+    @IBAction func SaveAndBack(sender: UIButton) {
+        
+        let currentUser = KCSUser.activeUser()
+        if(!(name.text!.isEmpty))
+        {
+            currentUser.setValue(name.text, forAttribute:"Name")
+        }
+        if(!(age.text!.isEmpty))
+        {
+            currentUser.setValue(age.text, forAttribute: "Age")
+        }
+        
+        if(!(city.text!.isEmpty))
+        {
+            currentUser.setValue(city.text, forAttribute:"City")
+        }
+        
+        if(!(province.text!.isEmpty))
+        {
+            currentUser.setValue(province.text, forAttribute: "Province")
+        }  
+        
+        self.BackToHome()
     }  
-    
-    self.BackToHome()
-  }  
 }

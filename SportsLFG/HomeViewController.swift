@@ -1,4 +1,4 @@
-// 
+//
 // File   : HomeViewController.swift
 // Author : Charles Li
 // Date created: Oct.13 2015
@@ -9,13 +9,13 @@ import Foundation
 
 class HomeViewController : UIViewController
 {
-  
-  @IBAction func Logout(sender: UIButton) {
-    //let LoginControllerView=self.storyboard?.instantiateViewControllerWithIdentifier("LoginNavigationController")
-    KCSUser.activeUser().logout()
-    performSegueWithIdentifier("GoBackToLogin", sender: UIButton.self)    
-  }
-  override func viewDidLoad() {
+    
+    @IBAction func Logout(sender: UIButton) {
+        //let LoginControllerView=self.storyboard?.instantiateViewControllerWithIdentifier("LoginNavigationController")
+        KCSUser.activeUser().logout()
+        performSegueWithIdentifier("GoBackToLogin", sender: UIButton.self)
+    }
+    override func viewDidLoad() {
         super.viewDidLoad()
-  }
+    }
 }
