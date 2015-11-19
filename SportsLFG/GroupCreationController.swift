@@ -2,27 +2,34 @@
 // File  : GroupCreationController.swift
 // Author: Charles Li
 // Date created  : Nov 04 2015
-// Date modified : Nov 04 2015
+// Date modified : Nov 19 2015
 // Description : This is class is used in the group creation view controller and handles 
 //               group creation request
 //
 import Foundation
+import UIKit
 
 //TODO:
 //     1. Save the sportType when the group is created
 //     2. Verify user address using CLLocation manager 
 //     3. Let user pick their location using the map
-//     4. Let user pick province and location using pickers
+
 
 
 class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFieldDelegate,UIPickerViewDelegate
 {
-
+  
   //MARK: Properties
   var sport :String!
   var sportType : String?
   var sportTypeArr = ["Outdoor","Indoor","Gym"]
-
+  var timePicker   = UIDatePicker()
+  var datePicker   = UIDatePicker()
+  
+  @IBOutlet weak var rootScrollView: UIScrollView!
+  @IBOutlet weak var contentView: UIView!
+  @IBOutlet weak var rootScrollViewBottomConstraint: NSLayoutConstraint!
+  
   //must-enter attributes 
   @IBOutlet weak var currentName: UITextField!
   @IBOutlet weak var maxSize: UITextField!
@@ -47,7 +54,22 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     
-    //set all the text fields' delegate to the view controller itself
+    let doubleTaps = UITapGestureRecognizer(target: self, action: Selector("hideKeyboardInScrollView:"))
+    rootScrollView.addGestureRecognizer(doubleTaps)
+    doubleTaps.numberOfTapsRequired = 2
+    doubleTaps.numberOfTouchesRequired = 1
+    
+    //Register keyboard events
+    let defaultCenter = NSNotificationCenter.defaultCenter()
+    defaultCenter.addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardDidShowNotification, object: nil)
+    
+    defaultCenter.addObserver(self, selector: Selector("keyboardDidHide:"), name: UIKeyboardDidHideNotification, object: nil)
+    NSLog("Check")
+    
+    
+    
+    
+    //Set all the text fields' delegate to the view controller itself
     self.currentName.delegate = self;
     self.maxSize.delegate  = self;
     self.address.delegate  = self;
@@ -62,12 +84,117 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.sportTypePickerView.delegate   = self;
     self.sportTypePickerView.dataSource = self;
     
+    
+    
+    //Date and Time pickers configuration 
+    
+    let currentDate = NSDate()
+    
+    //Time 
+    self.timePicker.datePickerMode = UIDatePickerMode.Time
+    self.timePicker.minuteInterval = 5
+    self.timePicker.setDate(currentDate, animated : true)
+    self.timePicker.addTarget(self, action: Selector("updateTime"), forControlEvents: UIControlEvents.ValueChanged)
+    self.time.inputView = self.timePicker
+    
+    
+    //Date
+    self.datePicker.datePickerMode = UIDatePickerMode.Date
+    self.datePicker.minimumDate = NSDate()
+    self.datePicker.addTarget(self, action: Selector("updateDate"), forControlEvents: UIControlEvents.ValueChanged)
+    self.date.inputView = self.datePicker
+    
+    
+    
+    
+    
+    
+    
   }
+  
+  ////////////////////
+  //Selector methods//
+  ////////////////////
+  /*Gesture*/
+  
+  func hideKeyboardInScrollView(gesture: UITapGestureRecognizer) -> Void
+  {
+    self.rootScrollView.endEditing(true)
+  }
+  
+  
+  
+  
+  /*Time and Date pickerViews*/
+  
+  //This method is called when the value of the time picker is changed
+  //and updates the text in the time textfield
+  func updateTime()
+  {
+    let timeFormatter = NSDateFormatter()
+    timeFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    let selectedTime = timeFormatter.stringFromDate(timePicker.date)
+    self.time.text = selectedTime 
+  }
+  
+  //This method is called when the value of the date picker is changed
+  //and updates the text in the date textfield
+  func updateDate()
+  {
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+    let selectedDate = dateFormatter.stringFromDate(datePicker.date)
+    self.date.text = selectedDate 
+    
+  }
+  
+  /*Keyboard*/
+  
+  func keyboardDidShow(keyboardNotif : NSNotification) -> Void 
+  {
+    //NSLog("keyboardWillShow")
+    if let info = keyboardNotif.userInfo
+    {
+      if let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as?NSValue)?.CGRectValue().size
+      {
+
+        //update the constraint to resize the scroll view 
+        let kbHeight  = keyboardSize.height
+        if(rootScrollViewBottomConstraint.constant < kbHeight)
+        {
+          rootScrollViewBottomConstraint.constant = kbHeight
+        }
+        
+        
+      }
+    }
+  }
+  
+  func keyboardDidHide(keyboardNotif : NSNotification) -> Void 
+  {
+    //NSLog("keyboardWillHide")
+    if let info = keyboardNotif.userInfo
+    {
+      if let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue().size
+      {
+        //update the constraint to resize the scroll view 
+        let kbHeight  = keyboardSize.height
+        rootScrollViewBottomConstraint.constant -= kbHeight
+      }
+    }
+  }
+  
+  
+  ////////////////////
+  //Delegate methods//
+  ////////////////////
+  
+  /*PickerView Delegates*/
   
   //This method is used to specify the number of cloumns in the picker elemnt 
   func numberOfComponentsInPickerView(pickerView :UIPickerView) -> Int
   {
-     return 1 
+    return 1 
   }
   
   //This method is used to specify the number of rows of data in the UIPickerView element 
@@ -88,6 +215,9 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     sportType = sportTypeArr[row]
   }
   
+  
+  /*TextField Delegates*/
+  
   //This method  dismisses keyboard on return key press
   func textFieldShouldReturn(textField: UITextField) -> Bool{
     textField.resignFirstResponder()
@@ -95,9 +225,10 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     return false
   }
   
-  //MThis method dismisses keyboard by touching to anywhere on the screen
-  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    self.view.endEditing(true)
+  //This method dismisses keyboard by touching to anywhere on the screen
+  override func touchesBegan(doubleTaps: Set<UITouch>, withEvent event: UIEvent?) {
+    
+    self.rootScrollView.endEditing(true)
   }
   
   //MARK: Actions
@@ -108,7 +239,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   
   @IBAction func PingPong(sender: UIButton) {
     sport        = "PingPong"
-       for btn in SportsButton{
+    for btn in SportsButton{
       btn.selected = false
     }
     sender.selected = true
@@ -121,9 +252,6 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     }
     sender.selected = true
   }
-  
-  
-  
   
   
   //This methods returns back to the LFG view controller
@@ -151,13 +279,13 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     
     //This checks if there is any mandatory fields is missing
     if(currentName.text?.isEmpty == true ||
-       maxSize.text?.isEmpty     == true ||
-       address.text?.isEmpty     == true ||
-       city!.text?.isEmpty       == true ||
-       province!.text?.isEmpty   == true ||
-       time!.text?.isEmpty       == true ||
-       date!.text?.isEmpty       == true ||
-       sport                     == nil )
+      maxSize.text?.isEmpty     == true ||
+      address.text?.isEmpty     == true ||
+      city!.text?.isEmpty       == true ||
+      province!.text?.isEmpty   == true ||
+      time!.text?.isEmpty       == true ||
+      date!.text?.isEmpty       == true ||
+      sport                     == nil )
     {
       let alert = UIAlertController(
         title  : NSLocalizedString("Error", comment: "account success note title"),
@@ -170,24 +298,24 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       presentViewController(alert, animated: true , completion: nil)
       return
     }
-     
+    
     //Kinvey API method that creates a store object 
     //so we can save entities to a specific collection
     let storeGroup = KCSAppdataStore.storeWithOptions(
       [KCSStoreKeyCollectionName : "Groups", 
-       KCSStoreKeyCollectionTemplateClass : Group.self]
+        KCSStoreKeyCollectionTemplateClass : Group.self]
     )
     
     let storeInGroup = KCSAppdataStore.storeWithOptions(
       [KCSStoreKeyCollectionName          : "InGroups", 
-       KCSStoreKeyCollectionTemplateClass : inGroup.self])
-
+        KCSStoreKeyCollectionTemplateClass : inGroup.self])
+    
     
     
     //This creates a query that checks whether the item already exists by 
     //changing the user input to all lowercases and comparing it to the database
     let query = KCSQuery(onField: "nameLowercase", withExactMatchForValue: currentName.text!.lowercaseString)
-       
+    
     //execute the query 
     storeGroup.countWithQuery(query) { (count :UInt, errorOrNil :NSError!) -> Void in
       
@@ -239,11 +367,11 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
         withCompletionBlock: {(objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in 
           if (errorOrNil != nil)
           {
-      
+            
             print(errorOrNil.userInfo[KCSErrorCode])
             print(errorOrNil.userInfo[KCSErrorInternalError])
             print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
-          
+            
             //identify the error domain
             let message = errorOrNil.userInfo[KCSErrorInternalError] as! String?
             
@@ -257,7 +385,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
             alert.addAction(cancelAction)
             self.presentViewController(alert, animated: true, completion: nil)
             return 
-        
+            
           }
           else
           {
@@ -267,7 +395,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
             
             let currentUserId    = KCSUser.activeUser().userId
             let currentGroupName = group.name
-
+            
             
             //add the user to the group 
             let userInGroup = inGroup()
@@ -286,7 +414,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
                   print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
                   //error
                   //prompt the user to save their info again
-              
+                  
                 }
                 else if(objectsOrNil != nil)
                 {
@@ -294,7 +422,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
                   let checkInGroup = objectsOrNil[0] as! inGroup
                   NSLog("userID:%@",checkInGroup.userId!)
                   NSLog("groupName:%@",checkInGroup.groupName!)
-
+                  
                   //information must be uploadded to the InGroup relationship collection 
                   //on our backend database before the  current view disappears 
                   let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
@@ -305,9 +433,9 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
                 
               }, 
               withProgressBlock: nil)
-            }
+          }
         },
-      
+        
         withProgressBlock : nil)
     }    
   }  
