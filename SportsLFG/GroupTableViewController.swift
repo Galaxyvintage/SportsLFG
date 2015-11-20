@@ -104,7 +104,7 @@ class GroupTableViewController: UITableViewController {
         let group = groupA[indexPath.row]
         
         // Configure the cell...
-        cell.NameLabel.text       = group.name
+        cell.NameLabel.text       = "["+group.sportType!+"]"+group.name!
         cell.StartDateLabel.text  = group.startDate
         cell.StartTimeLabel.text  = group.startTime
         cell.ProvienceLabel.text  = group.province

@@ -38,12 +38,10 @@ class LFGViewController : UIViewController, UINavigationBarDelegate,UIBarPositio
   }
   
   //MARK:Actions
-  //NearbyGroups button
-  @IBAction func NearbyGroups(sender: UIButton) {
-  }
   
   //Outdoor button
   @IBAction func OutdoorGroups(sender: UIButton) {
+    
   }
   
   //Indoor button

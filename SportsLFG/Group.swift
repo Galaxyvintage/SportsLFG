@@ -38,7 +38,7 @@ class Group : NSObject{
             "owner"    : "owner",
             "dateCreated": "dateCreated",
             "sport"    : "sport",
-            "sportTYpe": "sportType",
+            "sportType": "sportType",
             "startTime": "time",
             "startDate": "date",
             "maxSize"  :  "maxSize",

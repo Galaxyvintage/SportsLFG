@@ -54,7 +54,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     
     let doubleTaps = UITapGestureRecognizer(target: self, action: Selector("hideKeyboardInScrollView:"))
     rootScrollView.addGestureRecognizer(doubleTaps)
-    doubleTaps.numberOfTapsRequired = 2
+    doubleTaps.numberOfTapsRequired    = 1
     doubleTaps.numberOfTouchesRequired = 1
     
     //Register keyboard events

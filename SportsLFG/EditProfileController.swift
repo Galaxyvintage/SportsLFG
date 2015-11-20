@@ -45,7 +45,7 @@ class EditProfileController : UIViewController
   }
   
   
-  @IBAction func SaveAndBack(sender: UIButton) {
+  @IBAction func SaveAndBack(sender: UIBarButtonItem) {
     
     let currentUser = KCSUser.activeUser()
     if(!(name.text!.isEmpty))
@@ -86,5 +86,6 @@ class EditProfileController : UIViewController
         NSLog("failed to save")
       }
     }
-  }  
+
+  }
 }
