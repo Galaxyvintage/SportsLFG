@@ -14,8 +14,6 @@ import UIKit
 //     2. Verify user address using CLLocation manager 
 //     3. Let user pick their location using the map
 
-
-
 class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFieldDelegate,UIPickerViewDelegate
 {
   
@@ -66,9 +64,6 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     defaultCenter.addObserver(self, selector: Selector("keyboardDidHide:"), name: UIKeyboardDidHideNotification, object: nil)
     NSLog("Check")
     
-    
-    
-    
     //Set all the text fields' delegate to the view controller itself
     self.currentName.delegate = self;
     self.maxSize.delegate  = self;
@@ -83,8 +78,6 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     
     self.sportTypePickerView.delegate   = self;
     self.sportTypePickerView.dataSource = self;
-    
-    
     
     //Date and Time pickers configuration 
     
@@ -103,13 +96,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.datePicker.minimumDate = NSDate()
     self.datePicker.addTarget(self, action: Selector("updateDate"), forControlEvents: UIControlEvents.ValueChanged)
     self.date.inputView = self.datePicker
-    
-    
-    
-    
-    
-    
-    
+
   }
   
   ////////////////////
@@ -121,9 +108,6 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   {
     self.rootScrollView.endEditing(true)
   }
-  
-  
-  
   
   /*Time and Date pickerViews*/
   
@@ -157,15 +141,12 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     {
       if let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as?NSValue)?.CGRectValue().size
       {
-
         //update the constraint to resize the scroll view 
         let kbHeight  = keyboardSize.height
         if(rootScrollViewBottomConstraint.constant < kbHeight)
         {
           rootScrollViewBottomConstraint.constant = kbHeight
-        }
-        
-        
+        }                
       }
     }
   }
@@ -346,7 +327,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       //and assigns user input to the instance properties
       let group = Group()
       
-      
+      //Mandatory properties 
       group.name          = self.currentName.text! 
       group.nameLowercase = self.currentName.text!.lowercaseString
       group.owner         = KCSUser.activeUser().userId
@@ -354,12 +335,17 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       group.startTime     = self.time.text! 
       group.startDate     = self.date.text! 
       group.sport         = self.sport
+      group.sportType     = self.sportType
       group.maxSize       = Int(self.maxSize.text!)! 
-      group.currentSize   = 0                //only 1 member when it's first created 
+      group.currentSize   = 0  //only 1 member when it's first created 
       group.address       = self.address.text! 
       group.city          = self.city.text!
       group.province      = self.province.text!
       group.metadata?.setGloballyWritable(false)
+      
+      //Optional properties 
+      //
+      
       
       //This method saves the changes and uploads the newly created entity to the database
       storeGroup.saveObject(
@@ -367,7 +353,6 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
         withCompletionBlock: {(objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in 
           if (errorOrNil != nil)
           {
-            
             print(errorOrNil.userInfo[KCSErrorCode])
             print(errorOrNil.userInfo[KCSErrorInternalError])
             print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
@@ -428,14 +413,11 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
                   let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
                   sharedFlag.gotoLFG = true
                   self.presentViewController(mainControllerView, animated: true,completion:nil)      
-                  
                 }
-                
               }, 
               withProgressBlock: nil)
           }
         },
-        
         withProgressBlock : nil)
     }    
   }  

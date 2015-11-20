@@ -7,15 +7,32 @@
 
 import Foundation
 
-class HomeViewController : UIViewController
+class HomeViewController : UIViewController,UINavigationBarDelegate,UIBarPositioningDelegate
 {
+  //MARK:Properties
+  @IBOutlet weak var navigationBar: UINavigationBar!
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.navigationBar.delegate = self
+  }
   
+  ////////////////////
+  //Delegate Methods//
+  ////////////////////
+  
+  /*UIBar*/
+  func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
+    return UIBarPosition.TopAttached
+  }
+  
+  
+  
+  //MARK:Actions
   @IBAction func Logout(sender: UIButton) {
     //let LoginControllerView=self.storyboard?.instantiateViewControllerWithIdentifier("LoginNavigationController")
     KCSUser.activeUser().logout()
     performSegueWithIdentifier("GoBackToLogin", sender: UIButton.self)    
   }
-  override func viewDidLoad() {
-        super.viewDidLoad()
-  }
+
 }

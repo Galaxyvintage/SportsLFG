@@ -12,12 +12,14 @@ class FirstTimeUserViewController : UIViewController, UITextFieldDelegate{
   
   
   //MARK: Properties 
+  var gender : String?
+  
   
   @IBOutlet weak var Name: UITextField!
   @IBOutlet weak var Age : UITextField!
   @IBOutlet weak var City: UITextField!
   @IBOutlet weak var Province: UITextField!
-  
+  @IBOutlet weak var genderSwitch: UISwitch!
   override func viewDidLoad() {
     
     super.viewDidLoad()
@@ -76,7 +78,16 @@ class FirstTimeUserViewController : UIViewController, UITextFieldDelegate{
       presentViewController(alert, animated: true , completion: nil)
       return
     }
+   
     
+    if(genderSwitch.on == true)
+    {
+      self.gender = "Female"
+    }
+    else
+    {
+      self.gender = "Male"
+    }
     
     //This adds custom attributes to the user 
     //It's only for the first time user 
@@ -86,7 +97,7 @@ class FirstTimeUserViewController : UIViewController, UITextFieldDelegate{
     currentUser.setValue(Age.text, forAttribute:"Age")
     currentUser.setValue(City.text, forAttribute:"City")
     currentUser.setValue(Province.text, forAttribute:"Province")
-    
+    currentUser.setValue(gender, forAttribute:"Gender")
     
     //This method saves the custom attributes to the kinvey back-end database
     

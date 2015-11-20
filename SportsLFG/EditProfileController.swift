@@ -1,9 +1,10 @@
 //
-//  EditProfileController.swift
-//  SportsLFG
-//
-//  Created by CharlesL on 2015-11-15.
-//  Copyright © 2015 CMPT-GP03. All rights reserved.
+// File : EditProfileController.swift
+// Author :Charles Li
+// Date created : Nov 03 2015
+// Date modified: Nov 20 2015
+// Description : This is class is used to handle personal information modification
+// 
 //
 
 import Foundation
@@ -15,11 +16,19 @@ class EditProfileController : UIViewController
   @IBOutlet weak var age:  UITextField!
   @IBOutlet weak var city: UITextField!
   @IBOutlet weak var province: UITextField!
+  @IBOutlet weak var gender: UISwitch!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //add placeholder to text field    
+    //add placeholder to text field 
+    let currentGender = KCSUser.activeUser().getValueForAttribute("Gender") as? String
+    
+    if(currentGender == "Female")
+    {
+      gender.setOn(true, animated: true)
+    }
+    
   }
   
   func BackToHome()
@@ -58,6 +67,24 @@ class EditProfileController : UIViewController
       currentUser.setValue(province.text, forAttribute: "Province")
     }  
     
-    self.BackToHome()
+    if(gender.on == true)
+    {
+      currentUser.setValue("Female", forAttribute: "Gender")
+    }
+    else 
+    {
+      currentUser.setValue("Male", forAttribute: "Gender")
+    }
+    currentUser.saveWithCompletionBlock { (NSarry:[AnyObject]!, errorOrNil:NSError!) -> Void in
+      if (errorOrNil == nil)
+      {
+        self.BackToHome()
+      }
+      else
+      {
+        //inform user the error 
+        NSLog("failed to save")
+      }
+    }
   }  
 }

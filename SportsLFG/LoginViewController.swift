@@ -2,7 +2,7 @@
 // File : LoginViewController.swift
 // Author : Aaron Cheung, Charles Li
 // Date created : Oct 30 2015
-// Date modified: Nov 01 2015
+// Date modified: Nov 19 2015
 // Description  : This class is used by the login view controller and handles user login requests
 
 import UIKit
@@ -49,7 +49,7 @@ class LoginViewController : UIViewController, UITextFieldDelegate
     let email = userEmailField.text
     let password = userPasswordField.text
     let firstControllerView=self.storyboard?.instantiateViewControllerWithIdentifier("FirstTimeUser")
-    let mainControllerView = self.storyboard?.instantiateViewControllerWithIdentifier("HomeController")
+    let mainControllerView = self.storyboard?.instantiateViewControllerWithIdentifier("MainCVController")
     
     KCSUser.loginWithUsername(
       email!,
@@ -86,11 +86,10 @@ class LoginViewController : UIViewController, UITextFieldDelegate
             
           })
           
-            
           } else {
           //there was an error with the update save
           
-          let message = "email or password incorrect"//need to include the case when  internet connection is not available.
+          let message = "email or password incorrect" //need to include the case when  internet connection is not available.
           let alert = UIAlertController(
             title: NSLocalizedString("Log-in failed", comment: "can not log in"),
             message: message,
