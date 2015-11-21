@@ -19,8 +19,8 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   
   //MARK: Properties
   var sport :String!
-  var sportType : String?
-  var sportTypeArr = ["Outdoor","Indoor","Gym"]
+  var category : String?
+  var categoryArr = ["Outdoor","Indoor","Gym"]
   var timePicker   = UIDatePicker()
   var datePicker   = UIDatePicker()
   
@@ -181,19 +181,19 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   //This method is used to specify the number of rows of data in the UIPickerView element 
   func pickerView(pickerView : UIPickerView, numberOfRowsInComponent component: Int)->Int
   {
-    return sportTypeArr.count 
+    return categoryArr.count 
   } 
   
   //This method is used to specify the data for a specific row and specific component
   func pickerView(pickerView : UIPickerView, titleForRow row :Int, forComponent component: Int) -> String?
   {
-    return sportTypeArr[row]
+    return categoryArr[row]
   }  
   
   
   func pickerView(pickerView : UIPickerView, didSelectRow row : Int, inComponent component : Int)
   {
-    sportType = sportTypeArr[row]
+    category = categoryArr[row]
   }
   
   
@@ -335,7 +335,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       group.startTime     = self.time.text! 
       group.startDate     = self.date.text! 
       group.sport         = self.sport
-      group.sportType     = self.sportType
+      group.category      = self.category
       group.maxSize       = Int(self.maxSize.text!)! 
       group.currentSize   = 0  //only 1 member when it's first created 
       group.address       = self.address.text! 

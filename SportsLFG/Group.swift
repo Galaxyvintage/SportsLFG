@@ -20,7 +20,7 @@ class Group : NSObject{
     var startTime  : String?
     var startDate  : String?
     var sport      : String?
-    var sportType  : String?
+    var category   : String?
     var currentSize: NSNumber?
     var maxSize    : NSNumber?
     var address    : String?
@@ -38,7 +38,7 @@ class Group : NSObject{
             "owner"    : "owner",
             "dateCreated": "dateCreated",
             "sport"    : "sport",
-            "sportType": "sportType",
+            "category": "category",
             "startTime": "time",
             "startDate": "date",
             "maxSize"  :  "maxSize",

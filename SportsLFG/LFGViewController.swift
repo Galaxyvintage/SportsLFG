@@ -15,7 +15,7 @@ class LFGViewController : UIViewController, UINavigationBarDelegate,UIBarPositio
   //MARK:Properties
   @IBOutlet weak var navigationBar: UINavigationBar!
   
-  
+  var category : String?
   
   
   
@@ -39,21 +39,39 @@ class LFGViewController : UIViewController, UINavigationBarDelegate,UIBarPositio
   
   //MARK:Actions
   
-  //Outdoor button
-  @IBAction func OutdoorGroups(sender: UIButton) {
-    
+  @IBAction func All(sender: UIButton)
+  {
+    category = "All"
+    self.performSegueWithIdentifier("ShowGroups", sender: sender)
+  }  
+  @IBAction func OutdoorGroups(sender: UIButton) 
+  {
+    category = "Outdoor"
+    self.performSegueWithIdentifier("ShowGroups", sender: sender)
   }
   
   //Indoor button
-  @IBAction func IndoorGroups(sender: UIButton) {
+  @IBAction func IndoorGroups(sender: UIButton)
+  {
+    category = "Indoor"
+    self.performSegueWithIdentifier("ShowGroups", sender: sender)
   }
   
   //Gym button
   //
-  @IBAction func GymGroups(sender: UIButton) {
+  @IBAction func GymGroups(sender: UIButton) 
+  {
+    category = "Gym"
+    self.performSegueWithIdentifier("ShowGroups", sender: sender)
   }
   
-  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    if (segue.identifier == "ShowGroups") {
+      let navController = segue.destinationViewController as! UINavigationController
+      let svc = navController.viewControllers[0] as! GroupTableViewController
+      svc.category = category
+    }
+  }
   
   
 }

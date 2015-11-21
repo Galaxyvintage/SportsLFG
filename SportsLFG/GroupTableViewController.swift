@@ -13,6 +13,8 @@ class GroupTableViewController: UITableViewController {
     
   // MARK: Properties
     
+  var category : String?
+  
   //an empty array of Group objects
   var groupA = [Group]()
     
@@ -40,8 +42,27 @@ class GroupTableViewController: UITableViewController {
       //)
       */
       
-      //This query returns all objects from the database 
-      let query = KCSQuery()
+      //Determine what query we need based on the value of category 
+      
+      var query : KCSQuery
+      if(category == "All")
+      {
+        query = KCSQuery()
+      }
+      else if( category == "Outdoor")
+      {
+        query = KCSQuery(onField: "category", withExactMatchForValue: "Outdoor")
+      }
+      else if( category == "Indoor")
+      {
+        query = KCSQuery(onField: "category", withExactMatchForValue: "Indoor")
+      }
+      else//(category == "Gym")
+      {
+        query = KCSQuery(onField: "category", withExactMatchForValue: "Gym")
+      }
+      
+      
       
       //This limit the query for the first 20 objects
       //TODO: need to add a function to load more in the next version
@@ -104,7 +125,7 @@ class GroupTableViewController: UITableViewController {
         let group = groupA[indexPath.row]
         
         // Configure the cell...
-        cell.NameLabel.text       = "["+group.sportType!+"]"+group.name!
+        cell.NameLabel.text       = "["+group.category!+"]"+group.name!
         cell.StartDateLabel.text  = group.startDate
         cell.StartTimeLabel.text  = group.startTime
         cell.ProvienceLabel.text  = group.province
