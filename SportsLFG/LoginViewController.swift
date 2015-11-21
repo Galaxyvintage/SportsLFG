@@ -49,7 +49,7 @@ class LoginViewController : UIViewController, UITextFieldDelegate
         let email = userEmailField.text
         let password = userPasswordField.text
         let firstControllerView=self.storyboard?.instantiateViewControllerWithIdentifier("FirstTimeUser")
-        let mainControllerView = self.storyboard?.instantiateViewControllerWithIdentifier("HomeController")
+        let mainControllerView = self.storyboard?.instantiateViewControllerWithIdentifier("LocationViewNavigation")
         
         KCSUser.loginWithUsername(
             email!,

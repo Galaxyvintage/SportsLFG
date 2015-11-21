@@ -89,9 +89,6 @@ class GroupViewController: UIViewController {
                 }
                 
             })
-            
-            
-            
         }
     }
     
