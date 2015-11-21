@@ -11,7 +11,7 @@ import Foundation
 
 class EditProfileController : UIViewController
 {
-
+  
   @IBOutlet weak var name: UITextField!
   @IBOutlet weak var age:  UITextField!
   @IBOutlet weak var city: UITextField!
@@ -41,31 +41,31 @@ class EditProfileController : UIViewController
   
   @IBAction func Back(sender: UIButton) {
     
-     self.BackToHome()
+    self.BackToHome()
   }
   
   
   @IBAction func SaveAndBack(sender: UIBarButtonItem) {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //add placeholder to text field
-    }
-    
-    func BackToHome()
+    let currentUser = KCSUser.activeUser()
+    if(!(name.text!.isEmpty))
     {
-        let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController")
-        sharedFlag.gotoHome = true
-        presentViewController(mainControllerView, animated: true,completion:nil)
+      currentUser.setValue(name.text, forAttribute:"Name")
+    }
+    if(!(age.text!.isEmpty))
+    {
+      currentUser.setValue(age.text, forAttribute: "Age")
     }
     
-    
-    @IBAction func Back(sender: UIButton) {
-        
-        self.BackToHome()
+    if(!(city.text!.isEmpty))
+    {
+      currentUser.setValue(city.text, forAttribute:"City")
     }
     
+    if(!(province.text!.isEmpty))
+    {
+      currentUser.setValue(province.text, forAttribute: "Province")
+    }  
     
     if(gender.on == true)
     {
@@ -75,6 +75,7 @@ class EditProfileController : UIViewController
     {
       currentUser.setValue("Male", forAttribute: "Gender")
     }
+    
     currentUser.saveWithCompletionBlock { (NSarry:[AnyObject]!, errorOrNil:NSError!) -> Void in
       if (errorOrNil == nil)
       {
@@ -86,6 +87,6 @@ class EditProfileController : UIViewController
         NSLog("failed to save")
       }
     }
-
+    
   }
 }

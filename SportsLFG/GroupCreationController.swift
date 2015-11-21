@@ -11,7 +11,7 @@ import UIKit
 
 //TODO:
 //     1. Save the sportType when the group is created
-//     2. Verify user address using CLLocation manager
+//     2. Verify user address using CLLocation manager 
 //     3. Let user pick their location using the map
 
 class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFieldDelegate,UIPickerViewDelegate
@@ -76,15 +76,8 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.ageMax!.delegate  = self;
     self.detail!.delegate  = self;
     
-    //must-enter attributes
-    @IBOutlet weak var currentName: UITextField!
-    @IBOutlet weak var maxSize: UITextField!
-    @IBOutlet weak var address: UITextField!
-    @IBOutlet weak var city: UITextField!
-    @IBOutlet weak var province: UITextField!
-    @IBOutlet weak var time: UITextField!
-    @IBOutlet weak var date: UITextField!
-    @IBOutlet weak var sportTypePickerView: UIPickerView!
+    self.sportTypePickerView.delegate   = self;
+    self.sportTypePickerView.dataSource = self;
     
     //Date and Time pickers configuration 
     
@@ -103,7 +96,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.datePicker.minimumDate = NSDate()
     self.datePicker.addTarget(self, action: Selector("updateDate"), forControlEvents: UIControlEvents.ValueChanged)
     self.date.inputView = self.datePicker
-
+    
   }
   
   ////////////////////
@@ -246,23 +239,23 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   @IBAction func BackToLFG(sender: UIButton) {
     NSLog("BackToLFG")
     
-    //This method is used to specify the number of cloumns in the picker elemnt
-    func numberOfComponentsInPickerView(pickerView :UIPickerView) -> Int
-    {
-        return 1
-    }
+    //unwind back to MainCVController 
+    //set gotoLFG to true and perform segue to LFG controller
+    let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
+    sharedFlag.gotoLFG = true
+    self.presentViewController(mainControllerView, animated: true,completion:nil)      
+  }
+  
+  
+  
+  
+  //write information to the newGroup object
+  @IBAction func createGroup(sender: UIButton) {
     
-    //This method is used to specify the number of rows of data in the UIPickerView element
-    func pickerView(pickerView : UIPickerView, numberOfRowsInComponent component: Int)->Int
-    {
-        return sportTypeArr.count
-    }
     
-    //This method is used to specify the data for a specific row and specific component
-    func pickerView(pickerView : UIPickerView, titleForRow row :Int, forComponent component: Int) -> String?
-    {
-        return sportTypeArr[row]
-    }
+    ///////////////////////
+    //Validate user input//
+    ///////////////////////
     
     
     //This checks if there is any mandatory fields is missing
@@ -275,7 +268,16 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       date!.text?.isEmpty       == true ||
       sport                     == nil )
     {
-        sportType = sportTypeArr[row]
+      let alert = UIAlertController(
+        title  : NSLocalizedString("Error", comment: "account success note title"),
+        message: NSLocalizedString("Empty field", comment: "password errors"),
+        preferredStyle : UIAlertControllerStyle.Alert
+      )
+      
+      let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+      alert.addAction(cancelAction)
+      presentViewController(alert, animated: true , completion: nil)
+      return
     }
     
     //Kinvey API method that creates a store object 
@@ -360,11 +362,10 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
             
             //create an alert to tell user there is an error
             let alert = UIAlertController(
-                title  : NSLocalizedString("Error", comment: "account success note title"),
-                message: NSLocalizedString("Empty field", comment: "password errors"),
-                preferredStyle : UIAlertControllerStyle.Alert
+              title  : NSLocalizedString("Error", comment: "error"),
+              message: message,
+              preferredStyle: UIAlertControllerStyle.Alert  
             )
-            
             let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
             alert.addAction(cancelAction)
             self.presentViewController(alert, animated: true, completion: nil)
