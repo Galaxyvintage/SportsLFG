@@ -1,4 +1,4 @@
-// 
+//
 // File   : HomeViewController.swift
 // Author : Charles Li
 // Date created: Oct.13 2015

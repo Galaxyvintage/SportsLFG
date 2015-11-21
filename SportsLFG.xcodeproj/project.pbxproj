@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A412ABC1BFD4CE40024C746 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A412ABB1BFD4CE40024C746 /* LocationViewController.swift */; };
 		4A76EB011BEC9216004890AD /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A76EB001BEC9216004890AD /* GroupTableViewCell.swift */; };
 		4A955EF21BF0182900CDDA74 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A955EF11BF0182900CDDA74 /* GroupViewController.swift */; };
 		4A9EFE501BED5B1E00CA1BC8 /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9EFE4F1BED5B1E00CA1BC8 /* GroupTableViewController.swift */; };
 		4AC6A8631BEDD1CE004F9C7A /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC6A8621BEDD1CE004F9C7A /* Group.swift */; };
 		630431841BF0965C004B31EF /* inGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630431831BF0965C004B31EF /* inGroup.swift */; };
-		6322901A1BE0C0C00097B93B /* SportsLFG.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 632290181BE0C0C00097B93B /* SportsLFG.xcdatamodeld */; };
 		6322901F1BE0C0C00097B93B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6322901D1BE0C0C00097B93B /* LaunchScreen.storyboard */; };
 		6322902E1BE0C15E0097B93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632290271BE0C15E0097B93B /* AppDelegate.swift */; };
 		6322902F1BE0C15E0097B93B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632290281BE0C15E0097B93B /* HomeViewController.swift */; };
@@ -46,13 +46,13 @@
 		0436F88DAFDD8EB0368A14C8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		0FDE3EA33AED1FE155D30688 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		402569FD0E94BE229C00BD29 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		4A412ABB1BFD4CE40024C746 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		4A76EB001BEC9216004890AD /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		4A955EF11BF0182900CDDA74 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		4A9EFE4F1BED5B1E00CA1BC8 /* GroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
 		4AC6A8621BEDD1CE004F9C7A /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		630431831BF0965C004B31EF /* inGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = inGroup.swift; sourceTree = "<group>"; };
 		6322900E1BE0C0C00097B93B /* SportsLFG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportsLFG.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		632290191BE0C0C00097B93B /* SportsLFG.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SportsLFG.xcdatamodel; sourceTree = "<group>"; };
 		6322901E1BE0C0C00097B93B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		632290201BE0C0C00097B93B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		632290261BE0C15E0097B93B /* SportsLFG-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SportsLFG-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -133,7 +133,6 @@
 				632290351BE0C1730097B93B /* Main.storyboard */,
 				6322901D1BE0C0C00097B93B /* LaunchScreen.storyboard */,
 				632290201BE0C0C00097B93B /* Info.plist */,
-				632290181BE0C0C00097B93B /* SportsLFG.xcdatamodeld */,
 				632290261BE0C15E0097B93B /* SportsLFG-Bridging-Header.h */,
 			);
 			path = SportsLFG;
@@ -190,6 +189,7 @@
 				4A76EB001BEC9216004890AD /* GroupTableViewCell.swift */,
 				4A9EFE4F1BED5B1E00CA1BC8 /* GroupTableViewController.swift */,
 				4A955EF11BF0182900CDDA74 /* GroupViewController.swift */,
+				4A412ABB1BFD4CE40024C746 /* LocationViewController.swift */,
 			);
 			name = LFG;
 			sourceTree = "<group>";
@@ -363,7 +363,7 @@
 				63D573EE1BE7E78E00EE769A /* FirstTimeUserViewController.swift in Sources */,
 				632290341BE0C15E0097B93B /* RegisterViewController.swift in Sources */,
 				4A9EFE501BED5B1E00CA1BC8 /* GroupTableViewController.swift in Sources */,
-				6322901A1BE0C0C00097B93B /* SportsLFG.xcdatamodeld in Sources */,
+				4A412ABC1BFD4CE40024C746 /* LocationViewController.swift in Sources */,
 				4AC6A8631BEDD1CE004F9C7A /* Group.swift in Sources */,
 				6322902F1BE0C15E0097B93B /* HomeViewController.swift in Sources */,
 				63C0350F1BE4ABF400BAFA65 /* LFGViewController.swift in Sources */,
@@ -503,11 +503,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SportsLFG/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = CMPT275.SportsLFG;
+				PRODUCT_BUNDLE_IDENTIFIER = "CMPT275.SportsLFG-Isaac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SportsLFG/SportsLFG-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -583,19 +586,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		632290181BE0C0C00097B93B /* SportsLFG.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				632290191BE0C0C00097B93B /* SportsLFG.xcdatamodel */,
-			);
-			currentVersion = 632290191BE0C0C00097B93B /* SportsLFG.xcdatamodel */;
-			path = SportsLFG.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 632290061BE0C0C00097B93B /* Project object */;
 }

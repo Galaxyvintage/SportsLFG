@@ -47,25 +47,25 @@ class EditProfileController : UIViewController
   
   @IBAction func SaveAndBack(sender: UIBarButtonItem) {
     
-    let currentUser = KCSUser.activeUser()
-    if(!(name.text!.isEmpty))
-    {
-      currentUser.setValue(name.text, forAttribute:"Name")
-    }
-    if(!(age.text!.isEmpty))
-    {
-      currentUser.setValue(age.text, forAttribute: "Age")
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //add placeholder to text field
     }
     
-    if(!(city.text!.isEmpty))
+    func BackToHome()
     {
-      currentUser.setValue(city.text, forAttribute:"City")
+        let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController")
+        sharedFlag.gotoHome = true
+        presentViewController(mainControllerView, animated: true,completion:nil)
     }
     
-    if(!(province.text!.isEmpty))
-    {
-      currentUser.setValue(province.text, forAttribute: "Province")
-    }  
+    
+    @IBAction func Back(sender: UIButton) {
+        
+        self.BackToHome()
+    }
+    
     
     if(gender.on == true)
     {
