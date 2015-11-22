@@ -15,11 +15,11 @@ class ProfileTableViewController : UITableViewController
   @IBOutlet weak var age: UILabel!
   @IBOutlet weak var location: UILabel!
   @IBOutlet weak var gender: UILabel!
-
+  
   override func viewDidLoad() {
     
     //change the label accordingly to the user info given by the KCSUser object
-  
+    
     let currentUser = KCSUser.activeUser()
     let myName      = currentUser.getValueForAttribute("Name") as! String
     let myAge       = (currentUser.getValueForAttribute("Age") as! String)+" years old"
@@ -27,9 +27,9 @@ class ProfileTableViewController : UITableViewController
     let myGender    = currentUser.getValueForAttribute("Gender") as! String
     
     name.text = myName
-    age.text =  myAge
+    age.text  = myAge
     location.text = myLocation
     gender.text   = myGender
-     
+    
   }
 }

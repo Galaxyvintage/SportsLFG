@@ -2,17 +2,17 @@
 // File  : GroupCreationController.swift
 // Author: Charles Li
 // Date created  : Nov 04 2015
-// Date modified : Nov 19 2015
+// Date modified : Nov 22 2015
 // Description : This is class is used in the group creation view controller and handles 
 //               group creation request
 //
 import Foundation
 import UIKit
+import CoreLocation
 
 //TODO:
-//     1. Save the sportType when the group is created
-//     2. Verify user address using CLLocation manager 
-//     3. Let user pick their location using the map
+//     1. Verify user address using CLLocation manager 
+//     2. Let user pick their location using the map
 
 class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFieldDelegate,UIPickerViewDelegate
 {
@@ -21,8 +21,10 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   var sport :String!
   var category : String?
   var categoryArr = ["Outdoor","Indoor","Gym"]
-  var timePicker   = UIDatePicker()
-  var datePicker   = UIDatePicker()
+  var timePicker  = UIDatePicker()
+  var datePicker  = UIDatePicker()
+  var geocoder    = CLGeocoder()
+  
   
   @IBOutlet weak var rootScrollView: UIScrollView!
   @IBOutlet weak var contentView: UIView!
@@ -36,7 +38,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   @IBOutlet weak var province: UITextField!
   @IBOutlet weak var time: UITextField!
   @IBOutlet weak var date: UITextField!
-  @IBOutlet weak var sportTypePickerView: UIPickerView!
+  @IBOutlet weak var categoryPickerView: UIPickerView!
   
   
   //optional attributes 
@@ -48,10 +50,11 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   
   @IBOutlet var SportsButton: [UIButton]!
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+
     // Do any additional setup after loading the view, typically from a nib.
-    
     let doubleTaps = UITapGestureRecognizer(target: self, action: Selector("hideKeyboardInScrollView:"))
     rootScrollView.addGestureRecognizer(doubleTaps)
     doubleTaps.numberOfTapsRequired    = 1
@@ -62,7 +65,6 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     defaultCenter.addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardDidShowNotification, object: nil)
     
     defaultCenter.addObserver(self, selector: Selector("keyboardDidHide:"), name: UIKeyboardDidHideNotification, object: nil)
-    NSLog("Check")
     
     //Set all the text fields' delegate to the view controller itself
     self.currentName.delegate = self;
@@ -76,8 +78,14 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.ageMax!.delegate  = self;
     self.detail!.delegate  = self;
     
-    self.sportTypePickerView.delegate   = self;
-    self.sportTypePickerView.dataSource = self;
+    self.categoryPickerView.delegate   = self;
+    self.categoryPickerView.dataSource = self;
+    
+    //set the PickerView to the first row and call the delegate method 
+    self.categoryPickerView.selectRow(0, inComponent: 0, animated: true)
+    self.pickerView(categoryPickerView, didSelectRow: 0, inComponent: 0)
+    
+    
     
     //Date and Time pickers configuration 
     
@@ -191,6 +199,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   }  
   
   
+  
   func pickerView(pickerView : UIPickerView, didSelectRow row : Int, inComponent component : Int)
   {
     category = categoryArr[row]
@@ -212,74 +221,35 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.rootScrollView.endEditing(true)
   }
   
-  //MARK: Actions
   
-  //////////
-  //Sports//
-  //////////
+  ///////////////////
+  //private methods//
+  ///////////////////
   
-  @IBAction func PingPong(sender: UIButton) {
-    sport        = "PingPong"
-    for btn in SportsButton{
-      btn.selected = false
-    }
-    sender.selected = true
+  //This method takes a string and shows an alert with that message
+  
+  func showCancelUIAlert(title          : String,
+    titleComment   : String,
+    message        : String,
+    messageComment : String)
+  {
+    let alert = UIAlertController(
+      title  : NSLocalizedString(title, comment: titleComment),
+      message: NSLocalizedString(message, comment: messageComment),
+      preferredStyle : UIAlertControllerStyle.Alert
+    )
+    
+    let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+    alert.addAction(cancelAction)
+    presentViewController(alert, animated: true , completion: nil)
+    return
+    
+    
   }
   
-  @IBAction func Soccer(sender:UIButton) {
-    sport        = "Soccer"
-    for btn in SportsButton{
-      btn.selected = false
-    }
-    sender.selected = true
-  }
-  
-  
-  //This methods returns back to the LFG view controller
-  @IBAction func BackToLFG(sender: UIButton) {
-    NSLog("BackToLFG")
-    
-    //unwind back to MainCVController 
-    //set gotoLFG to true and perform segue to LFG controller
-    let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
-    sharedFlag.gotoLFG = true
-    self.presentViewController(mainControllerView, animated: true,completion:nil)      
-  }
-  
-  
-  
-  
-  //write information to the newGroup object
-  @IBAction func createGroup(sender: UIButton) {
-    
-    
-    ///////////////////////
-    //Validate user input//
-    ///////////////////////
-    
-    
-    //This checks if there is any mandatory fields is missing
-    if(currentName.text?.isEmpty == true ||
-      maxSize.text?.isEmpty     == true ||
-      address.text?.isEmpty     == true ||
-      city!.text?.isEmpty       == true ||
-      province!.text?.isEmpty   == true ||
-      time!.text?.isEmpty       == true ||
-      date!.text?.isEmpty       == true ||
-      sport                     == nil )
-    {
-      let alert = UIAlertController(
-        title  : NSLocalizedString("Error", comment: "account success note title"),
-        message: NSLocalizedString("Empty field", comment: "password errors"),
-        preferredStyle : UIAlertControllerStyle.Alert
-      )
-      
-      let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-      alert.addAction(cancelAction)
-      presentViewController(alert, animated: true , completion: nil)
-      return
-    }
-    
+  //
+  func saveGroup()
+  {
     //Kinvey API method that creates a store object 
     //so we can save entities to a specific collection
     let storeGroup = KCSAppdataStore.storeWithOptions(
@@ -336,6 +306,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       group.startDate     = self.date.text! 
       group.sport         = self.sport
       group.category      = self.category
+      print(group.category)
       group.maxSize       = Int(self.maxSize.text!)! 
       group.currentSize   = 0  //only 1 member when it's first created 
       group.address       = self.address.text! 
@@ -345,7 +316,6 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       
       //Optional properties 
       //
-      
       
       //This method saves the changes and uploads the newly created entity to the database
       storeGroup.saveObject(
@@ -392,12 +362,14 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
                 
                 if(errorOrNil != nil)
                 {
-                  NSLog("Check")
+                  //error 
+                  NSLog("Error")
                   
+                  //print out erros to the console
                   print(errorOrNil.userInfo[KCSErrorCode])
                   print(errorOrNil.userInfo[KCSErrorInternalError])
                   print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
-                  //error
+                  
                   //prompt the user to save their info again
                   
                 }
@@ -420,6 +392,99 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
         },
         withProgressBlock : nil)
     }    
+  }
+  
+  
+  //MARK: Actions
+  
+  //////////
+  //Sports//
+  //////////
+  
+  @IBAction func PingPong(sender: UIButton) {
+    sport        = "PingPong"
+    for btn in SportsButton{
+      btn.selected = false
+    }
+    sender.selected = true
+  }
+  
+  @IBAction func Soccer(sender:UIButton) {
+    sport        = "Soccer"
+    for btn in SportsButton{
+      btn.selected = false
+    }
+    sender.selected = true
+  }
+  
+  
+  //This methods returns back to the LFG view controller
+  @IBAction func BackToLFG(sender: UIButton) {
+    NSLog("BackToLFG")
+    
+    //unwind back to MainCVController 
+    //set gotoLFG to true and perform segue to LFG controller
+    let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
+    sharedFlag.gotoLFG = true
+    self.presentViewController(mainControllerView, animated: true,completion:nil)      
+  }
+  
+  
+  
+  
+  //write information to the newGroup object
+  @IBAction func createGroup(sender: UIButton) {
+    
+    
+    ///////////////////////
+    //Validate user input//
+    ///////////////////////
+    
+    
+    //This checks if there is any mandatory fields is missing
+    if(currentName.text?.isEmpty == true ||
+      maxSize.text?.isEmpty      == true ||
+      address.text?.isEmpty      == true ||
+      city!.text?.isEmpty        == true ||
+      province!.text?.isEmpty    == true ||
+      time!.text?.isEmpty        == true ||
+      date!.text?.isEmpty        == true ||
+      sport                      == nil )
+    {
+      let alert = UIAlertController(
+        title  : NSLocalizedString("Error", comment: "account success note title"),
+        message: NSLocalizedString("Empty field", comment: "password errors"),
+        preferredStyle : UIAlertControllerStyle.Alert
+      )
+      
+      let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+      alert.addAction(cancelAction)
+      presentViewController(alert, animated: true , completion: nil)
+      return
+    }
+    
+    var groupLocation = (address.text)! + "," 
+    groupLocation    += (city.text)! + "," + (province.text)!
+    
+    geocoder.geocodeAddressString(
+      groupLocation, 
+      completionHandler: { (placemarks :[CLPlacemark]?,errorOrNil : NSError?) -> Void in
+        
+        if(errorOrNil != nil || placemarks == nil)
+        {
+          //Error
+          self.showCancelUIAlert("Error", 
+            titleComment   : "Group Creation Error", 
+            message        : "Failed Verifying the Location",
+            messageComment : "Wrong Location")
+          return
+        }
+        else
+        {
+          //Success 
+          self.saveGroup()
+        } 
+    })
   }  
 }
 

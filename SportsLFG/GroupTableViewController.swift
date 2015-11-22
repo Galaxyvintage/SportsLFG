@@ -132,6 +132,7 @@ class GroupTableViewController: UITableViewController {
     cell.CityLabel.text       = group.city
     cell.AddressLabel.text    = group.address
     cell.MaxNumberLabel.text  = String(group.currentSize!)+"/"+String(group.maxSize!)
+    
     //cell.SportTypeImageView.image using switch, need to further change
     switch group.sport!{
     case "bB":
