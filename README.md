@@ -15,11 +15,13 @@
 #####VERSION 2.0
 
 - [ ] 1.  Password Reset
-- [x] 2.  Edit Profile
+- [x] 2.  Profile Editing
 - [x] 3.  Map View for Groups
-- [x] 4.  Search By Category
+- [x] 4.  Searching by Category
 - [ ] 5.  Group Deletion
-- [x] 6.  Business Logics for database collections 
+- [x] 6.  Business Logics for Database Collections in Kinvey 
+- [x] 7.  Taking Profile Pictures  
+
 
 #####VERSION 3.0
 
