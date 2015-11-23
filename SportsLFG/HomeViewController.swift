@@ -9,59 +9,148 @@ import Foundation
 
 class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPositioningDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
-    //MARK:Properties
-    @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var PhotoImageView: UIImageView!
+  //MARK:Properties
+  @IBOutlet weak var navigationBar: UINavigationBar!
+  @IBOutlet weak var PhotoImageView: UIImageView!
+  
+  var parent :  MainCVController!  
+  var imageCache : NSCache!
+  
+  
+  override func viewDidLoad() 
+  { 
+    super.viewDidLoad()
+    self.navigationBar.delegate = self
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationBar.delegate = self
+    //Use the SharedImageCache singleton class to store profile images 
+    imageCache = SharedImageCache.ImageCache.imageCache
+  }
+  
+  override func viewDidAppear(animated : Bool) 
+  {
+    super.viewDidAppear(animated)
+    
+    
+    let image = imageCache.objectForKey("myImage") as? UIImage
+    
+    if(image != nil)//image is in the cache
+    {
+      self.PhotoImageView.image = image
     }
-    
-    ////////////////////
-    //Delegate Methods//
-    ////////////////////
-    
-    /*UIBar*/
-    func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
-        return UIBarPosition.TopAttached
+    else//the image is not in the cache
+    {
+      let currentUser = KCSUser.activeUser()
+      
+      //Download the profile image if it exists 
+      KCSFileStore.downloadDataByName(
+        (currentUser.userId)!,
+        completionBlock: { (downloadedResources: [AnyObject]!, error: NSError!) -> Void in
+          //returned data array is empty
+          if(downloadedResources.count == 0)
+          {
+            return
+          }
+          else if (error == nil)
+          {
+            let file = downloadedResources[0] as! KCSFile
+            let fileData = file.data
+            var outputObject: NSObject! = nil
+            if file.mimeType.hasPrefix("text") 
+            {
+              outputObject = NSString(data: fileData, encoding: NSUTF8StringEncoding)
+            } 
+            else if file.mimeType.hasPrefix("image/jpeg") 
+            {
+              //save the downloaded image to the NSCache
+              outputObject = UIImage(data: fileData)
+              self.PhotoImageView.image = outputObject as? UIImage
+              self.imageCache.setObject(outputObject, forKey: "myImage") 
+            }
+            NSLog("downloaded: %@", outputObject)
+          } 
+          else 
+          {
+            NSLog("Got an error: %@", error)
+          }
+        },
+        progressBlock: nil
+      )
     }
+  }
+  
+  ////////////////////
+  //Delegate Methods//
+  ////////////////////
+  
+  /*UIBar*/
+  func positionForBar(bar: UIBarPositioning) -> UIBarPosition 
+  {
+    return UIBarPosition.TopAttached
+  }
+  
+  // MARK: UIImagePickerControllerDelegate
+  func imagePickerControllerDidCancel(picker: UIImagePickerController) 
+  {
+    // Dismiss the picker if the user canceled.
+    dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) 
+  {
+    // The info dictionary contains multiple representations of the image, and this uses the original.
+    let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
     
-    // MARK: UIImagePickerControllerDelegate
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        // Dismiss the picker if the user canceled.
-        dismissViewControllerAnimated(true, completion: nil)
-    }
+    // Set photoImageView to display the selected image.
+    PhotoImageView.image = selectedImage
+    let metadata = KCSMetadata()
+    metadata.setGloballyReadable(true)
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        // The info dictionary contains multiple representations of the image, and this uses the original.
-        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        
-        // Set photoImageView to display the selected image.
-        PhotoImageView.image = selectedImage
-        
-        // Dismiss the picker.
-        dismissViewControllerAnimated(true, completion: nil)
-    }
+    KCSFileStore.uploadData(
+      UIImageJPEGRepresentation(selectedImage,0.2),
+      options:[
+        KCSFileFileName : (KCSUser.activeUser().userId)!,
+        KCSFileMimeType : "image/jpeg",
+        KCSFileACL      : metadata
+      ],
+      completionBlock: { (uploadInfo: KCSFile!, error: NSError!) -> Void in
+        if(error == nil)
+        {
+          NSLog("Upload finished. File id='%@'", uploadInfo.fileId)
+          
+          //save the new image to the NSCache dictionary 
+          self.imageCache.setObject(selectedImage, forKey: "myImage")
+          
+          // Dismiss the picker.
+          self.dismissViewControllerAnimated(true, completion: nil)
+        }
+      }, 
+      progressBlock: nil 
+      //{ (objects: [AnyObject]!, percentComplete: Double) -> Void in
+      //progressView.progress = Float(percentComplete)
+      //}
+    )
+  }
+  
+  
+  
+  //MARK:Actions
+  @IBAction func Logout(sender: UIButton) 
+  {
+    //let LoginControllerView=self.storyboard?.instantiateViewControllerWithIdentifier("LoginNavigationController")
+    KCSUser.activeUser().logout()
+    performSegueWithIdentifier("GoBackToLogin", sender: UIButton.self)
+  }
+  
+  @IBAction func selectImageFromPhotoLibrary(sender: AnyObject) 
+  {
+    // UIImagePickerController is a view controller that lets a user pick media from their photo library.
+    let imagePickerController = UIImagePickerController()
     
-    //MARK:Actions
-    @IBAction func Logout(sender: UIButton) {
-        //let LoginControllerView=self.storyboard?.instantiateViewControllerWithIdentifier("LoginNavigationController")
-        KCSUser.activeUser().logout()
-        performSegueWithIdentifier("GoBackToLogin", sender: UIButton.self)
-    }
+    // Only allow photos to be picked, not taken.
+    imagePickerController.sourceType = .PhotoLibrary
     
-    @IBAction func selectImageFromPhotoLibrary(sender: AnyObject) {
-        // UIImagePickerController is a view controller that lets a user pick media from their photo library.
-        let imagePickerController = UIImagePickerController()
-        
-        // Only allow photos to be picked, not taken.
-        imagePickerController.sourceType = .PhotoLibrary
-        
-        // Make sure ViewController is notified when the user picks an image.
-        imagePickerController.delegate = self
-        
-        presentViewController(imagePickerController, animated: true, completion: nil)
-    }
-    
+    // Make sure ViewController is notified when the user picks an image.
+    imagePickerController.delegate = self    
+    presentViewController(imagePickerController, animated: true, completion: nil)
+  }
 }
