@@ -3,8 +3,7 @@
 // Author :Charles Li
 // Date created : Nov 03 2015
 // Date modified: Nov 20 2015
-// Description : This is class is used to handle personal information
-// TODO: need to implement the edit function so the users can change their info
+// Description : This is class is used to handle display of personal information.
 
 import Foundation
 

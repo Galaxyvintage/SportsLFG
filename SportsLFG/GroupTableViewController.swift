@@ -40,7 +40,7 @@ class GroupTableViewController: UITableViewController {
     {
       query = KCSQuery(onField: "category", withExactMatchForValue: "Indoor")
     }
-    else//(category == "Gym")
+    else //(category == "Gym")
     {
       query = KCSQuery(onField: "category", withExactMatchForValue: "Gym")
     }

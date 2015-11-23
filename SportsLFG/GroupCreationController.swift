@@ -88,7 +88,15 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     
     //Date and Time pickers configuration 
     
-    let currentDate = NSDate()
+    let currentDate  = NSDate()
+    
+    // Initial values for time and date
+    let dateFormatter = NSDateFormatter()
+    let timeFormatter = NSDateFormatter()
+    dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+    timeFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    self.time.text = timeFormatter.stringFromDate(currentDate)
+    self.date.text = dateFormatter.stringFromDate(currentDate)
     
     //Time 
     self.timePicker.datePickerMode = UIDatePickerMode.Time
@@ -221,32 +229,19 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   //This method dismisses keyboard by touching to anywhere on the screen
   override func touchesBegan(doubleTaps: Set<UITouch>, withEvent event: UIEvent?) {
     
-    self.rootScrollView.endEditing(true)
-  }
-  
-  
-  ///////////////////
-  //private methods//
-  ///////////////////
-  
-  //This method takes a string and shows an alert with that message
-  
-  func showCancelUIAlert(title          : String,
-    titleComment   : String,
-    message        : String,
-    messageComment : String)
-  {
-    let alert = UIAlertController(
-      title  : NSLocalizedString(title, comment: titleComment),
-      message: NSLocalizedString(message, comment: messageComment),
-      preferredStyle : UIAlertControllerStyle.Alert
-    )
+    /*PickerView Delegates*/
     
-    let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-    alert.addAction(cancelAction)
-    presentViewController(alert, animated: true , completion: nil)
-    return
+    //This method is used to specify the number of cloumns in the picker elemnt
+    func numberOfComponentsInPickerView(pickerView :UIPickerView) -> Int
+    {
+        return 1
+    }
     
+    //This method is used to specify the number of rows of data in the UIPickerView element
+    func pickerView(pickerView : UIPickerView, numberOfRowsInComponent component: Int)->Int
+    {
+        return categoryArr.count
+    }
     
   }
   
@@ -260,33 +255,125 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
         KCSStoreKeyCollectionTemplateClass : Group.self]
     )
     
-    let storeInGroup = KCSAppdataStore.storeWithOptions(
-      [KCSStoreKeyCollectionName          : "InGroups", 
-        KCSStoreKeyCollectionTemplateClass : inGroup.self])
     
     
+    func pickerView(pickerView : UIPickerView, didSelectRow row : Int, inComponent component : Int)
+    {
+        category = categoryArr[row]
+    }
     
     //This creates a query that checks whether the group already exists 
     let query = KCSQuery(onField: "nameLowercase", withExactMatchForValue: currentName.text!.lowercaseString)
     
-    //execute the query 
-    storeGroup.countWithQuery(query) { (count :UInt, errorOrNil :NSError!) -> Void in
-      
-      //if the group already exists
-      if(count > 0)
-      {
+    /*TextField Delegates*/
+    
+    //This method  dismisses keyboard on return key press
+    func textFieldShouldReturn(textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        self.view.endEditing(true)
+        return false
+    }
+    
+    //This method dismisses keyboard by touching to anywhere on the screen
+    override func touchesBegan(doubleTaps: Set<UITouch>, withEvent event: UIEvent?) {
         
-        //create an alert to tell user there is an error
+        self.rootScrollView.endEditing(true)
+    }
+    
+    
+    ///////////////////
+    //private methods//
+    ///////////////////
+    
+    //This method takes a string and shows an alert with that message
+    
+    func showCancelUIAlert(title          : String,
+        titleComment   : String,
+        message        : String,
+        messageComment : String)
+    {
         let alert = UIAlertController(
-          title  : NSLocalizedString("Error", comment: "error"),
-          message: "Group already exists",
-          preferredStyle: UIAlertControllerStyle.Alert  
+            title  : NSLocalizedString(title, comment: titleComment),
+            message: NSLocalizedString(message, comment: messageComment),
+            preferredStyle : UIAlertControllerStyle.Alert
+        )
+        
+        let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(cancelAction)
+        presentViewController(alert, animated: true , completion: nil)
+        return
+        
+        
+    }
+    
+    // function to cancel when group creation has an error
+    func cancelSave()
+    {
+        
+        let alert = UIAlertController(
+            
         )
         let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
         alert.addAction(cancelAction)
         self.presentViewController(alert, animated: true, completion: nil)
-        return 
-      }
+        return
+    }
+    
+    //
+    func saveGroup()
+    {
+        //Kinvey API method that creates a store object
+        //so we can save entities to a specific collection
+        let storeGroup = KCSAppdataStore.storeWithOptions(
+            [KCSStoreKeyCollectionName : "Groups",
+                KCSStoreKeyCollectionTemplateClass : Group.self]
+        )
+        
+        let storeInGroup = KCSAppdataStore.storeWithOptions(
+            [KCSStoreKeyCollectionName          : "InGroups",
+                KCSStoreKeyCollectionTemplateClass : inGroup.self])
+        
+        
+        
+        //This creates a query that checks whether the item already exists by
+        //changing the user input to all lowercases and comparing it to the database
+        let query = KCSQuery(onField: "nameLowercase", withExactMatchForValue: currentName.text!.lowercaseString)
+        
+        //execute the query
+        storeGroup.countWithQuery(query) { (count :UInt, errorOrNil :NSError!) -> Void in
+            
+            //if the group already exists
+            if(count > 0)
+            {
+                
+                //create an alert to tell user there is an error
+                let alert = UIAlertController(
+                    title  : NSLocalizedString("Error", comment: "error"),
+                    message: "Group already exists",
+                    preferredStyle: UIAlertControllerStyle.Alert
+                )
+                // how do i avoid duplicating this?
+                let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+                alert.addAction(cancelAction)
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+            
+            if(Int(self.maxSize.text!)! <= 1)
+            {
+                //Prevent user from making a group with size of 1 or less
+                let alert = UIAlertController(
+                    title : NSLocalizedString("Error", comment: "error"),
+                    message: "Group size must be at least 2",
+                    preferredStyle: UIAlertControllerStyle.Alert
+                )
+                // ...
+                let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+                alert.addAction(cancelAction)
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+        
       
       
       //The following 4 lines get the current date of the system
