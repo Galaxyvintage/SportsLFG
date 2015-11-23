@@ -5,8 +5,7 @@
 // Date edited   : Nov.11 2015
 // Description   : This class is used to map the properties correctly to the
 //                 inGroups collection in our Kinvey's database
-// TODO: this is unfinished and will not be used in version 1.0
-//
+
 
 import Foundation
 

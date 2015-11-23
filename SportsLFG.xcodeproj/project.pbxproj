@@ -21,6 +21,8 @@
 		632290321BE0C15E0097B93B /* MainCVSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322902B1BE0C15E0097B93B /* MainCVSegue.swift */; };
 		632290341BE0C15E0097B93B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322902D1BE0C15E0097B93B /* RegisterViewController.swift */; };
 		632290371BE0C1730097B93B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 632290351BE0C1730097B93B /* Main.storyboard */; };
+		633320F91C028F860048FD4B /* SharedImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633320F81C028F860048FD4B /* SharedImageCache.swift */; };
+		633320FA1C028F860048FD4B /* SharedImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633320F81C028F860048FD4B /* SharedImageCache.swift */; };
 		637FFA7F1BF9661300A06686 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637FFA7E1BF9661300A06686 /* EditProfileController.swift */; };
 		63C0350B1BE485E700BAFA65 /* enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0350A1BE485E700BAFA65 /* enum.swift */; };
 		63C0350F1BE4ABF400BAFA65 /* LFGViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0350E1BE4ABF400BAFA65 /* LFGViewController.swift */; };
@@ -63,6 +65,7 @@
 		6322902B1BE0C15E0097B93B /* MainCVSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainCVSegue.swift; path = SportsLFG/MainCVSegue.swift; sourceTree = "<group>"; };
 		6322902D1BE0C15E0097B93B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		632290361BE0C1730097B93B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		633320F81C028F860048FD4B /* SharedImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedImageCache.swift; sourceTree = "<group>"; };
 		637FFA7E1BF9661300A06686 /* EditProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfileController.swift; path = SportsLFG/EditProfileController.swift; sourceTree = "<group>"; };
 		63C0350A1BE485E700BAFA65 /* enum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enum.swift; sourceTree = "<group>"; };
 		63C0350E1BE4ABF400BAFA65 /* LFGViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFGViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 				4AC6A8621BEDD1CE004F9C7A /* Group.swift */,
 				63C0350A1BE485E700BAFA65 /* enum.swift */,
 				630431831BF0965C004B31EF /* inGroup.swift */,
+				633320F81C028F860048FD4B /* SharedImageCache.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -366,6 +370,7 @@
 				4A412ABC1BFD4CE40024C746 /* LocationViewController.swift in Sources */,
 				4AC6A8631BEDD1CE004F9C7A /* Group.swift in Sources */,
 				6322902F1BE0C15E0097B93B /* HomeViewController.swift in Sources */,
+				633320F91C028F860048FD4B /* SharedImageCache.swift in Sources */,
 				63C0350F1BE4ABF400BAFA65 /* LFGViewController.swift in Sources */,
 				4A955EF21BF0182900CDDA74 /* GroupViewController.swift in Sources */,
 				637FFA7F1BF9661300A06686 /* EditProfileController.swift in Sources */,
@@ -382,6 +387,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				633320FA1C028F860048FD4B /* SharedImageCache.swift in Sources */,
 				63D2D24C1BF031D10065C2A3 /* SportsLFGTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

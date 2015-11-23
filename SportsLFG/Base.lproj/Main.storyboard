@@ -141,6 +141,9 @@
                                                 <include reference="iah-ML-G51"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="selectImageFromPhotoLibrary:" destination="YrH-6f-Kgn" eventType="touchUpInside" id="mdA-2z-O02"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <animations/>
@@ -534,6 +537,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="PhotoImageView" destination="xr8-Do-al2" id="aQq-mt-XPn"/>
                         <outlet property="navigationBar" destination="1Wv-cF-Fuu" id="IYn-Va-Ya3"/>
                     </connections>
                 </viewController>
@@ -1768,7 +1772,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="64" y="55" width="49.5" height="19.5"/>
+                                                        <rect key="frame" x="64" y="55" width="50" height="20"/>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mpd-Ee-nox">
