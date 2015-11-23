@@ -142,7 +142,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                         preferredStyle: UIAlertControllerStyle.Alert
                     )
                     
-                    let defaultAction = UIAlertAction(title :"OK", style: UIAlertActionStyle.Default, handler: nil)
+                  let defaultAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (Default) -> Void in
+                    
+                    //pop the current view and go back to login screen
+                    self.navigationController?.popViewControllerAnimated(true)
+                  })
                     alert.addAction(defaultAction)
                     self.presentViewController(alert, animated: true , completion: nil)
                     return
