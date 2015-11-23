@@ -3,8 +3,7 @@
 // Author : Charles Li
 // Date created: Nov.03 2015
 // Date edited : Nov.20 2015
-// Description:
-// TODO: Need to implement the searching by category feature in version 2.0 in this file
+// Description: Controller for the main LFG home screen
 //
 //
 
