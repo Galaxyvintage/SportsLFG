@@ -2,9 +2,9 @@
 // File : FirstTimeUserViewController.swift
 // Author :Charles Li
 // Date created : Nov 02 2015
-// Date modified: Nov 03 2015
+// Date modified: Nov 22 2015
 // Description :  This class is used by the first time user view controller and it's for
-//                either first time users or old users that use a new device
+//                either first time users
 
 import Foundation
 

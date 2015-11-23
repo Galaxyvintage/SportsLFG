@@ -18,6 +18,8 @@ class EditProfileController : UIViewController
   @IBOutlet weak var province: UITextField!
   @IBOutlet weak var gender: UISwitch!
   
+  var delegateObject : ProfileUpdatingProtocol?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -33,8 +35,6 @@ class EditProfileController : UIViewController
   
   func BackToHome()
   {
-    sharedFlag.gotoHome = true
-
     //Dismiss order (right to left)
     //HomeView Controller<- Root View Controller
     self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
@@ -80,6 +80,7 @@ class EditProfileController : UIViewController
     currentUser.saveWithCompletionBlock { (NSarry:[AnyObject]!, errorOrNil:NSError!) -> Void in
       if (errorOrNil == nil)
       {
+        self.delegateObject?.didFinishUpdate()
         self.BackToHome()
       }
       else

@@ -51,7 +51,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="EgH-3e-E7y" kind="show" id="J67-hs-kZM"/>
+                                    <segue destination="EgH-3e-E7y" kind="presentation" identifier="EditProfile" id="J67-hs-kZM"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalCompressionResistancePriority="749" ambiguous="YES" misplaced="YES" text="Experience level()" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwz-CS-icW">
@@ -88,7 +88,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="Kx1-MM-p6K" kind="embed" id="pwd-6H-4VM"/>
+                                    <segue destination="Kx1-MM-p6K" kind="embed" identifier="EmbedProfile" id="pwd-6H-4VM"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uBE-zo-0EH">
@@ -4478,9 +4478,9 @@
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="bq1-Hu-3sX">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="gdV-pO-TYh">
                             <connections>
-                                <action selector="SaveAndBack:" destination="Fbx-dJ-L2B" id="ZFZ-9i-ucl"/>
+                                <action selector="SaveAndBack:" destination="Fbx-dJ-L2B" id="MXd-Op-Vww"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -4992,7 +4992,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
-                        <color key="barTintColor" red="1" green="0.4536918975" blue="0.56043483329999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="1" green="0.21734501340000001" blue="0.26213414540000002" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
@@ -5004,7 +5004,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GBg-s7-JhZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1344.75" y="319.875"/>
+            <point key="canvasLocation" x="-1320.75" y="310.875"/>
         </scene>
         <!--PersonalInfo Navigation Controller-->
         <scene sceneID="Ab1-oT-aZE">

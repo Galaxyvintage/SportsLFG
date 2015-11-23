@@ -13,6 +13,7 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
   @IBOutlet weak var navigationBar: UINavigationBar!
   @IBOutlet weak var PhotoImageView: UIImageView!
   
+  
   var parent :  MainCVController!  
   var imageCache : NSCache!
   
@@ -77,6 +78,27 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
     }
   }
   
+  
+  //This method prepare the segue and change the sender button's state to selected
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if(segue.identifier == "EditProfile")
+    {
+      let navigationVC = segue.destinationViewController as! UINavigationController
+      let sourceVC     = navigationVC.topViewController as! EditProfileController
+      //This sets Editing profile's delegate object to ProfileTableViewController 
+      sourceVC.delegateObject = (self.childViewControllers[0] as! ProfileTableViewController)
+    }
+    
+    if(segue.identifier == "EmbedProfile")
+    {
+      let profileTableViewController = segue.destinationViewController as! ProfileTableViewController
+      
+      self.addChildViewController(profileTableViewController)
+    }
+   
+   
+    
+  }  
   ////////////////////
   //Delegate Methods//
   ////////////////////

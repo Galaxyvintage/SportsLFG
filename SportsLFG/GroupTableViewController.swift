@@ -13,9 +13,9 @@ class GroupTableViewController: UITableViewController {
   // MARK: Properties
   
   var category : String?
-  
+  var delegateObject : GroupLoadingProtocol?
   //an empty array of Group objects
-  var groupA = [Group]()
+  var groups = [Group]()
   
   //Kinvey API method that creates a store object 
   let store = KCSAppdataStore.storeWithOptions(
@@ -69,8 +69,9 @@ class GroupTableViewController: UITableViewController {
             NSLog("newGroup's city is %@",newGroup.city!)
             NSLog("newGroup's province is %@",newGroup.province!)
             
-            self.groupA += [newGroup]  
+            self.groups += [newGroup]  
           }
+          self.delegateObject?.didFinishLoading(self.groups)
           self.tableView.reloadData()
         }
       }, 
@@ -92,7 +93,7 @@ class GroupTableViewController: UITableViewController {
   }
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return groupA.count
+    return groups.count
   }
   
   
@@ -103,7 +104,7 @@ class GroupTableViewController: UITableViewController {
     let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GroupTableViewCell
     
     // Fetches the appropriate group for the data source layout.
-    let group = groupA[indexPath.row]
+    let group = groups[indexPath.row]
     
     // Configure the cell...
     cell.NameLabel.text       = "["+group.category!+"]"+group.name!
@@ -186,7 +187,7 @@ class GroupTableViewController: UITableViewController {
       // Get the cell that generated this segue.
       if let selectedGroupCell = sender as? GroupTableViewCell {
         let indexPath = tableView.indexPathForCell(selectedGroupCell)!
-        let selectedGroup = groupA[indexPath.row]
+        let selectedGroup = groups[indexPath.row]
         groupDetailViewController.group = selectedGroup
       }
     }

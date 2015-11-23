@@ -2,10 +2,8 @@
 // File   : LFGViewController.swift
 // Author : Charles Li
 // Date created: Nov.03 2015
-// Date edited : Nov.20 2015
-// Description:
-// TODO: Need to implement the searching by category feature in version 2.0 in this file
-//
+// Date edited : Nov.22 2015
+// Description:  This class is used to search groups by category 
 //
 
 import Foundation
@@ -38,6 +36,8 @@ class LFGViewController : UIViewController, UINavigationBarDelegate,UIBarPositio
   }
   
   //MARK:Actions
+  //Following methods pass the category data to the GroupTableView 
+  //based on which button is pressed 
   
   @IBAction func All(sender: UIButton)
   {
@@ -65,11 +65,13 @@ class LFGViewController : UIViewController, UINavigationBarDelegate,UIBarPositio
     self.performSegueWithIdentifier("ShowGroups", sender: sender)
   }
   
+  
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
     if (segue.identifier == "ShowGroups") 
     {
       let navController = segue.destinationViewController as! UINavigationController
       let container = navController.viewControllers[0] as! LocationViewController
+      
       //pass the category information to the container view controller
       container.category = category
     }

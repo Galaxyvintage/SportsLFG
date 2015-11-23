@@ -8,7 +8,13 @@
 
 import Foundation
 
-class ProfileTableViewController : UITableViewController
+protocol ProfileUpdatingProtocol
+{
+  func didFinishUpdate()
+}
+
+
+class ProfileTableViewController : UITableViewController,ProfileUpdatingProtocol
 {
   
   @IBOutlet weak var name: UILabel!
@@ -19,7 +25,12 @@ class ProfileTableViewController : UITableViewController
   override func viewDidLoad() {
     
     //change the label accordingly to the user info given by the KCSUser object
-    
+    loadProfile()
+  }
+  
+  //This loads the user data from the database
+  func loadProfile()
+  {
     let currentUser = KCSUser.activeUser()
     let myName      = currentUser.getValueForAttribute("Name") as! String
     let myAge       = (currentUser.getValueForAttribute("Age") as! String)+" years old"
@@ -29,7 +40,17 @@ class ProfileTableViewController : UITableViewController
     name.text = myName
     age.text  = myAge
     location.text = myLocation
-    gender.text   = myGender
-    
+    gender.text   = myGender 
   }
+  
+  
+  ////////////////////
+  //Delegate methods//
+  ////////////////////
+  
+  func didFinishUpdate() {
+    loadProfile()
+  }
+  
+  
 }

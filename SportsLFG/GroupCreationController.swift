@@ -1,18 +1,15 @@
 //
 // File  : GroupCreationController.swift
-// Author: Charles Li
+// Author: Charles Li, Issac Qiao
 // Date created  : Nov 04 2015
-// Date modified : Nov 22 2015
-// Description : This is class is used in the group creation view controller and handles 
+// Date modified : Nov 23 2015
+// Description : This class is used in the group creation view controller and handles 
 //               group creation request
 //
 import Foundation
 import UIKit
 import CoreLocation
 
-//TODO:
-//     1. Verify user address using CLLocation manager 
-//     2. Let user pick their location using the map
 
 class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFieldDelegate,UIPickerViewDelegate
 {
@@ -53,12 +50,14 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     // Do any additional setup after loading the view, typically from a nib.
-    let doubleTaps = UITapGestureRecognizer(target: self, action: Selector("hideKeyboardInScrollView:"))
-    rootScrollView.addGestureRecognizer(doubleTaps)
-    doubleTaps.numberOfTapsRequired    = 1
-    doubleTaps.numberOfTouchesRequired = 1
+  
+    //Single tap gestureRecognizer to dismiss keyboards
+    let singleTap = UITapGestureRecognizer(target: self, action: Selector("hideKeyboardInScrollView:"))
+    rootScrollView.addGestureRecognizer(singleTap)
+    singleTap.numberOfTapsRequired    = 1
+    singleTap.numberOfTouchesRequired = 1
     
     //Register keyboard events
     let defaultCenter = NSNotificationCenter.defaultCenter()
@@ -95,6 +94,8 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.timePicker.datePickerMode = UIDatePickerMode.Time
     self.timePicker.minuteInterval = 5
     self.timePicker.setDate(currentDate, animated : true)
+    
+    //This calls the updateTime method when the value is changed 
     self.timePicker.addTarget(self, action: Selector("updateTime"), forControlEvents: UIControlEvents.ValueChanged)
     self.time.inputView = self.timePicker
     
@@ -102,6 +103,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     //Date
     self.datePicker.datePickerMode = UIDatePickerMode.Date
     self.datePicker.minimumDate = NSDate()
+    //This calls the updateDate method when the value is changed 
     self.datePicker.addTarget(self, action: Selector("updateDate"), forControlEvents: UIControlEvents.ValueChanged)
     self.date.inputView = self.datePicker
     
@@ -142,6 +144,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   
   /*Keyboard*/
   
+  //This changes the scrollview to a smaller size when the keyboard shows 
   func keyboardDidShow(keyboardNotif : NSNotification) -> Void 
   {
     //NSLog("keyboardWillShow")
@@ -159,6 +162,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     }
   }
   
+  //This changes the scrollview size back to normal 
   func keyboardDidHide(keyboardNotif : NSNotification) -> Void 
   {
     //NSLog("keyboardWillHide")
@@ -198,8 +202,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     return categoryArr[row]
   }  
   
-  
-  
+  //This method is used to assign data to the category variable based on the selected row
   func pickerView(pickerView : UIPickerView, didSelectRow row : Int, inComponent component : Int)
   {
     category = categoryArr[row]
@@ -247,7 +250,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     
   }
   
-  //
+  //This method uses Kinvey APIs to save a new group to the database
   func saveGroup()
   {
     //Kinvey API method that creates a store object 
@@ -263,8 +266,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     
     
     
-    //This creates a query that checks whether the item already exists by 
-    //changing the user input to all lowercases and comparing it to the database
+    //This creates a query that checks whether the group already exists 
     let query = KCSQuery(onField: "nameLowercase", withExactMatchForValue: currentName.text!.lowercaseString)
     
     //execute the query 
@@ -317,6 +319,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       //Optional properties 
       //
       
+      
       //This method saves the changes and uploads the newly created entity to the database
       storeGroup.saveObject(
         group, 
@@ -344,7 +347,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
           }
           else
           {
-            //save was sucessful
+            //Save was sucessful
             //TODO:bring user to their group page 
             NSLog("Successfullly saved event(id ='%@').",(objectsOrNil[0] as! NSObject).kinveyObjectId())
             
@@ -352,7 +355,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
             let currentGroupName = group.name
             
             
-            //add the user to the group 
+            //Add the user to the group 
             let userInGroup = inGroup()
             userInGroup.userId = currentUserId
             userInGroup.groupName = currentGroupName
@@ -382,9 +385,8 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
                   
                   //information must be uploadded to the InGroup relationship collection 
                   //on our backend database before the  current view disappears 
-                  let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
-                  sharedFlag.gotoLFG = true
-                  self.presentViewController(mainControllerView, animated: true,completion:nil)      
+   
+                  self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                 }
               }, 
               withProgressBlock: nil)
@@ -463,6 +465,8 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     var groupLocation = (address.text)! + "," 
     groupLocation    += (city.text)! + "," + (province.text)!
     
+    //This gets the geographic coordinates from an address string
+    //using the geocoder class and returns an alert if the address is not found 
     geocoder.geocodeAddressString(
       groupLocation, 
       completionHandler: { (placemarks :[CLPlacemark]?,errorOrNil : NSError?) -> Void in
@@ -472,7 +476,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
           //Error
           self.showCancelUIAlert("Error", 
             titleComment   : "Group Creation Error", 
-            message        : "Failed Verifying the Location",
+            message        : "Location is not valid",
             messageComment : "Wrong Location")
           return
         }
