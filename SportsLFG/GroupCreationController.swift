@@ -423,10 +423,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     NSLog("BackToLFG")
     
     //unwind back to MainCVController 
-    //set gotoLFG to true and perform segue to LFG controller
-    let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
-    sharedFlag.gotoLFG = true
-    self.presentViewController(mainControllerView, animated: true,completion:nil)      
+    self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)    
   }
   
   

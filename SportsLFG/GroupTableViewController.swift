@@ -1,10 +1,9 @@
 //
-// File  : GroupTableViewController.swift
-// Author: Aaron Cheung, Charles Li, Isaac Qiao
+// File  : LocationViewController.swift
+// Author:  Charles Li, Isaac Qiao
 // Date created  : Nov.08 2015
-// Date edited   : Nov.20 2015
-// Description :
-//
+// Date edited   : Nov.22 2015
+// Description :  
 //
 
 import UIKit
@@ -25,23 +24,7 @@ class GroupTableViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    /*
-    //testing inGroup (error)
-    //let groupId = "5640db6a035ea9491b06c2c7"
-    //store.loadObjectWithID(groupId, withCompletionBlock: { (objectsOrNil : [AnyObject]!, errorOrNil: NSError!) -> Void in
-    // if errorOrNil == nil{
-    //    let group = objectsOrNil[0] as! Group
-    //    let in_group = group.members! 
-    //    NSLog("first user Id is %@ ",(in_group[0].user?.userId)!)
-    //  }
-    
-    
-    
-    // }, withProgressBlock: nil
-    //)
-    */
-    
+
     //Determine what query we need based on the value of category 
     
     var query : KCSQuery
@@ -61,8 +44,6 @@ class GroupTableViewController: UITableViewController {
     {
       query = KCSQuery(onField: "category", withExactMatchForValue: "Gym")
     }
-    
-    
     
     //This limit the query for the first 20 objects
     //TODO: need to add a function to load more in the next version
@@ -159,20 +140,6 @@ class GroupTableViewController: UITableViewController {
   //MARK:Actions
   
   
-  //This method is called when the back button is called and brings the users 
-  //back to the LFG page
-  @IBAction func BackToLFG(sender: UIButton) {
-    NSLog("BackToLFG")
-    //unwind back to MainCVController 
-    //set gotoLFG to true and perform segue to LFG controller
-    let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
-    sharedFlag.gotoLFG = true
-    self.presentViewController(mainControllerView, animated: true,completion:nil)      
-    
-    
-  }
-  
-  
   /*
   // Override to support conditional editing of the table view.
   override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -227,6 +194,4 @@ class GroupTableViewController: UITableViewController {
       print("Adding new group.")
     }
   }
-  
-  
 }

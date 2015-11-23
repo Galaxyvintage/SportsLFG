@@ -2,10 +2,16 @@
 // File : LoginViewController.swift
 // Author : Aaron Cheung, Charles Li
 // Date created : Oct 30 2015
-// Date modified: Nov 19 2015
+// Date modified: Nov 22 2015
 // Description  : This class is used by the login view controller and handles user login requests
 
 import UIKit
+
+
+protocol DismissViewControllerProtocol
+{
+  func dismissViewController() 
+}
 
 
 class LoginViewController : UIViewController, UITextFieldDelegate
@@ -15,6 +21,7 @@ class LoginViewController : UIViewController, UITextFieldDelegate
   
   @IBOutlet weak var userEmailField: UITextField!
   @IBOutlet weak var userPasswordField: UITextField!
+  
   
   
   
@@ -28,6 +35,11 @@ class LoginViewController : UIViewController, UITextFieldDelegate
     self.userPasswordField.delegate = self
     
   }
+  
+  
+  ////////////////////
+  //Delegate methods//
+  ////////////////////
   
   //This method dismisses keyboard on return key press
   func textFieldShouldReturn(textField: UITextField) -> Bool{
@@ -48,8 +60,8 @@ class LoginViewController : UIViewController, UITextFieldDelegate
   @IBAction func userLogin(sender: UIButton) {
     let email = userEmailField.text
     let password = userPasswordField.text
-    let firstControllerView=self.storyboard?.instantiateViewControllerWithIdentifier("FirstTimeUser")
-    let mainControllerView = self.storyboard?.instantiateViewControllerWithIdentifier("MainCVController")
+    let firstViewController = self.storyboard?.instantiateViewControllerWithIdentifier("FirstTimeUser")
+    let mainViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("MainCVController") as? MainCVController
     
     KCSUser.loginWithUsername(
       email!,
@@ -76,11 +88,11 @@ class LoginViewController : UIViewController, UITextFieldDelegate
               
               //this checks whether the currentuser's name is empty or nil
               if(check == nil || check! as! String == ""){
-                self.presentViewController(firstControllerView!,animated:true, completion:nil)
+                self.presentViewController(firstViewController!,animated:true, completion:nil)
               }
               else
               {
-                self.presentViewController(mainControllerView!, animated: true, completion: nil)   
+                self.presentViewController(mainViewController!, animated: true, completion: nil)   
               }
               
             }

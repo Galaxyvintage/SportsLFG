@@ -25,13 +25,17 @@ class sharedFlag{
 }
 
 
-class MainCVController : UIViewController, UIImagePickerControllerDelegate{
+class MainCVController : UIViewController, UIImagePickerControllerDelegate
+{
   
   //MARK: Properties
-  
+
   var currentViewController: UIViewController!
   @IBOutlet var TabBarButtons: Array<UIButton>!
   @IBOutlet var CV: UIView!
+  
+  
+  
   override func viewDidLoad() {
     
     super.viewDidLoad()
@@ -57,6 +61,7 @@ class MainCVController : UIViewController, UIImagePickerControllerDelegate{
     }
   }
   
+  
   //This method prepare the segue and change the sender button's state to selected
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     
@@ -78,6 +83,7 @@ class MainCVController : UIViewController, UIImagePickerControllerDelegate{
     {
       let HVController = segue.destinationViewController as! HomeViewController
       HVController.parent = self
+ 
     }
     
     

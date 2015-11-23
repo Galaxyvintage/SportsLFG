@@ -33,11 +33,12 @@ class EditProfileController : UIViewController
   
   func BackToHome()
   {
-    let mainControllerView = self.storyboard!.instantiateViewControllerWithIdentifier("MainCVController") 
     sharedFlag.gotoHome = true
-    presentViewController(mainControllerView, animated: true,completion:nil)  
+
+    //Dismiss order (right to left)
+    //HomeView Controller<- Root View Controller
+    self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
   }
-  
   
   @IBAction func Back(sender: UIButton) {
     

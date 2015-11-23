@@ -66,10 +66,12 @@ class LFGViewController : UIViewController, UINavigationBarDelegate,UIBarPositio
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-    if (segue.identifier == "ShowGroups") {
+    if (segue.identifier == "ShowGroups") 
+    {
       let navController = segue.destinationViewController as! UINavigationController
-      let svc = navController.viewControllers[0] as! GroupTableViewController
-      svc.category = category
+      let container = navController.viewControllers[0] as! LocationViewController
+      //pass the category information to the container view controller
+      container.category = category
     }
   }
   

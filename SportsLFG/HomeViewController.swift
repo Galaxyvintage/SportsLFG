@@ -16,7 +16,6 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
   var parent :  MainCVController!  
   var imageCache : NSCache!
   
-  
   override func viewDidLoad() 
   { 
     super.viewDidLoad()
@@ -82,6 +81,7 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
   //Delegate Methods//
   ////////////////////
   
+  
   /*UIBar*/
   func positionForBar(bar: UIBarPositioning) -> UIBarPosition 
   {
@@ -125,9 +125,7 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
         }
       }, 
       progressBlock: nil 
-      //{ (objects: [AnyObject]!, percentComplete: Double) -> Void in
-      //progressView.progress = Float(percentComplete)
-      //}
+
     )
   }
   
@@ -136,9 +134,10 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
   //MARK:Actions
   @IBAction func Logout(sender: UIButton) 
   {
-    //let LoginControllerView=self.storyboard?.instantiateViewControllerWithIdentifier("LoginNavigationController")
     KCSUser.activeUser().logout()
-    performSegueWithIdentifier("GoBackToLogin", sender: UIButton.self)
+    self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    //self.dismissViewControllerAnimated(true, completion: nil)
+    //performSegueWithIdentifier("GoBackToLogin", sender: UIButton.self)
   }
   
   @IBAction func selectImageFromPhotoLibrary(sender: AnyObject) 

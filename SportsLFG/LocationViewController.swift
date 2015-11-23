@@ -13,116 +13,141 @@ import CoreLocation
 
 class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
 {
-
-    @IBOutlet weak var mapView: MKMapView!
+  
+  //MARK:Properties
+  @IBOutlet weak var mapView: MKMapView!
+  @IBOutlet weak var groupsContainer: UIView!
+  
+  var category : String!
+  let locationManager =  CLLocationManager()
+  
+  
+  //-------------------------------------------------------
+  //Kinvey API method that creates a store object
+  let store = KCSAppdataStore.storeWithOptions(
+    [KCSStoreKeyCollectionName : "Groups",
+      KCSStoreKeyCollectionTemplateClass : Group.self])
+  //-------------------------------------------------------
+  
+  
+  override func viewDidLoad() {
     
-    let locationManager =  CLLocationManager()
+    super.viewDidLoad()
+    
+    NSLog("viewDidLoad")
+    self.locationManager.delegate = self
+    
+    self.locationManager.requestWhenInUseAuthorization()
+    
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    
+    self.locationManager.startUpdatingLocation()
+    
+    self.mapView.showsUserLocation = true
     
     
     //-------------------------------------------------------
-    //Kinvey API method that creates a store object
-    let store = KCSAppdataStore.storeWithOptions(
-        [KCSStoreKeyCollectionName : "Groups",
-            KCSStoreKeyCollectionTemplateClass : Group.self])
-    //-------------------------------------------------------
+    let query = KCSQuery()
     
+    //This limit the query for the first 20 objects
+    //TODO: need to add a function to load more in the next version
+    // query.limitModifer = KCSQueryLimitModifier(limit: 20)
+    //query.skipModifier = KCSQuerySkipModifier(withcount: 20)
     
-    override func viewDidLoad() {
+    store.queryWithQuery(
+      query,
+      withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
         
-        super.viewDidLoad()
-        
-        self.locationManager.delegate = self
-        
-        self.locationManager.requestWhenInUseAuthorization()
-        
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
-        self.locationManager.startUpdatingLocation()
-        
-        self.mapView.showsUserLocation = true
-        
-        
-        //-------------------------------------------------------
-        let query = KCSQuery()
-        
-        //This limit the query for the first 20 objects
-        //TODO: need to add a function to load more in the next version
-        // query.limitModifer = KCSQueryLimitModifier(limit: 20)
-        //query.skipModifier = KCSQuerySkipModifier(withcount: 20)
-        
-        store.queryWithQuery(
-            query,
-            withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
+        NSLog("InCompletionBlock1")
+        if (errorOrNil != nil)
+        {
+          NSLog("Load Database Error")
+          print(errorOrNil.userInfo[KCSErrorCode])
+          print(errorOrNil.userInfo[KCSErrorInternalError])
+          print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
+        }
+        else if(errorOrNil == nil)
+        {
+          NSLog("error is nil")
+          
+          for testGroup in objectsOrNil
+          {
+            let newGroup = testGroup as! Group
+            
+            // here write the things about pins
+            let groupwork = newGroup
+            // map view
+            var groupLocation =  (groupwork.address)! + ","
+            groupLocation += (groupwork.city)!    + ","
+            groupLocation += (groupwork.province)!
+            NSLog(groupLocation)
+            let geocoder = CLGeocoder()
+            geocoder.geocodeAddressString(groupLocation, completionHandler: { (placemarks :[CLPlacemark]?,errorOrNil : NSError?) -> Void in
+              
+              if let firstPlacemark = placemarks?[0] {
+                let location = firstPlacemark.location!
+                let center = CLLocationCoordinate2DMake (location.coordinate.latitude, location.coordinate.longitude)
                 
-                NSLog("InCompletionBlock1")
-                if (errorOrNil != nil)
-                {
-                    NSLog("Load Database Error")
-                    print(errorOrNil.userInfo[KCSErrorCode])
-                    print(errorOrNil.userInfo[KCSErrorInternalError])
-                    print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
-                }
-                else if(errorOrNil == nil)
-                {
-                    NSLog("error is nil")
-                    
-                    for testGroup in objectsOrNil
-                    {
-                        let newGroup = testGroup as! Group
-                        
-                        // here write the things about pins
-                        let groupwork = newGroup
-                        // map view
-                        var groupLocation =  (groupwork.address)! + ","
-                        groupLocation += (groupwork.city)!    + ","
-                        groupLocation += (groupwork.province)!
-                        NSLog(groupLocation)
-                        let geocoder = CLGeocoder()
-                        geocoder.geocodeAddressString(groupLocation, completionHandler: { (placemarks :[CLPlacemark]?,errorOrNil : NSError?) -> Void in
-                            
-                            if let firstPlacemark = placemarks?[0] {
-                                let location = firstPlacemark.location!
-                                let center = CLLocationCoordinate2DMake (location.coordinate.latitude, location.coordinate.longitude)
-                                
-                                let annotation = MKPointAnnotation()
-                                annotation.coordinate = center
-                                annotation.title = (groupwork.name)!
-                                annotation.subtitle = (groupwork.sport)!
-                                self.mapView.addAnnotation(annotation)
-                            }
-                            
-                        })
-                    }
-                    
-                }
-            },
-            withProgressBlock: nil
-        )
-        //-------------------------------------------------------
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = center
+                annotation.title = (groupwork.name)!
+                annotation.subtitle = (groupwork.sport)!
+                self.mapView.addAnnotation(annotation)
+              }
+              
+            })
+          }
+          
+        }
+      },
+      withProgressBlock: nil
+    )
+    //-------------------------------------------------------
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  // MARK: - Location Delegate Methods
+  
+  func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+  {
+    let location = locations.last
     
-    // MARK: - Location Delegate Methods
+    let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
+    let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    self.mapView.setRegion(region, animated: true)
+    
+    self.locationManager.stopUpdatingLocation()
+  }
+  
+  func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
+  {
+    print("Error: " + error.localizedDescription)
+  }
+  
+  //notify the embedded segue what data category the table should retrieve 
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    if (segue.identifier == "showGroupTable") 
     {
-        let location = locations.last
-        
-        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-        
-        self.mapView.setRegion(region, animated: true)
-        
-        self.locationManager.stopUpdatingLocation()
+      let GroupTableVC = segue.destinationViewController as! GroupTableViewController
+      
+      GroupTableVC.category = self.category
     }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
-    {
-        print("Error: " + error.localizedDescription)
-    }
-    
+  }
+  
+  //MARK:Actions
+  
+  //This method is called when the back button is called and brings the users 
+  //back to the LFG page
+  
+  @IBAction func BackToLFG(sender: UIButton) 
+  {
+    self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+  }
 }
+
+
