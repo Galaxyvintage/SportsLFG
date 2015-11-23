@@ -21,6 +21,7 @@
 - [ ] 5.  Group Deletion(ver3.0)
 - [x] 6.  Business Logics for Database Collections in Kinvey 
 - [x] 7.  Taking Profile Pictures  
+- [ ] 8.  Taking Profile Pictures has some error double click will go back twice
 
 
 #####VERSION 3.0
