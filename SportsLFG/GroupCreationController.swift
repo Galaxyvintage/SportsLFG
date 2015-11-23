@@ -1,6 +1,6 @@
 //
 // File  : GroupCreationController.swift
-// Author: Charles Li, Issac Qiao
+// Author: Charles Li, Aaron Cheung, Issac Qiao
 // Date created  : Nov 04 2015
 // Date modified : Nov 23 2015
 // Description : This class is used in the group creation view controller and handles 
@@ -88,15 +88,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     
     //Date and Time pickers configuration 
     
-    let currentDate  = NSDate()
-    
-    // Initial values for time and date
-    let dateFormatter = NSDateFormatter()
-    let timeFormatter = NSDateFormatter()
-    dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-    timeFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-    self.time.text = timeFormatter.stringFromDate(currentDate)
-    self.date.text = dateFormatter.stringFromDate(currentDate)
+    let currentDate = NSDate()
     
     //Time 
     self.timePicker.datePickerMode = UIDatePickerMode.Time
@@ -186,48 +178,9 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   }
   
   
-  ////////////////////
-  //Delegate methods//
-  ////////////////////
-  
-  /*PickerView Delegates*/
-  
-  //This method is used to specify the number of cloumns in the picker elemnt 
-  func numberOfComponentsInPickerView(pickerView :UIPickerView) -> Int
-  {
-    return 1 
-  }
-  
-  //This method is used to specify the number of rows of data in the UIPickerView element 
-  func pickerView(pickerView : UIPickerView, numberOfRowsInComponent component: Int)->Int
-  {
-    return categoryArr.count 
-  } 
-  
-  //This method is used to specify the data for a specific row and specific component
-  func pickerView(pickerView : UIPickerView, titleForRow row :Int, forComponent component: Int) -> String?
-  {
-    return categoryArr[row]
-  }  
-  
-  //This method is used to assign data to the category variable based on the selected row
-  func pickerView(pickerView : UIPickerView, didSelectRow row : Int, inComponent component : Int)
-  {
-    category = categoryArr[row]
-  }
-  
-  
-  /*TextField Delegates*/
-  
-  //This method  dismisses keyboard on return key press
-  func textFieldShouldReturn(textField: UITextField) -> Bool{
-    textField.resignFirstResponder()
-    self.view.endEditing(true)
-    return false
-  }
-  
-  //This method dismisses keyboard by touching to anywhere on the screen
-  override func touchesBegan(doubleTaps: Set<UITouch>, withEvent event: UIEvent?) {
+    ////////////////////
+    //Delegate methods//
+    ////////////////////
     
     /*PickerView Delegates*/
     
@@ -243,17 +196,11 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
         return categoryArr.count
     }
     
-  }
-  
-  //This method uses Kinvey APIs to save a new group to the database
-  func saveGroup()
-  {
-    //Kinvey API method that creates a store object 
-    //so we can save entities to a specific collection
-    let storeGroup = KCSAppdataStore.storeWithOptions(
-      [KCSStoreKeyCollectionName : "Groups", 
-        KCSStoreKeyCollectionTemplateClass : Group.self]
-    )
+    //This method is used to specify the data for a specific row and specific component
+    func pickerView(pickerView : UIPickerView, titleForRow row :Int, forComponent component: Int) -> String?
+    {
+        return categoryArr[row]
+    }
     
     
     
@@ -261,9 +208,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     {
         category = categoryArr[row]
     }
-    
-    //This creates a query that checks whether the group already exists 
-    let query = KCSQuery(onField: "nameLowercase", withExactMatchForValue: currentName.text!.lowercaseString)
+
     
     /*TextField Delegates*/
     

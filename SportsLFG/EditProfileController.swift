@@ -2,7 +2,7 @@
 // File : EditProfileController.swift
 // Author :Charles Li, Aaron Cheung
 // Date created : Nov 03 2015
-// Date modified: Nov 20 2015
+// Date modified: Nov 23 2015
 // Description : This is class is used to handle personal information modification
 // 
 //
@@ -53,7 +53,6 @@ class EditProfileController : UIViewController
   @IBAction func Back(sender: UIButton) {
     
     self.BackToHome()
-    
   }
   
   
