@@ -365,6 +365,9 @@
                                         <include reference="WhX-Jp-P0n"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="showMyGroups:" destination="YrH-6f-Kgn" eventType="touchUpInside" id="xTr-y7-hdR"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NUn-52-48w">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>

@@ -169,9 +169,20 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
       self.presentingViewController?.dismissViewControllerAnimated(true, 
         completion: nil)
     }
-    //self.dismissViewControllerAnimated(true, completion: nil)
-    //performSegueWithIdentifier("GoBackToLogin", sender: UIButton.self)
   }
+  
+  @IBAction func showMyGroups(sender: UIButton) {
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  }
+  
   
   @IBAction func selectImageFromPhotoLibrary(sender: AnyObject) 
   {
