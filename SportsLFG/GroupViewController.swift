@@ -136,7 +136,7 @@ class GroupViewController: UIViewController {
             {
               let alert = UIAlertController(
                 title: NSLocalizedString("Hello", comment: "join a group"),
-                message: "looks like you are already in this group",
+                message: "It looks like you are already in this group!",
                 preferredStyle: UIAlertControllerStyle.Alert
               )
               let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)

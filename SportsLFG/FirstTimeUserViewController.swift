@@ -116,7 +116,7 @@ class FirstTimeUserViewController : UIViewController, UITextFieldDelegate{
     
     //After saving user info, the following presents the home view controller 
     
-    let mainControllerView = self.storyboard?.instantiateViewControllerWithIdentifier("HomeController")
+    let mainControllerView = self.storyboard?.instantiateViewControllerWithIdentifier("MainCVController")
     self.presentViewController(mainControllerView!, animated: true, completion: nil)              
   }
 }

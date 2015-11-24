@@ -95,8 +95,8 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
       
       self.addChildViewController(profileTableViewController)
     }
-   
-   
+    
+    
     
   }  
   ////////////////////
@@ -114,7 +114,7 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
   func imagePickerControllerDidCancel(picker: UIImagePickerController) 
   {
     // Dismiss the picker if the user canceled.
-    dismissViewControllerAnimated(true, completion: nil)
+    picker.dismissViewControllerAnimated(true, completion: nil)
   }
   
   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) 
@@ -127,6 +127,8 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
     let metadata = KCSMetadata()
     metadata.setGloballyReadable(true)
     
+    
+    //TODO:Check corner
     KCSFileStore.uploadData(
       UIImageJPEGRepresentation(selectedImage,0.2),
       options:[
@@ -143,11 +145,11 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
           self.imageCache.setObject(selectedImage, forKey: "myImage")
           
           // Dismiss the picker.
-          self.dismissViewControllerAnimated(true, completion: nil)
+          picker.dismissViewControllerAnimated(true, completion: nil)
         }
       }, 
       progressBlock: nil 
-
+      
     )
   }
   
@@ -157,13 +159,23 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
   @IBAction func Logout(sender: UIButton) 
   {
     KCSUser.activeUser().logout()
-    self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    if(self.presentingViewController?.restorationIdentifier == "FirstTimeUser")
+    {
+      self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, 
+        completion: nil)
+    }
+    else
+    {
+      self.presentingViewController?.dismissViewControllerAnimated(true, 
+        completion: nil)
+    }
     //self.dismissViewControllerAnimated(true, completion: nil)
     //performSegueWithIdentifier("GoBackToLogin", sender: UIButton.self)
   }
   
   @IBAction func selectImageFromPhotoLibrary(sender: AnyObject) 
   {
+    NSLog("select image")
     // UIImagePickerController is a view controller that lets a user pick media from their photo library.
     let imagePickerController = UIImagePickerController()
     

@@ -1,8 +1,8 @@
 //
 // File : EditProfileController.swift
-// Author :Charles Li
+// Author :Charles Li, Aaron Cheung
 // Date created : Nov 03 2015
-// Date modified: Nov 20 2015
+// Date modified: Nov 23 2015
 // Description : This is class is used to handle personal information modification
 // 
 //
@@ -23,9 +23,19 @@ class EditProfileController : UIViewController
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //add placeholder to text field 
+    //add placeholder to text field according to user's existing information
     let currentGender = KCSUser.activeUser().getValueForAttribute("Gender") as? String
+    let myName      = KCSUser.activeUser().getValueForAttribute("Name") as! String
+    let myAge       = KCSUser.activeUser().getValueForAttribute("Age") as! String
+    let myCity  = KCSUser.activeUser().getValueForAttribute("City") as! String
+    let myProvince = KCSUser.activeUser().getValueForAttribute("Province") as! String
     
+    name.text = myName
+    age.text = myAge
+    city.text = myCity
+    province.text = myProvince
+    
+    // set gender switch to correct gender
     if(currentGender == "Female")
     {
       gender.setOn(true, animated: true)
