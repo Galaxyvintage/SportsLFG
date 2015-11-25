@@ -389,16 +389,19 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
               message: "Your group has been created ",
               preferredStyle: UIAlertControllerStyle.Alert  
             )
-            let okAction = UIAlertAction(title :"Ok", style: UIAlertActionStyle.Cancel, handler: nil)
-            alert.addAction(okAction)
-            self.presentViewController(alert, animated: true, completion: { () -> Void in
+            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+              
+              //Bring user to their group 
               self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-
             })
+            
+            alert.addAction(okAction)
+            self.presentViewController(alert, animated: true, completion: nil)              
           }
         },
         
         withProgressBlock : nil)
+      
     }    
   }
   
@@ -433,7 +436,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     //unwind back to MainCVController 
     self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)    
   }
-
+  
   
   //write information to the newGroup object
   @IBAction func createGroup(sender: UIButton) {

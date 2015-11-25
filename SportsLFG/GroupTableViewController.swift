@@ -250,8 +250,21 @@ class GroupTableViewController: UITableViewController {
         let indexPath = tableView.indexPathForCell(selectedGroupCell)!
         let selectedGroup = groups[indexPath.row]
         groupDetailViewController.group = selectedGroup
+        
+        NSLog(self.category!)
+        if(self.category == "MyGroups")
+        {
+          NSLog("Leave")
+          groupDetailViewController.UIBarButtonItemTitle = "Leave"
+        }
+        else
+        {
+          NSLog("Join")
+          groupDetailViewController.UIBarButtonItemTitle = "Join"
+        }
       }
     }
+      
     else if segue.identifier == "AddGroup" {
       print("Adding new group.")
     }

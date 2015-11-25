@@ -27,11 +27,11 @@
 #####VERSION 3.0
 - [ ] 1. Search Group by Current Location
 - [ ] 2. HealthKit(Energy Drink Record)
-- [ ] 3. MyGroup
+- [x] 3. MyGroup
 - [ ] 4. Arbitrary sports in group creation
 - [ ] 5. GroupMembers Info in Group View
 - [ ] 6. HealthKit(Energy Drink Record)
-- [ ] 7. Leaving/Deleting Group
+- [x] 7. Leaving/Deleting Group
 - [ ] 8. Not loading groups in the past 
 - [ ] 9. Password Reset
 

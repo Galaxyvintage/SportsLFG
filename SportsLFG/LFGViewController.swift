@@ -74,6 +74,7 @@ class LFGViewController : UIViewController, UINavigationBarDelegate,UIBarPositio
       
       //pass the category information to the container view controller
       container.category = category!
+      
     }
   }
   
