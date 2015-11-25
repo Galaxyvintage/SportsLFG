@@ -73,7 +73,7 @@ class LFGViewController : UIViewController, UINavigationBarDelegate,UIBarPositio
       let container = navController.viewControllers[0] as! LocationViewController
       
       //pass the category information to the container view controller
-      container.category = category
+      container.category = category!
     }
   }
   

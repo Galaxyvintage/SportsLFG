@@ -12,75 +12,136 @@ class GroupTableViewController: UITableViewController {
   
   // MARK: Properties
   
-  var category : String?
+  var category :String?
+  
   var delegateObject : GroupLoadingProtocol?
   //an empty array of Group objects
   var groups = [Group]()
   
-  //Kinvey API method that creates a store object 
-  let store = KCSAppdataStore.storeWithOptions(
+  //Kinvey API methods that create store objects for 
+  //Group collection & InGroup collection
+  let storeGroup = KCSAppdataStore.storeWithOptions(
     [KCSStoreKeyCollectionName : "Groups", 
       KCSStoreKeyCollectionTemplateClass : Group.self])
   
+  let storeInGroup = KCSAppdataStore.storeWithOptions(
+    [KCSStoreKeyCollectionName : "InGroups", 
+      KCSStoreKeyCollectionTemplateClass : inGroup.self])
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     //Determine what query we need based on the value of category 
     
     var query : KCSQuery
-    if(category == "All")
-    {
-      query = KCSQuery()
-    }
-    else if( category == "Outdoor")
-    {
-      query = KCSQuery(onField: "category", withExactMatchForValue: "Outdoor")
-    }
-    else if( category == "Indoor")
-    {
-      query = KCSQuery(onField: "category", withExactMatchForValue: "Indoor")
-    }
-    else //(category == "Gym")
-    {
-      query = KCSQuery(onField: "category", withExactMatchForValue: "Gym")
-    }
     
-    //This limit the query for the first 20 objects
-    //TODO: need to add a function to load more in the next version
-    // query.limitModifer = KCSQueryLimitModifier(limit: 20)
-    //query.skipModifier = KCSQuerySkipModifier(withcount: 20)
-    
-    store.queryWithQuery(
-      query, 
-      withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
-        
-        NSLog("InCompletionBlock")
-        if(errorOrNil == nil)
-        {
-          NSLog("error is nil")
+    if(category == "MyGroups")
+    {
+      let currentUserId = KCSUser.activeUser().userId
+      var groupNames = [String]()
+      
+      query = KCSQuery(onField:"user",withExactMatchForValue:currentUserId)
+      
+      //get all the groupNames the currentUser is in
+      storeInGroup.queryWithQuery(
+        query, 
+        withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
           
-          for testGroup in objectsOrNil 
+          if(errorOrNil != nil)
           {
-            let newGroup = testGroup as! Group
-            
-            //the following 4 log statements are for testing purposes 
-            NSLog("newGroup's name is %@",newGroup.name!)
-            NSLog("newGroup's sport is %@",newGroup.sport!)
-            NSLog("newGroup's city is %@",newGroup.city!)
-            NSLog("newGroup's province is %@",newGroup.province!)
-            
-            self.groups += [newGroup]  
+            return//error TODO make an alert windows   
           }
-          self.delegateObject?.didFinishLoading(self.groups)
-          self.tableView.reloadData()
-        }
-      }, 
-      withProgressBlock: nil
-    )
-    
-    
+          else if(objectsOrNil != nil)
+          {
+            for new_inGroup in objectsOrNil
+            {
+              let new_inGroup = new_inGroup as! inGroup
+              groupNames.append(new_inGroup.groupName!)
+            }
+            
+            query = KCSQuery(onField: "name", usingConditional: .KCSIn, forValue: groupNames)
+            
+            self.storeGroup.queryWithQuery(
+              query, 
+              withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
+                
+                NSLog("InCompletionBlock")
+                if(errorOrNil != nil)
+                {
+                  return //error TODO make an alert windows  
+                }
+                else if(objectsOrNil != nil)
+                {
+                  NSLog("error is nil")
+                  
+                  for testGroup in objectsOrNil 
+                  {
+                    let newGroup = testGroup as! Group
+                    self.groups += [newGroup]  
+                  }
+                  self.delegateObject?.didFinishLoading(self.groups)
+                  self.tableView.reloadData()
+                } 
+              },
+              withProgressBlock: nil)//End Inner Query
+          }
+        }, 
+        withProgressBlock: nil)//End Out Query
+    }
+    else
+    {
+      
+      if(category == "All")
+      {
+        query = KCSQuery()
+      }
+      else if( category == "Outdoor")
+      {
+        query = KCSQuery(onField: "category", withExactMatchForValue: "Outdoor")
+      }
+      else if( category == "Indoor")
+      {
+        query = KCSQuery(onField: "category", withExactMatchForValue: "Indoor")
+      }
+      else //(category == "Gym")
+      {
+        query = KCSQuery(onField: "category", withExactMatchForValue: "Gym")
+      }
+      //This limit the query for the first 20 objects
+      //TODO: need to add a function to load more in the next version
+      // query.limitModifer = KCSQueryLimitModifier(limit: 20)
+      //query.skipModifier = KCSQuerySkipModifier(withcount: 20)
+      
+      storeGroup.queryWithQuery(
+        query, 
+        withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
+          
+          NSLog("InCompletionBlock")
+          if(errorOrNil == nil)
+          {
+            NSLog("error is nil")
+            
+            for testGroup in objectsOrNil 
+            {
+              let newGroup = testGroup as! Group
+              
+              //the following 4 log statements are for testing purposes 
+              NSLog("newGroup's name is %@",newGroup.name!)
+              NSLog("newGroup's sport is %@",newGroup.sport!)
+              NSLog("newGroup's city is %@",newGroup.city!)
+              NSLog("newGroup's province is %@",newGroup.province!)
+              
+              self.groups += [newGroup]  
+            }
+            self.delegateObject?.didFinishLoading(self.groups)
+            self.tableView.reloadData()
+          }
+        }, 
+        withProgressBlock: nil
+      )
+    }
   }
-  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.

@@ -29,7 +29,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var groupsContainer: UIView!
   
-  var category : String!
+  var category = "MyGroups"
   let locationManager =  CLLocationManager()
   
   override func viewDidLoad() {

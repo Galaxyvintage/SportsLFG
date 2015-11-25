@@ -132,6 +132,7 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
     KCSFileStore.uploadData(
       UIImageJPEGRepresentation(selectedImage,0.2),
       options:[
+        KCSFileId       : (KCSUser.activeUser().userId)! ,
         KCSFileFileName : (KCSUser.activeUser().userId)!,
         KCSFileMimeType : "image/jpeg",
         KCSFileACL      : metadata
@@ -174,13 +175,10 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
   @IBAction func showMyGroups(sender: UIButton) {
     
     
+    let groupNavigationVC  = self.storyboard?.instantiateViewControllerWithIdentifier("GroupNavigationVC") as? UINavigationController
+
     
-    
-    
-    
-    
-    
-    
+    self.presentViewController(groupNavigationVC!, animated: true, completion: nil)
   }
   
   

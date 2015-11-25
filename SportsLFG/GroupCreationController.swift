@@ -384,6 +384,17 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
             //TODO:bring user to their group page 
             NSLog("Successfullly saved event(id ='%@').",(objectsOrNil[0] as! NSObject).kinveyObjectId())
             
+            let alert = UIAlertController(
+              title  : NSLocalizedString("Success", comment: "group is successfully created "),
+              message: "Your group has been created ",
+              preferredStyle: UIAlertControllerStyle.Alert  
+            )
+            let okAction = UIAlertAction(title :"Ok", style: UIAlertActionStyle.Cancel, handler: nil)
+            alert.addAction(okAction)
+            self.presentViewController(alert, animated: true, completion: { () -> Void in
+              self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+
+            })
           }
         },
         
@@ -422,9 +433,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     //unwind back to MainCVController 
     self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)    
   }
-  
-  
-  
+
   
   //write information to the newGroup object
   @IBAction func createGroup(sender: UIButton) {
