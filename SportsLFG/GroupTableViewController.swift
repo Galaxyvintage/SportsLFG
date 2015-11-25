@@ -131,6 +131,7 @@ class GroupTableViewController: UITableViewController {
               NSLog("newGroup's sport is %@",newGroup.sport!)
               NSLog("newGroup's city is %@",newGroup.city!)
               NSLog("newGroup's province is %@",newGroup.province!)
+              NSLog("newGroup's desc is %@",newGroup.detail!)
               
               self.groups += [newGroup]  
             }
@@ -168,7 +169,7 @@ class GroupTableViewController: UITableViewController {
     let group = groups[indexPath.row]
     
     // Configure the cell...
-    cell.NameLabel.text       = "["+group.category!+"]"+group.name!
+    cell.NameLabel.text       = "["+group.category!+"] "+group.name!
     cell.StartDateLabel.text  = group.startDate
     cell.StartTimeLabel.text  = group.startTime
     cell.ProvienceLabel.text  = group.province

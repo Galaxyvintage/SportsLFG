@@ -28,6 +28,7 @@ class Group : NSObject{
   var province   : String?
   var geocoord   : CLLocation?
   var metadata   : KCSMetadata? //Kinvey metadata, optional
+  var detail     : String?
   
   //This function provided by Kinvey API maps the variables above to the back-end database schema
   override func hostToKinveyPropertyMapping() -> [NSObject : AnyObject]! {

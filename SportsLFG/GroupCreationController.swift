@@ -90,6 +90,14 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     
     let currentDate = NSDate()
     
+    // Initial values for time and date
+    let dateFormatter = NSDateFormatter()
+    let timeFormatter = NSDateFormatter()
+    dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+    timeFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    self.time.text = timeFormatter.stringFromDate(currentDate)
+    self.date.text = dateFormatter.stringFromDate(currentDate)
+    
     //Time 
     self.timePicker.datePickerMode = UIDatePickerMode.Time
     self.timePicker.minuteInterval = 5
@@ -106,6 +114,8 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     //This calls the updateDate method when the value is changed 
     self.datePicker.addTarget(self, action: Selector("updateDate"), forControlEvents: UIControlEvents.ValueChanged)
     self.date.inputView = self.datePicker
+    
+    self.detail!.text = "Come join in!"
     
   }
   
@@ -351,6 +361,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       
       //Optional properties 
       //
+      //group.detail        = self.detail!.text
       
       
       //This method saves the changes and uploads the newly created entity to the database
@@ -467,6 +478,9 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       alert.addAction(cancelAction)
       presentViewController(alert, animated: true , completion: nil)
       return
+    }
+    if (detail!.text?.isEmpty   == nil) {
+        detail!.text = "Come join in!"
     }
     
     var groupLocation = (address.text)! + "," 

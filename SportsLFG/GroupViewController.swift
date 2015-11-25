@@ -33,8 +33,10 @@ class GroupViewController: UIViewController {
   @IBOutlet weak var AddressLabel: UILabel!
   @IBOutlet weak var MaxNumLabel: UILabel!
   
+  //@IBOutlet weak var DetailView: UITextView!
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     
     let RightButtonItem = UIBarButtonItem(title: UIBarButtonItemTitle, style: UIBarButtonItemStyle.Plain, target: self, action: Selector("LeftBarButtonPressed:"))
     
@@ -57,6 +59,16 @@ class GroupViewController: UIViewController {
       CityLabel.text        = groupwork.city
       AddressLabel.text     = groupwork.address
       MaxNumLabel.text      = String(groupwork.maxSize)
+        /*
+        NSLog("starting description stuff")
+        if (groupwork.detail!.isEmpty)
+        {
+            // insert a default description or leave blank or afafaf
+            DetailView.text = "Come join in!"
+        } else {
+            DetailView.text = groupwork.detail
+        }
+        */
       
       // map view
       var groupLocation =  (groupwork.address)! + ","
@@ -99,6 +111,7 @@ class GroupViewController: UIViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+    
   
   
   //This method adds the current user to the group
