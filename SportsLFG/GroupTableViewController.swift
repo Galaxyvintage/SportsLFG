@@ -2,7 +2,7 @@
 // File  : LocationViewController.swift
 // Author:  Charles Li, Isaac Qiao
 // Date created  : Nov.08 2015
-// Date edited   : Nov.22 2015
+// Date edited   : Nov.25 2015
 // Description :  
 //
 
@@ -29,10 +29,11 @@ class GroupTableViewController: UITableViewController {
       KCSStoreKeyCollectionTemplateClass : inGroup.self])
   
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    //Determine what query we need based on the value of category 
+  
+  override func viewDidAppear(animated: Bool) {
+
+    super.viewDidAppear(animated)
+    self.groups.removeAll()
     
     var query : KCSQuery
     
@@ -141,7 +142,20 @@ class GroupTableViewController: UITableViewController {
         withProgressBlock: nil
       )
     }
+    
+    
+    
+    
   }
+  
+    
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+  
+  
+  
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.

@@ -110,11 +110,15 @@ class GroupViewController: UIViewController {
       [KCSStoreKeyCollectionName          : "InGroups",
         KCSStoreKeyCollectionTemplateClass : inGroup.self])
     
-    let query = KCSQuery(onField:"user", withExactMatchForValue: currentUserId)
+    
+    let nameQuery  = KCSQuery(onField:"user", withExactMatchForValue: currentUserId)
+    let groupQuery = KCSQuery(onField:"group",withExactMatchForValue: currentGroupName)
+    
+    let combinedQuery = nameQuery.queryByJoiningQuery(groupQuery, usingOperator: KCSQueryConditional.KCSAnd)
     
     //query to check whether the user is already in the group
     store.queryWithQuery(
-      query,
+      combinedQuery,
       withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in
         
         if(errorOrNil != nil)
@@ -126,7 +130,7 @@ class GroupViewController: UIViewController {
           print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
           return
         }
-        else if(objectsOrNil != nil)
+        else if(objectsOrNil == nil)
         {
           //add the user to the group
           let userInGroup = inGroup()
@@ -163,7 +167,19 @@ class GroupViewController: UIViewController {
             }, 
             withProgressBlock: nil)
         }
-        
+        else//(objectOrNil != nil)
+        {
+          let alert = UIAlertController(
+            title: NSLocalizedString("Sorry", comment: "error"),
+            message: "It looks like you are already in this group",
+            preferredStyle: UIAlertControllerStyle.Alert
+          )
+          let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+          alert.addAction(cancelAction)
+          self.presentViewController(alert, animated: true , completion: nil)
+          return
+          
+        }
       },
       withProgressBlock: nil)
   }
@@ -181,7 +197,7 @@ class GroupViewController: UIViewController {
     let groupQuery = KCSQuery(onField:"group",withExactMatchForValue: currentGroupName)
     
     let combinedQuery = nameQuery.queryByJoiningQuery(groupQuery, usingOperator: KCSQueryConditional.KCSAnd)
-
+    
     
     store.removeObject(
       combinedQuery, 
@@ -192,7 +208,7 @@ class GroupViewController: UIViewController {
           print(errorOrNil.userInfo[KCSErrorCode])
           print(errorOrNil.userInfo[KCSErrorInternalError])
           print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
-
+          
           return//error, deletion failed
         }
           
@@ -202,8 +218,12 @@ class GroupViewController: UIViewController {
             title: NSLocalizedString("Hello", comment: "successful deletion"),
             message: "You have left this group",
             preferredStyle: UIAlertControllerStyle.Alert)
-          let cancelAction = UIAlertAction(title :"Ok", style: UIAlertActionStyle.Cancel, handler: nil)
-          alert.addAction(cancelAction)
+          
+          let okAction = UIAlertAction(title :"Ok", style: UIAlertActionStyle.Cancel, handler: {(cancelAction : UIAlertAction)-> Void in
+            
+            self.navigationController?.popViewControllerAnimated(true)
+          })
+          alert.addAction(okAction)
           self.presentViewController(alert, animated: true , completion: nil)
           
         }
