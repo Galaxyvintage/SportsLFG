@@ -289,7 +289,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   }
   
   //
-  func saveGroup()
+  func saveGroup(groupLocation : CLLocation)
   {
     //Kinvey API method that creates a store object
     //so we can save entities to a specific collection
@@ -370,7 +370,9 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       group.address       = self.address.text! 
       group.city          = self.city.text!
       group.province      = self.province.text!
+      group.geoLocation      = groupLocation
       group.metadata?.setGloballyWritable(false)
+      
       
       //Optional properties
       if(self.detail!.text != nil)
@@ -513,7 +515,9 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
         else
         {
           //Success 
-          self.saveGroup()
+          let firstPlacemark = placemarks?[0]
+          let location = (firstPlacemark!.location)!
+          self.saveGroup(location)
         } 
     })
   }  

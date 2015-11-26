@@ -26,7 +26,7 @@ class Group : NSObject{
   var address    : String?
   var city       : String?
   var province   : String?
-  var geocoord   : CLLocation?
+  var geoLocation: CLLocation?
   var metadata   : KCSMetadata? //Kinvey metadata, optional
   var detail     : String?
   
@@ -49,7 +49,7 @@ class Group : NSObject{
       "province" : "province",
       "detail"   : "detail",
       "metadata" : KCSEntityKeyMetadata,
-      "geocoord" : KCSEntityKeyGeolocation //geo location
+      "geoLocation" : KCSEntityKeyGeolocation //geo location
     ]
   }
   
