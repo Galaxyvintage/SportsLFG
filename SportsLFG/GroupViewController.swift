@@ -234,16 +234,15 @@ class GroupViewController: UIViewController {
           let okAction = UIAlertAction(title :"Ok", style: UIAlertActionStyle.Cancel, handler: {(cancelAction : UIAlertAction)-> Void in
             
             self.navigationController?.popViewControllerAnimated(true)
+            
+            
+            
           })
           alert.addAction(okAction)
           self.presentViewController(alert, animated: true , completion: nil)
-          
         }
-        
       }, withProgressBlock: nil)
-    
   }
-  
   
   //This method gets called when the right bar button is pressed
   func LeftBarButtonPressed(sender : UIBarButtonItem) {

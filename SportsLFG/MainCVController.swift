@@ -38,7 +38,7 @@ class MainCVController : UIViewController, UIImagePickerControllerDelegate
   //This method prepare the segue and change the sender button's state to selected
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     
-    let availableIdentifiers = ["Home","LFG","Team/Group"]
+    let availableIdentifiers = ["Home","LFG"]
     
     if(availableIdentifiers.contains(segue.identifier!)) {
       

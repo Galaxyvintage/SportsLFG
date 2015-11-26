@@ -11,19 +11,25 @@ import Foundation
 class LFGViewController : UIViewController, UINavigationBarDelegate,UIBarPositioningDelegate
 {
   //MARK:Properties
-  @IBOutlet weak var navigationBar: UINavigationBar!
-  
   var category : String?
   
+  @IBOutlet weak var navigationBar: UINavigationBar!
   
-  
+  @IBOutlet weak var All: UIButton!
+  @IBOutlet weak var Outdoor: UIButton!
+  @IBOutlet weak var Indoor: UIButton!
+  @IBOutlet weak var Gym: UIButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationBar.delegate = self
+    
+    All.layer.cornerRadius     = 10
+    Outdoor.layer.cornerRadius = 10
+    Indoor.layer.cornerRadius  = 10
+    Gym.layer.cornerRadius     = 10
+  
   }
-  
-  
   
   ////////////////////
   //Delegate methods//
@@ -64,7 +70,6 @@ class LFGViewController : UIViewController, UINavigationBarDelegate,UIBarPositio
     category = "Gym"
     self.performSegueWithIdentifier("ShowGroups", sender: sender)
   }
-  
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
     if (segue.identifier == "ShowGroups") 

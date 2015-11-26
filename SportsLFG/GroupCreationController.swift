@@ -89,10 +89,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.categoryPickerView.selectRow(0, inComponent: 0, animated: true)
     self.pickerView(categoryPickerView, didSelectRow: 0, inComponent: 0)
     
-    
-    
     //Date and Time pickers configuration 
-    
     let currentDate = NSDate()
     
     // Initial values for time and date
@@ -112,10 +109,10 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.timePicker.addTarget(self, action: Selector("updateTime"), forControlEvents: UIControlEvents.ValueChanged)
     self.time.inputView = self.timePicker
     
-    
     //Date
     self.datePicker.datePickerMode = UIDatePickerMode.Date
     self.datePicker.minimumDate = NSDate()
+    
     //This calls the updateDate method when the value is changed 
     self.datePicker.addTarget(self, action: Selector("updateDate"), forControlEvents: UIControlEvents.ValueChanged)
     self.date.inputView = self.datePicker
@@ -348,8 +345,6 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
         return
       }
       
-      
-      
       //The following 4 lines get the current date of the system
       let tempDate  = NSDate()
       let formatter = NSDateFormatter()
@@ -380,7 +375,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       //Optional properties
       if(self.detail!.text != nil)
       {
-        group.detail        = self.detail!.text
+        group.detail  = self.detail!.text
       }
       
       //This method saves the changes and uploads the newly created entity to the database
@@ -421,7 +416,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
             )
             let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
               
-              //Bring user to their group 
+              //Todo:Bring user to their group 
               self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             })
             
@@ -429,7 +424,6 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
             self.presentViewController(alert, animated: true, completion: nil)              
           }
         },
-        
         withProgressBlock : nil)
       
     }    
@@ -457,8 +451,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     }
     sender.selected = true
   }
-  
-  
+
   //This methods returns back to the LFG view controller
   @IBAction func BackToLFG(sender: UIButton) {
     NSLog("BackToLFG")
@@ -467,15 +460,12 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)    
   }
   
-  
   //write information to the newGroup object
   @IBAction func createGroup(sender: UIButton) {
-    
     
     ///////////////////////
     //Validate user input//
     ///////////////////////
-    
     
     //This checks if there is any mandatory fields is missing
     if(currentName.text?.isEmpty == true ||

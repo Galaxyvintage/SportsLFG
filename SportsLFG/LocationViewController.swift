@@ -13,6 +13,8 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CoreGraphics
+
 
 //This protocol is used as a delegate to pass data back from 
 //GroupTableViewControllerto LocationViewController
@@ -35,6 +37,8 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   override func viewWillAppear(animated: Bool) {
     //before the view appears
     super.viewWillAppear(animated)
+    
+    //reload data in the  group table view controller(child view controller) 
     let groupTableVC = self.childViewControllers[0] as! GroupTableViewController
     groupTableVC.reloadGroupData()
     
@@ -48,6 +52,9 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     super.viewDidLoad()
     
     NSLog("viewDidLoad")
+  
+    self.mapView.layer.borderWidth = 1
+    
     self.locationManager.delegate = self
     
     self.locationManager.requestWhenInUseAuthorization()

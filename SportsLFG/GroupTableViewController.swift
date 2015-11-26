@@ -3,8 +3,7 @@
 // Author:  Charles Li, Isaac Qiao
 // Date created  : Nov.08 2015
 // Date edited   : Nov.25 2015
-// Description :  
-//
+// Description :  This class is responsible to show groups and locations 
 
 import UIKit
 
@@ -15,24 +14,21 @@ class GroupTableViewController: UITableViewController {
   var category :String?
   
   var delegateObject : GroupLoadingProtocol?
+  
   //an empty array of Group objects
   var groups = [Group]()
   
   //Kinvey API methods that create store objects for 
-  //Group collection & InGroup collection
+  //Group collection 
   let storeGroup = KCSAppdataStore.storeWithOptions(
     [KCSStoreKeyCollectionName : "Groups", 
       KCSStoreKeyCollectionTemplateClass : Group.self])
   
+  //InGroup collection
   let storeInGroup = KCSAppdataStore.storeWithOptions(
     [KCSStoreKeyCollectionName : "InGroups", 
       KCSStoreKeyCollectionTemplateClass : inGroup.self])
   
-  
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -42,13 +38,28 @@ class GroupTableViewController: UITableViewController {
   // MARK: - Table view data source
   
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return 1
+    return self.groups.count
+    
   }
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return groups.count
+    
+    return 1
+  }  
+  
+  override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+  {
+    let spacing = CGFloat(5)
+    return spacing
+    
   }
   
+  override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    
+    let headerView = UIView()
+    headerView.backgroundColor = UIColor.clearColor()
+    return headerView
+  }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
@@ -57,7 +68,7 @@ class GroupTableViewController: UITableViewController {
     let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GroupTableViewCell
     
     // Fetches the appropriate group for the data source layout.
-    let group = groups[indexPath.row]
+    let group = groups[indexPath.section]
     
     // Configure the cell...
     // Mandatory properties 
@@ -71,6 +82,11 @@ class GroupTableViewController: UITableViewController {
     
     // Optional properties 
     
+    
+    // rounded corners 
+    cell.layer.cornerRadius  = 10
+    cell.layer.borderWidth   = 1
+    cell.layer.masksToBounds = true
     
     //cell.SportTypeImageView.image using switch, need to further change
     switch group.sport!{
@@ -95,12 +111,13 @@ class GroupTableViewController: UITableViewController {
     return cell
   }
   
+  
+  
   //This method will be called by the viewWillAppear method in 
   //LocationViewController 
   func reloadGroupData()
   {
-    self.groups.removeAll()
-    
+    var temp_groups = [Group]()
     var query : KCSQuery
     
     if(category == "MyGroups")
@@ -108,9 +125,10 @@ class GroupTableViewController: UITableViewController {
       let currentUserId = KCSUser.activeUser().userId
       var groupNames = [String]()
       
+      //Get all the groups the current user is in from the InGroups collection
       query = KCSQuery(onField:"user",withExactMatchForValue:currentUserId)
       
-      //get all the groupNames the currentUser is in
+      //Start Outer Query
       storeInGroup.queryWithQuery(
         query, 
         withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
@@ -127,27 +145,31 @@ class GroupTableViewController: UITableViewController {
               groupNames.append(new_inGroup.groupName!)
             }
             
+            
+            //Get all the groups using the group names from the previous query         
             query = KCSQuery(onField: "name", usingConditional: .KCSIn, forValue: groupNames)
             
+            //Start Inner Query
             self.storeGroup.queryWithQuery(
               query, 
               withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
                 
-                NSLog("InCompletionBlock")
                 if(errorOrNil != nil)
                 {
-                  return //error TODO make an alert windows  
+                  return //Error TODO make an alert windows  
                 }
                 else if(objectsOrNil != nil)
-                {
-                  NSLog("error is nil")
-                  
+                { 
+                  //Success
+                  //there is at least one object 
                   for testGroup in objectsOrNil 
                   {
                     let newGroup = testGroup as! Group
-                    self.groups += [newGroup]  
+                    temp_groups += [newGroup]  
                   }
-                  self.delegateObject?.didFinishLoading(self.groups)
+                  self.groups.removeAll()
+                  self.groups = temp_groups
+                  self.delegateObject?.didFinishLoading(temp_groups)
                   self.tableView.reloadData()
                 } 
               },
@@ -174,6 +196,7 @@ class GroupTableViewController: UITableViewController {
       {
         query = KCSQuery(onField: "category", withExactMatchForValue: "Gym")
       }
+      
       //This limit the query for the first 20 objects
       //TODO: need to add a function to load more in the next version
       // query.limitModifer = KCSQueryLimitModifier(limit: 20)
@@ -184,23 +207,28 @@ class GroupTableViewController: UITableViewController {
         withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
           
           NSLog("InCompletionBlock")
-          if(errorOrNil == nil)
+          if((errorOrNil) != nil)
+          {
+            //Error TODO make an alert window 
+          }
+          else if(errorOrNil == nil)
           {
             NSLog("error is nil")
             
             for testGroup in objectsOrNil 
             {
               let newGroup = testGroup as! Group
-          
-              //the following 4 log statements are for testing purposes 
+              
+              //the following 5 log statements are for testing purposes 
               NSLog("newGroup's name is %@",newGroup.name!)
               NSLog("newGroup's sport is %@",newGroup.sport!)
               NSLog("newGroup's city is %@",newGroup.city!)
               NSLog("newGroup's province is %@",newGroup.province!)
-              //NSLog("newGroup's desc is %@",newGroup.detail!)
-              
-              self.groups += [newGroup]  
+              NSLog("newGroup's desc is %@",newGroup.detail!)
+              temp_groups += [newGroup]  
             }
+            self.groups.removeAll()
+            self.groups = temp_groups
             self.delegateObject?.didFinishLoading(self.groups)
             self.tableView.reloadData()
           }
@@ -257,7 +285,7 @@ class GroupTableViewController: UITableViewController {
       // Get the cell that generated this segue.
       if let selectedGroupCell = sender as? GroupTableViewCell {
         let indexPath = tableView.indexPathForCell(selectedGroupCell)!
-        let selectedGroup = groups[indexPath.row]
+        let selectedGroup = groups[indexPath.section]
         groupDetailViewController.group = selectedGroup
         
         NSLog(self.category!)
