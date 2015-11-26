@@ -32,6 +32,17 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   var category = "MyGroups"
   let locationManager =  CLLocationManager()
   
+  override func viewWillAppear(animated: Bool) {
+    //before the view appears
+    super.viewWillAppear(animated)
+    let groupTableVC = self.childViewControllers[0] as! GroupTableViewController
+    groupTableVC.reloadGroupData()
+    
+    //might be not necessary since it's already called in
+    //reloadGroupData()
+    groupTableVC.tableView.reloadData()
+  }
+  
   override func viewDidLoad() {
     
     super.viewDidLoad()

@@ -83,7 +83,6 @@ class GroupViewController: UIViewController {
           
           
         }
-          
         else if let firstPlacemark = placemarks?[0] {
           //print(firstPlacemark)
           let location = firstPlacemark.location!

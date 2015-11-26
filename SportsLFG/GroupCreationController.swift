@@ -377,10 +377,11 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       group.province      = self.province.text!
       group.metadata?.setGloballyWritable(false)
       
-      //Optional properties 
-      //
-      //group.detail        = self.detail!.text
-      
+      //Optional properties
+      if(self.detail!.text != nil)
+      {
+        group.detail        = self.detail!.text
+      }
       
       //This method saves the changes and uploads the newly created entity to the database
       storeGroup.saveObject(

@@ -47,6 +47,7 @@ class Group : NSObject{
       "address"  : "address",
       "city"     : "city",
       "province" : "province",
+      "detail"   : "detail",
       "metadata" : KCSEntityKeyMetadata,
       "geocoord" : KCSEntityKeyGeolocation //geo location
     ]

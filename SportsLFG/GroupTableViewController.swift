@@ -30,9 +30,75 @@ class GroupTableViewController: UITableViewController {
   
   
   
-  override func viewDidAppear(animated: Bool) {
-
-    super.viewDidAppear(animated)
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  // MARK: - Table view data source
+  
+  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    return 1
+  }
+  
+  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return groups.count
+  }
+  
+  
+  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+    // Table view cells are reused and should be dequeued using a cell identifier.
+    let cellIdentifier = "GroupTableViewCell"
+    let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GroupTableViewCell
+    
+    // Fetches the appropriate group for the data source layout.
+    let group = groups[indexPath.row]
+    
+    // Configure the cell...
+    // Mandatory properties 
+    cell.NameLabel.text       = "["+group.category!+"] "+group.name!
+    cell.StartDateLabel.text  = group.startDate
+    cell.StartTimeLabel.text  = group.startTime
+    cell.ProvienceLabel.text  = group.province
+    cell.CityLabel.text       = group.city
+    cell.AddressLabel.text    = group.address
+    cell.MaxNumberLabel.text  = String(group.currentSize!)+"/"+String(group.maxSize!)
+    
+    // Optional properties 
+    
+    
+    //cell.SportTypeImageView.image using switch, need to further change
+    switch group.sport!{
+    case "bB":
+      let photo1 = UIImage(named: "Basketball-50_blue")!
+      cell.SportTypeImageView.image = photo1
+    case "Soccer":
+      let photo1 = UIImage(named: "Football 2-50_blue")!
+      cell.SportTypeImageView.image = photo1
+    case "PingPong":
+      let photo1 = UIImage(named: "Ping Pong-50_blue")!
+      cell.SportTypeImageView.image = photo1
+    case "R":
+      let photo1 = UIImage(named: "Running-50_blue")!
+      cell.SportTypeImageView.image = photo1
+    default:
+      let photod = UIImage(named: "defaultPhoto")!
+      cell.SportTypeImageView.image = photod
+      
+    }
+    
+    return cell
+  }
+  
+  //This method will be called by the viewWillAppear method in 
+  //LocationViewController 
+  func reloadGroupData()
+  {
     self.groups.removeAll()
     
     var query : KCSQuery
@@ -92,7 +158,6 @@ class GroupTableViewController: UITableViewController {
     }
     else
     {
-      
       if(category == "All")
       {
         query = KCSQuery()
@@ -126,13 +191,13 @@ class GroupTableViewController: UITableViewController {
             for testGroup in objectsOrNil 
             {
               let newGroup = testGroup as! Group
-              
+          
               //the following 4 log statements are for testing purposes 
               NSLog("newGroup's name is %@",newGroup.name!)
               NSLog("newGroup's sport is %@",newGroup.sport!)
               NSLog("newGroup's city is %@",newGroup.city!)
               NSLog("newGroup's province is %@",newGroup.province!)
-              NSLog("newGroup's desc is %@",newGroup.detail!)
+              //NSLog("newGroup's desc is %@",newGroup.detail!)
               
               self.groups += [newGroup]  
             }
@@ -145,72 +210,7 @@ class GroupTableViewController: UITableViewController {
     }
   }
   
-    
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
-  
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-  
-  // MARK: - Table view data source
-  
-  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return 1
-  }
-  
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return groups.count
-  }
-  
-  
-  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    
-    // Table view cells are reused and should be dequeued using a cell identifier.
-    let cellIdentifier = "GroupTableViewCell"
-    let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GroupTableViewCell
-    
-    // Fetches the appropriate group for the data source layout.
-    let group = groups[indexPath.row]
-    
-    // Configure the cell...
-    cell.NameLabel.text       = "["+group.category!+"] "+group.name!
-    cell.StartDateLabel.text  = group.startDate
-    cell.StartTimeLabel.text  = group.startTime
-    cell.ProvienceLabel.text  = group.province
-    cell.CityLabel.text       = group.city
-    cell.AddressLabel.text    = group.address
-    cell.MaxNumberLabel.text  = String(group.currentSize!)+"/"+String(group.maxSize!)
-    
-    //cell.SportTypeImageView.image using switch, need to further change
-    switch group.sport!{
-    case "bB":
-      let photo1 = UIImage(named: "Basketball-50_blue")!
-      cell.SportTypeImageView.image = photo1
-    case "Soccer":
-      let photo1 = UIImage(named: "Football 2-50_blue")!
-      cell.SportTypeImageView.image = photo1
-    case "PingPong":
-      let photo1 = UIImage(named: "Ping Pong-50_blue")!
-      cell.SportTypeImageView.image = photo1
-    case "R":
-      let photo1 = UIImage(named: "Running-50_blue")!
-      cell.SportTypeImageView.image = photo1
-    default:
-      let photod = UIImage(named: "defaultPhoto")!
-      cell.SportTypeImageView.image = photod
-      
-    }
-    
-    return cell
-  }
-  
   //MARK:Actions
-  
-  
   /*
   // Override to support conditional editing of the table view.
   override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
