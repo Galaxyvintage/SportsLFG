@@ -2,7 +2,7 @@
 // File  : GroupCreationController.swift
 // Author: Charles Li, Aaron Cheung, Issac Qiao
 // Date created  : Nov 04 2015
-// Date modified : Nov 24 2015
+// Date modified : Nov 25 2015
 // Description : This class is used in the group creation view controller and handles 
 //               group creation request
 //
@@ -21,7 +21,12 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   var timePicker  = UIDatePicker()
   var datePicker  = UIDatePicker()
   var geocoder    = CLGeocoder()
+  var timeFormatter : NSDateFormatter? //for time 
+  var dateFormatter : NSDateFormatter? //for date
   
+  
+  
+  var activeTextField :UITextField?
   
   @IBOutlet weak var rootScrollView: UIScrollView!
   @IBOutlet weak var contentView: UIView!
@@ -93,7 +98,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     //Time 
     self.timePicker.datePickerMode = UIDatePickerMode.Time
     self.timePicker.minuteInterval = 5
-    self.timePicker.setDate(currentDate, animated : true)
+    
     
     //This calls the updateTime method when the value is changed 
     self.timePicker.addTarget(self, action: Selector("updateTime"), forControlEvents: UIControlEvents.ValueChanged)
@@ -107,6 +112,18 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.datePicker.addTarget(self, action: Selector("updateDate"), forControlEvents: UIControlEvents.ValueChanged)
     self.date.inputView = self.datePicker
     
+    
+    //Set the current date and time to the pickers 
+    
+    self.datePicker.setDate(currentDate, animated: true)
+    self.timePicker.setDate(currentDate, animated : true)
+    
+    self.timeFormatter = NSDateFormatter()
+    self.dateFormatter = NSDateFormatter()
+    timeFormatter!.timeStyle = NSDateFormatterStyle.ShortStyle
+    dateFormatter!.dateStyle = NSDateFormatterStyle.ShortStyle
+    self.time.text = timeFormatter!.stringFromDate(timePicker.date)
+    self.date.text = timeFormatter!.stringFromDate(datePicker.date)
   }
   
   ////////////////////
@@ -125,9 +142,9 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   //and updates the text in the time textfield
   func updateTime()
   {
-    let timeFormatter = NSDateFormatter()
-    timeFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-    let selectedTime = timeFormatter.stringFromDate(timePicker.date)
+    self.timeFormatter = NSDateFormatter()
+    timeFormatter!.timeStyle = NSDateFormatterStyle.ShortStyle
+    let selectedTime = timeFormatter!.stringFromDate(timePicker.date)
     self.time.text = selectedTime 
   }
   
@@ -135,9 +152,9 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   //and updates the text in the date textfield
   func updateDate()
   {
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-    let selectedDate = dateFormatter.stringFromDate(datePicker.date)
+    self.dateFormatter = NSDateFormatter()
+    dateFormatter!.dateStyle = NSDateFormatterStyle.ShortStyle
+    let selectedDate = dateFormatter!.stringFromDate(datePicker.date)
     self.date.text = selectedDate 
     
   }
@@ -152,8 +169,10 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     {
       if let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as?NSValue)?.CGRectValue().size
       {
+        
         //update the constraint to resize the scroll view 
         let kbHeight  = keyboardSize.height
+        
         if(rootScrollViewBottomConstraint.constant < kbHeight)
         {
           rootScrollViewBottomConstraint.constant = kbHeight
@@ -203,7 +222,6 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   }
   
   
-  
   func pickerView(pickerView : UIPickerView, didSelectRow row : Int, inComponent component : Int)
   {
     category = categoryArr[row]
@@ -211,6 +229,18 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   
   
   /*TextField Delegates*/
+  
+  func textFieldDidBeginEditing(textField: UITextField)  
+  { //Keyboard becomes visible
+    //perform actions.
+    self.activeTextField = textField
+  }
+  
+  func textFieldDidEndEditing(textField: UITextField)  
+  { //Keyboard becomes visible
+    //perform actions.
+    self.activeTextField = nil
+  }
   
   //This method  dismisses keyboard on return key press
   func textFieldShouldReturn(textField: UITextField) -> Bool{
