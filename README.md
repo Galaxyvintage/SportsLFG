@@ -30,10 +30,9 @@
 - [x] 3. MyGroup
 - [ ] 4. Arbitrary sports in group creation
 - [ ] 5. GroupMembers Info in Group View
-- [ ] 6. HealthKit(Energy Drink Record)
-- [x] 7. Leaving/Deleting Group
-- [ ] 8. Not loading groups in the past 
-- [ ] 9. Password Reset
+- [x] 6. Leaving/Deleting Group
+- [ ] 7. Not loading groups in the past 
+- [ ] 8. Password Reset
 
 
 #####Current Overview
