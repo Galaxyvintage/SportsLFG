@@ -291,7 +291,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     return
   }
   
-  //
+  // Sends group data to the database
   func saveGroup()
   {
     //Kinvey API method that creates a store object
@@ -378,6 +378,8 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       group.metadata?.setGloballyWritable(false)
       
       //Optional properties
+    
+        //Should already have been checked but redundancy
       if(self.detail!.text != nil)
       {
         group.detail        = self.detail!.text
@@ -457,7 +459,16 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     }
     sender.selected = true
   }
-  
+    
+    /*
+    @IBAction func Basketball(sender:UIButton) {
+        sport = "Basketball" //basketball
+        for btn in SportsButton{
+            btn.selected = false
+        }
+        sender.selected = true
+    }
+    */
   
   //This methods returns back to the LFG view controller
   @IBAction func BackToLFG(sender: UIButton) {
