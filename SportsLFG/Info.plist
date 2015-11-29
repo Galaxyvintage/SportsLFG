@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>App needs emergency contact information</string>
+	<string>This app would like to read and write data regarding nutrition</string>
 	<key>NSHealthUpdateUsageDescription </key>
 	<string></string>
 	<key>CFBundleDocumentTypes</key>
