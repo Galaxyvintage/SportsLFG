@@ -1,5 +1,5 @@
 //
-//  TextInputTableViewCell.swift
+//  GroupTableViewCell_2TableViewCell.swift
 //  SportsLFG
 //
 //  Created by Charles Li on 2015-11-27.
@@ -8,13 +8,15 @@
 
 import UIKit
 
-class TextInputTableViewCell: UITableViewCell {
+class TitleTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var TitleLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
