@@ -3139,10 +3139,10 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="DatePickerCell" rowHeight="163" id="IRW-9Z-esE" customClass="SportsSelectionTableViewCell" customModule="SportsLFG" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="344" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="344" width="375" height="163"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IRW-9Z-esE" id="aQa-Qc-8aJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="162"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="VPa-Z3-4gU">
@@ -3187,10 +3187,10 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="LocationInputCell" rowHeight="250" id="fEO-fV-L7G" userLabel="MapViewCell" customClass="SportsSelectionTableViewCell" customModule="SportsLFG" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="160" width="375" height="46"/>
+                                <rect key="frame" x="0.0" y="507" width="375" height="250"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fEO-fV-L7G" id="BF1-9N-cXx">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="249"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dxh-S8-JSB">
