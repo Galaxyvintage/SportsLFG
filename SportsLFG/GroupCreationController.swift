@@ -288,8 +288,8 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     return
   }
   
-  //
-  func saveGroup(groupLocation : CLLocation)
+  // Sends group data to the database
+  func saveGroup(groupLocation: CLLocation)
   {
     //Kinvey API method that creates a store object
     //so we can save entities to a specific collection
@@ -455,7 +455,17 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     }
     sender.selected = true
   }
-
+    
+    /*
+    @IBAction func Basketball(sender:UIButton) {
+        sport = "Basketball" //basketball
+        for btn in SportsButton{
+            btn.selected = false
+        }
+        sender.selected = true
+    }
+    */
+  
   //This methods returns back to the LFG view controller
   @IBAction func BackToLFG(sender: UIButton) {
     NSLog("BackToLFG")

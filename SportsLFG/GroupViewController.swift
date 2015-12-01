@@ -21,11 +21,11 @@ class GroupViewController: UIViewController {
   var UIBarButtonItemTitle : String?
   var currentView : UIView!
   var activityIndicator : UIActivityIndicatorView!
+  
+  
   // MARK: Properties
-  
   @IBOutlet weak var mapView: MKMapView!
-  
-  @IBOutlet weak var GroupNameLabel: UILabel!
+
   @IBOutlet weak var CreateDateLabel: UILabel!
   @IBOutlet weak var StartDateLabel: UILabel!
   @IBOutlet weak var StartTimeLabel: UILabel!
@@ -33,13 +33,14 @@ class GroupViewController: UIViewController {
   @IBOutlet weak var CityLabel: UILabel!
   @IBOutlet weak var AddressLabel: UILabel!
   @IBOutlet weak var MaxNumLabel: UILabel!
+  @IBOutlet weak var Description: UITextView!
   
   //@IBOutlet weak var DetailView: UITextView!
   override func viewDidLoad() {
     // Do any additional setup after loading the view.
     super.viewDidLoad()
     
-    // Spinner config
+    // Spinner Config
     self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     
     self.currentView = self.view
@@ -49,21 +50,11 @@ class GroupViewController: UIViewController {
     self.activityIndicator.hidesWhenStopped = true
     self.activityIndicator.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
     
-    
-    
-    @IBOutlet weak var GroupNameLabel: UILabel!
-    @IBOutlet weak var CreateDateLabel: UILabel!
-    @IBOutlet weak var StartDateLabel: UILabel!
-    @IBOutlet weak var StartTimeLabel: UILabel!
-    @IBOutlet weak var ProvienceLabel: UILabel!
-    @IBOutlet weak var CityLabel: UILabel!
-    @IBOutlet weak var AddressLabel: UILabel!
-    @IBOutlet weak var MaxNumLabel: UILabel!
-    @IBOutlet weak var Description: UITextView!
-    
-    
-    // UIBarButtonItem for Join and Leave 
-    let RightButtonItem = UIBarButtonItem(title: UIBarButtonItemTitle, style: UIBarButtonItemStyle.Plain, target: self, action: Selector("LeftBarButtonPressed:"))
+    // UIBarButtonItem Config for Join and Leave 
+    let RightButtonItem = UIBarButtonItem(title : UIBarButtonItemTitle, 
+      style : UIBarButtonItemStyle.Plain, 
+      target: self, 
+      action: Selector("LeftBarButtonPressed:"))
     
     self.navigationItem.rightBarButtonItem = RightButtonItem
     
@@ -72,7 +63,7 @@ class GroupViewController: UIViewController {
     // Set up views if editing an existing Group.
     if let groupwork = group {
       navigationItem.title  = groupwork.name
-      GroupNameLabel.text   = groupwork.name
+    
       CreateDateLabel.text  = groupwork.dateCreated
       StartDateLabel.text   = groupwork.startDate
       StartTimeLabel.text   = groupwork.startTime
@@ -80,16 +71,18 @@ class GroupViewController: UIViewController {
       CityLabel.text        = groupwork.city
       AddressLabel.text     = groupwork.address
       MaxNumLabel.text      = String(groupwork.maxSize)
-      /*
-      NSLog("starting description stuff")
-      if (groupwork.detail!.isEmpty)
+      
+      
+      if(groupwork.detail!.isEmpty)
       {
-      // insert a default description or leave blank or afafaf
-      DetailView.text = "Come join in!"
-      } else {
-      DetailView.text = groupwork.detail
+        // insert a default description or leave blank or afafaf
+        // should already been dealt with at creation but just in case
+        Description.text = "Description:" + "Come join in!"
+      } else 
+      {
+        Description.text = "Description:" + (groupwork.detail)!    
       }
-      */
+      
       
       // map view
       var groupLocation =  (groupwork.address)! + ","
@@ -97,30 +90,33 @@ class GroupViewController: UIViewController {
       groupLocation += (groupwork.province)!
       NSLog(groupLocation)
       let geocoder = CLGeocoder()
-      geocoder.geocodeAddressString(groupLocation, completionHandler: { (placemarks :[CLPlacemark]?,errorOrNil : NSError?) -> Void in
-        
-        if errorOrNil != nil
-        {
+      geocoder.geocodeAddressString(
+        groupLocation, 
+        completionHandler: { (placemarks :[CLPlacemark]?,errorOrNil : NSError?) -> Void in
           
-          
-        }
-        else if let firstPlacemark = placemarks?[0] {
-          //print(firstPlacemark)
-          let location = firstPlacemark.location!
-          let center = CLLocationCoordinate2DMake (location.coordinate.latitude, location.coordinate.longitude)
-          print(location.coordinate.latitude)
-          print(location.coordinate.longitude)
-          let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-          
-          let region = MKCoordinateRegion(center : center, span : span)
-          
-          let annotation = MKPointAnnotation()
-          annotation.coordinate = center
-          annotation.title = (groupwork.name)!
-          
-          self.mapView.addAnnotation(annotation)
-          self.mapView.setRegion(region, animated: true)
-        }
+          if errorOrNil != nil
+          {
+            
+            
+          }
+          else if let firstPlacemark = placemarks?[0] 
+          {
+            //print(firstPlacemark)
+            let location = firstPlacemark.location!
+            let center = CLLocationCoordinate2DMake (location.coordinate.latitude, location.coordinate.longitude)
+            print(location.coordinate.latitude)
+            print(location.coordinate.longitude)
+            let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+            
+            let region = MKCoordinateRegion(center : center, span : span)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = center
+            annotation.title = (groupwork.name)!
+            
+            self.mapView.addAnnotation(annotation)
+            self.mapView.setRegion(region, animated: true)
+          }
       })
     }
   }
@@ -129,13 +125,6 @@ class GroupViewController: UIViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  
-  
-  
-  
-  
-  
-  
   
   
   //This method adds the current user to the group
@@ -147,10 +136,6 @@ class GroupViewController: UIViewController {
       [KCSStoreKeyCollectionName          : "InGroups",
         KCSStoreKeyCollectionTemplateClass : inGroup.self])
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     let nameQuery  = KCSQuery(onField:"user", withExactMatchForValue: currentUserId)
     let groupQuery = KCSQuery(onField:"group",withExactMatchForValue: currentGroupName)!
@@ -158,9 +143,6 @@ class GroupViewController: UIViewController {
     nameQuery.addQuery(groupQuery)
     
     //query to check whether the user is already in the group
-    self.currentView.bringSubviewToFront(self.activityIndicator)
-    self.activityIndicator.hidden = false
-    self.activityIndicator.startAnimating()
     store.queryWithQuery(
       nameQuery,
       withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in
@@ -185,8 +167,8 @@ class GroupViewController: UIViewController {
           store.saveObject(
             userInGroup,
             withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil : NSError!) -> Void in
-              self.activityIndicator.stopAnimating()
               
+              self.activityIndicator.stopAnimating()
               if(errorOrNil != nil)
               {
                 //error
@@ -217,7 +199,9 @@ class GroupViewController: UIViewController {
                   message:"You have joined this group successfully",
                   preferredStyle: UIAlertControllerStyle.Alert
                 )
-                let okAction = UIAlertAction(title :"OK", style: UIAlertActionStyle.Cancel, handler: nil)
+                let okAction = UIAlertAction(title  :"OK", 
+                  style  : UIAlertActionStyle.Cancel,
+                  handler: nil)
                 alert.addAction(okAction)
                 self.presentViewController(alert, animated: true , completion: nil)
                 return
@@ -227,6 +211,7 @@ class GroupViewController: UIViewController {
         }
         else
         {
+          self.activityIndicator.stopAnimating()
           NSLog("in group")
           print(objectsOrNil)
           let alert = UIAlertController(
@@ -234,7 +219,9 @@ class GroupViewController: UIViewController {
             message: "It looks like you are already in this group",
             preferredStyle: UIAlertControllerStyle.Alert
           )
-          let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+          let cancelAction = UIAlertAction(title  :"Cancel", 
+            style  : UIAlertActionStyle.Cancel, 
+            handler: nil)
           alert.addAction(cancelAction)
           self.presentViewController(alert, animated: true , completion: nil)
           return
@@ -259,9 +246,6 @@ class GroupViewController: UIViewController {
     
     nameQuery.addQuery(groupQuery)
     
-    self.currentView.bringSubviewToFront(self.activityIndicator)
-    self.activityIndicator.hidden = false
-    self.activityIndicator.startAnimating()
     store.removeObject(
       nameQuery, 
       withCompletionBlock: {(count:UInt, errorOrNil : NSError!) -> Void in
@@ -269,7 +253,12 @@ class GroupViewController: UIViewController {
         self.activityIndicator.stopAnimating()
         if(errorOrNil != nil)
         {
-            return true // stub
+          NSLog("error2")
+          print(errorOrNil.userInfo[KCSErrorCode])
+          print(errorOrNil.userInfo[KCSErrorInternalError])
+          print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
+          
+          return//error, deletion failed
         }
           
         else
@@ -279,10 +268,11 @@ class GroupViewController: UIViewController {
             message: "You have left this group",
             preferredStyle: UIAlertControllerStyle.Alert)
           
-          let okAction = UIAlertAction(title :"Ok", style: UIAlertActionStyle.Cancel, handler: {(cancelAction : UIAlertAction)-> Void in
-            
-            self.navigationController?.popViewControllerAnimated(true)
-            
+          let okAction = UIAlertAction(title  :"Ok", 
+            style  : UIAlertActionStyle.Cancel, 
+            handler: {(cancelAction : UIAlertAction)-> Void in
+              self.navigationController?.popViewControllerAnimated(true)
+              
           })
           alert.addAction(okAction)
           self.presentViewController(alert, animated: true , completion: nil)
@@ -294,6 +284,8 @@ class GroupViewController: UIViewController {
   //Helper function that select the correct function 
   func update(condition : String)
   {
+    self.currentView.bringSubviewToFront(self.activityIndicator)
+    self.activityIndicator.hidden = false
     self.activityIndicator.startAnimating()
     if(condition == "Join")
     {
@@ -309,97 +301,44 @@ class GroupViewController: UIViewController {
   //This method gets called when the right bar button is pressed
   func LeftBarButtonPressed(sender : UIBarButtonItem) {
     
-    //This method removes the current user from the grop
-    func leaveGroup()
+    if(sender.title! == "Join")
     {
-        let currentUserId = KCSUser.activeUser().userId
-        let currentGroupName = group!.name
-        let store = KCSAppdataStore.storeWithOptions(
-            [KCSStoreKeyCollectionName          : "InGroups",
-                KCSStoreKeyCollectionTemplateClass : inGroup.self])
+      let alert = UIAlertController(
+        title: NSLocalizedString("Hello", comment: "join a group"),
+        message: "Do you wanna join this group?",
+        preferredStyle: UIAlertControllerStyle.Alert
+      )
+      let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default){(UIAlertAction) -> Void in
         
         //add user to the Group
         self.update("Join")
-        
-        let combinedQuery = nameQuery.queryByJoiningQuery(groupQuery, usingOperator: KCSQueryConditional.KCSAnd)
+      }
+      let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+      alert.addAction(okAction)
+      alert.addAction(cancelAction)
+      self.presentViewController(alert, animated: true , completion: nil)
+      
+    }
+    else
+    {
+      let alert = UIAlertController(
+        title: NSLocalizedString("Hello", comment: "leave a group"),
+        message: "Do you wanna leave this group?",
+        preferredStyle: UIAlertControllerStyle.Alert
+      )
+      let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default){(UIAlertAction) -> Void in
         
         //remove user from the Group
         self.update("Leave")
         
-        store.removeObject(
-            combinedQuery,
-            withCompletionBlock: { (count:UInt, errorOrNil : NSError!) -> Void in
-                if(errorOrNil != nil)
-                {
-                    NSLog("error2")
-                    print(errorOrNil.userInfo[KCSErrorCode])
-                    print(errorOrNil.userInfo[KCSErrorInternalError])
-                    print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
-                    
-                    return//error, deletion failed
-                }
-                    
-                else
-                {
-                    let alert = UIAlertController(
-                        title: NSLocalizedString("Hello", comment: "successful deletion"),
-                        message: "You have left this group",
-                        preferredStyle: UIAlertControllerStyle.Alert)
-                    
-                    let okAction = UIAlertAction(title :"Ok", style: UIAlertActionStyle.Cancel, handler: {(cancelAction : UIAlertAction)-> Void in
-                        
-                        self.navigationController?.popViewControllerAnimated(true)
-                    })
-                    alert.addAction(okAction)
-                    self.presentViewController(alert, animated: true , completion: nil)
-                    
-                }
-                
-            }, withProgressBlock: nil)
-        
+      }
+      let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+      alert.addAction(okAction)
+      alert.addAction(cancelAction)
+      self.presentViewController(alert, animated: true , completion: nil)
     }
     
-    
-    //This method gets called when the right bar button is pressed
-    func LeftBarButtonPressed(sender : UIBarButtonItem) {
-        
-        if(sender.title! == "Join")
-        {
-            let alert = UIAlertController(
-                title: NSLocalizedString("Hello", comment: "join a group"),
-                message: "Do you wanna join this group?",
-                preferredStyle: UIAlertControllerStyle.Alert
-            )
-            let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
-                
-                //add user to the Group
-                self.joinGroup()
-                
-            }
-            let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-            alert.addAction(okAction)
-            alert.addAction(cancelAction)
-            self.presentViewController(alert, animated: true , completion: nil)
-            
-        }
-        else
-        {
-            let alert = UIAlertController(
-                title: NSLocalizedString("Hello", comment: "leave a group"),
-                message: "Do you wanna leave this group?",
-                preferredStyle: UIAlertControllerStyle.Alert
-            )
-            let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
-                
-                //remove user from the Group
-                self.leaveGroup()
-                
-            }
-            let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-            alert.addAction(okAction)
-            alert.addAction(cancelAction)
-            self.presentViewController(alert, animated: true , completion: nil)
-        }
-        
-    } 
+  } 
 }
+
+
