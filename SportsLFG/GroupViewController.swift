@@ -51,6 +51,15 @@ class GroupViewController: UIViewController {
     
     
     
+    @IBOutlet weak var GroupNameLabel: UILabel!
+    @IBOutlet weak var CreateDateLabel: UILabel!
+    @IBOutlet weak var StartDateLabel: UILabel!
+    @IBOutlet weak var StartTimeLabel: UILabel!
+    @IBOutlet weak var ProvienceLabel: UILabel!
+    @IBOutlet weak var CityLabel: UILabel!
+    @IBOutlet weak var AddressLabel: UILabel!
+    @IBOutlet weak var MaxNumLabel: UILabel!
+    @IBOutlet weak var Description: UITextView!
     
     
     // UIBarButtonItem for Join and Leave 
@@ -138,6 +147,10 @@ class GroupViewController: UIViewController {
       [KCSStoreKeyCollectionName          : "InGroups",
         KCSStoreKeyCollectionTemplateClass : inGroup.self])
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
     let nameQuery  = KCSQuery(onField:"user", withExactMatchForValue: currentUserId)
     let groupQuery = KCSQuery(onField:"group",withExactMatchForValue: currentGroupName)!
@@ -256,12 +269,7 @@ class GroupViewController: UIViewController {
         self.activityIndicator.stopAnimating()
         if(errorOrNil != nil)
         {
-          NSLog("error2")
-          print(errorOrNil.userInfo[KCSErrorCode])
-          print(errorOrNil.userInfo[KCSErrorInternalError])
-          print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
-          
-          return//error, deletion failed
+            return true // stub
         }
           
         else
@@ -301,43 +309,97 @@ class GroupViewController: UIViewController {
   //This method gets called when the right bar button is pressed
   func LeftBarButtonPressed(sender : UIBarButtonItem) {
     
-    if(sender.title! == "Join")
+    //This method removes the current user from the grop
+    func leaveGroup()
     {
-      let alert = UIAlertController(
-        title: NSLocalizedString("Hello", comment: "join a group"),
-        message: "Do you wanna join this group?",
-        preferredStyle: UIAlertControllerStyle.Alert
-      )
-      let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+        let currentUserId = KCSUser.activeUser().userId
+        let currentGroupName = group!.name
+        let store = KCSAppdataStore.storeWithOptions(
+            [KCSStoreKeyCollectionName          : "InGroups",
+                KCSStoreKeyCollectionTemplateClass : inGroup.self])
         
         //add user to the Group
         self.update("Join")
         
-      }
-      let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-      alert.addAction(okAction)
-      alert.addAction(cancelAction)
-      self.presentViewController(alert, animated: true , completion: nil)
-      
-    }
-    else
-    {
-      let alert = UIAlertController(
-        title: NSLocalizedString("Hello", comment: "leave a group"),
-        message: "Do you wanna leave this group?",
-        preferredStyle: UIAlertControllerStyle.Alert
-      )
-      let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+        let combinedQuery = nameQuery.queryByJoiningQuery(groupQuery, usingOperator: KCSQueryConditional.KCSAnd)
         
         //remove user from the Group
         self.update("Leave")
         
-      }
-      let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-      alert.addAction(okAction)
-      alert.addAction(cancelAction)
-      self.presentViewController(alert, animated: true , completion: nil)
+        store.removeObject(
+            combinedQuery,
+            withCompletionBlock: { (count:UInt, errorOrNil : NSError!) -> Void in
+                if(errorOrNil != nil)
+                {
+                    NSLog("error2")
+                    print(errorOrNil.userInfo[KCSErrorCode])
+                    print(errorOrNil.userInfo[KCSErrorInternalError])
+                    print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
+                    
+                    return//error, deletion failed
+                }
+                    
+                else
+                {
+                    let alert = UIAlertController(
+                        title: NSLocalizedString("Hello", comment: "successful deletion"),
+                        message: "You have left this group",
+                        preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    let okAction = UIAlertAction(title :"Ok", style: UIAlertActionStyle.Cancel, handler: {(cancelAction : UIAlertAction)-> Void in
+                        
+                        self.navigationController?.popViewControllerAnimated(true)
+                    })
+                    alert.addAction(okAction)
+                    self.presentViewController(alert, animated: true , completion: nil)
+                    
+                }
+                
+            }, withProgressBlock: nil)
+        
     }
     
-  } 
+    
+    //This method gets called when the right bar button is pressed
+    func LeftBarButtonPressed(sender : UIBarButtonItem) {
+        
+        if(sender.title! == "Join")
+        {
+            let alert = UIAlertController(
+                title: NSLocalizedString("Hello", comment: "join a group"),
+                message: "Do you wanna join this group?",
+                preferredStyle: UIAlertControllerStyle.Alert
+            )
+            let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+                
+                //add user to the Group
+                self.joinGroup()
+                
+            }
+            let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            self.presentViewController(alert, animated: true , completion: nil)
+            
+        }
+        else
+        {
+            let alert = UIAlertController(
+                title: NSLocalizedString("Hello", comment: "leave a group"),
+                message: "Do you wanna leave this group?",
+                preferredStyle: UIAlertControllerStyle.Alert
+            )
+            let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+                
+                //remove user from the Group
+                self.leaveGroup()
+                
+            }
+            let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            self.presentViewController(alert, animated: true , completion: nil)
+        }
+        
+    } 
 }

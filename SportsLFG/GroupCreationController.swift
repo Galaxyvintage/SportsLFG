@@ -375,6 +375,8 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       
       
       //Optional properties
+    
+        //Should already have been checked but redundancy
       if(self.detail!.text != nil)
       {
         group.detail  = self.detail!.text
