@@ -2,7 +2,7 @@
 // File  : GroupViewController.swift
 // Author: Aaron Cheung, Charles Li, Isaac Qiao
 // Date created  : Nov.08 2015
-// Date edited   : Nov.24 2015
+// Date edited   : Nov.30 2015
 // Description : This class is used in group view controller when users want to see
 //               the detail information
 //
@@ -19,7 +19,8 @@ class GroupViewController: UIViewController {
   */
   var group: Group?
   var UIBarButtonItemTitle : String?
-  
+  var currentView : UIView!
+  var activityIndicator : UIActivityIndicatorView!
   // MARK: Properties
   
   @IBOutlet weak var mapView: MKMapView!
@@ -35,16 +36,27 @@ class GroupViewController: UIViewController {
   
   //@IBOutlet weak var DetailView: UITextView!
   override func viewDidLoad() {
+    // Do any additional setup after loading the view.
     super.viewDidLoad()
     
+    // Spinner config
+    self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     
+    self.currentView = self.view
+    print(self.currentView)
+    self.currentView.addSubview(self.activityIndicator)
+    self.activityIndicator.frame  = self.currentView.frame
+    self.activityIndicator.hidesWhenStopped = true
+    self.activityIndicator.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+    
+    
+    
+    
+    
+    // UIBarButtonItem for Join and Leave 
     let RightButtonItem = UIBarButtonItem(title: UIBarButtonItemTitle, style: UIBarButtonItemStyle.Plain, target: self, action: Selector("LeftBarButtonPressed:"))
     
-    NSLog("title is %@ ",UIBarButtonItemTitle!)
     self.navigationItem.rightBarButtonItem = RightButtonItem
-    
-    
-    // Do any additional setup after loading the view.
     
     //RightBarButtonItem.title = self.UIBarButtonItemTitle
     
@@ -99,9 +111,7 @@ class GroupViewController: UIViewController {
           
           self.mapView.addAnnotation(annotation)
           self.mapView.setRegion(region, animated: true)
-          
         }
-        
       })
     }
   }
@@ -110,6 +120,12 @@ class GroupViewController: UIViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,16 +141,20 @@ class GroupViewController: UIViewController {
     
     let nameQuery  = KCSQuery(onField:"user", withExactMatchForValue: currentUserId)
     let groupQuery = KCSQuery(onField:"group",withExactMatchForValue: currentGroupName)!
- 
+    
     nameQuery.addQuery(groupQuery)
     
     //query to check whether the user is already in the group
+    self.currentView.bringSubviewToFront(self.activityIndicator)
+    self.activityIndicator.hidden = false
+    self.activityIndicator.startAnimating()
     store.queryWithQuery(
       nameQuery,
       withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in
         
         if(errorOrNil != nil)
         {
+          self.activityIndicator.stopAnimating()
           //error
           NSLog("error1")
           print(errorOrNil.userInfo[KCSErrorCode])
@@ -152,6 +172,7 @@ class GroupViewController: UIViewController {
           store.saveObject(
             userInGroup,
             withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil : NSError!) -> Void in
+              self.activityIndicator.stopAnimating()
               
               if(errorOrNil != nil)
               {
@@ -213,6 +234,7 @@ class GroupViewController: UIViewController {
   //This method removes the current user from the grop
   func leaveGroup()
   {
+    
     let currentUserId = KCSUser.activeUser().userId   
     let currentGroupName = group!.name 
     let store = KCSAppdataStore.storeWithOptions(
@@ -221,12 +243,17 @@ class GroupViewController: UIViewController {
     
     let nameQuery  = KCSQuery(onField:"user", withExactMatchForValue: currentUserId)
     let groupQuery = KCSQuery(onField:"group",withExactMatchForValue: currentGroupName)
-
+    
     nameQuery.addQuery(groupQuery)
     
+    self.currentView.bringSubviewToFront(self.activityIndicator)
+    self.activityIndicator.hidden = false
+    self.activityIndicator.startAnimating()
     store.removeObject(
       nameQuery, 
       withCompletionBlock: {(count:UInt, errorOrNil : NSError!) -> Void in
+        
+        self.activityIndicator.stopAnimating()
         if(errorOrNil != nil)
         {
           NSLog("error2")
@@ -256,6 +283,21 @@ class GroupViewController: UIViewController {
       withProgressBlock: nil)
   }
   
+  //Helper function that select the correct function 
+  func update(condition : String)
+  {
+    self.activityIndicator.startAnimating()
+    if(condition == "Join")
+    {
+      self.performSelector("joinGroup", withObject: nil, afterDelay: 0.001)
+    }
+    else
+    {
+      self.performSelector("leaveGroup", withObject: nil, afterDelay: 0.001)
+    }
+    
+  }
+  
   //This method gets called when the right bar button is pressed
   func LeftBarButtonPressed(sender : UIBarButtonItem) {
     
@@ -269,7 +311,7 @@ class GroupViewController: UIViewController {
       let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
         
         //add user to the Group
-        self.joinGroup()
+        self.update("Join")
         
       }
       let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
@@ -288,7 +330,7 @@ class GroupViewController: UIViewController {
       let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
         
         //remove user from the Group
-        self.leaveGroup()
+        self.update("Leave")
         
       }
       let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)

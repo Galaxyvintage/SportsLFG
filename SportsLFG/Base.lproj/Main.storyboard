@@ -4038,7 +4038,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JVk-7S-LLl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2432.25" y="-397.125"/>
+            <point key="canvasLocation" x="2360.25" y="-391.125"/>
         </scene>
         <!--Groups-->
         <scene sceneID="jiS-46-Tvg">
@@ -5609,8 +5609,8 @@
         <image name="User Groups-32_red" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vWq-99-rKt"/>
         <segue reference="qxK-gx-4Ir"/>
+        <segue reference="8Ed-5T-Dcv"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
