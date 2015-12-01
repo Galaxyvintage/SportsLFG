@@ -54,6 +54,9 @@
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="335" y="270" width="40" height="32"/>
+                                </variation>
                                 <connections>
                                     <segue destination="EgH-3e-E7y" kind="presentation" identifier="EditProfile" id="J67-hs-kZM"/>
                                 </connections>
@@ -320,7 +323,8 @@
                                         <include reference="lX3-CV-9ON"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="1" y="338" width="375" height="80"/>
                                     <mask key="constraints">
                                         <include reference="Py6-GG-8x1"/>
                                         <include reference="K8k-3Z-ZYo"/>
@@ -707,7 +711,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="50" y="348" width="275" height="30"/>
+                                    <rect key="frame" x="49" y="348" width="276" height="30"/>
                                 </variation>
                                 <connections>
                                     <outlet property="delegate" destination="mtH-Fw-rQP" id="BdB-J3-YP7"/>
@@ -726,7 +730,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="50" y="281" width="275" height="30"/>
+                                    <rect key="frame" x="49" y="279" width="276" height="30"/>
                                 </variation>
                                 <connections>
                                     <outlet property="delegate" destination="mtH-Fw-rQP" id="RjT-ea-1ss"/>
@@ -739,7 +743,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="50" y="214" width="275" height="30"/>
+                                    <rect key="frame" x="49" y="214" width="276" height="30"/>
                                 </variation>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="User Name(Email)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vT8-xF-V2Y">
@@ -1214,7 +1218,7 @@
                                     <outlet property="weekData" destination="aHZ-KL-CIP" id="HDr-C0-Ysa"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="G2GatoradeCell" rowHeight="329" id="roX-Tg-Zdw" userLabel="G2Gatorade">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="G2GatoradeCell" rowHeight="329" id="roX-Tg-Zdw" userLabel="G2Gatorade" customClass="G2GatoradeTableViewCell" customModule="SportsLFG" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="369" width="375" height="329"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="roX-Tg-Zdw" id="tQi-gZ-6wB">
@@ -1330,11 +1334,17 @@
                                                     <include reference="DxN-uu-ySh"/>
                                                 </mask>
                                             </variation>
+                                            <connections>
+                                                <action selector="saveHKSample:" destination="roX-Tg-Zdw" eventType="touchUpInside" id="ecT-W8-NQY"/>
+                                            </connections>
                                         </button>
-                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="8fn-fd-m7k">
+                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="8fn-fd-m7k">
                                             <rect key="frame" x="-47" y="-14" width="94" height="29"/>
                                             <animations/>
                                             <color key="tintColor" red="0.26274509800000001" green="0.46666666670000001" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="stepperPressed:" destination="roX-Tg-Zdw" eventType="valueChanged" id="ghM-ih-WJp"/>
+                                            </connections>
                                         </stepper>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# of bottles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yde-K4-IjY">
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -1610,6 +1620,16 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <connections>
+                                    <outlet property="Calories" destination="oB7-lI-N5f" id="qXw-qS-RPk"/>
+                                    <outlet property="Potassium" destination="6PE-08-cpo" id="SLl-DW-G51"/>
+                                    <outlet property="Sodium" destination="bzm-1W-N8F" id="rzD-TT-WB1"/>
+                                    <outlet property="Sugars" destination="RnH-5A-Wwb" id="h88-o0-jKo"/>
+                                    <outlet property="bottlesConsumed" destination="Yde-K4-IjY" id="cQu-kL-AWe"/>
+                                    <outlet property="countStepper" destination="8fn-fd-m7k" id="uGY-Fh-X5L"/>
+                                    <outlet property="todayData" destination="WPr-vS-KdM" id="PqW-C4-HJF"/>
+                                    <outlet property="weekData" destination="5BF-b4-yvg" id="Noh-sP-PNG"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -1631,7 +1651,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gjl-1l-Xug" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1220.25" y="277.5"/>
+            <point key="canvasLocation" x="-1298.25" y="412.5"/>
         </scene>
         <!--Login Navigation-->
         <scene sceneID="j3f-dz-eHr">
@@ -4458,7 +4478,8 @@
                                         <exclude reference="XdU-ww-T23"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="151" y="617" width="75" height="32"/>
                                     <mask key="constraints">
                                         <include reference="XdU-ww-T23"/>
                                     </mask>
@@ -4482,6 +4503,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="75" y="652" width="76" height="15"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="MyGroups" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XtW-9p-bAj">
                                 <rect key="frame" x="158" y="649" width="59" height="18"/>
@@ -4497,7 +4521,8 @@
                                         <exclude reference="RPF-oH-alC"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="151" y="652" width="75" height="15"/>
                                     <mask key="constraints">
                                         <include reference="RPF-oH-alC"/>
                                     </mask>
@@ -4514,6 +4539,9 @@
                                 <state key="selected" image="Search Property-32_red">
                                     <color key="titleColor" red="1" green="0.21734501340000001" blue="0.26213414540000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="75" y="617" width="76" height="32"/>
+                                </variation>
                                 <connections>
                                     <segue destination="Ria-Of-cfs" kind="custom" identifier="LFG" customClass="MainCVSegue" customModule="SportsLFG" customModuleProvider="target" id="gGt-Ed-8mY"/>
                                 </connections>
@@ -4524,6 +4552,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="226" y="652" width="74" height="15"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Energy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vi9-bY-SL3">
                                 <rect key="frame" x="319" y="649" width="37" height="16"/>
@@ -4544,7 +4575,8 @@
                                         <exclude reference="tU6-YC-Yii"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="226" y="617" width="74" height="32"/>
                                     <mask key="constraints">
                                         <exclude reference="tU6-YC-Yii"/>
                                     </mask>

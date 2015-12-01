@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 
 
-class EnergyTableViewController : UITableViewController
+class EnergyTableViewController : UITableViewController,SavingHKSamplesDelegate
 {
   
   internal var selectedIndexPath:NSIndexPath? = nil
   
   let kAuthorizeHealthKitSection = 1
+  
   var sectionZero = ["Water","Gatorade"] 
   let sectionOne  = ["Authorize HealthKit"]
   
@@ -38,7 +39,7 @@ class EnergyTableViewController : UITableViewController
           style: UIAlertActionStyle.Default, handler: nil)
         alert.addAction(okAction)
         
-        dispatch_async(dispatch_get_main_queue()) {
+        dispatch_sync(dispatch_get_main_queue()) {
           // Do UI stuff here
           self.presentViewController(alert, animated: true, completion: nil) 
         }
@@ -55,6 +56,14 @@ class EnergyTableViewController : UITableViewController
     }  
   }
   
+  func didFinishLoadingHKSamplesDelegate()
+  {
+    let indexPathToSelect = NSIndexPath(forRow: 1, inSection: 0)
+    self.tableView.selectRowAtIndexPath(indexPathToSelect, animated: true, scrollPosition: UITableViewScrollPosition.Top)
+    self.tableView(self.tableView, didSelectRowAtIndexPath:indexPathToSelect)
+    NSLog("Finish Loading HKSamples")
+  }
+  
   // MARK: - TableView Delegate
   
   override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
@@ -66,7 +75,6 @@ class EnergyTableViewController : UITableViewController
     return 2
     
   }
-  
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch section
@@ -92,9 +100,22 @@ class EnergyTableViewController : UITableViewController
         return Cell
         
       case(0,1)://TODO: Need to change this 
-        cellIdentifier = "WaterCell"
-        let Cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! WaterTableViewCell
-        return Cell
+        cellIdentifier = "G2GatoradeCell"
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! G2GatoradeTableViewCell
+        
+        let G2GatoradeObject = G2Gatorade()
+    
+        cell.Calories.text  = String(G2GatoradeObject.Calories)
+        cell.Sodium.text    = String(G2GatoradeObject.Sodium)
+        cell.Potassium.text = String(G2GatoradeObject.Potassium)
+        cell.Sugars.text    = String(G2GatoradeObject.Sugars)
+        
+        cell.bottlesConsumed.text = "1"
+        
+        cell.healthManager  = self.healthManager
+        cell.delegateObject = self
+        
+        return cell
       default: break
       }
       
@@ -180,13 +201,17 @@ class EnergyTableViewController : UITableViewController
         self.sectionZero.removeAtIndex(selectedRow + 1)
         indexPathToRemove = NSIndexPath(forRow: selectedRow + 1, inSection: 0)
         
-      default: return 
+        self.tableView.beginUpdates()
+        NSLog("removing")
+        self.tableView.deleteRowsAtIndexPaths(NSArray(object: indexPathToRemove) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        self.tableView.endUpdates()
+        
+      case 1 : break   
+        
+      default:
+        return
       } 
       
-      self.tableView.beginUpdates()
-      NSLog("removing")
-      self.tableView.deleteRowsAtIndexPaths(NSArray(object: indexPathToRemove) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-      self.tableView.endUpdates()
     }
     
     
@@ -209,7 +234,7 @@ class EnergyTableViewController : UITableViewController
       indexPathToInsert = NSIndexPath(forRow: 1, inSection: 0)
       print(self.sectionZero)
     case(0,1):
-      self.sectionZero.insert("WaterDataInput", atIndex: 2)//TODO:Need to change the string
+      self.sectionZero.insert("G2GatoradeInput", atIndex: 2)//TODO:Need to change the string
       indexPathToInsert = NSIndexPath(forRow: 2, inSection: 0)
       print(self.sectionZero)
     default:return
@@ -238,9 +263,9 @@ class EnergyTableViewController : UITableViewController
       case(0,1):  
         if(indexPath.section   == 0 && 
            indexPath.row       == 2 &&
-           self.sectionZero[2] == "WaterDataInput")//TODO:Update the string
+           self.sectionZero[2] == "G2GatoradeInput")//TODO:Update the string
         {
-          return CGFloat(157)
+          return CGFloat(329)
         }
 
         

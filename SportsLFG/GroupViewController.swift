@@ -59,16 +59,16 @@ class GroupViewController: UIViewController {
       CityLabel.text        = groupwork.city
       AddressLabel.text     = groupwork.address
       MaxNumLabel.text      = String(groupwork.maxSize)
-        /*
-        NSLog("starting description stuff")
-        if (groupwork.detail!.isEmpty)
-        {
-            // insert a default description or leave blank or afafaf
-            DetailView.text = "Come join in!"
-        } else {
-            DetailView.text = groupwork.detail
-        }
-        */
+      /*
+      NSLog("starting description stuff")
+      if (groupwork.detail!.isEmpty)
+      {
+      // insert a default description or leave blank or afafaf
+      DetailView.text = "Come join in!"
+      } else {
+      DetailView.text = groupwork.detail
+      }
+      */
       
       // map view
       var groupLocation =  (groupwork.address)! + ","
@@ -110,7 +110,7 @@ class GroupViewController: UIViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-    
+  
   
   
   //This method adds the current user to the group
@@ -124,13 +124,13 @@ class GroupViewController: UIViewController {
     
     
     let nameQuery  = KCSQuery(onField:"user", withExactMatchForValue: currentUserId)
-    let groupQuery = KCSQuery(onField:"group",withExactMatchForValue: currentGroupName)
-    
-    let combinedQuery = nameQuery.queryByJoiningQuery(groupQuery, usingOperator: KCSQueryConditional.KCSAnd)
+    let groupQuery = KCSQuery(onField:"group",withExactMatchForValue: currentGroupName)!
+ 
+    nameQuery.addQuery(groupQuery)
     
     //query to check whether the user is already in the group
     store.queryWithQuery(
-      combinedQuery,
+      nameQuery,
       withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in
         
         if(errorOrNil != nil)
@@ -142,8 +142,9 @@ class GroupViewController: UIViewController {
           print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
           return
         }
-        else if(objectsOrNil == nil)
+        else if(objectsOrNil != nil && objectsOrNil.count == 0)
         {
+          NSLog("no error")
           //add the user to the group
           let userInGroup = inGroup()
           userInGroup.userId = currentUserId
@@ -155,6 +156,7 @@ class GroupViewController: UIViewController {
               if(errorOrNil != nil)
               {
                 //error
+                NSLog("error is not nil111111")
                 let message = errorOrNil.userInfo[NSLocalizedDescriptionKey];
                 
                 let alert = UIAlertController(
@@ -174,13 +176,25 @@ class GroupViewController: UIViewController {
                 let checkInGroup = objectsOrNil[0] as! inGroup
                 NSLog("userID:%@",checkInGroup.userId!)
                 NSLog("groupName:%@",checkInGroup.groupName!)
+                
+                
+                let alert = UIAlertController(
+                  title: NSLocalizedString("Congratz", comment: "success"),
+                  message:"You have joined this group successfully",
+                  preferredStyle: UIAlertControllerStyle.Alert
+                )
+                let okAction = UIAlertAction(title :"OK", style: UIAlertActionStyle.Cancel, handler: nil)
+                alert.addAction(okAction)
+                self.presentViewController(alert, animated: true , completion: nil)
+                return
               }
-              
             }, 
             withProgressBlock: nil)
         }
-        else//(objectOrNil != nil)
+        else
         {
+          NSLog("in group")
+          print(objectsOrNil)
           let alert = UIAlertController(
             title: NSLocalizedString("Sorry", comment: "error"),
             message: "It looks like you are already in this group",
@@ -207,13 +221,12 @@ class GroupViewController: UIViewController {
     
     let nameQuery  = KCSQuery(onField:"user", withExactMatchForValue: currentUserId)
     let groupQuery = KCSQuery(onField:"group",withExactMatchForValue: currentGroupName)
-    
-    let combinedQuery = nameQuery.queryByJoiningQuery(groupQuery, usingOperator: KCSQueryConditional.KCSAnd)
-    
+
+    nameQuery.addQuery(groupQuery)
     
     store.removeObject(
-      combinedQuery, 
-      withCompletionBlock: { (count:UInt, errorOrNil : NSError!) -> Void in
+      nameQuery, 
+      withCompletionBlock: {(count:UInt, errorOrNil : NSError!) -> Void in
         if(errorOrNil != nil)
         {
           NSLog("error2")
@@ -235,13 +248,12 @@ class GroupViewController: UIViewController {
             
             self.navigationController?.popViewControllerAnimated(true)
             
-            
-            
           })
           alert.addAction(okAction)
           self.presentViewController(alert, animated: true , completion: nil)
         }
-      }, withProgressBlock: nil)
+      }, 
+      withProgressBlock: nil)
   }
   
   //This method gets called when the right bar button is pressed
