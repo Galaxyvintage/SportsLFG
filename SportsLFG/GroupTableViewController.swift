@@ -201,9 +201,11 @@ class GroupTableViewController: UITableViewController {
     case "Tennis":
       let photo1 = UIImage(named: "Tennis-50_red")!
       cell.SportTypeImageView.image = photo1
+        
     default:
-      let alp = Array(arrayLiteral: group.sport!.uppercaseString)[0]
-      let photod = UIImage(named: alp)!
+      let alp = group.sport!.uppercaseString
+      let photoname = alp[alp.startIndex.advancedBy(0)]
+      let photod = UIImage(named: "\(photoname)")!
       cell.SportTypeImageView.image = photod
       
     }
