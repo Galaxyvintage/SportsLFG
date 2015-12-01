@@ -76,10 +76,16 @@ class GroupTableViewController: UITableViewController {
                 {
                   NSLog("error is nil")
                   
+                  //let currentDate = NSDate()
+                    
                   for testGroup in objectsOrNil 
                   {
+                    //Check if group start date is already past
+                    
                     let newGroup = testGroup as! Group
-                    self.groups += [newGroup]  
+                    //if (validDate(currentDate,newGroup.startDate)) {
+                        self.groups += [newGroup]
+                    //}
                   }
                   self.delegateObject?.didFinishLoading(self.groups)
                   self.tableView.reloadData()
@@ -127,12 +133,14 @@ class GroupTableViewController: UITableViewController {
             {
               let newGroup = testGroup as! Group
               
-              //the following 4 log statements are for testing purposes 
+              /*
+                //the following 4 log statements are for testing purposes
               NSLog("newGroup's name is %@",newGroup.name!)
               NSLog("newGroup's sport is %@",newGroup.sport!)
               NSLog("newGroup's city is %@",newGroup.city!)
               NSLog("newGroup's province is %@",newGroup.province!)
-              
+              */
+                
               self.groups += [newGroup]  
             }
             self.delegateObject?.didFinishLoading(self.groups)
@@ -144,6 +152,33 @@ class GroupTableViewController: UITableViewController {
     }
   }
   
+    //Compare the date of the group to the current date
+    //Return true if current date is before the group's date
+    //Return false if the current date is after the group's date
+    func validDate(currentDate: NSDate, groupDate: String) -> Bool {
+        
+        //string to date- database stores date as string
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yy"
+        //NSLog("groupDate is:")
+        //NSLog(dateFormatter.dateFromString(groupDate))
+        let date = dateFormatter.dateFromString(groupDate)
+        return true
+        // do time later
+        /*
+        // now should be able to compare current date with groupDate
+        if ([currentDate laterDate:groupDate] == NSOrderedDescending) {
+            //currentDate is later than groupDate- not valid
+            return false
+        } else if ([currentDate, compare:groupDate] == NSOrderedAscending) {
+            //currentDate is earlier than groupDate- valid
+            return true
+        } else {
+            //dates are the same- unlikely to happen
+            return true
+        }
+*       /
+    }
     
   override func viewDidLoad() {
     super.viewDidLoad()
