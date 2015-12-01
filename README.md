@@ -18,10 +18,10 @@
 - [x] 2.  Profile Editing
 - [x] 3.  Map View for Groups
 - [x] 4.  Searching by Category
-- [ ] 5.  Group Deletion(ver3.0)
+- [x] 5.  Group Deletion(ver3.0)
 - [x] 6.  Business Logics for Database Collections in Kinvey 
 - [x] 7.  Taking Profile Pictures  
-- [ ] 8.  Taking Profile Pictures has some error double click will go back twice
+- [x] 8.  Taking Profile Pictures has some error double click will go back twice
 
 
 #####VERSION 3.0
@@ -29,11 +29,10 @@
 - [ ] 2. HealthKit(Energy Drink Record)
 - [x] 3. MyGroup
 - [ ] 4. Arbitrary sports in group creation
-- [ ] 5. GroupMembers Info in Group View
-- [ ] 6. HealthKit(Energy Drink Record)
-- [x] 7. Leaving/Deleting Group
-- [ ] 8. Not loading groups in the past 
-- [ ] 9. Password Reset
+- [ ] 5. Load GroupMembers Info from database
+- [x] 6. Leaving/Deleting Group
+- [ ] 7. Not loading groups in the past 
+- [ ] 8. Password Reset
 
 
 #####Current Overview
