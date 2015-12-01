@@ -21,6 +21,8 @@
 		632290321BE0C15E0097B93B /* MainCVSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322902B1BE0C15E0097B93B /* MainCVSegue.swift */; };
 		632290341BE0C15E0097B93B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322902D1BE0C15E0097B93B /* RegisterViewController.swift */; };
 		632290371BE0C1730097B93B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 632290351BE0C1730097B93B /* Main.storyboard */; };
+		63319F231C0D88AC00319100 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63319F221C0D88AC00319100 /* Member.swift */; };
+		63319F251C0D88FC00319100 /* GroupMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63319F241C0D88FC00319100 /* GroupMemberTableViewCell.swift */; };
 		633320F91C028F860048FD4B /* SharedImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633320F81C028F860048FD4B /* SharedImageCache.swift */; };
 		633320FA1C028F860048FD4B /* SharedImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633320F81C028F860048FD4B /* SharedImageCache.swift */; };
 		637FFA7F1BF9661300A06686 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637FFA7E1BF9661300A06686 /* EditProfileController.swift */; };
@@ -41,9 +43,7 @@
 		63FBD2991C0D08480078C2BB /* G2GatoradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FBD2981C0D08480078C2BB /* G2GatoradeTableViewCell.swift */; };
 		96C3F6D51BE4284600AC236A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C3F6D41BE4284600AC236A /* LoginViewController.swift */; };
 		A1F5DE97E1C7507ECD8C9F5F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE3EA33AED1FE155D30688 /* libPods.a */; };
-		C3C08F3B1C0C6C2D00A2F888 /* GroupMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C08F3A1C0C6C2D00A2F888 /* GroupMemberTableViewCell.swift */; };
 		C3C08F3D1C0C6EBD00A2F888 /* GroupMemberTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C08F3C1C0C6EBD00A2F888 /* GroupMemberTableViewController.swift */; };
-		C3C08F3F1C0C70A400A2F888 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C08F3E1C0C70A400A2F888 /* Member.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +77,8 @@
 		6322902B1BE0C15E0097B93B /* MainCVSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainCVSegue.swift; path = SportsLFG/MainCVSegue.swift; sourceTree = "<group>"; };
 		6322902D1BE0C15E0097B93B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		632290361BE0C1730097B93B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		63319F221C0D88AC00319100 /* Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		63319F241C0D88FC00319100 /* GroupMemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberTableViewCell.swift; sourceTree = "<group>"; };
 		633320F81C028F860048FD4B /* SharedImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedImageCache.swift; sourceTree = "<group>"; };
 		637FFA7E1BF9661300A06686 /* EditProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfileController.swift; path = SportsLFG/EditProfileController.swift; sourceTree = "<group>"; };
 		63C0350A1BE485E700BAFA65 /* enum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enum.swift; sourceTree = "<group>"; };
@@ -98,9 +100,7 @@
 		63FBD2961C0C44850078C2BB /* WaterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterTableViewCell.swift; sourceTree = "<group>"; };
 		63FBD2981C0D08480078C2BB /* G2GatoradeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = G2GatoradeTableViewCell.swift; sourceTree = "<group>"; };
 		96C3F6D41BE4284600AC236A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		C3C08F3A1C0C6C2D00A2F888 /* GroupMemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberTableViewCell.swift; sourceTree = "<group>"; };
 		C3C08F3C1C0C6EBD00A2F888 /* GroupMemberTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberTableViewController.swift; sourceTree = "<group>"; };
-		C3C08F3E1C0C70A400A2F888 /* Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,11 +201,11 @@
 		63D573F11BE9A7C200EE769A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				63319F221C0D88AC00319100 /* Member.swift */,
 				4AC6A8621BEDD1CE004F9C7A /* Group.swift */,
 				63C0350A1BE485E700BAFA65 /* enum.swift */,
 				630431831BF0965C004B31EF /* inGroup.swift */,
 				633320F81C028F860048FD4B /* SharedImageCache.swift */,
-				C3C08F3E1C0C70A400A2F888 /* Member.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -229,7 +229,7 @@
 				4A9EFE4F1BED5B1E00CA1BC8 /* GroupTableViewController.swift */,
 				4A955EF11BF0182900CDDA74 /* GroupViewController.swift */,
 				4A412ABB1BFD4CE40024C746 /* LocationViewController.swift */,
-				C3C08F3A1C0C6C2D00A2F888 /* GroupMemberTableViewCell.swift */,
+				63319F241C0D88FC00319100 /* GroupMemberTableViewCell.swift */,
 				C3C08F3C1C0C6EBD00A2F888 /* GroupMemberTableViewController.swift */,
 			);
 			name = LFG;
@@ -425,6 +425,7 @@
 				63C0350B1BE485E700BAFA65 /* enum.swift in Sources */,
 				4A76EB011BEC9216004890AD /* GroupTableViewCell.swift in Sources */,
 				63D573EE1BE7E78E00EE769A /* FirstTimeUserViewController.swift in Sources */,
+				63319F231C0D88AC00319100 /* Member.swift in Sources */,
 				632290341BE0C15E0097B93B /* RegisterViewController.swift in Sources */,
 				63FBD2931C0C2F5B0078C2BB /* EnergyRecordDataModel.xcdatamodeld in Sources */,
 				4A9EFE501BED5B1E00CA1BC8 /* GroupTableViewController.swift in Sources */,
@@ -441,6 +442,7 @@
 				96C3F6D51BE4284600AC236A /* LoginViewController.swift in Sources */,
 				63D573F51BE9F7D900EE769A /* GroupCreationController.swift in Sources */,
 				632290321BE0C15E0097B93B /* MainCVSegue.swift in Sources */,
+				63319F251C0D88FC00319100 /* GroupMemberTableViewCell.swift in Sources */,
 				63D573F01BE9797900EE769A /* ProfileTableViewController.swift in Sources */,
 				630431841BF0965C004B31EF /* inGroup.swift in Sources */,
 				63FBD2991C0D08480078C2BB /* G2GatoradeTableViewCell.swift in Sources */,

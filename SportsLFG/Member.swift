@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Member : NSObject{
+class Member: NSObject
+{
     // MARK: Properties
 
     var photo : UIImage?
@@ -19,7 +20,8 @@ class Member : NSObject{
     
     // MARK: Initialization
     
-    init?(photo: UIImage?, name: String, age: String, gender: String, location: String) {
+    init?(photo: UIImage?, name: String, age: String, gender: String, location: String) 
+    {
         // Initialize stored properties.
         self.name = name
         self.photo = photo
