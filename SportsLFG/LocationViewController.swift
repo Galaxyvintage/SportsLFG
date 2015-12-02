@@ -3,8 +3,8 @@
 // Author : Isaac Qiao, Charles Li
 // Date created: Nov.18 2015
 // Date edited : 11.31 2015
-// Description: This is class is responsible for loading the group data and displaying in 
-//              a table view and on a map at the same time 
+// Description: This is class is responsible for loading the group data and displaying in
+//              a table view and on a map at the same time
 //
 // Created by IsaacQ on 2015-11-18.
 // Copyright © 2015 CMPT-GP03. All rights reserved.
@@ -16,248 +16,215 @@ import CoreLocation
 import CoreGraphics
 
 
-//This protocol is used as a delegate to pass data back from 
+//This protocol is used as a delegate to pass data back from
 //GroupTableViewControllerto LocationViewController
 protocol GroupLoadingProtocol
 {
-  func didFinishLoading(groups:[Group])
+    func didFinishLoading(groups:[Group])
 }
 
 class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,GroupLoadingProtocol
 {
-  
-  //MARK:Properties
-  @IBOutlet weak var mapView: MKMapView!
-  @IBOutlet weak var groupsContainer: UIView!
-  @IBOutlet weak var rangeSelector: UISegmentedControl!
-  
-  var category = "MyGroups"
-  var groupTableVC : GroupTableViewController!
-  let locationManager =  CLLocationManager()
-  var myCurrentLocation : CLLocation?
-  var annotationContainer = [MKPointAnnotation]()
-  
-  override func viewWillAppear(animated: Bool) {
-    //before the view appears
-    super.viewWillAppear(animated)
     
-    //reload data in the  group table view controller(child view controller) 
-    groupTableVC = self.childViewControllers[0] as! GroupTableViewController
-    groupTableVC.update(nil)
+    //MARK:Properties
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var groupsContainer: UIView!
+    @IBOutlet weak var rangeSelector: UISegmentedControl!
     
-    //might be not necessary since it's already called in
-    //reloadGroupData()
-    //groupTableVC.tableView.reloadData()
-  }
-  
-  override func viewDidLoad() {
+    var category = "MyGroups"
+    var groupTableVC : GroupTableViewController!
+    let locationManager =  CLLocationManager()
+    var myCurrentLocation : CLLocation?
+    var annotationContainer = [MKPointAnnotation]()
     
-    super.viewDidLoad()
-    
-    NSLog("viewDidLoad")
-    self.rangeSelector.selectedSegmentIndex = 3
-    
-    self.mapView.layer.borderWidth = 1
-    
-    self.locationManager.delegate = self
-    
-    self.locationManager.requestWhenInUseAuthorization()
-    
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    
-    self.locationManager.startUpdatingLocation()
-    
-    if(locationManager.location != nil)
-    {
-      self.myCurrentLocation = locationManager.location
-    }
-    self.mapView.showsUserLocation = true
-    
-    self.rangeSelector.addTarget(self, action: "reloadDataBasedOnSelectedSegment", forControlEvents: .ValueChanged);
-    
-    
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-  
-  
-  
-  
-  ////////////////////
-  //Delegate Methods//
-  ////////////////////
-  
-  //This delegate method is called in GroupTableViewController and
-  //loads the data to the map when the group table view controller 
-  //finishes loading the data 
-  func didFinishLoading(groups:[Group])
-  {
-  
-    self.mapView.removeAnnotations(self.annotationContainer)
-    
-    for group in groups
-    {
-      let newGroup = group
-      
-      // here write the things about pins
-      let groupwork = newGroup
-      
-      // map view
-      var groupLocation =  (groupwork.address)! + ","
-      groupLocation += (groupwork.city)!    + ","
-      groupLocation += (groupwork.province)!
-      NSLog(groupLocation)
-      let geocoder = CLGeocoder()
-      
-      geocoder.geocodeAddressString(groupLocation, completionHandler: { (placemarks :[CLPlacemark]?,errorOrNil : NSError?) -> Void in
+    override func viewWillAppear(animated: Bool) {
+        //before the view appears
+        super.viewWillAppear(animated)
         
-        if let firstPlacemark = placemarks?[0] {
-          let location = firstPlacemark.location!
-          let center = CLLocationCoordinate2DMake (location.coordinate.latitude, location.coordinate.longitude)
-          
-          let annotation = MKPointAnnotation()
-          
-          annotation.coordinate = center
-          annotation.title = (groupwork.name)!
-          annotation.subtitle = (groupwork.sport)!
-          
-          self.annotationContainer.append(annotation)
-          self.mapView.addAnnotation(annotation)
+        //reload data in the  group table view controller(child view controller)
+        groupTableVC = self.childViewControllers[0] as! GroupTableViewController
+        groupTableVC.update(nil)
+        
+        //might be not necessary since it's already called in
+        //reloadGroupData()
+        //groupTableVC.tableView.reloadData()
+    }
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        NSLog("viewDidLoad")
+        self.rangeSelector.selectedSegmentIndex = 3
+        
+        self.mapView.layer.borderWidth = 1
+        
+        self.locationManager.delegate = self
+        
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        self.locationManager.startUpdatingLocation()
+        
+        if(locationManager.location != nil)
+        {
+            self.myCurrentLocation = locationManager.location
         }
-      })
-    }
-  } 
-  
-  
-  //The following two methods are delegate methods for setting up the location manager and map view
-  func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
-  {
-    let location = locations.last
-    
-    let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
-    let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-    
-    self.mapView.setRegion(region, animated: true)
-    
-    self.locationManager.stopUpdatingLocation()
-  }
-  
-  func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
-  {
-    print("Error: " + error.localizedDescription)
-  }
-  
-  
-  //This notifies the embedded segue which data category the table should retrieve 
-  //and sets up the delegateObject variable  in GropTableViewController to LocationViewController 
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-    if (segue.identifier == "showGroupTable") 
-    {
-      let GroupTableVC = segue.destinationViewController as! GroupTableViewController
-      
-      //pass category data to GroupTableViewController
-      GroupTableVC.category = self.category
-      
-      //assign delegate object
-      GroupTableVC.delegateObject = self
-      
-    }
-  }
-  
-  ////////////////////
-  //Selector Methods//
-  ////////////////////
-  
-  func reloadDataBasedOnSelectedSegment()
-  {
-    if(self.myCurrentLocation == nil)
-    {
-      return //current location not available 
-    }
-    else
-    {
-      let myLatitude  = Double(self.myCurrentLocation!.coordinate.latitude)
-      let myLongitude = Double(self.myCurrentLocation!.coordinate.longitude)
-      print(myLatitude,myLongitude)
-      var query : KCSQuery?
-      
-      switch self.rangeSelector.selectedSegmentIndex
-      {
-      case 0://5km or 3.1 miles approx.
-        query = KCSQuery(
-          onField: KCSEntityKeyGeolocation,
-          usingConditionalPairs:[
-            KCSQueryConditional.KCSNearSphere.rawValue,[myLongitude,myLatitude],
-            KCSQueryConditional.KCSMaxDistance.rawValue, 0.3
-          ])
-      case 1://10km
-        query = KCSQuery(
-          onField: KCSEntityKeyGeolocation,
-          usingConditionalPairs:[
-            KCSQueryConditional.KCSNearSphere.rawValue,[myLongitude,myLatitude],
-            KCSQueryConditional.KCSMaxDistance.rawValue, 9.3
-          ])
-      case 2://15km
-        query = KCSQuery(
-          onField: KCSEntityKeyGeolocation,
-          usingConditionalPairs:[
-            KCSQueryConditional.KCSNearSphere.rawValue,[myLongitude,myLatitude],
-            KCSQueryConditional.KCSMaxDistance.rawValue, 27.9
-          ])
+        self.mapView.showsUserLocation = true
         
-      case 3://All
-        query = nil
-      default:break
-      }
-      self.groupTableVC.update(query)
-      
-      let storeGroup = KCSAppdataStore.storeWithOptions(
-        [KCSStoreKeyCollectionName : "Groups", 
-          KCSStoreKeyCollectionTemplateClass : Group.self])
-
-      
-      storeGroup.queryWithQuery(
-        query, 
-        withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
-  
-          
-          if(errorOrNil != nil)
-          {
-            print(errorOrNil.userInfo)
-            print(errorOrNil.userInfo["Kinvey.kinveyErrorCode"])
-            print(errorOrNil.userInfo[KCSErrorInternalError])
-            print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
-            return //Error TODO make an alert windows  
-          }
-          else if(objectsOrNil != nil)
-          { 
-            //Success
-            //there is at least one object 
-            for testGroup in objectsOrNil 
-            {
-              let newGroup = testGroup as! Group
-              print(newGroup)
-            }
-          } 
-        },
-        withProgressBlock: nil)//End Inner Query
+        self.rangeSelector.addTarget(self, action: "reloadDataBasedOnSelectedSegment", forControlEvents: .ValueChanged);
+        
+        
     }
     
-  }
-  
-  
-  
-  //MARK:Actions
-  
-  //This method is called when the back button is called and brings the users 
-  //back to the LFG page by dismissing the current view controller 
-  @IBAction func BackToLFG(sender: UIButton) 
-  {
-    self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-  }
-  
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    
+    ////////////////////
+    //Delegate Methods//
+    ////////////////////
+    
+    //This delegate method is called in GroupTableViewController and
+    //loads the data to the map when the group table view controller
+    //finishes loading the data
+    func didFinishLoading(groups:[Group])
+    {
+        
+        self.mapView.removeAnnotations(self.annotationContainer)
+        
+        for group in groups
+        {
+            let newGroup = group
+            
+            // here write the things about pins
+            let groupwork = newGroup
+            
+            // map view
+            var groupLocation =  (groupwork.address)! + ","
+            groupLocation += (groupwork.city)!    + ","
+            groupLocation += (groupwork.province)!
+            NSLog(groupLocation)
+            let geocoder = CLGeocoder()
+            
+            geocoder.geocodeAddressString(groupLocation, completionHandler: { (placemarks :[CLPlacemark]?,errorOrNil : NSError?) -> Void in
+                
+                if let firstPlacemark = placemarks?[0] {
+                    let location = firstPlacemark.location!
+                    let center = CLLocationCoordinate2DMake (location.coordinate.latitude, location.coordinate.longitude)
+                    
+                    let annotation = MKPointAnnotation()
+                    
+                    annotation.coordinate = center
+                    annotation.title = (groupwork.name)!
+                    annotation.subtitle = (groupwork.sport)!
+                    
+                    self.annotationContainer.append(annotation)
+                    self.mapView.addAnnotation(annotation)
+                }
+            })
+        }
+    }
+    
+    
+    //The following two methods are delegate methods for setting up the location manager and map view
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+        let location = locations.last
+        
+        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+        
+        self.mapView.setRegion(region, animated: true)
+        
+        self.locationManager.stopUpdatingLocation()
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
+    {
+        print("Error: " + error.localizedDescription)
+    }
+    
+    
+    //This notifies the embedded segue which data category the table should retrieve
+    //and sets up the delegateObject variable  in GropTableViewController to LocationViewController
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "showGroupTable")
+        {
+            let GroupTableVC = segue.destinationViewController as! GroupTableViewController
+            
+            //pass category data to GroupTableViewController
+            GroupTableVC.category = self.category
+            
+            //assign delegate object
+            GroupTableVC.delegateObject = self
+            
+        }
+    }
+    
+    ////////////////////
+    //Selector Methods//
+    ////////////////////
+    
+    func reloadDataBasedOnSelectedSegment()
+    {
+        if(self.myCurrentLocation == nil)
+        {
+            return //current location not available
+        }
+        else
+        {
+            let myLatitude  = Double(self.myCurrentLocation!.coordinate.latitude)
+            let myLongitude = Double(self.myCurrentLocation!.coordinate.longitude)
+            print(myLatitude,myLongitude)
+            var query : KCSQuery?
+            
+            switch self.rangeSelector.selectedSegmentIndex
+            {
+            case 0://5km or 3.1 miles approx.
+                query = KCSQuery(
+                    onField: KCSEntityKeyGeolocation,
+                    usingConditionalPairs:[
+                        KCSQueryConditional.KCSNearSphere.rawValue,[myLongitude,myLatitude],
+                        KCSQueryConditional.KCSMaxDistance.rawValue, 3.1
+                    ])
+            case 1://10km
+                query = KCSQuery(
+                    onField: KCSEntityKeyGeolocation,
+                    usingConditionalPairs:[
+                        KCSQueryConditional.KCSNearSphere.rawValue,[myLongitude,myLatitude],
+                        KCSQueryConditional.KCSMaxDistance.rawValue, 9.3
+                    ])
+            case 2://15km
+                query = KCSQuery(
+                    onField: KCSEntityKeyGeolocation,
+                    usingConditionalPairs:[
+                        KCSQueryConditional.KCSNearSphere.rawValue,[myLongitude,myLatitude],
+                        KCSQueryConditional.KCSMaxDistance.rawValue, 27.9
+                    ])
+                
+            case 3://All
+                query = nil
+            default:break
+            }
+            self.groupTableVC.update(query)
+        }
+        
+    }
+        
+        //MARK:Actions
+        
+        //This method is called when the back button is called and brings the users 
+        //back to the LFG page by dismissing the current view controller 
+        @IBAction func BackToLFG(sender: UIButton) 
+        {
+            self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
 }
 

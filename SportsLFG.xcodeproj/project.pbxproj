@@ -99,7 +99,14 @@
 		63D2D24D1BF031D10065C2A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63D573ED1BE7E78E00EE769A /* FirstTimeUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTimeUserViewController.swift; sourceTree = "<group>"; };
 		63D573EF1BE9797900EE769A /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewController.swift; path = SportsLFG/ProfileTableViewController.swift; sourceTree = "<group>"; };
-		63D573F41BE9F7D900EE769A /* GroupCreationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = GroupCreationController.swift; sourceTree = "<group>"; tabWidth = 2; };
+		63D573F41BE9F7D900EE769A /* GroupCreationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCreationController.swift; sourceTree = "<group>"; };
+		63FBD2881C0AE2670078C2BB /* HealthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
+		63FBD28A1C0AED0B0078C2BB /* EnergyTableViewController .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EnergyTableViewController .swift"; sourceTree = "<group>"; };
+		63FBD28C1C0BCCBC0078C2BB /* EnergyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnergyTableViewCell.swift; sourceTree = "<group>"; };
+		63FBD28E1C0C2E6C0078C2BB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		63FBD2921C0C2F5B0078C2BB /* EnergyRecordDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EnergyRecordDataModel.xcdatamodel; sourceTree = "<group>"; };
+		63FBD2961C0C44850078C2BB /* WaterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterTableViewCell.swift; sourceTree = "<group>"; };
+		63FBD2981C0D08480078C2BB /* G2GatoradeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = G2GatoradeTableViewCell.swift; sourceTree = "<group>"; };
 		96C3F6D41BE4284600AC236A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C3C08F3C1C0C6EBD00A2F888 /* GroupMemberTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				27AEA61C1C08DEEB0062982D /* GroupCreationUI */,
+				63FBD2901C0C2EC50078C2BB /* Energy */,
 				63CD204E1C06A8DE00F6A625 /* SportsLFG.entitlements */,
 				63D573F11BE9A7C200EE769A /* Classes */,
 				63D573F21BE9F2EA00EE769A /* Login&Register */,
@@ -439,6 +447,7 @@
 				63C0350B1BE485E700BAFA65 /* enum.swift in Sources */,
 				4A76EB011BEC9216004890AD /* GroupTableViewCell.swift in Sources */,
 				63D573EE1BE7E78E00EE769A /* FirstTimeUserViewController.swift in Sources */,
+				63319F231C0D88AC00319100 /* Member.swift in Sources */,
 				27AEA61E1C08DF720062982D /* TextInputTableViewCell.swift in Sources */,
 				632290341BE0C15E0097B93B /* RegisterViewController.swift in Sources */,
 				63FBD2931C0C2F5B0078C2BB /* EnergyRecordDataModel.xcdatamodeld in Sources */,
