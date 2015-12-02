@@ -2,7 +2,7 @@
 // File   : LocationViewController.swift
 // Author : Isaac Qiao, Charles Li
 // Date created: Nov.18 2015
-// Date edited : Nov.23 2015
+// Date edited : 11.31 2015
 // Description: This is class is responsible for loading the group data and displaying in 
 //              a table view and on a map at the same time 
 //
@@ -23,28 +23,31 @@ protocol GroupLoadingProtocol
   func didFinishLoading(groups:[Group])
 }
 
-
 class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,GroupLoadingProtocol
 {
   
   //MARK:Properties
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var groupsContainer: UIView!
+  @IBOutlet weak var rangeSelector: UISegmentedControl!
   
   var category = "MyGroups"
+  var groupTableVC : GroupTableViewController!
   let locationManager =  CLLocationManager()
+  var myCurrentLocation : CLLocation?
+  var annotationContainer = [MKPointAnnotation]()
   
   override func viewWillAppear(animated: Bool) {
     //before the view appears
     super.viewWillAppear(animated)
     
     //reload data in the  group table view controller(child view controller) 
-    let groupTableVC = self.childViewControllers[0] as! GroupTableViewController
-    groupTableVC.reloadGroupData()
+    groupTableVC = self.childViewControllers[0] as! GroupTableViewController
+    groupTableVC.update(nil)
     
     //might be not necessary since it's already called in
     //reloadGroupData()
-    groupTableVC.tableView.reloadData()
+    //groupTableVC.tableView.reloadData()
   }
   
   override func viewDidLoad() {
@@ -52,7 +55,8 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     super.viewDidLoad()
     
     NSLog("viewDidLoad")
-  
+    self.rangeSelector.selectedSegmentIndex = 3
+    
     self.mapView.layer.borderWidth = 1
     
     self.locationManager.delegate = self
@@ -63,7 +67,15 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     
     self.locationManager.startUpdatingLocation()
     
+    if(locationManager.location != nil)
+    {
+      self.myCurrentLocation = locationManager.location
+    }
     self.mapView.showsUserLocation = true
+    
+    self.rangeSelector.addTarget(self, action: "reloadDataBasedOnSelectedSegment", forControlEvents: .ValueChanged);
+    
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -71,16 +83,21 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     // Dispose of any resources that can be recreated.
   }
   
+  
+  
+  
   ////////////////////
   //Delegate Methods//
   ////////////////////
-  
   
   //This delegate method is called in GroupTableViewController and
   //loads the data to the map when the group table view controller 
   //finishes loading the data 
   func didFinishLoading(groups:[Group])
   {
+  
+    self.mapView.removeAnnotations(self.annotationContainer)
+    
     for group in groups
     {
       let newGroup = group
@@ -102,9 +119,12 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
           let center = CLLocationCoordinate2DMake (location.coordinate.latitude, location.coordinate.longitude)
           
           let annotation = MKPointAnnotation()
+          
           annotation.coordinate = center
           annotation.title = (groupwork.name)!
           annotation.subtitle = (groupwork.sport)!
+          
+          self.annotationContainer.append(annotation)
           self.mapView.addAnnotation(annotation)
         }
       })
@@ -130,6 +150,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     print("Error: " + error.localizedDescription)
   }
   
+  
   //This notifies the embedded segue which data category the table should retrieve 
   //and sets up the delegateObject variable  in GropTableViewController to LocationViewController 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
@@ -146,6 +167,89 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     }
   }
   
+  ////////////////////
+  //Selector Methods//
+  ////////////////////
+  
+  func reloadDataBasedOnSelectedSegment()
+  {
+    if(self.myCurrentLocation == nil)
+    {
+      return //current location not available 
+    }
+    else
+    {
+      let myLatitude  = Double(self.myCurrentLocation!.coordinate.latitude)
+      let myLongitude = Double(self.myCurrentLocation!.coordinate.longitude)
+      print(myLatitude,myLongitude)
+      var query : KCSQuery?
+      
+      switch self.rangeSelector.selectedSegmentIndex
+      {
+      case 0://5km or 3.1 miles approx.
+        query = KCSQuery(
+          onField: KCSEntityKeyGeolocation,
+          usingConditionalPairs:[
+            KCSQueryConditional.KCSNearSphere.rawValue,[myLongitude,myLatitude],
+            KCSQueryConditional.KCSMaxDistance.rawValue, 0.3
+          ])
+      case 1://10km
+        query = KCSQuery(
+          onField: KCSEntityKeyGeolocation,
+          usingConditionalPairs:[
+            KCSQueryConditional.KCSNearSphere.rawValue,[myLongitude,myLatitude],
+            KCSQueryConditional.KCSMaxDistance.rawValue, 9.3
+          ])
+      case 2://15km
+        query = KCSQuery(
+          onField: KCSEntityKeyGeolocation,
+          usingConditionalPairs:[
+            KCSQueryConditional.KCSNearSphere.rawValue,[myLongitude,myLatitude],
+            KCSQueryConditional.KCSMaxDistance.rawValue, 27.9
+          ])
+        
+      case 3://All
+        query = nil
+      default:break
+      }
+      self.groupTableVC.update(query)
+      
+      let storeGroup = KCSAppdataStore.storeWithOptions(
+        [KCSStoreKeyCollectionName : "Groups", 
+          KCSStoreKeyCollectionTemplateClass : Group.self])
+
+      
+      storeGroup.queryWithQuery(
+        query, 
+        withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
+  
+          
+          if(errorOrNil != nil)
+          {
+            print(errorOrNil.userInfo)
+            print(errorOrNil.userInfo["Kinvey.kinveyErrorCode"])
+            print(errorOrNil.userInfo[KCSErrorInternalError])
+            print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
+            return //Error TODO make an alert windows  
+          }
+          else if(objectsOrNil != nil)
+          { 
+            //Success
+            //there is at least one object 
+            for testGroup in objectsOrNil 
+            {
+              let newGroup = testGroup as! Group
+              print(newGroup)
+            }
+          } 
+        },
+        withProgressBlock: nil)//End Inner Query
+    }
+    
+  }
+  
+  
+  
   //MARK:Actions
   
   //This method is called when the back button is called and brings the users 
@@ -154,6 +258,6 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   {
     self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
   }
+  
 }
-
 

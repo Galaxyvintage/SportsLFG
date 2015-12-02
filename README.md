@@ -25,8 +25,8 @@
 
 
 #####VERSION 3.0
-- [ ] 1. Search Group by Current Location
-- [ ] 2. HealthKit(Energy Drink Record)
+- [x] 1. Search Group by Current Location
+- [x] 2. HealthKit(Energy Drink Record)
 - [x] 3. MyGroup
 - [ ] 4. Arbitrary sports in group creation
 - [ ] 5. Load GroupMembers Info from database

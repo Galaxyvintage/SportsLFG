@@ -26,6 +26,14 @@ class LoginViewController : UIViewController, UITextFieldDelegate
   @IBOutlet weak var registerBtn: UIButton!
   @IBOutlet weak var passwordResetBtn: UIButton!
   
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    self.userEmailField.text?.removeAll()
+    self.userPasswordField.text?.removeAll()
+  }
+  
+  
+  
   override func viewDidLoad() {
     
     super.viewDidLoad()

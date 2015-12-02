@@ -7,12 +7,14 @@
 
 import UIKit
 
-class GroupTableViewController: UITableViewController {
+class GroupTableViewController: UITableViewController
+{
   
   // MARK: Properties
+  var indicatorView : UIView!
+  var activityIndicator : UIActivityIndicatorView!
   
   var category :String?
-  
   var delegateObject : GroupLoadingProtocol?
   
   //an empty array of Group objects
@@ -28,6 +30,30 @@ class GroupTableViewController: UITableViewController {
   let storeInGroup = KCSAppdataStore.storeWithOptions(
     [KCSStoreKeyCollectionName : "InGroups", 
       KCSStoreKeyCollectionTemplateClass : inGroup.self])
+  
+  var dataLimit = 20 //loads 20 groups max each time
+  var dataSkip  = 20 //skips 20 groups after loading the first time 
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    // activityIndicator Configure
+    self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    
+    self.indicatorView  = UIView(frame: self.tableView.frame)
+    print(self.indicatorView)
+    
+    self.tableView.addSubview(self.indicatorView)
+    
+    self.indicatorView.addSubview(self.activityIndicator)
+    self.indicatorView.hidden = true
+    self.activityIndicator.center = CGPoint(x: self.indicatorView.center.x, y: 40.0)
+    self.activityIndicator.frame  = self.indicatorView.frame
+    self.activityIndicator.hidesWhenStopped = true
+    
+    self.indicatorView.backgroundColor     = UIColor.clearColor()
+    self.activityIndicator.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+  }
   
   
   override func didReceiveMemoryWarning() {
@@ -72,7 +98,7 @@ class GroupTableViewController: UITableViewController {
     
     // Configure the cell...
     // Mandatory properties 
-    cell.NameLabel.text       = "["+group.category!+"] "+group.name!
+    cell.NameLabel.text       = "["+group.category!+"]"+group.name!
     cell.StartDateLabel.text  = group.startDate
     cell.StartTimeLabel.text  = group.startTime
     cell.ProvienceLabel.text  = group.province
@@ -113,13 +139,27 @@ class GroupTableViewController: UITableViewController {
   
   
   
+  //Helper function that displays the actitivy indiciator while loading data
+  func update(query: KCSQuery?)
+  {
+    //self.tableView.bringSubviewToFront(self.indicatorView)
+    self.indicatorView.hidden = false
+    self.activityIndicator.hidden = false
+    self.activityIndicator.startAnimating()
+    self.performSelector(Selector("reloadGroupData:"), withObject: query , afterDelay: 0.001)
+  }
+  
+  
+  
   //This method will be called by the viewWillAppear method in 
   //LocationViewController 
-  func reloadGroupData()
+  func reloadGroupData(locationQuery : KCSQuery?)
   {
     var temp_groups = [Group]()
     var query : KCSQuery
     
+    
+      
     if(category == "MyGroups")
     {
       let currentUserId = KCSUser.activeUser().userId
@@ -129,13 +169,20 @@ class GroupTableViewController: UITableViewController {
       query = KCSQuery(onField:"user",withExactMatchForValue:currentUserId)
       
       //Start Outer Query
-      storeInGroup.queryWithQuery(
+      self.storeInGroup.queryWithQuery(
         query, 
         withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
           
           if(errorOrNil != nil)
           {
-            return//error TODO make an alert windows   
+            self.activityIndicator.stopAnimating()
+            self.indicatorView.hidden = true
+            // print(errorOrNil.userInfo["Kinvey.kinveyErrorCode"])          
+            //print(errorOrNil.userInfo[KCSErrorInternalError])
+            print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
+            //Error TODO make an alert window
+            
+            return 
           }
           else if(objectsOrNil != nil)
           {
@@ -149,13 +196,25 @@ class GroupTableViewController: UITableViewController {
             //Get all the groups using the group names from the previous query         
             query = KCSQuery(onField: "name", usingConditional: .KCSIn, forValue: groupNames)
             
+            if(locationQuery != nil)
+            {
+              query.addQuery(locationQuery)
+            }
+            
+            
+            
             //Start Inner Query
             self.storeGroup.queryWithQuery(
               query, 
               withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
+                self.activityIndicator.stopAnimating()
+                self.indicatorView.hidden = true
                 
                 if(errorOrNil != nil)
                 {
+                  //print(errorOrNil.userInfo["Kinvey.kinveyErrorCode"])
+                  //print(errorOrNil.userInfo[KCSErrorInternalError])
+                  print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
                   return //Error TODO make an alert windows  
                 }
                 else if(objectsOrNil != nil)
@@ -196,6 +255,11 @@ class GroupTableViewController: UITableViewController {
       {
         query = KCSQuery(onField: "category", withExactMatchForValue: "Gym")
       }
+  
+      if(locationQuery != nil)
+      {
+        query.addQuery(locationQuery)
+      }
       
       //This limit the query for the first 20 objects
       //TODO: need to add a function to load more in the next version
@@ -205,10 +269,15 @@ class GroupTableViewController: UITableViewController {
       storeGroup.queryWithQuery(
         query, 
         withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
+          self.activityIndicator.stopAnimating()
+          self.indicatorView.hidden = true
           
           NSLog("InCompletionBlock")
           if((errorOrNil) != nil)
           {
+            print(errorOrNil.userInfo["Kinvey.kinveyErrorCode"])
+            print(errorOrNil.userInfo[KCSErrorInternalError])
+            print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
             //Error TODO make an alert window 
           }
           else if(errorOrNil == nil)
