@@ -22,6 +22,15 @@ class LoginViewController : UIViewController, UITextFieldDelegate
   @IBOutlet weak var userEmailField: UITextField!
   @IBOutlet weak var userPasswordField: UITextField!
   
+  @IBOutlet weak var loginBtn: UIButton!
+  @IBOutlet weak var registerBtn: UIButton!
+  @IBOutlet weak var passwordResetBtn: UIButton!
+  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    self.userEmailField.text?.removeAll()
+    self.userPasswordField.text?.removeAll()
+  }
   
   
   
@@ -33,6 +42,10 @@ class LoginViewController : UIViewController, UITextFieldDelegate
     //set all the textfields's delegate to its view controller
     self.userEmailField.delegate    = self
     self.userPasswordField.delegate = self
+    
+    loginBtn.layer.cornerRadius = 10
+    registerBtn.layer.cornerRadius = 10
+    passwordResetBtn.layer.cornerRadius = 10
     
   }
   

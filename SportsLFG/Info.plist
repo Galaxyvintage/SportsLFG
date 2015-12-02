@@ -4,10 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>App needs emergency contact information</string>
-	<key>NSHealthUpdateUsageDescription </key>
-	<string></string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -50,8 +46,18 @@
 		<string>MKDirectionsModeTaxi</string>
 		<string>MKDirectionsModeTrain</string>
 	</array>
+	<key>NSHealthShareUsageDescription</key>
+	<string>This app would like to read and write data regarding nutrition</string>
+	<key>NSHealthUpdateUsageDescription </key>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>App needs Location Services for Current Location.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
