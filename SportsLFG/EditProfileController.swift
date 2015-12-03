@@ -18,7 +18,7 @@ class EditProfileController : UIViewController
   @IBOutlet weak var province: UITextField!
   @IBOutlet weak var gender: UISwitch!
   
-  var delegateObject : ProfileUpdatingProtocol?
+  weak var delegateObject : ProfileUpdatingProtocol?
   
   override func viewDidLoad() {
     super.viewDidLoad()

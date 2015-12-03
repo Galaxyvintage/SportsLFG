@@ -14,8 +14,8 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
   @IBOutlet weak var PhotoImageView: UIImageView!
   
   
-  var parent :  MainCVController!  
-  var imageCache : NSCache!
+  weak var parent :  MainCVController!
+  weak var imageCache : NSCache!
   
   override func viewDidLoad() 
   { 

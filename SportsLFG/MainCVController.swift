@@ -8,21 +8,17 @@
 
 
 import Foundation
-
-
-import Foundation
-
+import UIKit
 
 class MainCVController : UIViewController, UIImagePickerControllerDelegate
 {
   
   //MARK: Properties
 
-  var currentViewController: UIViewController!
-  @IBOutlet var TabBarButtons: Array<UIButton>!
-  @IBOutlet var CV: UIView!
-  
-  
+  weak var currentViewController: UIViewController!
+
+  @IBOutlet weak var CV: UIView!
+  @IBOutlet var TabBarButtons: [UIButton]!
   
   override func viewDidLoad() {
     
@@ -52,12 +48,14 @@ class MainCVController : UIViewController, UIImagePickerControllerDelegate
     }
     
     //This sets the parent variable to the current view controller 
+    /*
     if(segue.identifier == "Home")
     {
       let HVController = segue.destinationViewController as! HomeViewController
       HVController.parent = self
  
     }
+    */
     
     
   }

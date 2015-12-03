@@ -11,12 +11,12 @@ class MainCVSegue: UIStoryboardSegue {
   
   override func perform() {
     
-    let TabBarController      = self.sourceViewController as! MainCVController
+    weak var TabBarController = self.sourceViewController as! MainCVController
     let destinationController = self.destinationViewController as UIViewController
     
     
     //childViewControllers is an array that contains all the childViewControllers
-    let childViewControllers  = TabBarController.childViewControllers
+    let childViewControllers  = TabBarController!.childViewControllers
     
     //check if the childViewControllers array is empty or not
     if(childViewControllers.count > 0)
@@ -31,25 +31,24 @@ class MainCVSegue: UIStoryboardSegue {
     
     //  Add view to placeholder view
     //  TabBarController.addChildViewController(rootViewController)
-    TabBarController.currentViewController = destinationController
-    TabBarController.addChildViewController(destinationController)
+    TabBarController!.currentViewController = destinationController
+    TabBarController!.addChildViewController(destinationController)
     destinationController.didMoveToParentViewController(TabBarController)
-    TabBarController.CV.addSubview(destinationController.view)
+    TabBarController!.CV.addSubview(destinationController.view)
     
     
     
-    TabBarController.CV.translatesAutoresizingMaskIntoConstraints = false
+    TabBarController!.CV.translatesAutoresizingMaskIntoConstraints = false
     destinationController.view.translatesAutoresizingMaskIntoConstraints = false
     
     
     let horizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[v1]-0-|", options: .AlignAllTop, metrics: nil, views: ["v1": destinationController.view])
     
-    TabBarController.CV.addConstraints(horizontalConstraint)
+    TabBarController!.CV.addConstraints(horizontalConstraint)
     
     let verticalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[v1]-0-|", options: .AlignAllTop, metrics: nil, views: ["v1": destinationController.view])
     
-    TabBarController.CV.addConstraints(verticalConstraint)
-    destinationController.didMoveToParentViewController(TabBarController)
+    TabBarController!.CV.addConstraints(verticalConstraint)
     
   }
   

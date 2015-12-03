@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ProfileUpdatingProtocol
+protocol ProfileUpdatingProtocol:class
 {
   func didFinishUpdate()
 }

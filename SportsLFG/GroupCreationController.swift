@@ -50,7 +50,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   @IBOutlet weak var detail: UITextField?
   
   
-  @IBOutlet var SportsButton: [UIButton]!
+  //@IBOutlet var SportsButton: [UIButton]!
   
   
   override func viewDidLoad() {
@@ -426,7 +426,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   //////////
   //Sports//
   //////////
-  
+  /*
   @IBAction func PingPong(sender: UIButton) {
     sport = "PingPong"
     for btn in SportsButton{
@@ -458,7 +458,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
         }
         sender.selected = true
     }
-  
+  */
   //This methods returns back to the LFG view controller
   @IBAction func BackToLFG(sender: UIButton) {
     NSLog("BackToLFG")

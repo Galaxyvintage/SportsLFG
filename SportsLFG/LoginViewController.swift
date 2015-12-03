@@ -74,8 +74,8 @@ class LoginViewController : UIViewController, UITextFieldDelegate
     let email = userEmailField.text
     let password = userPasswordField.text
     let firstViewController = self.storyboard?.instantiateViewControllerWithIdentifier("FirstTimeUser")
-    let mainViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("MainCVController") as? MainCVController
-    
+  let mainViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("MainCVController") as? MainCVController
+   // let mainViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("LFGViewController") as? LFGViewController
     KCSUser.loginWithUsername(
       email!,
       password: password!,

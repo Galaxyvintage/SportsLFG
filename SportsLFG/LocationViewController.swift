@@ -18,7 +18,7 @@ import CoreGraphics
 
 //This protocol is used as a delegate to pass data back from 
 //GroupTableViewControllerto LocationViewController
-protocol GroupLoadingProtocol
+protocol GroupLoadingProtocol : class
 {
   func didFinishLoading(groups:[Group])
 }
@@ -32,18 +32,22 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   @IBOutlet weak var rangeSelector: UISegmentedControl!
   
   var category = "MyGroups"
-  var groupTableVC : GroupTableViewController!
-  let locationManager =  CLLocationManager()
+  weak var groupTableVC : GroupTableViewController!
+  var locationManager   : CLLocationManager?
   var myCurrentLocation : CLLocation?
-  var annotationContainer = [MKPointAnnotation]()
+  var annotationContainer : [MKPointAnnotation]?
   
   override func viewWillAppear(animated: Bool) {
     //before the view appears
     super.viewWillAppear(animated)
     
     //reload data in the  group table view controller(child view controller) 
-    groupTableVC = self.childViewControllers[0] as! GroupTableViewController
+    self.groupTableVC = self.childViewControllers[0] as! GroupTableViewController
+    
+    //reset dataSkip back to zero
+    
     groupTableVC.update(nil)
+    
     
     //might be not necessary since it's already called in
     //reloadGroupData()
@@ -55,21 +59,25 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     super.viewDidLoad()
     
     NSLog("viewDidLoad")
+    self.annotationContainer = [MKPointAnnotation]()
+    
+    self.locationManager = CLLocationManager()
+    
     self.rangeSelector.selectedSegmentIndex = 3
     
     self.mapView.layer.borderWidth = 1
     
-    self.locationManager.delegate = self
+    self.locationManager!.delegate = self
     
-    self.locationManager.requestWhenInUseAuthorization()
+    self.locationManager!.requestWhenInUseAuthorization()
     
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    self.locationManager!.desiredAccuracy = kCLLocationAccuracyBest
     
-    self.locationManager.startUpdatingLocation()
+    self.locationManager!.startUpdatingLocation()
     
-    if(locationManager.location != nil)
+    if(locationManager!.location != nil)
     {
-      self.myCurrentLocation = locationManager.location
+      self.myCurrentLocation = locationManager!.location
     }
     self.mapView.showsUserLocation = true
     
@@ -96,7 +104,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   func didFinishLoading(groups:[Group])
   {
   
-    self.mapView.removeAnnotations(self.annotationContainer)
+    self.mapView.removeAnnotations(self.annotationContainer!)
     
     for group in groups
     {
@@ -124,7 +132,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
           annotation.title = (groupwork.name)!
           annotation.subtitle = (groupwork.sport)!
           
-          self.annotationContainer.append(annotation)
+          self.annotationContainer!.append(annotation)
           self.mapView.addAnnotation(annotation)
         }
       })
@@ -142,7 +150,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     
     self.mapView.setRegion(region, animated: true)
     
-    self.locationManager.stopUpdatingLocation()
+    self.locationManager!.stopUpdatingLocation()
   }
   
   func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
@@ -191,7 +199,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
           onField: KCSEntityKeyGeolocation,
           usingConditionalPairs:[
             KCSQueryConditional.KCSNearSphere.rawValue,[myLongitude,myLatitude],
-            KCSQueryConditional.KCSMaxDistance.rawValue, 0.3
+            KCSQueryConditional.KCSMaxDistance.rawValue, 3.1
           ])
       case 1://10km
         query = KCSQuery(
@@ -247,8 +255,6 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     }
     
   }
-  
-  
   
   //MARK:Actions
   

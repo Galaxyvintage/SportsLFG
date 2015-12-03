@@ -19,8 +19,8 @@ class GroupViewController: UIViewController {
   */
   var group: Group?
   var UIBarButtonItemTitle : String?
-  var currentView : UIView!
-  var activityIndicator : UIActivityIndicatorView!
+  weak var currentView : UIView!
+  weak var activityIndicator : UIActivityIndicatorView!
   
   
   // MARK: Properties
@@ -42,11 +42,10 @@ class GroupViewController: UIViewController {
     
     // Spinner Config
     self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-    
-    self.currentView = self.view
-    print(self.currentView)
-    self.currentView.addSubview(self.activityIndicator)
-    self.activityIndicator.frame  = self.currentView.frame
+
+
+    self.view.addSubview(self.activityIndicator)
+    self.activityIndicator.frame  = self.view.frame
     self.activityIndicator.hidesWhenStopped = true
     self.activityIndicator.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
     
@@ -70,7 +69,7 @@ class GroupViewController: UIViewController {
       ProvienceLabel.text   = groupwork.province
       CityLabel.text        = groupwork.city
       AddressLabel.text     = groupwork.address
-      MaxNumLabel.text      = String(groupwork.maxSize)
+      MaxNumLabel.text      = String(groupwork.currentSize!) + "/" + String(groupwork.maxSize!)
       
       
       if(groupwork.detail!.isEmpty)

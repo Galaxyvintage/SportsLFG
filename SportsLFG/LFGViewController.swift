@@ -47,19 +47,19 @@ class LFGViewController : UIViewController, UINavigationBarDelegate,UIBarPositio
   
   @IBAction func All(sender: UIButton)
   {
-    category = "All"
+    self.category = "All"
     self.performSegueWithIdentifier("ShowGroups", sender: sender)
   }  
   @IBAction func OutdoorGroups(sender: UIButton) 
   {
-    category = "Outdoor"
+    self.category = "Outdoor"
     self.performSegueWithIdentifier("ShowGroups", sender: sender)
   }
   
   //Indoor button
   @IBAction func IndoorGroups(sender: UIButton)
   {
-    category = "Indoor"
+    self.category = "Indoor"
     self.performSegueWithIdentifier("ShowGroups", sender: sender)
   }
   
@@ -67,18 +67,18 @@ class LFGViewController : UIViewController, UINavigationBarDelegate,UIBarPositio
   //
   @IBAction func GymGroups(sender: UIButton) 
   {
-    category = "Gym"
+    self.category = "Gym"
     self.performSegueWithIdentifier("ShowGroups", sender: sender)
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
     if (segue.identifier == "ShowGroups") 
     {
-      let navController = segue.destinationViewController as! UINavigationController
-      let container = navController.viewControllers[0] as! LocationViewController
+      weak var navController = segue.destinationViewController as? UINavigationController
+      weak var container = navController!.viewControllers[0] as? LocationViewController
       
       //pass the category information to the container view controller
-      container.category = category!
+      container!.category = category!
       
     }
   }
