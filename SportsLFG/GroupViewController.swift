@@ -57,6 +57,7 @@ class GroupViewController: UIViewController {
     
     self.navigationItem.rightBarButtonItem = RightButtonItem
     
+    changeRightButtonTitle()
     //RightBarButtonItem.title = self.UIBarButtonItemTitle
     
     // Set up views if editing an existing Group.
@@ -76,10 +77,10 @@ class GroupViewController: UIViewController {
       {
         // insert a default description or leave blank or afafaf
         // should already been dealt with at creation but just in case
-        Description.text = "Description:" + "Come join in!"
+        Description.text = "Description: " + "Come join in!"
       } else 
       {
-        Description.text = "Description:" + (groupwork.detail)!    
+        Description.text = "Description: " + (groupwork.detail)!
       }
       
       
@@ -119,6 +120,66 @@ class GroupViewController: UIViewController {
       })
     }
   }
+    /*
+    //I want to update the size as the user joins/leaves but right now you can't see the update until you back all the way out to home
+    func updateSize() {
+        let groupwork = group
+        MaxNumLabel.text = (String(groupwork!.currentSize!) + "/" + String(groupwork!.maxSize!))
+        NSLog("updateSize "+String(groupwork!.currentSize!))
+    }
+    */
+   
+    // Changes the right "Join/Leave" button to the appropriate one
+    func changeRightButtonTitle() {
+        let currentUserId = KCSUser.activeUser().userId
+        let currentGroupName = group!.name
+        let store = KCSAppdataStore.storeWithOptions(
+            [KCSStoreKeyCollectionName          : "InGroups",
+                KCSStoreKeyCollectionTemplateClass : inGroup.self])
+        
+        
+        let nameQuery  = KCSQuery(onField:"user", withExactMatchForValue: currentUserId)
+        let groupQuery = KCSQuery(onField:"group",withExactMatchForValue: currentGroupName)!
+        
+        nameQuery.addQuery(groupQuery)
+        
+        //query to check whether the user is already in the group
+        store.queryWithQuery(
+            nameQuery,
+            withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in
+                
+                if(errorOrNil != nil)
+                {
+                    self.activityIndicator.stopAnimating()
+                    //error
+                    NSLog("error1")
+                    print(errorOrNil.userInfo[KCSErrorCode])
+                    print(errorOrNil.userInfo[KCSErrorInternalError])
+                    print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
+                    return
+                }
+                else if(objectsOrNil != nil && objectsOrNil.count == 0)
+                {
+                    NSLog("viewDidAppear: not in group")
+                    //not in the group
+                    self.navigationItem.rightBarButtonItem!.title = "Join"
+                }
+                else
+                {
+                    self.activityIndicator.stopAnimating()
+                    NSLog("viewDidAppear: is in group")
+                    self.navigationItem.rightBarButtonItem!.title = "Leave"
+                }
+            },
+            withProgressBlock: nil)
+    }
+    
+    //override viewDidAppear
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        changeRightButtonTitle()
+        //updateSize()
+    }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -202,7 +263,9 @@ class GroupViewController: UIViewController {
                   style  : UIAlertActionStyle.Cancel,
                   handler: nil)
                 alert.addAction(okAction)
+                
                 self.presentViewController(alert, animated: true , completion: nil)
+                self.viewDidAppear(true)
                 return
               }
             }, 
@@ -219,10 +282,13 @@ class GroupViewController: UIViewController {
             preferredStyle: UIAlertControllerStyle.Alert
           )
           let cancelAction = UIAlertAction(title  :"Cancel", 
-            style  : UIAlertActionStyle.Cancel, 
-            handler: nil)
+            style  : UIAlertActionStyle.Cancel,
+            handler: {(action: UIAlertAction!) in
+                self.navigationController?.popViewControllerAnimated(true)
+            })
           alert.addAction(cancelAction)
           self.presentViewController(alert, animated: true , completion: nil)
+            self.viewDidAppear(true)
           return
           
         }
@@ -268,10 +334,9 @@ class GroupViewController: UIViewController {
             preferredStyle: UIAlertControllerStyle.Alert)
           
           let okAction = UIAlertAction(title  :"Ok", 
-            style  : UIAlertActionStyle.Cancel, 
+            style  : UIAlertActionStyle.Cancel,
             handler: {(cancelAction : UIAlertAction)-> Void in
               self.navigationController?.popViewControllerAnimated(true)
-              
           })
           alert.addAction(okAction)
           self.presentViewController(alert, animated: true , completion: nil)
