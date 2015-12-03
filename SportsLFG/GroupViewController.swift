@@ -19,8 +19,8 @@ class GroupViewController: UIViewController {
   */
   var group: Group?
   var UIBarButtonItemTitle : String?
-  weak var currentView : UIView!
-  weak var activityIndicator : UIActivityIndicatorView!
+  var currentView : UIView!
+  var activityIndicator : UIActivityIndicatorView!
   
   
   // MARK: Properties
@@ -57,7 +57,7 @@ class GroupViewController: UIViewController {
     
     self.navigationItem.rightBarButtonItem = RightButtonItem
     
-    changeRightButtonTitle()
+    //changeRightButtonTitle()
     //RightBarButtonItem.title = self.UIBarButtonItemTitle
     
     // Set up views if editing an existing Group.
@@ -288,7 +288,7 @@ class GroupViewController: UIViewController {
             })
           alert.addAction(cancelAction)
           self.presentViewController(alert, animated: true , completion: nil)
-            self.viewDidAppear(true)
+          self.viewDidAppear(true)
           return
           
         }
@@ -336,7 +336,7 @@ class GroupViewController: UIViewController {
           let okAction = UIAlertAction(title  :"Ok", 
             style  : UIAlertActionStyle.Cancel,
             handler: {(cancelAction : UIAlertAction)-> Void in
-              self.navigationController?.popViewControllerAnimated(true)
+            self.navigationController?.popViewControllerAnimated(true)
           })
           alert.addAction(okAction)
           self.presentViewController(alert, animated: true , completion: nil)
@@ -348,7 +348,7 @@ class GroupViewController: UIViewController {
   //Helper function that select the correct function 
   func update(condition : String)
   {
-    self.currentView.bringSubviewToFront(self.activityIndicator)
+    self.view.bringSubviewToFront(self.activityIndicator)
     self.activityIndicator.hidden = false
     self.activityIndicator.startAnimating()
     if(condition == "Join")
@@ -403,6 +403,11 @@ class GroupViewController: UIViewController {
     }
     
   } 
+  
+  deinit{
+    
+    print("GroupView Controller is released")
+  }  
 }
 
 

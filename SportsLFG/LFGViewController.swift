@@ -74,8 +74,8 @@ class LFGViewController : UIViewController, UINavigationBarDelegate,UIBarPositio
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
     if (segue.identifier == "ShowGroups") 
     {
-      weak var navController = segue.destinationViewController as? UINavigationController
-      weak var container = navController!.viewControllers[0] as? LocationViewController
+      let navController = segue.destinationViewController as? UINavigationController
+      let container = navController!.viewControllers[0] as? LocationViewController
       
       //pass the category information to the container view controller
       container!.category = category!

@@ -8,7 +8,7 @@
 import UIKit
 
 
-protocol DismissViewControllerProtocol
+protocol DismissViewControllerProtocol:class
 {
   func dismissViewController() 
 }

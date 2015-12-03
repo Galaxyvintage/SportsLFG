@@ -2,7 +2,7 @@
 // File  : LocationViewController.swift
 // Author:  Charles Li, Isaac Qiao
 // Date created  : Nov.08 2015
-// Date edited   : Nov.25 2015
+// Date edited   : Dec.03 2015
 // Description :  This class is responsible to show groups and locations
 
 import UIKit
@@ -144,9 +144,6 @@ class GroupTableViewController: UITableViewController
       
     }
     
-    print(self.groups!.count)
-    print(indexPath.section)
-    
     
     if(self.lastItemReached == false &&
       indexPath.section == (self.groups!.count - 1) )
@@ -163,6 +160,12 @@ class GroupTableViewController: UITableViewController
   //Helper function that displays the actitivy indiciator while loading data
   func update(query: KCSQuery?)
   {
+    if(query != nil)
+    {
+      self.dataSkip = 0
+      self.groups?.removeAll()
+    }
+    
     print("updating")
     //self.tableView.bringSubviewToFront(self.indicatorView)
     self.indicatorView.hidden = false
@@ -216,6 +219,7 @@ class GroupTableViewController: UITableViewController
               self.activityIndicator.stopAnimating()
               self.indicatorView.hidden = true
               NSLog("last tiem reached")
+              self.tableView.reloadData()
               self.lastItemReached = true
               return
             }
@@ -263,7 +267,8 @@ class GroupTableViewController: UITableViewController
                   }
                   
                   
-                  if(self.dataSkip <= self.dataLimit)
+                  if(self.dataSkip <= self.dataLimit ||
+                     self.groups!.count < self.dataLimit)
                   {
                     self.groups!.removeAll()
                   }
@@ -271,6 +276,7 @@ class GroupTableViewController: UITableViewController
                   self.groups!.appendContentsOf(temp_groups)//append(temp_groups)
                   self.delegateObject?.didFinishLoading(self.groups!)
                   self.tableView.reloadData()
+                  print("table data reloaded")
                   
                 }
               },
@@ -332,6 +338,7 @@ class GroupTableViewController: UITableViewController
             if(objectsOrNil.count == 0)
             {
               NSLog("last item reached")
+              self.tableView.reloadData()
               self.lastItemReached = true
               return
             }
@@ -350,10 +357,12 @@ class GroupTableViewController: UITableViewController
               temp_groups += [newGroup]
             }
             
-            if(self.groups!.count <= self.dataLimit)
+            if(self.dataSkip <= self.dataLimit ||
+              self.groups!.count < self.dataLimit)
             {
               self.groups!.removeAll()
             }
+
             
             self.groups!.appendContentsOf(temp_groups)//append(temp_groups)
             self.delegateObject?.didFinishLoading(self.groups!)
@@ -409,24 +418,24 @@ class GroupTableViewController: UITableViewController
   // In a storyboard-based application, you will often want to do a little preparation before navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "ShowDetail" {
-      let groupDetailViewController = segue.destinationViewController as! GroupViewController
+      let groupDetailViewController = segue.destinationViewController as? GroupViewController
       
       // Get the cell that generated this segue.
       if let selectedGroupCell = sender as? GroupTableViewCell {
         let indexPath = tableView.indexPathForCell(selectedGroupCell)!
         let selectedGroup = groups![indexPath.section]
-        groupDetailViewController.group = selectedGroup
+        groupDetailViewController!.group = selectedGroup
         
-        NSLog(self.category!)
-        if(self.category == "MyGroups")
+        NSLog(category!)
+        if(category == "MyGroups")
         {
           NSLog("Leave")
-          groupDetailViewController.UIBarButtonItemTitle = "Leave"
+          groupDetailViewController!.UIBarButtonItemTitle = "Leave"
         }
         else
         {
           NSLog("Join")
-          groupDetailViewController.UIBarButtonItemTitle = "Join"
+          groupDetailViewController!.UIBarButtonItemTitle = "Join"
         }
       }
     }
@@ -435,4 +444,11 @@ class GroupTableViewController: UITableViewController
       print("Adding new group.")
     }
   }
+  
+  
+  deinit
+  {
+    print("GroupTableView is released")
+  }
+
 }

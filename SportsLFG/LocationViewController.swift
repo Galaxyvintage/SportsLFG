@@ -31,7 +31,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   @IBOutlet weak var groupsContainer: UIView!
   @IBOutlet weak var rangeSelector: UISegmentedControl!
   
-  var category = "MyGroups"
+  var category : String = "MyGroups"
   weak var groupTableVC : GroupTableViewController!
   var locationManager   : CLLocationManager?
   var myCurrentLocation : CLLocation?
@@ -45,7 +45,8 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     self.groupTableVC = self.childViewControllers[0] as! GroupTableViewController
     
     //reset dataSkip back to zero
-    
+    groupTableVC.dataSkip = 0
+    groupTableVC.groups?.removeAll()
     groupTableVC.update(nil)
     
     
@@ -103,15 +104,13 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   //finishes loading the data 
   func didFinishLoading(groups:[Group])
   {
-  
+    
     self.mapView.removeAnnotations(self.annotationContainer!)
     
-    for group in groups
+    for groupwork in groups
     {
-      let newGroup = group
       
       // here write the things about pins
-      let groupwork = newGroup
       
       // map view
       var groupLocation =  (groupwork.address)! + ","
@@ -220,42 +219,10 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         query = nil
       default:break
       }
+      
       self.groupTableVC.update(query)
-      
-      let storeGroup = KCSAppdataStore.storeWithOptions(
-        [KCSStoreKeyCollectionName : "Groups", 
-          KCSStoreKeyCollectionTemplateClass : Group.self])
-
-      
-      storeGroup.queryWithQuery(
-        query, 
-        withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
-  
-          
-          if(errorOrNil != nil)
-          {
-            print(errorOrNil.userInfo)
-            print(errorOrNil.userInfo["Kinvey.kinveyErrorCode"])
-            print(errorOrNil.userInfo[KCSErrorInternalError])
-            print(errorOrNil.userInfo[NSLocalizedDescriptionKey])
-            return //Error TODO make an alert windows  
-          }
-          else if(objectsOrNil != nil)
-          { 
-            //Success
-            //there is at least one object 
-            for testGroup in objectsOrNil 
-            {
-              let newGroup = testGroup as! Group
-              print(newGroup)
-            }
-          } 
-        },
-        withProgressBlock: nil)//End Inner Query
     }
-    
   }
-  
   //MARK:Actions
   
   //This method is called when the back button is called and brings the users 

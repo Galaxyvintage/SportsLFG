@@ -7,16 +7,15 @@
 //loads different view depending on the selected button
 
 
-import Foundation
 import UIKit
 
-class MainCVController : UIViewController, UIImagePickerControllerDelegate
+class MainCVController : UIViewController
 {
   
   //MARK: Properties
-
-  weak var currentViewController: UIViewController!
-
+  
+ var currentViewController: UIViewController!
+  
   @IBOutlet weak var CV: UIView!
   @IBOutlet var TabBarButtons: [UIButton]!
   
@@ -37,27 +36,35 @@ class MainCVController : UIViewController, UIImagePickerControllerDelegate
     let availableIdentifiers = ["Home","LFG"]
     
     if(availableIdentifiers.contains(segue.identifier!)) {
-      
-      for btn in TabBarButtons {
-        btn.selected = false
-      }
-      
-      let senderBtn = sender as! UIButton
-      senderBtn.selected = true
-      
+    
+    for btn in TabBarButtons {
+    btn.selected = false
+    }
+    
+    let senderBtn = sender as! UIButton
+    senderBtn.selected = true
+    
     }
     
     //This sets the parent variable to the current view controller 
     /*
     if(segue.identifier == "Home")
     {
-      let HVController = segue.destinationViewController as! HomeViewController
-      HVController.parent = self
- 
-    }
+    let HVController = segue.destinationViewController as! HomeViewController
+    HVController.parent = self
+    
+    } 
     */
+
     
     
   }
   
+  deinit{
+    
+    print("MainCVControlller is released")
+    self.TabBarButtons.removeAll()
+  }
+  
 }  
+

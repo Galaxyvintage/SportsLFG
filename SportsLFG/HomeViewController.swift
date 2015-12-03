@@ -147,7 +147,7 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
           
           // Dismiss the picker.
           picker.dismissViewControllerAnimated(true, completion: nil)
-        }
+          }
       }, 
       progressBlock: nil 
       
