@@ -274,20 +274,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     
     
   }
-  
-  // function to cancel when group creation has an error
-  func cancelSave()
-  {
-    
-    let alert = UIAlertController(
-      
-    )
-    let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-    alert.addAction(cancelAction)
-    self.presentViewController(alert, animated: true, completion: nil)
-    return
-  }
-  
+   
   // Sends group data to the database
   func saveGroup(groupLocation: CLLocation)
   {
@@ -456,15 +443,21 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     sender.selected = true
   }
     
-    /*
-    @IBAction func Basketball(sender:UIButton) {
+  @IBAction func Basketball(sender:UIButton) {
         sport = "Basketball" //basketball
         for btn in SportsButton{
             btn.selected = false
         }
         sender.selected = true
     }
-    */
+    
+    @IBAction func Running(sender: UIButton) {
+        sport = "Basketball" //basketball
+        for btn in SportsButton{
+            btn.selected = false
+        }
+        sender.selected = true
+    }
   
   //This methods returns back to the LFG view controller
   @IBAction func BackToLFG(sender: UIButton) {
