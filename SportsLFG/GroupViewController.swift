@@ -408,8 +408,18 @@ class GroupViewController: UIViewController {
       self.presentViewController(alert, animated: true , completion: nil)
     }
     
-  } 
-  
+  }
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // pass the group to the next view
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showMembers" {
+        let MemberViewController = segue.destinationViewController as?GroupMemberTableViewController
+            MemberViewController!.group = self.group
+        }
+    }
+    
+    
   deinit{
     
     print("GroupView Controller is released")

@@ -1,10 +1,10 @@
 //
-//  GroupMemberTableViewController.swift
-//  SportsLFG
-//
-//  Created by Isaac Qiao on 2015-11-30.
-//  Copyright © 2015 CMPT-GP03. All rights reserved.
-//
+// File  : GroupMemberTableViewController.swift
+// Author: Isaac Qiao
+// Date created  : Nov.30 2015
+// Date edited   :
+// Description :  Controls the table view of members in a group
+
 
 import UIKit
 
@@ -13,6 +13,7 @@ class GroupMemberTableViewController: UITableViewController {
     // MARK: Properties
     
     var members = [Member]()
+    var group : Group? //This group
     
     func loadSample() {
         let photo1 = UIImage(named: "Male-25")!
@@ -25,6 +26,11 @@ class GroupMemberTableViewController: UITableViewController {
         let m2 = Member(photo: photo3, name: "nv1",age: "21", gender: "man", location:"sfuasb")!
         
         members += [m1, f1, m2]
+    }
+    
+    //REAL load members function, pass in group from _______
+    func loadMembers() {
+        // For this group, get each member
     }
     
     override func viewDidLoad() {
