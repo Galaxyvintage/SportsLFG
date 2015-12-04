@@ -119,9 +119,22 @@ class HealthManager
     })
   }
 
-  
-  
-  
-  
-  
+  func saveWaterSample(water : Double, date :NSDate)
+  {
+    let waterType     = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater)!
+    let waterQuantity = HKQuantity(unit: HKUnit.gramUnitWithMetricPrefix(HKMetricPrefix.Milli), doubleValue: water)
+    let waterSample   = HKQuantitySample(type: waterType, quantity: waterQuantity, startDate: date, endDate: date)
+    
+    healthKitStore.saveObject(waterSample, withCompletion: { (success, error) -> Void in
+      
+      var message : String?
+      if( error != nil ) {
+        message = "Error Saving Water Sample"
+        print("Error saving water sample: \(error!.localizedDescription)")
+      } else {
+        message = "Water Sample has been saved successfully!"
+        print("Water Sample has been saved successfully!")
+      }
+    })
+  }
 }
