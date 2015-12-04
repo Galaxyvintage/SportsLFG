@@ -20,7 +20,7 @@ import CoreGraphics
 //GroupTableViewControllerto LocationViewController
 protocol GroupLoadingProtocol : class
 {
-    func didFinishLoading(groups:[Group])
+  func didFinishLoading(groups:[Group])
 }
 
 class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,GroupLoadingProtocol
@@ -41,7 +41,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     //before the view appears
     super.viewWillAppear(animated)
     
-    //reload data in the  group table view controller(child view controller) 
+    //reload data in the  group table view controller(child view controller)
     self.groupTableVC = self.childViewControllers[0] as! GroupTableViewController
     
     //reset dataSkip back to zero
@@ -57,18 +57,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   
   override func viewDidLoad() {
     
-    override func viewWillAppear(animated: Bool) {
-        //before the view appears
-        super.viewWillAppear(animated)
-        
-        //reload data in the  group table view controller(child view controller)
-        groupTableVC = self.childViewControllers[0] as! GroupTableViewController
-        groupTableVC.update(nil)
-        
-        //might be not necessary since it's already called in
-        //reloadGroupData()
-        //groupTableVC.tableView.reloadData()
-    }
+    super.viewDidLoad()
     
     NSLog("viewDidLoad")
     self.annotationContainer = [MKPointAnnotation]()
@@ -89,6 +78,10 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     {
       self.myCurrentLocation = locationManager!.location
     }
+    self.mapView.showsUserLocation = true
+    
+    self.rangeSelector.addTarget(self, action: "reloadDataBasedOnSelectedSegment", forControlEvents: .ValueChanged);
+    
     
   }
   
@@ -98,6 +91,12 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   }
   
   
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    
+    mapView.removeFromSuperview()
+    mapView = nil
+  }
   
   
   ////////////////////
@@ -105,8 +104,8 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   ////////////////////
   
   //This delegate method is called in GroupTableViewController and
-  //loads the data to the map when the group table view controller 
-  //finishes loading the data 
+  //loads the data to the map when the group table view controller
+  //finishes loading the data
   func didFinishLoading(groups:[Group])
   {
     
@@ -141,6 +140,13 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         }
       })
     }
+  }
+  
+  
+  //The following two methods are delegate methods for setting up the location manager and map view
+  func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+  {
+    let location = locations.last
     
     let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
     let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
@@ -156,36 +162,33 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   }
   
   
-  //This notifies the embedded segue which data category the table should retrieve 
-  //and sets up the delegateObject variable  in GropTableViewController to LocationViewController 
+  //This notifies the embedded segue which data category the table should retrieve
+  //and sets up the delegateObject variable  in GropTableViewController to LocationViewController
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-    if (segue.identifier == "showGroupTable") 
+    if (segue.identifier == "showGroupTable")
     {
-        print("Error: " + error.localizedDescription)
+      let GroupTableVC = segue.destinationViewController as! GroupTableViewController
+      
+      //pass category data to GroupTableViewController
+      GroupTableVC.category = self.category
+      
+      //assign delegate object
+      GroupTableVC.delegateObject = self
+      
     }
-    
-    
-    //This notifies the embedded segue which data category the table should retrieve
-    //and sets up the delegateObject variable  in GropTableViewController to LocationViewController
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if (segue.identifier == "showGroupTable")
-        {
-            let GroupTableVC = segue.destinationViewController as! GroupTableViewController
-            
-            //pass category data to GroupTableViewController
-            GroupTableVC.category = self.category
-            
-            //assign delegate object
-            GroupTableVC.delegateObject = self
-            
-        }
+  }
+  
+  ////////////////////
+  //Selector Methods//
+  ////////////////////
+  
+  func reloadDataBasedOnSelectedSegment()
+  {
+    if(self.myCurrentLocation == nil)
+    {
+      return //current location not available
     }
-    
-    ////////////////////
-    //Selector Methods//
-    ////////////////////
-    
-    func reloadDataBasedOnSelectedSegment()
+    else
     {
       let myLatitude  = Double(self.myCurrentLocation!.coordinate.latitude)
       let myLongitude = Double(self.myCurrentLocation!.coordinate.longitude)
@@ -226,12 +229,11 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   }
   //MARK:Actions
   
-  //This method is called when the back button is called and brings the users 
-  //back to the LFG page by dismissing the current view controller 
-  @IBAction func BackToLFG(sender: UIButton) 
+  //This method is called when the back button is called and brings the users
+  //back to the LFG page by dismissing the current view controller
+  @IBAction func BackToLFG(sender: UIButton)
   {
     self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
   }
   
 }
-
