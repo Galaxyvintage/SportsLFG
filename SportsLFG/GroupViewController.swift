@@ -2,7 +2,7 @@
 // File  : GroupViewController.swift
 // Author: Aaron Cheung, Charles Li, Isaac Qiao
 // Date created  : Nov.08 2015
-// Date edited   : Nov.30 2015
+// Date edited   : Dec.04 2015
 // Description : This class is used in group view controller when users want to see
 //               the detail information
 //
