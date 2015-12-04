@@ -17,16 +17,19 @@ class MainCVController : UIViewController
   var currentViewController: UIViewController!
   
   @IBOutlet weak var CV: UIView!
-  @IBOutlet var TabBarButtons: [UIButton]!
+  //@IBOutlet var TabBarButtons: [UIButton]!
+  @IBOutlet weak var Home: UIButton!
+  @IBOutlet weak var LFG: UIButton!
+  @IBOutlet weak var MyGroups: UIButton!
+  @IBOutlet weak var Energy: UIButton!
   
   override func viewDidLoad() {
     
     super.viewDidLoad()
     
-    //NSLog("check1")
-    if(TabBarButtons.count > 0) {
-      performSegueWithIdentifier("Home", sender: TabBarButtons[0])
-    }
+    //Go to the home page when it's first loaded
+    performSegueWithIdentifier("Home", sender: Home)
+    
   }
   
   //This method prepare the segue and change the sender button's state to selected
@@ -36,9 +39,10 @@ class MainCVController : UIViewController
     
     if(availableIdentifiers.contains(segue.identifier!)) {
       
-      for btn in TabBarButtons {
-        btn.selected = false
-      }
+      Home.selected     = false 
+      LFG.selected      = false
+      MyGroups.selected = false
+      Energy.selected   = false
       
       (sender as! UIButton).selected = true
     }
@@ -55,7 +59,8 @@ class MainCVController : UIViewController
   deinit{
     
     print("MainCVControlller is released")
-    TabBarButtons.removeAll()
+    
+    
   }
   
 }

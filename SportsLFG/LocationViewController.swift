@@ -91,12 +91,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   }
   
   
-  override func viewWillDisappear(animated: Bool) {
-    super.viewWillDisappear(animated)
-    
-    mapView.removeFromSuperview()
-    mapView = nil
-  }
+
   
   
   ////////////////////
@@ -234,6 +229,13 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   @IBAction func BackToLFG(sender: UIButton)
   {
     self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  
+  deinit
+  {
+    mapView.removeFromSuperview()
+    mapView = nil
   }
   
 }

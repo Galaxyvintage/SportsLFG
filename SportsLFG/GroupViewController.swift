@@ -180,12 +180,6 @@ class GroupViewController: UIViewController {
         //updateSize()
     }
     
-    //override viewDidDisappear
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        mapView.removeFromSuperview()
-        mapView = nil
-    }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -238,7 +232,6 @@ class GroupViewController: UIViewController {
               if(errorOrNil != nil)
               {
                 //error
-                NSLog("error is not nil111111")
                 let message = errorOrNil.userInfo[NSLocalizedDescriptionKey];
                 
                 let alert = UIAlertController(
@@ -305,7 +298,6 @@ class GroupViewController: UIViewController {
   //This method removes the current user from the grop
   func leaveGroup()
   {
-    
     let currentUserId = KCSUser.activeUser().userId   
     let currentGroupName = group!.name 
     let store = KCSAppdataStore.storeWithOptions(
@@ -410,9 +402,11 @@ class GroupViewController: UIViewController {
     
   } 
   
-  deinit{
-    
+  deinit
+  {
     print("GroupView Controller is released")
+    mapView.removeFromSuperview()
+    mapView = nil
   }  
 }
 
