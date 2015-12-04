@@ -2,8 +2,8 @@
 // File   : MainCVController.swift
 // Author : Charles Li
 // Date created: Oct.11 2015
-// Date edited : Nov.22 2015
-// Description: This is responsible for the main tab bar view controller(custom control) and 
+// Date edited : Dec.04 2015
+// Description: This is responsible for the main tab bar view controller(custom control) and
 //loads different view depending on the selected button
 
 
@@ -14,7 +14,7 @@ class MainCVController : UIViewController
   
   //MARK: Properties
   
- var currentViewController: UIViewController!
+  var currentViewController: UIViewController!
   
   @IBOutlet weak var CV: UIView!
   @IBOutlet var TabBarButtons: [UIButton]!
@@ -29,34 +29,27 @@ class MainCVController : UIViewController
     }
   }
   
-  
   //This method prepare the segue and change the sender button's state to selected
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     
     let availableIdentifiers = ["Home","LFG"]
     
     if(availableIdentifiers.contains(segue.identifier!)) {
-    
-    for btn in TabBarButtons {
-    btn.selected = false
+      
+      for btn in TabBarButtons {
+        btn.selected = false
+      }
+      
+      (sender as! UIButton).selected = true
     }
     
-    let senderBtn = sender as! UIButton
-    senderBtn.selected = true
-    
-    }
-    
-    //This sets the parent variable to the current view controller 
+    //This sets the parent variable to the current view controller
     if(segue.identifier == "Home")
     {
-    let HVController = segue.destinationViewController as! HomeViewController
-    HVController.parent = self
-    
-    } 
-
-
-    
-    
+      let HVController = segue.destinationViewController as! HomeViewController
+      HVController.parent = self
+      
+    }
   }
   
   deinit{
@@ -65,5 +58,5 @@ class MainCVController : UIViewController
     TabBarButtons.removeAll()
   }
   
-}  
+}
 

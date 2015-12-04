@@ -73,7 +73,7 @@
 		632290271BE0C15E0097B93B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		632290281BE0C15E0097B93B /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = SportsLFG/HomeViewController.swift; sourceTree = "<group>"; };
 		632290291BE0C15E0097B93B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6322902A1BE0C15E0097B93B /* MainCVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainCVController.swift; path = SportsLFG/MainCVController.swift; sourceTree = "<group>"; };
+		6322902A1BE0C15E0097B93B /* MainCVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; name = MainCVController.swift; path = SportsLFG/MainCVController.swift; sourceTree = "<group>"; };
 		6322902B1BE0C15E0097B93B /* MainCVSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainCVSegue.swift; path = SportsLFG/MainCVSegue.swift; sourceTree = "<group>"; };
 		6322902D1BE0C15E0097B93B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		632290361BE0C1730097B93B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };

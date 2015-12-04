@@ -83,7 +83,6 @@ class GroupViewController: UIViewController {
         Description.text = "Description: " + (groupwork.detail)!
       }
       
-      
       // map view
       var groupLocation =  (groupwork.address)! + ","
       groupLocation += (groupwork.city)! + ","
@@ -179,6 +178,13 @@ class GroupViewController: UIViewController {
         super.viewDidAppear(true)
         changeRightButtonTitle()
         //updateSize()
+    }
+    
+    //override viewDidDisappear
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        mapView.removeFromSuperview()
+        mapView = nil
     }
   
   override func didReceiveMemoryWarning() {

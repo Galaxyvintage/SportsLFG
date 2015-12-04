@@ -66,8 +66,6 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     
     self.rangeSelector.selectedSegmentIndex = 3
     
-    self.mapView.layer.borderWidth = 1
-    
     self.locationManager!.delegate = self
     
     self.locationManager!.requestWhenInUseAuthorization()
