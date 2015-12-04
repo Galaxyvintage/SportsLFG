@@ -138,7 +138,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                     NSLog("successful")
                     let alert = UIAlertController(
                         title: NSLocalizedString("Account Creation Successful", comment: "account success note title"),
-                        message: NSLocalizedString("User created. Welcome! You will received an email to verify the email before you can log on", comment: "account success message body"),
+                        message: NSLocalizedString("User created. Welcome! You will received an email to verify the registration before you can log on", comment: "account success message body"),
                         preferredStyle: UIAlertControllerStyle.Alert
                     )
                     

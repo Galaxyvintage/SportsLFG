@@ -28,8 +28,8 @@ class LoginViewController : UIViewController, UITextFieldDelegate
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-    self.userEmailField.text?.removeAll()
-    self.userPasswordField.text?.removeAll()
+    userEmailField.text?.removeAll()
+    userPasswordField.text?.removeAll()
   }
   
   
@@ -40,8 +40,8 @@ class LoginViewController : UIViewController, UITextFieldDelegate
     // Do any additional setup after loading the view, typically from a nib.
     
     //set all the textfields's delegate to its view controller
-    self.userEmailField.delegate    = self
-    self.userPasswordField.delegate = self
+    userEmailField.delegate    = self
+    userPasswordField.delegate = self
     
     loginBtn.layer.cornerRadius = 10
     registerBtn.layer.cornerRadius = 10
@@ -73,8 +73,7 @@ class LoginViewController : UIViewController, UITextFieldDelegate
   @IBAction func userLogin(sender: UIButton) {
     let email = userEmailField.text
     let password = userPasswordField.text
-    let firstViewController = self.storyboard?.instantiateViewControllerWithIdentifier("FirstTimeUser")
-  let mainViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("MainCVController") as? MainCVController
+ 
    // let mainViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("LFGViewController") as? LFGViewController
     KCSUser.loginWithUsername(
       email!,
@@ -101,10 +100,14 @@ class LoginViewController : UIViewController, UITextFieldDelegate
               
               //this checks whether the currentuser's name is empty or nil
               if(check == nil || check! as! String == ""){
+                
+                let firstViewController = self.storyboard?.instantiateViewControllerWithIdentifier("FirstTimeUser")
+
                 self.presentViewController(firstViewController!,animated:true, completion:nil)
               }
               else
               {
+                let mainViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("MainCVController") as? MainCVController
                 self.presentViewController(mainViewController!, animated: true, completion: nil)   
               }
               

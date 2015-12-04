@@ -47,14 +47,13 @@ class MainCVController : UIViewController
     }
     
     //This sets the parent variable to the current view controller 
-    /*
     if(segue.identifier == "Home")
     {
     let HVController = segue.destinationViewController as! HomeViewController
     HVController.parent = self
     
     } 
-    */
+
 
     
     
@@ -63,7 +62,7 @@ class MainCVController : UIViewController
   deinit{
     
     print("MainCVControlller is released")
-    self.TabBarButtons.removeAll()
+    TabBarButtons.removeAll()
   }
   
 }  

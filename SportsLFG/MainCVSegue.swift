@@ -11,8 +11,8 @@ class MainCVSegue: UIStoryboardSegue {
   
   override func perform() {
     
-    let TabBarController = self.sourceViewController as! MainCVController
-    let destinationController = self.destinationViewController as UIViewController
+    let TabBarController =  sourceViewController as! MainCVController
+    let destinationController = destinationViewController as UIViewController
     
     
     //childViewControllers is an array that contains all the childViewControllers

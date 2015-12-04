@@ -147,7 +147,7 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
           
           // Dismiss the picker.
           picker.dismissViewControllerAnimated(true, completion: nil)
-          }
+        }
       }, 
       progressBlock: nil 
       
@@ -160,27 +160,28 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
   @IBAction func Logout(sender: UIButton) 
   {
     KCSUser.activeUser().logout()
+    let transition = CATransition()
+    transition.duration = 2.0
+    transition.type = kCATransitionReveal// = kCATransitionFade
+    transition.subtype = kCATransitionFromRight
+    
     if(self.presentingViewController?.restorationIdentifier == "FirstTimeUser")
     {
-      self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, 
+      self.parent.childViewControllers[0].view.removeFromSuperview()
+      self.parent.childViewControllers[0].removeFromParentViewController()
+      self.parent.presentingViewController?.presentingViewController?.view.layer.addAnimation(transition, forKey: kCATransition)
+      self.parent.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(false, 
         completion: nil)
     }
     else
     {
-      self.presentingViewController?.dismissViewControllerAnimated(true, 
-        completion: nil)
+      self.parent.childViewControllers[0].view.removeFromSuperview()
+      self.parent.childViewControllers[0].removeFromParentViewController()
+      self.parent.presentingViewController?.view.layer.addAnimation(transition, forKey: kCATransition)
+      self.parent.presentingViewController?.dismissViewControllerAnimated(false, completion: nil)
     }
   }
-  
-  @IBAction func showMyGroups(sender: UIButton) {
-    
-    
-    let groupNavigationVC  = self.storyboard?.instantiateViewControllerWithIdentifier("GroupNavigationVC") as? UINavigationController
 
-    
-    self.presentViewController(groupNavigationVC!, animated: true, completion: nil)
-  }
-  
   
   @IBAction func selectImageFromPhotoLibrary(sender: AnyObject) 
   {
