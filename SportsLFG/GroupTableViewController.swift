@@ -125,7 +125,7 @@ class GroupTableViewController: UITableViewController
     
     //cell.SportTypeImageView.image using switch, need to further change
     switch group.sport!{
-    case "bB":
+    case "Basketball":
       let photo1 = UIImage(named: "Basketball-50_blue")!
       cell.SportTypeImageView.image = photo1
     case "Soccer":
@@ -134,16 +134,20 @@ class GroupTableViewController: UITableViewController
     case "PingPong":
       let photo1 = UIImage(named: "Ping Pong-50_blue")!
       cell.SportTypeImageView.image = photo1
-    case "R":
+    case "Running":
       let photo1 = UIImage(named: "Running-50_blue")!
-      
       cell.SportTypeImageView.image = photo1
+    case "Tennis":
+      let photo1 = UIImage(named: "Tennis-50_red")!
+      cell.SportTypeImageView.image = photo1
+      
     default:
-      let photod = UIImage(named: "defaultPhoto")!
+      let alp = group.sport!.uppercaseString
+      let photoname = alp[alp.startIndex.advancedBy(0)]
+      let photod = UIImage(named: "\(photoname)")!
       cell.SportTypeImageView.image = photod
       
-    }
-    
+    }    
     
     if(self.lastItemReached == false &&
       indexPath.section == (self.groups!.count - 1) )
