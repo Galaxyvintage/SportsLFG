@@ -6,7 +6,6 @@
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--HomeView -->
@@ -45,20 +44,8 @@
                                     <constraint firstAttribute="width" constant="47" id="uvy-AS-NbQ"/>
                                 </constraints>
                                 <state key="normal" image="Contacts"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOy-sz-r8I">
-                                <rect key="frame" x="290" y="0.0" width="30" height="32"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Edit">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="335" y="270" width="40" height="32"/>
-                                </variation>
                                 <connections>
-                                    <segue destination="EgH-3e-E7y" kind="presentation" identifier="EditProfile" id="J67-hs-kZM"/>
+                                    <segue destination="EgH-3e-E7y" kind="presentation" id="Uss-S6-tJ1"/>
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l4S-tR-sXP" userLabel="Pinfo">
@@ -170,6 +157,9 @@
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" red="0.97804109380000004" green="0.97670762519999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="165" y="31" width="47" height="21"/>
+                                </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NUn-52-48w">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -199,12 +189,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1Wv-cF-Fuu" firstAttribute="leading" secondItem="KCJ-xx-0N4" secondAttribute="leading" id="3Rn-3B-Pa3"/>
-                            <constraint firstItem="VOy-sz-r8I" firstAttribute="top" secondItem="l4S-tR-sXP" secondAttribute="bottom" constant="4" id="4jq-95-FWF"/>
                             <constraint firstItem="0Ym-fN-1WO" firstAttribute="top" secondItem="KCJ-xx-0N4" secondAttribute="top" constant="20" id="6Aa-7t-alI"/>
                             <constraint firstItem="NUn-52-48w" firstAttribute="top" secondItem="KCJ-xx-0N4" secondAttribute="top" constant="27" id="COA-Lb-lDu"/>
                             <constraint firstAttribute="centerX" secondItem="V3i-Kz-J2s" secondAttribute="centerX" id="GMv-Mp-pZ1"/>
                             <constraint firstItem="l4S-tR-sXP" firstAttribute="top" secondItem="1Wv-cF-Fuu" secondAttribute="bottom" constant="12" id="J5y-BZ-Gxm"/>
-                            <constraint firstAttribute="trailing" secondItem="VOy-sz-r8I" secondAttribute="trailing" id="Jvd-M4-okj"/>
                             <constraint firstItem="uBE-zo-0EH" firstAttribute="top" secondItem="0Ym-fN-1WO" secondAttribute="bottom" constant="11" id="Lvb-Da-xgA"/>
                             <constraint firstItem="uBE-zo-0EH" firstAttribute="leading" secondItem="KCJ-xx-0N4" secondAttribute="leading" id="Pxv-fq-zgU"/>
                             <constraint firstItem="1Wv-cF-Fuu" firstAttribute="top" secondItem="KCJ-xx-0N4" secondAttribute="top" id="Uc6-R0-wRR">
@@ -215,7 +203,6 @@
                             <constraint firstItem="V3i-Kz-J2s" firstAttribute="top" secondItem="KCJ-xx-0N4" secondAttribute="top" constant="31" id="gQF-iy-zrV"/>
                             <constraint firstItem="0Ym-fN-1WO" firstAttribute="leading" secondItem="KCJ-xx-0N4" secondAttribute="leading" constant="16" id="gn0-cT-2nC"/>
                             <constraint firstAttribute="trailing" secondItem="NUn-52-48w" secondAttribute="trailing" constant="15" id="rJV-d6-8mQ"/>
-                            <constraint firstItem="VOy-sz-r8I" firstAttribute="width" secondItem="l4S-tR-sXP" secondAttribute="width" multiplier="0.2" id="tJU-fz-rTc"/>
                             <constraint firstItem="l4S-tR-sXP" firstAttribute="leading" secondItem="uBE-zo-0EH" secondAttribute="trailing" constant="10" id="tnp-nk-8od"/>
                             <constraint firstItem="uBE-zo-0EH" firstAttribute="height" secondItem="l4S-tR-sXP" secondAttribute="height" id="vZg-es-zra"/>
                         </constraints>
@@ -251,9 +238,6 @@
                                 <include reference="J5y-BZ-Gxm"/>
                                 <include reference="ddY-wa-kKY"/>
                                 <include reference="tnp-nk-8od"/>
-                                <include reference="4jq-95-FWF"/>
-                                <include reference="Jvd-M4-okj"/>
-                                <include reference="tJU-fz-rTc"/>
                             </mask>
                         </variation>
                     </view>
@@ -274,7 +258,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="PhotoImageView" destination="xr8-Do-al2" id="aQq-mt-XPn"/>
                         <outlet property="navigationBar" destination="1Wv-cF-Fuu" id="IYn-Va-Ya3"/>
@@ -2113,7 +2097,7 @@
                     <navigationItem key="navigationItem" id="Heh-gI-iAF"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="All" destination="GM1-zu-MFA" id="gJp-qn-TJi"/>
                         <outlet property="Gym" destination="Aac-cd-VJP" id="zwN-S9-c2c"/>
@@ -5349,7 +5333,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="age" destination="slo-HK-51d" id="uFr-vk-1n2"/>
                         <outlet property="city" destination="0xi-5n-Wlf" id="bjE-ov-IHp"/>
@@ -5360,7 +5344,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K7z-w9-4VZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="527.25" y="-1042.125"/>
+            <point key="canvasLocation" x="603.75" y="-1042.125"/>
         </scene>
         <!--Equipment-->
         <scene sceneID="aCv-0m-gtv">
@@ -5876,6 +5860,7 @@
             <objects>
                 <navigationController title="PersonalInfo Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="EgH-3e-E7y" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackTranslucent" id="O0z-St-AMo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -5889,7 +5874,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iD9-eV-5hg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-476.25" y="-1036.875"/>
+            <point key="canvasLocation" x="-467.25" y="-1042.125"/>
         </scene>
         <!--GroupList Navigation Controller-->
         <scene sceneID="hFC-rj-4bW">
@@ -5964,7 +5949,7 @@
         <image name="defaultPhoto" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vWq-99-rKt"/>
+        <segue reference="8Ed-5T-Dcv"/>
         <segue reference="htn-YQ-PU2"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
