@@ -3,8 +3,8 @@
 // Author : Isaac Qiao, Charles Li
 // Date created: Nov.18 2015
 // Date edited : 11.31 2015
-// Description: This is class is responsible for loading the group data and displaying in 
-//              a table view and on a map at the same time 
+// Description: This is class is responsible for loading the group data and displaying in
+//              a table view and on a map at the same time
 //
 // Created by IsaacQ on 2015-11-18.
 // Copyright © 2015 CMPT-GP03. All rights reserved.
@@ -16,11 +16,11 @@ import CoreLocation
 import CoreGraphics
 
 
-//This protocol is used as a delegate to pass data back from 
+//This protocol is used as a delegate to pass data back from
 //GroupTableViewControllerto LocationViewController
 protocol GroupLoadingProtocol : class
 {
-  func didFinishLoading(groups:[Group])
+    func didFinishLoading(groups:[Group])
 }
 
 class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,GroupLoadingProtocol
@@ -57,7 +57,18 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   
   override func viewDidLoad() {
     
-    super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+        //before the view appears
+        super.viewWillAppear(animated)
+        
+        //reload data in the  group table view controller(child view controller)
+        groupTableVC = self.childViewControllers[0] as! GroupTableViewController
+        groupTableVC.update(nil)
+        
+        //might be not necessary since it's already called in
+        //reloadGroupData()
+        //groupTableVC.tableView.reloadData()
+    }
     
     NSLog("viewDidLoad")
     self.annotationContainer = [MKPointAnnotation]()
@@ -78,10 +89,6 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     {
       self.myCurrentLocation = locationManager!.location
     }
-    self.mapView.showsUserLocation = true
-    
-    self.rangeSelector.addTarget(self, action: "reloadDataBasedOnSelectedSegment", forControlEvents: .ValueChanged);
-    
     
   }
   
@@ -134,13 +141,6 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         }
       })
     }
-  } 
-  
-  
-  //The following two methods are delegate methods for setting up the location manager and map view
-  func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
-  {
-    let location = locations.last
     
     let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
     let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
@@ -161,28 +161,31 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
     if (segue.identifier == "showGroupTable") 
     {
-      let GroupTableVC = segue.destinationViewController as! GroupTableViewController
-      
-      //pass category data to GroupTableViewController
-      GroupTableVC.category = self.category
-      
-      //assign delegate object
-      GroupTableVC.delegateObject = self
-      
+        print("Error: " + error.localizedDescription)
     }
-  }
-  
-  ////////////////////
-  //Selector Methods//
-  ////////////////////
-  
-  func reloadDataBasedOnSelectedSegment()
-  {
-    if(self.myCurrentLocation == nil)
-    {
-      return //current location not available 
+    
+    
+    //This notifies the embedded segue which data category the table should retrieve
+    //and sets up the delegateObject variable  in GropTableViewController to LocationViewController
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "showGroupTable")
+        {
+            let GroupTableVC = segue.destinationViewController as! GroupTableViewController
+            
+            //pass category data to GroupTableViewController
+            GroupTableVC.category = self.category
+            
+            //assign delegate object
+            GroupTableVC.delegateObject = self
+            
+        }
     }
-    else
+    
+    ////////////////////
+    //Selector Methods//
+    ////////////////////
+    
+    func reloadDataBasedOnSelectedSegment()
     {
       let myLatitude  = Double(self.myCurrentLocation!.coordinate.latitude)
       let myLongitude = Double(self.myCurrentLocation!.coordinate.longitude)

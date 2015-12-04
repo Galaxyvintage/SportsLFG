@@ -3,7 +3,7 @@
 // Author: Charles Li, Aaron Cheung, Issac Qiao
 // Date created  : Nov 04 2015
 // Date modified : Nov 25 2015
-// Description : This class is used in the group creation view controller and handles 
+// Description : This class is used in the group creation view controller and handles
 //               group creation request
 //
 import Foundation
@@ -21,7 +21,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   var timePicker  = UIDatePicker()
   var datePicker  = UIDatePicker()
   var geocoder    = CLGeocoder()
-  var timeFormatter : NSDateFormatter? //for time 
+  var timeFormatter : NSDateFormatter? //for time
   var dateFormatter : NSDateFormatter? //for date
   
   
@@ -32,7 +32,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   @IBOutlet weak var contentView: UIView!
   @IBOutlet weak var rootScrollViewBottomConstraint: NSLayoutConstraint!
   
-  //must-enter attributes 
+  //must-enter attributes
   @IBOutlet weak var currentName: UITextField!
   @IBOutlet weak var maxSize: UITextField!
   @IBOutlet weak var address: UITextField!
@@ -43,7 +43,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   @IBOutlet weak var categoryPickerView: UIPickerView!
   
   
-  //optional attributes 
+  //optional attributes
   @IBOutlet weak var ageMin: UITextField?
   @IBOutlet weak var ageMax: UITextField?
   @IBOutlet var gender: [UIButton]?
@@ -85,11 +85,11 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.categoryPickerView.delegate   = self;
     self.categoryPickerView.dataSource = self;
     
-    //set the PickerView to the first row and call the delegate method 
+    //set the PickerView to the first row and call the delegate method
     self.categoryPickerView.selectRow(0, inComponent: 0, animated: true)
     self.pickerView(categoryPickerView, didSelectRow: 0, inComponent: 0)
     
-    //Date and Time pickers configuration 
+    //Date and Time pickers configuration
     let currentDate = NSDate()
     
     // Initial values for time and date
@@ -100,12 +100,12 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.time.text = timeFormatter.stringFromDate(currentDate)
     self.date.text = dateFormatter.stringFromDate(currentDate)
     
-    //Time 
+    //Time
     self.timePicker.datePickerMode = UIDatePickerMode.Time
     self.timePicker.minuteInterval = 5
     
     
-    //This calls the updateTime method when the value is changed 
+    //This calls the updateTime method when the value is changed
     self.timePicker.addTarget(self, action: Selector("updateTime"), forControlEvents: UIControlEvents.ValueChanged)
     self.time.inputView = self.timePicker
     
@@ -113,7 +113,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.datePicker.datePickerMode = UIDatePickerMode.Date
     self.datePicker.minimumDate = NSDate()
     
-    //This calls the updateDate method when the value is changed 
+    //This calls the updateDate method when the value is changed
     self.datePicker.addTarget(self, action: Selector("updateDate"), forControlEvents: UIControlEvents.ValueChanged)
     self.date.inputView = self.datePicker
     
@@ -140,7 +140,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.timeFormatter = NSDateFormatter()
     timeFormatter!.timeStyle = NSDateFormatterStyle.ShortStyle
     let selectedTime = timeFormatter!.stringFromDate(timePicker.date)
-    self.time.text = selectedTime 
+    self.time.text = selectedTime
   }
   
   //This method is called when the value of the date picker is changed
@@ -150,14 +150,14 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     self.dateFormatter = NSDateFormatter()
     dateFormatter!.dateStyle = NSDateFormatterStyle.ShortStyle
     let selectedDate = dateFormatter!.stringFromDate(datePicker.date)
-    self.date.text = selectedDate 
+    self.date.text = selectedDate
     
   }
   
   /*Keyboard*/
   
-  //This changes the scrollview to a smaller size when the keyboard shows 
-  func keyboardDidShow(keyboardNotif : NSNotification) -> Void 
+  //This changes the scrollview to a smaller size when the keyboard shows
+  func keyboardDidShow(keyboardNotif : NSNotification) -> Void
   {
     //NSLog("keyboardWillShow")
     if let info = keyboardNotif.userInfo
@@ -165,26 +165,26 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       if let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as?NSValue)?.CGRectValue().size
       {
         
-        //update the constraint to resize the scroll view 
+        //update the constraint to resize the scroll view
         let kbHeight  = keyboardSize.height
         
         if(rootScrollViewBottomConstraint.constant < kbHeight)
         {
           rootScrollViewBottomConstraint.constant = kbHeight
-        }                
+        }
       }
     }
   }
   
-  //This changes the scrollview size back to normal 
-  func keyboardDidHide(keyboardNotif : NSNotification) -> Void 
+  //This changes the scrollview size back to normal
+  func keyboardDidHide(keyboardNotif : NSNotification) -> Void
   {
     //NSLog("keyboardWillHide")
     if let info = keyboardNotif.userInfo
     {
       if let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue().size
       {
-        //update the constraint to resize the scroll view 
+        //update the constraint to resize the scroll view
         let kbHeight  = keyboardSize.height
         rootScrollViewBottomConstraint.constant -= kbHeight
       }
@@ -225,13 +225,13 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   
   /*TextField Delegates*/
   
-  func textFieldDidBeginEditing(textField: UITextField)  
+  func textFieldDidBeginEditing(textField: UITextField)
   { //Keyboard becomes visible
     //perform actions.
     self.activeTextField = textField
   }
   
-  func textFieldDidEndEditing(textField: UITextField)  
+  func textFieldDidEndEditing(textField: UITextField)
   { //Keyboard becomes visible
     //perform actions.
     self.activeTextField = nil
@@ -271,8 +271,6 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     alert.addAction(cancelAction)
     presentViewController(alert, animated: true , completion: nil)
     return
-    
-    
   }
    
   // Sends group data to the database
@@ -282,12 +280,11 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
     //so we can save entities to a specific collection
     let storeGroup = KCSAppdataStore.storeWithOptions(
       [KCSStoreKeyCollectionName : "Groups",
-        KCSStoreKeyCollectionTemplateClass : Group.self]
-    )
+        KCSStoreKeyCollectionTemplateClass : Group.self])
     
     
-    //This creates a query that checks whether the item already exists by
-    //changing the user input to all lowercases and comparing it to the database
+    //This creates a query that checks whether the group already exists by
+    //changing the user input to all lowercases and comparing it to other names in the database
     let query = KCSQuery(onField: "nameLowercase", withExactMatchForValue: currentName.text!.lowercaseString)
     
     //execute the query
@@ -296,39 +293,29 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       //if the group already exists
       if(errorOrNil != nil)
       {
-        //there is an error, possibly internet error 
+        //there is an error, possibly internet error
         return
         
       }
         
       else if(count > 0)
       {
-        
-        //create an alert to tell user there is an error
-        let alert = UIAlertController(
-          title  : NSLocalizedString("Error", comment: "error"),
-          message: "Group already exists",
-          preferredStyle: UIAlertControllerStyle.Alert)
-        
-        // how do i avoid duplicating this?
-        let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-        alert.addAction(cancelAction)
-        self.presentViewController(alert, animated: true, completion: nil)
-        return
+        self.showCancelUIAlert(
+          "Error",
+          titleComment: "",
+          message:"Group already exists",
+          messageComment: "")
       }
         
       else if(Int(self.maxSize.text!)! <= 1)
       {
         //Prevent user from making a group with size of 1 or less
-        let alert = UIAlertController(
-          title : NSLocalizedString("Error", comment: "error"),
-          message: "Group size must be at least 2",
-          preferredStyle: UIAlertControllerStyle.Alert
-        )
-        // ...
-        let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-        alert.addAction(cancelAction)
-        self.presentViewController(alert, animated: true, completion: nil)
+        
+        self.showCancelUIAlert(
+          "Error",
+          titleComment: "",
+          message:"Group size must be at least 2",
+          messageComment: "")
         return
       }
       
@@ -342,19 +329,19 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       //and assigns user input to the instance properties
       let group = Group()
       
-      //Mandatory properties 
-      group.name          = self.currentName.text! 
+      //Mandatory properties
+      group.name          = self.currentName.text!
       group.nameLowercase = self.currentName.text!.lowercaseString
       group.owner         = KCSUser.activeUser().userId
       group.dateCreated   = currentDate
-      group.startTime     = self.time.text! 
-      group.startDate     = self.date.text! 
+      group.startTime     = self.time.text!
+      group.startDate     = self.date.text!
       group.sport         = self.sport
       group.category      = self.category
       print(group.category)
-      group.maxSize       = Int(self.maxSize.text!)! 
-      group.currentSize   = 1  //only 1 member when it's first created 
-      group.address       = self.address.text! 
+      group.maxSize       = Int(self.maxSize.text!)!
+      group.currentSize   = 1  //only 1 member when it's first created
+      group.address       = self.address.text!
       group.city          = self.city.text!
       group.province      = self.province.text!
       group.geoLocation      = groupLocation
@@ -371,8 +358,8 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       
       //This method saves the changes and uploads the newly created entity to the database
       storeGroup.saveObject(
-        group, 
-        withCompletionBlock: {(objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in 
+        group,
+        withCompletionBlock: {(objectsOrNil:[AnyObject]!, errorOrNil :NSError!) -> Void in
           if (errorOrNil != nil)
           {
             print(errorOrNil.userInfo[KCSErrorCode])
@@ -383,41 +370,38 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
             let message = errorOrNil.userInfo[NSLocalizedDescriptionKey] as! String?
             
             //create an alert to tell user there is an error
-            let alert = UIAlertController(
-              title  : NSLocalizedString("Error", comment: "error"),
-              message: message,
-              preferredStyle: UIAlertControllerStyle.Alert  
-            )
-            let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-            alert.addAction(cancelAction)
-            self.presentViewController(alert, animated: true, completion: nil)
-            return 
+            self.showCancelUIAlert(
+              "Error",
+              titleComment: "",
+              message:message!,
+              messageComment: "")
+            return
             
           }
           else
           {
             //Save was sucessful
-            //TODO:bring user to their group page 
+            //TODO:bring user to their group page
             NSLog("Successfullly saved event(id ='%@').",(objectsOrNil[0] as! NSObject).kinveyObjectId())
             
             let alert = UIAlertController(
               title  : NSLocalizedString("Success", comment: "group is successfully created "),
               message: "Your group has been created ",
-              preferredStyle: UIAlertControllerStyle.Alert  
+              preferredStyle: UIAlertControllerStyle.Alert
             )
             let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
               
-              //Todo:Bring user to their group 
+              //Todo:Bring user to their group
               self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             })
             
             alert.addAction(okAction)
-            self.presentViewController(alert, animated: true, completion: nil)              
+            self.presentViewController(alert, animated: true, completion: nil)
           }
         },
         withProgressBlock : nil)
       
-    }    
+    }
   }
   
   
@@ -463,8 +447,8 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   @IBAction func BackToLFG(sender: UIButton) {
     NSLog("BackToLFG")
     
-    //unwind back to MainCVController 
-    self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)    
+    //unwind back to MainCVController
+    self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
   }
   
   //write information to the newGroup object
@@ -484,47 +468,44 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       date!.text?.isEmpty        == true ||
       sport                      == nil )
     {
-      let alert = UIAlertController(
-        title  : NSLocalizedString("Error", comment: "account success note title"),
-        message: NSLocalizedString("Empty field", comment: "password errors"),
-        preferredStyle : UIAlertControllerStyle.Alert
-      )
-      
-      let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-      alert.addAction(cancelAction)
-      presentViewController(alert, animated: true , completion: nil)
+      self.showCancelUIAlert(
+        "Error",
+        titleComment: "",
+        message:"Empty fields",
+        messageComment: "")
       return
     }
     if (detail!.text?.isEmpty   == nil) {
-        detail!.text = "Come join in!"
+      detail!.text = "Come join in!"
     }
     
-    var groupLocation = (address.text)! + "," 
+    var groupLocation = (address.text)! + ","
     groupLocation    += (city.text)! + "," + (province.text)!
     
     //This gets the geographic coordinates from an address string
-    //using the geocoder class and returns an alert if the address is not found 
+    //using the geocoder class and returns an alert if the address is not found
     geocoder.geocodeAddressString(
-      groupLocation, 
+      groupLocation,
       completionHandler: { (placemarks :[CLPlacemark]?,errorOrNil : NSError?) -> Void in
         
         if(errorOrNil != nil || placemarks == nil)
         {
           //Error
-          self.showCancelUIAlert("Error", 
-            titleComment   : "Group Creation Error", 
+          self.showCancelUIAlert(
+            "Error",
+            titleComment   : "Group Creation Error",
             message        : "Location is not valid",
             messageComment : "Wrong Location")
           return
         }
         else
         {
-          //Success 
+          //Success
           let firstPlacemark = placemarks?[0]
           let location = (firstPlacemark!.location)!
           self.saveGroup(location)
-        } 
+        }
     })
-  }  
+  }
 }
 
