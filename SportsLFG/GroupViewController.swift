@@ -17,7 +17,7 @@ class GroupViewController: UIViewController {
   /*
   This value is passed by `GroupTableViewController` in `prepareForSegue(_:sender:)`
   */
-  var group: Group?
+  weak var group: Group?
   var UIBarButtonItemTitle : String?
   var currentView : UIView!
   var activityIndicator : UIActivityIndicatorView!
