@@ -130,7 +130,7 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
     
     //TODO:Check corner
     KCSFileStore.uploadData(
-      UIImageJPEGRepresentation(selectedImage,0.2),
+      UIImageJPEGRepresentation(selectedImage,0.1),
       options:[
         KCSFileId       : (KCSUser.activeUser().userId)! ,
         KCSFileFileName : (KCSUser.activeUser().userId)!,

@@ -12,17 +12,128 @@ class GroupMemberTableViewController: UITableViewController {
   
   // MARK: Properties
   
+  weak var imageCache : NSCache!
   
-  var storeGroup   : KCSAppdataStore?
+  var storeUser    : KCSAppdataStore?
   var storeInGroup : KCSAppdataStore?
   var groupName    : String?
   var members = [Member]()
   
-
+  
   
   func loadMember() {
-      
-  
+    
+    
+    let groupQuery = KCSQuery(onField:"group",withExactMatchForValue:groupName)
+    
+    storeInGroup?.queryWithQuery(
+      groupQuery,
+      withCompletionBlock: { (objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
+        
+        if(errorOrNil != nil)
+        {
+          //error 
+        }
+        else if(objectsOrNil != nil)
+        {
+          var userIds = [String]()
+          for ingroup in objectsOrNil
+          {
+            userIds.append((ingroup as! inGroup).userId!)
+          }
+          
+          
+          self.storeUser?.loadObjectWithID(
+            userIds, 
+            withCompletionBlock: {(objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
+              
+              if(errorOrNil != nil)
+              {
+                //error
+              }
+                
+              else if (objectsOrNil != nil)
+              {
+                let users = objectsOrNil as! [KCSUser]
+                var image : UIImage?
+                var isImageFound : Bool = true
+                for user in users
+                {
+                  let name     = user.getValueForAttribute("Name") as! String
+                  let age      = user.getValueForAttribute("Age")  as! String
+                  let gender   = user.getValueForAttribute("Gender") as! String
+                  let city     = (user.getValueForAttribute("City") as! String) 
+                  let province = (user.getValueForAttribute("Province") as! String)
+                  let location = city+", "+province
+                  
+                  image    = self.imageCache.objectForKey(name) as? UIImage
+                  if(image == nil)
+                  {
+                    image = UIImage(named: "defaultPhoto")
+                    isImageFound = false
+                  }
+                  
+                  let newMember = Member(photo: image,name: name, age: age, gender: gender, location: location)
+                  
+                  self.members.append(newMember!)
+                }  
+                self.tableView.reloadData()
+              
+                if(!(isImageFound))
+                {
+                  KCSFileStore.downloadDataByName(
+                    userIds, 
+                    completionBlock: { (downloadedResources:[AnyObject]!, errorOrNil:NSError!) -> Void in
+                      
+                      //returned data array is empty
+                      if(downloadedResources.count == 0)
+                      {
+                        return
+                      }
+                      else if (errorOrNil == nil)
+                      {
+                        
+                        for var index = 0; index < downloadedResources.count; ++index 
+                        {
+                          print("index is \(index)")
+                          
+                          let file = downloadedResources[index] as! KCSFile
+                          let fileData = file.data
+                          var outputObject: NSObject! = nil
+                          if file.mimeType.hasPrefix("text") 
+                          {
+                            outputObject = NSString(data: fileData, encoding: NSUTF8StringEncoding)
+                          } 
+                          else if file.mimeType.hasPrefix("image/jpeg") 
+                          {
+                            //save the downloaded image to the NSCache
+                            outputObject = UIImage(data: fileData)
+                            let image    = outputObject as? UIImage
+                            
+                            //TODO: user index could be mess up
+                            self.imageCache.setObject(outputObject, forKey: self.members[index].name!) 
+                            self.members[index].photo = image
+                          }
+                          NSLog("downloaded: %@", outputObject)
+                        } 
+                        self.tableView.reloadData()
+                      } 
+                      else 
+                      {
+                        NSLog("Got an error: %@", errorOrNil)
+                      }
+                    },
+                    progressBlock: nil)//Photo download complete
+                }
+              }  
+            }, 
+            withProgressBlock: nil)//User information download complete
+        }
+      },
+      withProgressBlock: nil)//UserId download complete
+    
+    
+    
     
     /*
     let photo1 = UIImage(named: "Male-25")!
@@ -41,9 +152,12 @@ class GroupMemberTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.storeGroup = KCSAppdataStore.storeWithOptions(
-      [KCSStoreKeyCollectionName : "Groups",
-        KCSStoreKeyCollectionTemplateClass : Group.self])
+    NSLog("viewDidLoad in GroupMemberTableViewController")
+    self.imageCache = SharedImageCache.ImageCache.imageCache
+    
+    self.storeUser = KCSAppdataStore.storeWithOptions(
+      [KCSStoreKeyCollectionName : KCSUserCollectionName,
+        KCSStoreKeyCollectionTemplateClass : KCSUser.self])
     
     //InGroup collection
     self.storeInGroup = KCSAppdataStore.storeWithOptions(

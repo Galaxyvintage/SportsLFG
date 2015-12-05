@@ -22,7 +22,7 @@ class Member: NSObject
     
     init?(photo: UIImage?, name: String, age: String, gender: String, location: String) 
     {
-        // Initialize stored properties.
+      // Initialize stored properties.
         self.name = name
         self.photo = photo
         self.age = age

@@ -402,6 +402,18 @@ class GroupViewController: UIViewController {
     
   } 
   
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    if (segue.identifier == "showGroupMembers")
+    {
+      let GroupMemberTVC = segue.destinationViewController as!GroupMemberTableViewController
+      
+      //pass category data to GroupMemberTableViewController
+      GroupMemberTVC.groupName = self.group?.name
+            
+    }
+  }
+
   deinit
   {
     print("GroupView Controller is released")
