@@ -29,6 +29,9 @@ class Group : NSObject{
   var geoLocation: CLLocation?
   var metadata   : KCSMetadata? //Kinvey metadata, optional
   var detail     : String?
+  var gender     : String?
+  var minAge     : NSNumber?
+  var maxAge     : NSNumber?
   
   //This function provided by Kinvey API maps the variables above to the back-end database schema
   override func hostToKinveyPropertyMapping() -> [NSObject : AnyObject]! {
@@ -48,6 +51,9 @@ class Group : NSObject{
       "city"     : "city",
       "province" : "province",
       "detail"   : "detail",
+      "gender"   : "gender",
+      "minAge"   : "minAge",
+      "maxAge"   : "maxAge",
       "metadata" : KCSEntityKeyMetadata,
       "geoLocation" : KCSEntityKeyGeolocation //geo location
     ]

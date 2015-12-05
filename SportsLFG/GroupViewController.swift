@@ -196,6 +196,25 @@ class GroupViewController: UIViewController {
   //This method adds the current user to the group
   func joinGroup()
   {
+    //Check to see if the user fulfills the group age/gender restrictions.
+    if(userMeetsRequirements() == false) {
+        self.activityIndicator.stopAnimating()
+        NSLog("doesn't meet requirements")
+        let alert = UIAlertController(
+            title: NSLocalizedString("Sorry", comment: "error"),
+            message: "You do not meet the requirements of this group.",
+            preferredStyle: UIAlertControllerStyle.Alert
+        )
+        let cancelAction = UIAlertAction(title  :"Cancel",
+            style  : UIAlertActionStyle.Cancel,
+            handler: {(action: UIAlertAction!) in
+                self.navigationController?.popViewControllerAnimated(true)
+        })
+        alert.addAction(cancelAction)
+        self.presentViewController(alert, animated: true , completion: nil)
+        return
+    }
+    
     let currentUserId = KCSUser.activeUser().userId
     let currentGroupName = group!.name 
     let store = KCSAppdataStore.storeWithOptions(
@@ -416,6 +435,52 @@ class GroupViewController: UIViewController {
         if segue.identifier == "showMembers" {
         let MemberViewController = segue.destinationViewController as?GroupMemberTableViewController
             MemberViewController!.group = self.group
+        }
+    }
+    
+    func userMeetsRequirements() -> Bool {
+        var ageOK = false
+        var genderOK = false
+        let user = KCSUser.activeUser()
+        let myAge       = user.getValueForAttribute("Age") as! Int
+        let myGender    = user.getValueForAttribute("Gender") as! String
+        let groupMinAge = self.group!.minAge! as Int
+        let groupMaxAge = self.group!.maxAge! as Int
+        let groupGender = self.group!.gender!
+        
+        //Start age check
+        if (groupMinAge == -1 && groupMaxAge == -1) {
+            // age restriction not set (both = -1)
+            ageOK = true
+        } else if (groupMinAge != -1 && groupMaxAge == -1) {
+            //min is set and max is not set (max = -1)
+            if (myAge >= groupMinAge) {
+                ageOK = true
+            }
+        } else if (groupMinAge == -1 && groupMaxAge != -1) {
+            // max is set but min is not set (min = -1)
+            if (myAge <= groupMaxAge) {
+                ageOK = true
+            }
+        } else {
+            if (myAge <= groupMaxAge && myAge >= groupMinAge) {
+                //both are set
+                ageOK = true
+            } else {
+                ageOK = false
+            }
+        }
+        // Start gender check
+        if (groupGender == "Neutral" || (myGender == groupGender)) {
+            genderOK = true
+        } else {
+            genderOK = false
+        }
+        //User meets requirements if passes both age and gender check
+        if (ageOK && genderOK) {
+            return true
+        } else {
+            return false
         }
     }
     

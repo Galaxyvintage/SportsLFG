@@ -47,6 +47,8 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
   @IBOutlet weak var ageMin: UITextField?
   @IBOutlet weak var ageMax: UITextField?
   @IBOutlet var gender: [UIButton]?
+  @IBOutlet weak var genderM: UIButton!
+  @IBOutlet weak var genderF: UIButton!
   @IBOutlet weak var detail: UITextField?
   
   
@@ -329,6 +331,39 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       //and assigns user input to the instance properties
       let group = Group()
       
+      //Gender setting configuration
+      let groupGender : String
+      if (self.genderM.selected == true && self.genderF.selected == false) {
+        groupGender = "Male"
+      } else if (self.genderM.selected == false && self.genderF.selected == true) {
+        groupGender = "Female"
+      } else {
+        groupGender = "Neutral"
+      }
+      
+      //Age range configuration : -1 = not set
+      var groupAgeMin = Int(self.ageMin!.text!)!
+      var groupAgeMax = Int(self.ageMax!.text!)!
+      if (!(self.ageMin!.text!.isEmpty) && !(self.ageMin!.text!.isEmpty)) { //both fields filled
+        //can check the numbers for invalid/negative
+        if (groupAgeMin <= 0 || groupAgeMax <= 0 || (groupAgeMin > groupAgeMax)) {
+            self.showCancelUIAlert(
+              "Error",
+              titleComment: "",
+              message:"Please check your age restriction.",
+              messageComment: "")
+          return
+        }
+      }
+      //At least 1 field not filled
+      if (self.ageMin!.text!.isEmpty) {
+        groupAgeMin = -1 // use -1 to indicate no restriction
+      }
+      if (self.ageMax!.text!.isEmpty) {
+        groupAgeMax = -1
+      }
+      
+      
       //Mandatory properties
       group.name          = self.currentName.text!
       group.nameLowercase = self.currentName.text!.lowercaseString
@@ -344,13 +379,16 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
       group.address       = self.address.text!
       group.city          = self.city.text!
       group.province      = self.province.text!
-      group.geoLocation      = groupLocation
+      group.geoLocation   = groupLocation
       group.metadata?.setGloballyWritable(false)
       
       
       //Optional properties
+      group.gender        = groupGender
+      group.minAge        = groupAgeMin
+      group.maxAge        = groupAgeMax
     
-        //Should already have been checked but redundancy
+      //Should already have been checked but redundancy
       if(self.detail!.text != nil)
       {
         group.detail  = self.detail!.text
@@ -386,7 +424,7 @@ class GroupCreationController: UIViewController,UIPickerViewDataSource, UITextFi
             
             let alert = UIAlertController(
               title  : NSLocalizedString("Success", comment: "group is successfully created "),
-              message: "Your group has been created ",
+              message: "Your group has been successfully created.",
               preferredStyle: UIAlertControllerStyle.Alert
             )
             let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
