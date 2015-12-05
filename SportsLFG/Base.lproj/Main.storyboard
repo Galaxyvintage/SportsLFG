@@ -157,9 +157,6 @@
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" red="0.97804109380000004" green="0.97670762519999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="165" y="31" width="47" height="21"/>
-                                </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NUn-52-48w">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -184,10 +181,29 @@
                                     <segue destination="Mt0-cU-Kmz" kind="showDetail" identifier="GoBackToLogin" id="0bj-KV-32U"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPz-fv-fhQ" userLabel="chartView" customClass="BarChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="291" id="z0D-my-hX9"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="z0D-my-hX9"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="z0D-my-hX9"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="WPz-fv-fhQ" firstAttribute="leading" secondItem="KCJ-xx-0N4" secondAttribute="leading" constant="20" id="159-P9-6d6"/>
                             <constraint firstItem="1Wv-cF-Fuu" firstAttribute="leading" secondItem="KCJ-xx-0N4" secondAttribute="leading" id="3Rn-3B-Pa3"/>
                             <constraint firstItem="0Ym-fN-1WO" firstAttribute="top" secondItem="KCJ-xx-0N4" secondAttribute="top" constant="20" id="6Aa-7t-alI"/>
                             <constraint firstItem="NUn-52-48w" firstAttribute="top" secondItem="KCJ-xx-0N4" secondAttribute="top" constant="27" id="COA-Lb-lDu"/>
@@ -202,6 +218,8 @@
                             <constraint firstAttribute="trailing" secondItem="l4S-tR-sXP" secondAttribute="trailing" id="ddY-wa-kKY"/>
                             <constraint firstItem="V3i-Kz-J2s" firstAttribute="top" secondItem="KCJ-xx-0N4" secondAttribute="top" constant="31" id="gQF-iy-zrV"/>
                             <constraint firstItem="0Ym-fN-1WO" firstAttribute="leading" secondItem="KCJ-xx-0N4" secondAttribute="leading" constant="16" id="gn0-cT-2nC"/>
+                            <constraint firstItem="WPz-fv-fhQ" firstAttribute="top" secondItem="l4S-tR-sXP" secondAttribute="bottom" constant="48" id="iIH-ng-cEd"/>
+                            <constraint firstAttribute="trailing" secondItem="WPz-fv-fhQ" secondAttribute="trailing" constant="20" id="rEz-8m-gMA"/>
                             <constraint firstAttribute="trailing" secondItem="NUn-52-48w" secondAttribute="trailing" constant="15" id="rJV-d6-8mQ"/>
                             <constraint firstItem="l4S-tR-sXP" firstAttribute="leading" secondItem="uBE-zo-0EH" secondAttribute="trailing" constant="10" id="tnp-nk-8od"/>
                             <constraint firstItem="uBE-zo-0EH" firstAttribute="height" secondItem="l4S-tR-sXP" secondAttribute="height" id="vZg-es-zra"/>
@@ -209,22 +227,28 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="NUn-52-48w"/>
+                                <exclude reference="WPz-fv-fhQ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="COA-Lb-lDu"/>
-                                <exclude reference="rJV-d6-8mQ"/>
                                 <exclude reference="3Rn-3B-Pa3"/>
                                 <exclude reference="Uc6-R0-wRR"/>
                                 <exclude reference="Zym-nl-ScX"/>
+                                <exclude reference="COA-Lb-lDu"/>
+                                <exclude reference="rJV-d6-8mQ"/>
+                                <exclude reference="159-P9-6d6"/>
+                                <exclude reference="iIH-ng-cEd"/>
+                                <exclude reference="rEz-8m-gMA"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="NUn-52-48w"/>
+                                <include reference="WPz-fv-fhQ"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="COA-Lb-lDu"/>
-                                <include reference="rJV-d6-8mQ"/>
+                                <include reference="3Rn-3B-Pa3"/>
+                                <include reference="Uc6-R0-wRR"/>
+                                <include reference="Zym-nl-ScX"/>
                                 <include reference="6Aa-7t-alI"/>
                                 <include reference="gn0-cT-2nC"/>
                                 <include reference="Lvb-Da-xgA"/>
@@ -232,12 +256,14 @@
                                 <include reference="vZg-es-zra"/>
                                 <include reference="GMv-Mp-pZ1"/>
                                 <include reference="gQF-iy-zrV"/>
-                                <include reference="3Rn-3B-Pa3"/>
-                                <include reference="Uc6-R0-wRR"/>
-                                <include reference="Zym-nl-ScX"/>
                                 <include reference="J5y-BZ-Gxm"/>
                                 <include reference="ddY-wa-kKY"/>
                                 <include reference="tnp-nk-8od"/>
+                                <include reference="COA-Lb-lDu"/>
+                                <include reference="rJV-d6-8mQ"/>
+                                <include reference="159-P9-6d6"/>
+                                <include reference="iIH-ng-cEd"/>
+                                <include reference="rEz-8m-gMA"/>
                             </mask>
                         </variation>
                     </view>
@@ -261,6 +287,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="PhotoImageView" destination="xr8-Do-al2" id="aQq-mt-XPn"/>
+                        <outlet property="barChartView" destination="WPz-fv-fhQ" id="9X3-Ea-yDv"/>
                         <outlet property="navigationBar" destination="1Wv-cF-Fuu" id="IYn-Va-Ya3"/>
                     </connections>
                 </viewController>

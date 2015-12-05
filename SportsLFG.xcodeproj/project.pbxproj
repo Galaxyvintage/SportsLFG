@@ -10,6 +10,7 @@
 		27AEA6191C08D2360062982D /* GroupTableViewController_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AEA6181C08D2360062982D /* GroupTableViewController_2.swift */; };
 		27AEA61B1C08D3450062982D /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AEA61A1C08D3450062982D /* TitleTableViewCell.swift */; };
 		27AEA61E1C08DF720062982D /* TextInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AEA61D1C08DF720062982D /* TextInputTableViewCell.swift */; };
+		42621CB2CC870E351682FB69 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10738B7E66C848CFD9803639 /* Pods.framework */; };
 		4A412ABC1BFD4CE40024C746 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A412ABB1BFD4CE40024C746 /* LocationViewController.swift */; };
 		4A76EB011BEC9216004890AD /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A76EB001BEC9216004890AD /* GroupTableViewCell.swift */; };
 		4A955EF21BF0182900CDDA74 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A955EF11BF0182900CDDA74 /* GroupViewController.swift */; };
@@ -46,7 +47,6 @@
 		63FBD2971C0C44850078C2BB /* WaterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FBD2961C0C44850078C2BB /* WaterTableViewCell.swift */; };
 		63FBD2991C0D08480078C2BB /* G2GatoradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FBD2981C0D08480078C2BB /* G2GatoradeTableViewCell.swift */; };
 		96C3F6D51BE4284600AC236A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C3F6D41BE4284600AC236A /* LoginViewController.swift */; };
-		A1F5DE97E1C7507ECD8C9F5F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE3EA33AED1FE155D30688 /* libPods.a */; };
 		C3C08F3D1C0C6EBD00A2F888 /* GroupMemberTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C08F3C1C0C6EBD00A2F888 /* GroupMemberTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +62,7 @@
 
 /* Begin PBXFileReference section */
 		0436F88DAFDD8EB0368A14C8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		0FDE3EA33AED1FE155D30688 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		10738B7E66C848CFD9803639 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27AEA6181C08D2360062982D /* GroupTableViewController_2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewController_2.swift; sourceTree = "<group>"; };
 		27AEA61A1C08D3450062982D /* TitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		27AEA61D1C08DF720062982D /* TextInputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputTableViewCell.swift; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 				63FBD28F1C0C2E6C0078C2BB /* CoreData.framework in Frameworks */,
 				63CD20501C06A8DE00F6A625 /* HealthKit.framework in Frameworks */,
 				63CD204D1C06A8C600F6A625 /* MapKit.framework in Frameworks */,
-				A1F5DE97E1C7507ECD8C9F5F /* libPods.a in Frameworks */,
+				42621CB2CC870E351682FB69 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +150,7 @@
 				63FBD28E1C0C2E6C0078C2BB /* CoreData.framework */,
 				63CD204F1C06A8DE00F6A625 /* HealthKit.framework */,
 				63CD204C1C06A8C600F6A625 /* MapKit.framework */,
-				0FDE3EA33AED1FE155D30688 /* libPods.a */,
+				10738B7E66C848CFD9803639 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
