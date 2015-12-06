@@ -10,7 +10,9 @@ import UIKit
 
 class TitleTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var TitleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+
+    @IBOutlet weak var rightLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

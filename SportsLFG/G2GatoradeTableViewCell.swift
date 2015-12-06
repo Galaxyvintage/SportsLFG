@@ -44,10 +44,7 @@ class G2GatoradeTableViewCell : UITableViewCell,UITextFieldDelegate
   @IBOutlet weak var Sodium: UITextField!
   @IBOutlet weak var Potassium: UITextField!
   @IBOutlet weak var Sugars: UITextField!
-  
-  @IBOutlet weak var todayData: UILabel!
-  @IBOutlet weak var weekData: UILabel!
-  
+
   
   
   @IBAction func stepperPressed(sender: UIStepper) {

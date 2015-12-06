@@ -4,7 +4,7 @@
 // Date created : Nov 03 2015
 // Date modified: Nov 23 2015
 // Description : This is class is used to handle personal information modification
-// 
+//
 //
 
 import Foundation
@@ -24,14 +24,14 @@ class EditProfileController : UIViewController
     super.viewDidLoad()
     
     //add placeholder to text field according to user's existing information
-    let currentGender = KCSUser.activeUser().getValueForAttribute("Gender") as? String
-    let myName      = KCSUser.activeUser().getValueForAttribute("Name") as! String
-    let myAge       = KCSUser.activeUser().getValueForAttribute("Age") as! String
-    let myCity  = KCSUser.activeUser().getValueForAttribute("City") as! String
-    let myProvince = KCSUser.activeUser().getValueForAttribute("Province") as! String
+    let currentGender = KCSUser.activeUser().getValueForAttribute("Gender")   as? String
+    let myName        = KCSUser.activeUser().getValueForAttribute("Name")     as! String
+    let myAge         = KCSUser.activeUser().getValueForAttribute("Age")      as! String
+    let myCity        = KCSUser.activeUser().getValueForAttribute("City")     as! String
+    let myProvince    = KCSUser.activeUser().getValueForAttribute("Province") as! String
     
     name.text = myName
-    age.text = myAge
+    age.text  = myAge
     city.text = myCity
     province.text = myProvince
     
@@ -76,13 +76,13 @@ class EditProfileController : UIViewController
     if(!(province.text!.isEmpty))
     {
       currentUser.setValue(province.text, forAttribute: "Province")
-    }  
+    }
     
     if(gender.on == true)
     {
       currentUser.setValue("Female", forAttribute: "Gender")
     }
-    else 
+    else
     {
       currentUser.setValue("Male", forAttribute: "Gender")
     }
@@ -95,7 +95,7 @@ class EditProfileController : UIViewController
       }
       else
       {
-        //inform user the error 
+        //inform user the error
         NSLog("failed to save")
       }
     }
