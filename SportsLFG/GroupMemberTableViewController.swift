@@ -64,12 +64,12 @@ class GroupMemberTableViewController: UITableViewController {
                   let gender   = user.getValueForAttribute("Gender") as! String
 
                   
-                  image    = self.imageCache.objectForKey(name) as? UIImage
-                  if(image == nil)
-                  {
+                 // image    = self.imageCache.objectForKey(name) as? UIImage
+                 // if(image == nil)
+                 // {
                     image = UIImage(named: "defaultPhoto")
                     isImageFound = false
-                  }
+                 // }
                   
                   let newMember = Member(photo: image,name: name, age: age, gender: gender)
                   

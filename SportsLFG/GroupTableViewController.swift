@@ -76,12 +76,12 @@ class GroupTableViewController: UITableViewController
   
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     
-    return self.groups!.count
+    return 1
   }
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-    return 1
+    return self.groups!.count
   }
   
   override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
@@ -104,7 +104,7 @@ class GroupTableViewController: UITableViewController
     let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GroupTableViewCell
     
     // Fetches the appropriate group for the data source layout.
-    let group = groups![indexPath.section]
+    let group = groups![indexPath.row]
     
     // Configure the cell...
     // Mandatory properties
@@ -417,7 +417,7 @@ class GroupTableViewController: UITableViewController
       // Get the cell that generated this segue.
       if let selectedGroupCell = sender as? GroupTableViewCell {
         let indexPath = tableView.indexPathForCell(selectedGroupCell)!
-        let selectedGroup = groups![indexPath.section]
+        let selectedGroup = groups![indexPath.row]
         groupDetailViewController!.group = selectedGroup
         
         NSLog(category!)
