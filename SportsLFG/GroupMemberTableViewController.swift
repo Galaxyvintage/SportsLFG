@@ -32,7 +32,7 @@ class GroupMemberTableViewController: UITableViewController {
         
         if(errorOrNil != nil)
         {
-          //error 
+          //error
         }
         else if(objectsOrNil != nil)
         {
@@ -44,7 +44,7 @@ class GroupMemberTableViewController: UITableViewController {
           
           
           self.storeUser?.loadObjectWithID(
-            userIds, 
+            userIds,
             withCompletionBlock: {(objectsOrNil:[AnyObject]!, errorOrNil:NSError!) -> Void in
               
               if(errorOrNil != nil)
@@ -62,25 +62,25 @@ class GroupMemberTableViewController: UITableViewController {
                   let name     = user.getValueForAttribute("Name") as! String
                   let age      = user.getValueForAttribute("Age")  as! String
                   let gender   = user.getValueForAttribute("Gender") as! String
-
                   
-                 // image    = self.imageCache.objectForKey(name) as? UIImage
-                 // if(image == nil)
-                 // {
-                    image = UIImage(named: "defaultPhoto")
-                    isImageFound = false
-                 // }
                   
-                  let newMember = Member(photo: image,name: name, age: age, gender: gender)
+                  // image    = self.imageCache.objectForKey(name) as? UIImage
+                  // if(image == nil)
+                  // {
+                  image = UIImage(named: "defaultPhoto")
+                  isImageFound = false
+                  // }
+                  
+                  let newMember = Member(photo: image,name: name, age: age, gender: gender,userId : user.userId)
                   
                   self.members.append(newMember!)
-                }  
+                }
                 self.tableView.reloadData()
-              
+                
                 if(!(isImageFound))
                 {
                   KCSFileStore.downloadDataByName(
-                    userIds, 
+                    userIds,
                     completionBlock: { (downloadedResources:[AnyObject]!, errorOrNil:NSError!) -> Void in
                       
                       //returned data array is empty
@@ -91,40 +91,52 @@ class GroupMemberTableViewController: UITableViewController {
                       else if (errorOrNil == nil)
                       {
                         
-                        for var index = 0; index < downloadedResources.count; ++index 
+                        for var index = 0; index < downloadedResources.count; ++index
                         {
                           print("index is \(index)")
                           
                           let file = downloadedResources[index] as! KCSFile
-                          let fileData = file.data
-                          var outputObject: NSObject! = nil
-                          if file.mimeType.hasPrefix("text") 
+                          
+                          for var x = 0; x < userIds.count; ++x
                           {
-                            outputObject = NSString(data: fileData, encoding: NSUTF8StringEncoding)
-                          } 
-                          else if file.mimeType.hasPrefix("image/jpeg") 
-                          {
-                            //save the downloaded image to the NSCache
-                            outputObject = UIImage(data: fileData)
-                            let image    = outputObject as? UIImage
+                            print("userId is",userIds[x])
+                            print("fileId is",file.kinveyObjectId())
                             
-                            //TODO: user index could be mess up
-                            self.imageCache.setObject(outputObject, forKey: self.members[index].name!) 
-                            self.members[index].photo = image
-                          }
-                          NSLog("downloaded: %@", outputObject)
-                        } 
+                            if(self.members[x].userId == (file.kinveyObjectId()) )
+                            {
+                              let fileData = file.data
+                              var outputObject: NSObject! = nil
+                              if file.mimeType.hasPrefix("text")
+                              {
+                                outputObject = NSString(data: fileData, encoding: NSUTF8StringEncoding)
+                              }
+                              else if file.mimeType.hasPrefix("image/jpeg")
+                              {
+                                //save the downloaded image to the NSCache
+                                outputObject = UIImage(data: fileData)
+                                let image    = outputObject as? UIImage
+                                
+                                //TODO: user index could be mess up
+                                self.imageCache.setObject(outputObject, forKey: self.members[index].name!)
+                                self.members[x].photo = image
+                                NSLog("downloaded: %@", outputObject)
+                              }
+                              
+                            }
+                          }//inner for loop ends
+                          
+                        }//outer for loop ends
                         self.tableView.reloadData()
-                      } 
-                      else 
+                      }
+                      else
                       {
                         NSLog("Got an error: %@", errorOrNil)
                       }
                     },
                     progressBlock: nil)//Photo download complete
                 }
-              }  
-            }, 
+              }
+            },
             withProgressBlock: nil)//User information download complete
         }
       },
@@ -200,7 +212,7 @@ class GroupMemberTableViewController: UITableViewController {
   tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
   } else if editingStyle == .Insert {
   // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-  }    
+  }
   }
   */
   

@@ -116,7 +116,7 @@
 		63FBD2961C0C44850078C2BB /* WaterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterTableViewCell.swift; sourceTree = "<group>"; };
 		63FBD2981C0D08480078C2BB /* G2GatoradeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = G2GatoradeTableViewCell.swift; sourceTree = "<group>"; };
 		96C3F6D41BE4284600AC236A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		C3C08F3C1C0C6EBD00A2F888 /* GroupMemberTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberTableViewController.swift; sourceTree = "<group>"; };
+		C3C08F3C1C0C6EBD00A2F888 /* GroupMemberTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = GroupMemberTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
