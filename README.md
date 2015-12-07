@@ -28,39 +28,12 @@
 - [x] 1. Search Group by Current Location
 - [x] 2. HealthKit(Energy Drink Record)
 - [x] 3. MyGroup
-- [ ] 4. Arbitrary sports in group creation
-- [ ] 5. Load GroupMembers Info from database
+- [x] 4. Arbitrary sports in group creation
+- [x] 5. Load GroupMembers Info from database
 - [x] 6. Leaving/Deleting Group
 - [ ] 7. Not loading groups in the past 
 - [ ] 8. Password Reset
 
 
-#####Current Overview
-1. The features we have now in our Version 1 are 
 
-  1) creating account(with PK = email address)
-
-  2) editing initial profile(cannot edit in this version)
-
-  3) createinh groups (can only creat football and pingpong)
-
-  4) looking for groups(in group list which will show all groups in the database).
-
-2. Features we do not have in Version 1 are 
-
-  1) changing your account password
-  
-  2) editing your profile in your profile page
-
-  3) showing groups by categories 
-
-  4) group map view
-
-  5) team view(show your current team info)
-
-  6) schedule view(show schedule of your groups)
-
-  7) and More view(e.g. healthkit related)
-
-3. Features we will have in Version 2 are fullfilling what we should do in V1 and also viewing groups in Map view (shows groups near you), checking your team, and HealthKit related functions .
 
