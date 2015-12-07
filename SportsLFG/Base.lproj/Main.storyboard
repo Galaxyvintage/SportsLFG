@@ -3220,14 +3220,14 @@
             <objects>
                 <tableViewController id="q69-n4-WjN" customClass="GroupTableViewController_2" customModule="SportsLFG" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" rowHeight="46" sectionHeaderHeight="18" sectionFooterHeight="18" id="anP-Ts-3Bl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="GroupDetailCell" rowHeight="46" id="7Dy-K2-EDs" customClass="TitleTableViewCell" customModule="SportsLFG" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="375" height="46"/>
+                                <rect key="frame" x="0.0" y="114" width="375" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Dy-K2-EDs" id="55p-RS-R6M">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -3294,7 +3294,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="GroupNameInputCell" rowHeight="48" id="fHD-ef-0Qn" userLabel="DirectInputCell" customClass="TextInputTableViewCell" customModule="SportsLFG" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="739" width="375" height="48"/>
+                                <rect key="frame" x="0.0" y="160" width="375" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fHD-ef-0Qn" id="8wO-Jw-Q1o">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
@@ -3346,7 +3346,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="TextInputCell" rowHeight="46" id="CrI-uT-Zan" userLabel="SizeInputCell" customClass="TextInputTableViewCell" customModule="SportsLFG" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="96" width="375" height="46"/>
+                                <rect key="frame" x="0.0" y="208" width="375" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="center" tableViewCell="CrI-uT-Zan" id="H4E-Ev-x64">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -3396,10 +3396,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="SportsSelectionCell" rowHeight="230" id="n8y-VP-32h" customClass="SportsSelectionTableViewCell" customModule="SportsLFG" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="142" width="375" height="138"/>
+                                <rect key="frame" x="0.0" y="254" width="375" height="230"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n8y-VP-32h" id="2Mq-XP-Ro5">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="137"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="229"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not in the list?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AhU-Qk-Uja">
@@ -3635,11 +3635,6 @@
                                             <exclude reference="L3B-zW-6lE"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="Tr4-OA-RKM"/>
-                                            <exclude reference="e0x-wc-hHu"/>
-                                            <exclude reference="tlj-Z4-HAG"/>
-                                            <exclude reference="2NJ-cH-Pku"/>
-                                            <exclude reference="bLY-Vp-0C1"/>
                                             <exclude reference="58z-dn-4Kv"/>
                                             <exclude reference="h9I-jI-CVY"/>
                                             <exclude reference="rnd-de-MR1"/>
@@ -3647,6 +3642,11 @@
                                             <exclude reference="1mJ-2w-bXg"/>
                                             <exclude reference="C7K-VP-miL"/>
                                             <exclude reference="YZR-xC-Lq6"/>
+                                            <exclude reference="2NJ-cH-Pku"/>
+                                            <exclude reference="bLY-Vp-0C1"/>
+                                            <exclude reference="Tr4-OA-RKM"/>
+                                            <exclude reference="e0x-wc-hHu"/>
+                                            <exclude reference="tlj-Z4-HAG"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -3657,11 +3657,6 @@
                                             <include reference="L3B-zW-6lE"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="Tr4-OA-RKM"/>
-                                            <include reference="e0x-wc-hHu"/>
-                                            <include reference="tlj-Z4-HAG"/>
-                                            <include reference="2NJ-cH-Pku"/>
-                                            <include reference="bLY-Vp-0C1"/>
                                             <include reference="58z-dn-4Kv"/>
                                             <include reference="h9I-jI-CVY"/>
                                             <include reference="rnd-de-MR1"/>
@@ -3669,6 +3664,11 @@
                                             <include reference="1mJ-2w-bXg"/>
                                             <include reference="C7K-VP-miL"/>
                                             <include reference="YZR-xC-Lq6"/>
+                                            <include reference="2NJ-cH-Pku"/>
+                                            <include reference="bLY-Vp-0C1"/>
+                                            <include reference="Tr4-OA-RKM"/>
+                                            <include reference="e0x-wc-hHu"/>
+                                            <include reference="tlj-Z4-HAG"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -3684,7 +3684,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="DatePickerCell" rowHeight="163" id="IRW-9Z-esE" customClass="DatePickerTableViewCell" customModule="SportsLFG" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="280" width="375" height="163"/>
+                                <rect key="frame" x="0.0" y="484" width="375" height="163"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IRW-9Z-esE" id="aQa-Qc-8aJ">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="162"/>
@@ -3735,21 +3735,18 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="RestrictionInputCell" rowHeight="48" id="ezY-5q-wGz" userLabel="Restrictions" customClass="RestrictionTableViewCell" customModule="SportsLFG" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="787" width="375" height="120"/>
+                                <rect key="frame" x="0.0" y="647" width="375" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ezY-5q-wGz" id="xht-s3-Wjr">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming Soon!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCm-EF-xYM">
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="131" y="13" width="108" height="21"/>
-                                            </variation>
                                         </label>
                                     </subviews>
                                     <animations/>
@@ -3780,7 +3777,7 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="LocationInputCell" rowHeight="296" id="fEO-fV-L7G" userLabel="MapViewCell" customClass="LocationTableViewCell" customModule="SportsLFG">
-                                <rect key="frame" x="0.0" y="443" width="375" height="296"/>
+                                <rect key="frame" x="0.0" y="695" width="375" height="296"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fEO-fV-L7G" id="BF1-9N-cXx">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="295"/>
@@ -3836,9 +3833,6 @@
                                             <state key="normal" title="validate location">
                                                 <color key="titleColor" red="0.173409062" green="0.48115913939999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="44" y="257" width="286" height="30"/>
-                                            </variation>
                                             <connections>
                                                 <action selector="validateLocation:" destination="fEO-fV-L7G" eventType="touchUpInside" id="ePm-DF-SIK"/>
                                             </connections>
@@ -3950,7 +3944,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="NoteInputCell" rowHeight="120" id="W4t-zJ-5Tr" userLabel="Note" customClass="NotetableViewCell" customModule="SportsLFG" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="787" width="375" height="120"/>
+                                <rect key="frame" x="0.0" y="991" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W4t-zJ-5Tr" id="DgK-0g-PGL">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>

@@ -2,7 +2,7 @@
 // File  : LocationViewController.swift
 // Author:  Charles Li, Isaac Qiao
 // Date created  : Nov.08 2015
-// Date edited   : Dec.03 2015
+// Date edited   : Dec.06 2015
 // Description :  This class is responsible to show groups and locations
 
 import UIKit
