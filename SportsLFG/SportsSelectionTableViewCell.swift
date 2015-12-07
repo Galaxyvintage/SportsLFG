@@ -8,19 +8,26 @@
 
 import UIKit
 
-class SportsSelectionTableViewCell: UITableViewCell {
-
+class SportsSelectionTableViewCell: UITableViewCell,UITextFieldDelegate
+{
     
-    var Sport : String?
-    var Sports = [
+    @IBOutlet var SportsBtns: [UIButton]!
+  
+    @IBOutlet weak var userInput: UITextField!
+  
+    @IBOutlet weak var categoryPicker: UIPickerView!
+    
+    var sport : String?
+    var sports = [
         "Pingpong"  ,
         "Soccer"    ,
         "Basketball",
         "Running"   ,
         "Tennis"]
-    @IBOutlet var SportsBtns: [UIButton]!
-  
-    @IBOutlet weak var userInput: UITextField!
+
+    weak var parentCell : TitleTableViewCell?
+    weak var parentController : GroupTableViewController_2?
+    
     
     @IBAction func SportSelection(sender: UIButton!) {
         
@@ -31,8 +38,14 @@ class SportsSelectionTableViewCell: UITableViewCell {
         }
         
        sender.selected = true
-       Sport = Sports[sender.tag] //each button has its own tag 
-       print(Sport)
+       sport = sports[sender.tag] //each button has its own tag
+       parentController?.dictOne[0] = sport
+       parentController?.sport = sport
+       parentCell?.rightLabel.text = sport
+       parentCell?.rightLabel.textColor = UIColor.blackColor()
+       print(sport)
     }
+    
+    
     
 }

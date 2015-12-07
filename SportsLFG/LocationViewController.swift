@@ -45,6 +45,9 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     self.groupTableVC = self.childViewControllers[0] as! GroupTableViewController
     
     //reset dataSkip back to zero
+    
+    rangeSelector.selectedSegmentIndex = 3
+    
     groupTableVC.dataSkip = 0
     groupTableVC.groups?.removeAll()
     groupTableVC.update(nil)
@@ -206,7 +209,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             KCSQueryConditional.KCSNearSphere.rawValue,[myLongitude,myLatitude],
             KCSQueryConditional.KCSMaxDistance.rawValue, 9.3
           ])
-      case 2://15km
+      case 2://45km
         query = KCSQuery(
           onField: KCSEntityKeyGeolocation,
           usingConditionalPairs:[
@@ -218,7 +221,9 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         query = nil
       default:break
       }
-      
+      self.groupTableVC.dataSkip = 0
+      self.groupTableVC.groups?.removeAll()
+      self.groupTableVC.locationQuery = query
       self.groupTableVC.update(query)
     }
   }

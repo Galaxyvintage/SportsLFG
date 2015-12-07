@@ -17,7 +17,7 @@ class GroupTableViewController: UITableViewController
   
   var category :String?
   weak var delegateObject : GroupLoadingProtocol?
-  
+  var locationQuery : KCSQuery?
   //an empty array of Group objects
   var groups : [Group]?
   
@@ -146,14 +146,15 @@ class GroupTableViewController: UITableViewController
       let photoname = alp[alp.startIndex.advancedBy(0)]
       let photod = UIImage(named: "\(photoname)")!
       cell.SportTypeImageView.image = photod
-      
+      cell.NameLabel.text? = "["+group.category!+","+group.sport!+"]"
+      cell.NameLabel.text? += group.name!
     }    
     
     if(self.lastItemReached == false &&
       indexPath.section == (self.groups!.count - 1) )
     {
-      print("hello")
-      self.update(nil)
+      print("hello")  
+      self.update(locationQuery)
     }
     
     return cell
@@ -164,11 +165,7 @@ class GroupTableViewController: UITableViewController
   //Helper function that displays the actitivy indiciator while loading data
   func update(query: KCSQuery?)
   {
-    if(query != nil)
-    {
-      self.dataSkip = 0
-      self.groups?.removeAll()
-    }
+
     
     print("updating")
     //self.tableView.bringSubviewToFront(self.indicatorView)
@@ -271,8 +268,7 @@ class GroupTableViewController: UITableViewController
                   }
                   
                   
-                  if(self.dataSkip <= self.dataLimit ||
-                     self.groups!.count < self.dataLimit)
+                  if(self.groups!.count < self.dataLimit)
                   {
                     self.groups!.removeAll()
                   }
@@ -351,18 +347,12 @@ class GroupTableViewController: UITableViewController
             for testGroup in objectsOrNil
             {
               let newGroup = testGroup as! Group
-              
-              //the following 5 log statements are for testing purposes
-              NSLog("newGroup's name is %@",newGroup.name!)
-              NSLog("newGroup's sport is %@",newGroup.sport!)
-              NSLog("newGroup's city is %@",newGroup.city!)
-              NSLog("newGroup's province is %@",newGroup.province!)
-              NSLog("newGroup's desc is %@",newGroup.detail!)
               temp_groups += [newGroup]
+              print(newGroup.name)
             }
             
-            if(self.dataSkip <= self.dataLimit ||
-              self.groups!.count < self.dataLimit)
+            
+            if(self.groups!.count < self.dataLimit)
             {
               self.groups!.removeAll()
             }

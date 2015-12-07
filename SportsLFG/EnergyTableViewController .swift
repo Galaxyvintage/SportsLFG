@@ -32,7 +32,7 @@ class EnergyTableViewController : UITableViewController,SavingHKSamplesDelegate
         print("HealthKit authorization received")
         let alert = UIAlertController(
           title: "Hello",
-          message: "This app has been authorized successfully. Please go to the health app and change the settings under the Sources tab if needed", 
+          message: "This app has been linked to health app. Please go to the health app and change the settings under the Sources tab if needed",
           preferredStyle: UIAlertControllerStyle.Alert)
         let okAction = UIAlertAction(
           title: "OK", 
@@ -61,6 +61,18 @@ class EnergyTableViewController : UITableViewController,SavingHKSamplesDelegate
     let indexPathToSelect = NSIndexPath(forRow: 1, inSection: 0)
     self.tableView.selectRowAtIndexPath(indexPathToSelect, animated: true, scrollPosition: UITableViewScrollPosition.Top)
     self.tableView(self.tableView, didSelectRowAtIndexPath:indexPathToSelect)
+    let alert = UIAlertController(
+        title: "Hello",
+        message: "The data should be saved if health app has been authorized ",
+        preferredStyle: UIAlertControllerStyle.Alert)
+    let okAction = UIAlertAction(
+        title: "OK",
+        style: UIAlertActionStyle.Default, handler: nil)
+    alert.addAction(okAction)
+
+    
+    self.presentViewController(alert, animated: true, completion: nil)
+
     NSLog("Finish Loading HKSamples")
   }
   

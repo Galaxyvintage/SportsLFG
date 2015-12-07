@@ -46,8 +46,8 @@ class HomeViewController : UIViewController, UINavigationBarDelegate, UIBarPosit
     self.navigationBar.delegate = self
     barChartView.noDataText = "Hello, no data is provided"
     
-    ranges = ["5km", "15km", "30km", "All"]  
-    let groupsCount = [10.0,20.0,30.0,40.0]
+    ranges = ["5km", "15km", "45km", "All"]
+    let groupsCount = [10.0,20.0,30.0,190.0]
     setChart(ranges,values:groupsCount)
     
     //Use the SharedImageCache singleton class to store profile images 

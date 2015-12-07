@@ -14,5 +14,11 @@ class NotetableViewCell : UITableViewCell
     
     @IBOutlet weak var noteContent: UITextView!
     
+    weak var parentController : GroupTableViewController_2?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        noteContent.delegate = parentController
+    }
     
 }

@@ -10,9 +10,10 @@
 		0E122A4A1C13B99D00D16D56 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E122A491C13B99D00D16D56 /* LocationTableViewCell.swift */; };
 		0E122A4C1C13C5E900D16D56 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E122A4B1C13C5E900D16D56 /* NoteTableViewCell.swift */; };
 		0E122A4E1C13C83B00D16D56 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E122A4D1C13C83B00D16D56 /* DatePickerTableViewCell.swift */; };
+		0E607D9B1C14F36300F5E507 /* RestrictionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E607D9A1C14F36300F5E507 /* RestrictionTableViewCell.swift */; };
 		27AEA6191C08D2360062982D /* GroupTableViewController_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AEA6181C08D2360062982D /* GroupTableViewController_2.swift */; };
 		27AEA61B1C08D3450062982D /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AEA61A1C08D3450062982D /* TitleTableViewCell.swift */; };
-		27AEA61E1C08DF720062982D /* TextInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AEA61D1C08DF720062982D /* TextInputTableViewCell.swift */; };
+		27AEA61E1C08DF720062982D /* SizeInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AEA61D1C08DF720062982D /* SizeInputTableViewCell.swift */; };
 		42621CB2CC870E351682FB69 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10738B7E66C848CFD9803639 /* Pods.framework */; };
 		4A412ABC1BFD4CE40024C746 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A412ABB1BFD4CE40024C746 /* LocationViewController.swift */; };
 		4A76EB011BEC9216004890AD /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A76EB001BEC9216004890AD /* GroupTableViewCell.swift */; };
@@ -68,10 +69,11 @@
 		0E122A491C13B99D00D16D56 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		0E122A4B1C13C5E900D16D56 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		0E122A4D1C13C83B00D16D56 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
+		0E607D9A1C14F36300F5E507 /* RestrictionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestrictionTableViewCell.swift; sourceTree = "<group>"; };
 		10738B7E66C848CFD9803639 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27AEA6181C08D2360062982D /* GroupTableViewController_2.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = GroupTableViewController_2.swift; sourceTree = "<group>"; };
 		27AEA61A1C08D3450062982D /* TitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
-		27AEA61D1C08DF720062982D /* TextInputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputTableViewCell.swift; sourceTree = "<group>"; };
+		27AEA61D1C08DF720062982D /* SizeInputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = SizeInputTableViewCell.swift; sourceTree = "<group>"; };
 		402569FD0E94BE229C00BD29 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		4A412ABB1BFD4CE40024C746 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		4A76EB001BEC9216004890AD /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
@@ -144,11 +146,12 @@
 			children = (
 				27AEA6181C08D2360062982D /* GroupTableViewController_2.swift */,
 				27AEA61A1C08D3450062982D /* TitleTableViewCell.swift */,
-				27AEA61D1C08DF720062982D /* TextInputTableViewCell.swift */,
 				631C50531C0A381D00FCE0D6 /* SportsSelectionTableViewCell.swift */,
+				27AEA61D1C08DF720062982D /* SizeInputTableViewCell.swift */,
+				0E122A4D1C13C83B00D16D56 /* DatePickerTableViewCell.swift */,
+				0E607D9A1C14F36300F5E507 /* RestrictionTableViewCell.swift */,
 				0E122A491C13B99D00D16D56 /* LocationTableViewCell.swift */,
 				0E122A4B1C13C5E900D16D56 /* NoteTableViewCell.swift */,
-				0E122A4D1C13C83B00D16D56 /* DatePickerTableViewCell.swift */,
 			);
 			name = GroupCreationUI;
 			sourceTree = "<group>";
@@ -457,7 +460,7 @@
 				4A76EB011BEC9216004890AD /* GroupTableViewCell.swift in Sources */,
 				63D573EE1BE7E78E00EE769A /* FirstTimeUserViewController.swift in Sources */,
 				63319F231C0D88AC00319100 /* Member.swift in Sources */,
-				27AEA61E1C08DF720062982D /* TextInputTableViewCell.swift in Sources */,
+				27AEA61E1C08DF720062982D /* SizeInputTableViewCell.swift in Sources */,
 				632290341BE0C15E0097B93B /* RegisterViewController.swift in Sources */,
 				63FBD2931C0C2F5B0078C2BB /* EnergyRecordDataModel.xcdatamodeld in Sources */,
 				4A9EFE501BED5B1E00CA1BC8 /* GroupTableViewController.swift in Sources */,
@@ -476,6 +479,7 @@
 				63D573F51BE9F7D900EE769A /* GroupCreationController.swift in Sources */,
 				632290321BE0C15E0097B93B /* MainCVSegue.swift in Sources */,
 				63319F251C0D88FC00319100 /* GroupMemberTableViewCell.swift in Sources */,
+				0E607D9B1C14F36300F5E507 /* RestrictionTableViewCell.swift in Sources */,
 				63D573F01BE9797900EE769A /* ProfileTableViewController.swift in Sources */,
 				630431841BF0965C004B31EF /* inGroup.swift in Sources */,
 				63FBD2991C0D08480078C2BB /* G2GatoradeTableViewCell.swift in Sources */,

@@ -62,9 +62,7 @@ class GroupMemberTableViewController: UITableViewController {
                   let name     = user.getValueForAttribute("Name") as! String
                   let age      = user.getValueForAttribute("Age")  as! String
                   let gender   = user.getValueForAttribute("Gender") as! String
-                  let city     = (user.getValueForAttribute("City") as! String) 
-                  let province = (user.getValueForAttribute("Province") as! String)
-                  let location = city+", "+province
+
                   
                   image    = self.imageCache.objectForKey(name) as? UIImage
                   if(image == nil)
@@ -73,7 +71,7 @@ class GroupMemberTableViewController: UITableViewController {
                     isImageFound = false
                   }
                   
-                  let newMember = Member(photo: image,name: name, age: age, gender: gender, location: location)
+                  let newMember = Member(photo: image,name: name, age: age, gender: gender)
                   
                   self.members.append(newMember!)
                 }  
@@ -132,21 +130,6 @@ class GroupMemberTableViewController: UITableViewController {
       },
       withProgressBlock: nil)//UserId download complete
     
-    
-    
-    
-    /*
-    let photo1 = UIImage(named: "Male-25")!
-    let m1 = Member(photo: photo1, name: "nan1",age: "22", gender: "man", location:"sfu")!
-    
-    let photo2 = UIImage(named: "Female-25")!
-    let f1 = Member(photo: photo2, name: "nv1",age: "20", gender: "woman", location:"sfulibrary")!
-    
-    let photo3 = UIImage(named: "Male-25")!
-    let m2 = Member(photo: photo3, name: "nv1",age: "21", gender: "man", location:"sfuasb")!
-    
-    members += [m1, f1, m2]
-    */
   }
   
   override func viewDidLoad() {
@@ -197,7 +180,6 @@ class GroupMemberTableViewController: UITableViewController {
     cell.photoImageView.image = member.photo
     cell.ageLabel.text = member.age
     cell.genderLabel.text = member.gender
-    cell.locationLabel.text = member.location
     
     return cell
   }
