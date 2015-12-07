@@ -271,7 +271,10 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
   }
   
   func textViewDidEndEditing(textView: UITextView) {
-    textView.text = self.note
+    self.note = textView.text
+    
+    print(textView.text)
+    print(self.note)
   }
   
   //MARK: PickerView Delegates
@@ -956,14 +959,17 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
       
       
       //Should already have been checked but redundancy
-      if(self.note != nil)
+      print("printing note: " + self.note!)
+      if(self.note!.isEmpty)
       {
-        group.detail  = self.note
+        group.detail = "Come Join In!"
+        
       }
         
       else
       {
-        group.detail = "Come Join In!"
+        //print("note is not empty:" + group.detail!)
+        group.detail  = self.note
       }
       
       

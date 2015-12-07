@@ -58,10 +58,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func reigsterNewUser(sender: UIButton) {
         
-        let email     = userNewEmail.text
+        var email     = userNewEmail.text
         let password  = userNewPassword.text
         let confirm   = userNewPasswordConfirm.text
-        
+        print(email!)
+        email = email!.lowercaseString
+        print(email!)
         
         /////////////////////////
         //User Input Validation//
@@ -138,7 +140,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                     NSLog("successful")
                     let alert = UIAlertController(
                         title: NSLocalizedString("Account Creation Successful", comment: "account success note title"),
-                        message: NSLocalizedString("User created. Welcome! You will received an email to verify the registration before you can log on", comment: "account success message body"),
+                        message: NSLocalizedString("User created. Welcome! You will receive an email to verify the registration before you can log on", comment: "account success message body"),
                         preferredStyle: UIAlertControllerStyle.Alert
                     )
                     

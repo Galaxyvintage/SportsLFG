@@ -71,8 +71,9 @@ class LoginViewController : UIViewController, UITextFieldDelegate
   
   //This is the login method from the Kinvey API
   @IBAction func userLogin(sender: UIButton) {
-    let email = userEmailField.text
+    var email = userEmailField.text
     let password = userPasswordField.text
+    email = email!.lowercaseString
  
    // let mainViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("LFGViewController") as? LFGViewController
     KCSUser.loginWithUsername(
