@@ -138,7 +138,7 @@ class GroupTableViewController: UITableViewController
       let photo1 = UIImage(named: "Running-50_blue")!
       cell.SportTypeImageView.image = photo1
     case "Tennis":
-      let photo1 = UIImage(named: "Tennis-50_red")!
+      let photo1 = UIImage(named: "Tennis-50_blue")!
       cell.SportTypeImageView.image = photo1
       
     default:
