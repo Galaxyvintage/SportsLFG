@@ -151,7 +151,7 @@ class GroupTableViewController: UITableViewController
     }    
     
     if(self.lastItemReached == false &&
-      indexPath.section == (self.groups!.count - 1) )
+      indexPath.row == (self.groups!.count - 1) )
     {
       print("hello")  
       self.update(locationQuery)
