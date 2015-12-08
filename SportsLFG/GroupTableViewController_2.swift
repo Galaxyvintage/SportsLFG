@@ -13,40 +13,39 @@ import CoreLocation
 class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UITextViewDelegate,CLLocationManagerDelegate,UIPickerViewDelegate,UIPickerViewDataSource
 {
   
-  internal var selectedIndexPath:NSIndexPath? = nil
+  internal var selectedIndexPath:NSIndexPath?
+  internal var indexPathToInsert : NSIndexPath?
+  internal var indexPathToRemove : NSIndexPath?
   
+  //data source
   var sectionZero = ["Group Name"]
-  var sectionOne  = ["Sport",
-    "Group Size",
-    "Start",
-    "End",
-    "Restrictions",]
-  var sectionTwo = ["Location","Note"]
+  var sectionOne  = ["Sport","Group Size","Start","End","Restrictions"]
+  var sectionTwo  = ["Location","Note"]
   
+  //map the corresponding table view cell label value so they won't get messed up 
+  //when the table reusese cells randomly
   var dictOne :[Int:String]  = [:]//sport,size,start time, end time,restriction
   
+  //location
   weak var mapView : MKMapView?
-  
   var geocoder        : CLGeocoder?
-  
   var locationManager : CLLocationManager?
-  
   var myCurrentLocation : CLLocation?
+
+  var categoryArr = ["Outdoor","Indoor","Gym"]
+  var category : String?
   
+  //group information
+  var groupName : String?
+  var sport     : String?
+  var size      : String?
+  var time      : String?
+  var date      : String?
+  var note      : String?
   var address : String?
   var city    : String?
   var province: String?
   var isLocationValid : Bool?
-  
-  var groupName : String?
-  var categoryArr = ["Outdoor","Indoor","Gym"]
-  var category : String?
-  var sport    : String?
-  var size     : String?
-  var time     : String?
-  var date     : String?
-  var note     : String?
-  
   
   
   override func viewDidLoad() {
@@ -75,6 +74,74 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  ///////////////////
+  //private methods//
+  ///////////////////
+  
+  //This method takes a string and shows an alert with that message
+  
+  func showCancelUIAlert(title          : String,
+    titleComment   : String,
+    message        : String,
+    messageComment : String)
+  {
+    let alert = UIAlertController(
+      title  : NSLocalizedString(title, comment: titleComment),
+      message: NSLocalizedString(message, comment: messageComment),
+      preferredStyle : UIAlertControllerStyle.Alert)
+    
+    let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+    alert.addAction(cancelAction)
+    self.presentViewController(alert, animated: true , completion: nil)
+    return
+  }
+  
+  func insertRow()
+  {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  }
+  
+  
+  //This method remove the previous inserted row based on the current selected row
+  func removeRow()
+  {
+    let selectedRow = selectedIndexPath!.row
+    var indexPathToRemove : NSIndexPath?
+    
+    self.tableView.deselectRowAtIndexPath(selectedIndexPath!, animated:false)
+    
+    switch selectedIndexPath!.section
+    {
+    case 1 :
+      self.sectionOne.removeAtIndex(selectedRow  + 1) //content shown 1 row below
+      indexPathToRemove = NSIndexPath(forRow: selectedRow + 1, inSection: 1)
+    case 2:
+      self.sectionTwo.removeAtIndex(selectedRow  + 1) //content shown 1 row below
+      indexPathToRemove = NSIndexPath(forRow: selectedRow + 1, inSection: 2)
+      
+    default: break
+    }
+    
+    if(indexPathToRemove != nil)
+    {
+      self.tableView.beginUpdates()
+      NSLog("removing")
+      self.tableView.deleteRowsAtIndexPaths(NSArray(object: indexPathToRemove!) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Left)
+      self.tableView.endUpdates()
+    }
+    selectedIndexPath = nil
+
   }
   
   ////////////////////
@@ -113,45 +180,10 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
   func textFieldDidBeginEditing(textField: UITextField) {
     if(textField.tag == 0 )//GroupName
     {
-      let containerCell = (textField.superview?.superview) as! TextInputTableViewCell
-      var currentIndexPath : NSIndexPath?
-      
-      if let selectedCell  = containerCell.parentCell
+      //something else is currently selected
+      if(selectedIndexPath != nil)
       {
-        currentIndexPath     = self.tableView.indexPathForCell(selectedCell)
-      }
-      //something else is currentlyselected
-      if(selectedIndexPath != nil &&
-        selectedIndexPath != currentIndexPath)
-      {
-        let selectedRow = selectedIndexPath!.row
-        var indexPathToRemove : NSIndexPath?
-        
-        self.tableView.deselectRowAtIndexPath(selectedIndexPath!, animated:false)
-        
-        switch selectedIndexPath!.section
-        {
-        case 0 :
-          //self.sectionZero.removeAtIndex(selectedRow + 1)
-          break
-        case 1 :
-          self.sectionOne.removeAtIndex(selectedRow  + 1) //content shown 1 row below
-          indexPathToRemove = NSIndexPath(forRow: selectedRow + 1, inSection: 1)
-        case 2:
-          self.sectionTwo.removeAtIndex(selectedRow  + 1) //content shown 1 row below
-          indexPathToRemove = NSIndexPath(forRow: selectedRow + 1, inSection: 2)
-          
-        default: break
-        }
-        
-        if(indexPathToRemove != nil)
-        {
-          self.tableView.beginUpdates()
-          NSLog("removing")
-          self.tableView.deleteRowsAtIndexPaths(NSArray(object: indexPathToRemove!) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Left)
-          self.tableView.endUpdates()
-        }
-        selectedIndexPath = nil
+         self.removeRow()
       }
     }
   }
@@ -176,17 +208,20 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
     else if( textField.tag == 1 )//TextField in sport selection
     {
       let containerCell = (textField.superview?.superview) as! SportsSelectionTableViewCell
-      if(textField.text == nil || (textField.text!).isEmpty)
-      {
-        containerCell.parentCell!.rightLabel.text = "Unknown"
-        containerCell.parentCell!.rightLabel.textColor = UIColor.grayColor()
-      }
-      else
+      
+      //a sport could be selected
+      if(textField.text != nil && textField.text?.isEmpty == false)
       {
         self.sport = textField.text
         self.dictOne[0] = textField.text
         containerCell.parentCell!.rightLabel.text = textField.text
         containerCell.parentCell!.rightLabel.textColor = UIColor.blackColor()
+        
+        //deselect the selected button
+        for var x = 0; x < containerCell.SportsBtns.count; ++x
+        {
+          containerCell.SportsBtns[x].selected = false
+        }
       }
     }
       
@@ -239,42 +274,12 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
     print(sectionOne)
     if(selectedIndexPath != nil)
     {
-      let selectedRow = selectedIndexPath!.row
-      var indexPathToRemove : NSIndexPath?
-      
-      self.tableView.deselectRowAtIndexPath(selectedIndexPath!, animated:false)
-      
-      switch selectedIndexPath!.section
-      {
-      case 0 :
-        //self.sectionZero.removeAtIndex(selectedRow + 1)
-        break
-      case 1 :
-        self.sectionOne.removeAtIndex(selectedRow  + 1) //content shown 1 row below
-        indexPathToRemove = NSIndexPath(forRow: selectedRow + 1, inSection: 1)
-      case 2:
-        self.sectionTwo.removeAtIndex(selectedRow  + 1) //content shown 1 row below
-        indexPathToRemove = NSIndexPath(forRow: selectedRow + 1, inSection: 2)
-        
-      default: break
-      }
-      
-      if(indexPathToRemove != nil)
-      {
-        self.tableView.beginUpdates()
-        NSLog("removing")
-        self.tableView.deleteRowsAtIndexPaths(NSArray(object: indexPathToRemove!) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Left)
-        self.tableView.endUpdates()
-      }
-      selectedIndexPath = nil
+      self.removeRow()
     }
   }
   
   func textViewDidEndEditing(textView: UITextView) {
     self.note = textView.text
-    
-    print(textView.text)
-    print(self.note)
   }
   
   //MARK: PickerView Delegates
@@ -332,7 +337,6 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
     //load the corresponding table view cell based on the current selected cell
     if(selectedIndexPath != nil)
     {
-      
       switch (selectedIndexPath!.section, selectedIndexPath!.row)
       {
         
@@ -365,6 +369,7 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
           print(self.category)
           return cell
         }
+
       case (1,1)://GroupSize
         
         let currentSelectedCell = tableView.cellForRowAtIndexPath(selectedIndexPath!) as! TitleTableViewCell
@@ -386,6 +391,7 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
           
           return cell
         }
+
       case(1,2)://Start Date Picker
         
         let currentSelectedCell = tableView.cellForRowAtIndexPath(selectedIndexPath!) as! TitleTableViewCell
@@ -417,7 +423,6 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
           //update the currentSelected right label to the current time of the system
           if(cell.parentCell!.rightLabel.text == "Unknown")
           {
-            
             let date = cell.dateFormatter!.stringFromDate(currentDate)
             let time = cell.timeFormatter!.stringFromDate(currentDate)
             
@@ -434,6 +439,8 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
           }
           return cell
         }
+        
+
       case(1,3)://End Date Picker
         
         
@@ -456,19 +463,16 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
           
           return cell
         }
+        
       case(2,0)://Location
-        
-        let currentSelectedCell = tableView.cellForRowAtIndexPath(selectedIndexPath!) as! TitleTableViewCell
-        
-        
         if(indexPath.section == 2 && indexPath.row == 1)
         {
           cellIdentifier = "LocationInputCell"
           let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! LocationTableViewCell
           
-          cell.parentCell = currentSelectedCell
+ 
           cell.parentController = self
-          currentSelectedCell.rightLabel.text = ""
+
           
           //Configure the map view in this cell
           cell.geocoder   = self.geocoder
@@ -483,7 +487,7 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
             self.city      != nil &&
             self.province  != nil)
           {
-            currentSelectedCell.rightLabel.textColor = UIColor.blackColor()
+
             cell.address.text  = self.address
             cell.province.text = self.city
             cell.province.text = self.province
@@ -504,6 +508,7 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
           
           return cell
         }
+        
       default: break
       }
       
@@ -556,7 +561,6 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
         {
           cell.rightLabel.textColor = UIColor.blackColor()
         }
-        
         
         // third section
       case 2:
@@ -632,47 +636,35 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
       return
     }
     
-    
     let currentSection = indexPath.section
     var currentRow = indexPath.row
     
     //something else is selected
     if(selectedIndexPath != nil)
     {
-      let selectedRow = selectedIndexPath!.row
-      var indexPathToRemove : NSIndexPath?
+      if(indexPath.section   == selectedIndexPath!.section &&
+         (indexPath.row) - 1 == selectedIndexPath!.row    )
+      {
+        //the original selected cell would not appear to be 
+        //selected due to the new selection on the expanded cell
+        
+        //reselect the original selected cell
+        let originalCell = self.tableView.cellForRowAtIndexPath(selectedIndexPath!)
+        originalCell?.selected = true
+        
+        let expandedCell = self.tableView.cellForRowAtIndexPath(indexPath)
+        expandedCell?.selectionStyle = UITableViewCellSelectionStyle.None
+        
+        print("return")
+        return
+      }
+      
       if(currentSection == selectedIndexPath!.section &&
         currentRow > selectedIndexPath!.row)
       {
         currentRow = currentRow - 1
       }
-      
-      tableView.deselectRowAtIndexPath(selectedIndexPath!, animated:false)
-      
-      switch selectedIndexPath!.section
-      {
-      case 0 :
-        //self.sectionZero.removeAtIndex(selectedRow + 1)
-        break
-      case 1 :
-        self.sectionOne.removeAtIndex(selectedRow  + 1) //content shown 1 row below
-        indexPathToRemove = NSIndexPath(forRow: selectedRow + 1, inSection: 1)
-      case 2:
-        self.sectionTwo.removeAtIndex(selectedRow  + 1) //content shown 1 row below
-        indexPathToRemove = NSIndexPath(forRow: selectedRow + 1, inSection: 2)
-        
-      default: break
-      }
-      
-      if(indexPathToRemove != nil)
-      {
-        self.tableView.beginUpdates()
-        self.tableView.deleteRowsAtIndexPaths(NSArray(object: indexPathToRemove!) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Left)
-        print(sectionTwo)
-        self.tableView.reloadSections(NSIndexSet(index: 2), withRowAnimation: UITableViewRowAnimation.Automatic)
-        self.tableView.endUpdates()
-        self.tableView.endEditing(true)
-      }
+      self.removeRow()
     }
     
     // no previous selection
@@ -685,7 +677,6 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
       
     case(1,0):
       self.sectionOne.insert("SportsSelection", atIndex: 1)
-      
     case(1,1):
       self.sectionOne.insert("GroupSizeInput", atIndex: 2);
       print(sectionOne)
@@ -700,7 +691,6 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
       print(sectionOne)
     case(2,0):
       self.sectionTwo.insert("LocationInput",atIndex:1)
-      print("Inserted location input")
       print(sectionTwo)
       
     default: return
@@ -756,7 +746,7 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
           indexPath.row    == 1 &&
           sectionTwo[1]    == "LocationInput")
         {
-          return CGFloat(296)
+          return CGFloat(320)
         }
         
       default : break
@@ -799,29 +789,7 @@ class GroupTableViewController_2: UITableViewController, UITextFieldDelegate,UIT
     return headerView
   }
   
-  ///////////////////
-  //private methods//
-  ///////////////////
-  
-  //This method takes a string and shows an alert with that message
-  
-  func showCancelUIAlert(title          : String,
-    titleComment   : String,
-    message        : String,
-    messageComment : String)
-  {
-    let alert = UIAlertController(
-      title  : NSLocalizedString(title, comment: titleComment),
-      message: NSLocalizedString(message, comment: messageComment),
-      preferredStyle : UIAlertControllerStyle.Alert)
-    
-    let cancelAction = UIAlertAction(title :"Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-    alert.addAction(cancelAction)
-    self.presentViewController(alert, animated: true , completion: nil)
-    return
-  }
-  
-  
+  //MARK: Actions
   
   @IBAction func createGroup(sender: AnyObject) {
     
